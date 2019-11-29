@@ -146,7 +146,7 @@ sudo py -3 setup.py build install
     | DetailedResult        | Dictionary<DetailedResult>        |
     | ExtendedResults       | List<ExtendedResult>              |
 
-
+  
     | LocalizationResult        | Type              |
     | --------------------------|-------------------|
     | TerminatePhase            | LONG              |
@@ -171,7 +171,6 @@ sudo py -3 setup.py build install
     | AccompanyingTextBytes     | ByteArray         |
     | Confidence                | LONG              |
 
-
     ```
     DetailedReuslt depends on BarcodeFormat:
     ```
@@ -192,7 +191,6 @@ sudo py -3 setup.py build install
     | DataRegionNumber(DataMatrix)                  | LONG              |
     | LayerNumber(AZTEC)                            | LONG              |
 
-
     | ExtendedResult            | Type                      |
     | --------------------------|---------------------------|
     | ResultType                | LONG                      |
@@ -207,13 +205,11 @@ sudo py -3 setup.py build install
     | SamplingImage             | Dictionary<IMResultData>  |
     | Clarity                   | LONG                      |
 
-
     | SamplingImage            | Type              |
     | -------------------------|-------------------|
     | Bytes                    | ByteArray         |
     | Width                    | LONG              |
     | Height                   | LONG              |
-
 
     | IntermediateResult            | Type              |
     | ------------------------------|-------------------|
@@ -245,7 +241,6 @@ sudo py -3 setup.py build install
     | ScaleDownRatio                | LONG              |
     | FrameId                       | LONG              |
 
-
     ```
     IMResultData depends on DataType:
     ```
@@ -269,7 +264,6 @@ sudo py -3 setup.py build install
     | ---------------------|-------------------|
     | X                    | LONG              |
     | Y                    | LONG              |
-
 
 
 - StartVideoMode(max_buffer, max_results, video_width, video_height, image_format, callback)
@@ -407,10 +401,3 @@ Although these APIs will deprecate in a future version, it still works for now. 
 ## Online Documentation
 https://www.dynamsoft.com/Products/Barcode-Reader-Resources.aspx#documentation
 
-## Related Articles
-* [How to Define Python Object Members in C Code](https://www.codepool.biz/python-object-members.html)
-* [Python Barcode Decoding on Non-Python Created Thread](https://www.codepool.biz/python-decode-barcode-c-thread.html)
-* [Things to Do with DBR 6.0 and Python Barcode Extension](http://www.codepool.biz/dynamsoft-barcode-python-extension-6-0.html)
-* [How to Port C/C++ Barcode Extension to Python 3](http://www.codepool.biz/cc-barcode-extension-python-3.html)
-* [Building Python Barcode Extension with DBR 5.0 on Windows](http://www.codepool.biz/python-barcode-extension-dbr-windows.html)
-* [Building Python Barcode Extension with DBR 5.2 for Linux](http://www.codepool.biz/build-linux-python-barcode-extension.html)
