@@ -139,7 +139,6 @@ sudo py -3 setup.py build install
             print("BarcodeText:" + textResult["BarcodeText"])
     ```
 
-    ```
     | TextReuslt            | Type                              |
     | --------------------- |-----------------------------------|
     | BarcodeFormat         | LONG                              |
@@ -151,9 +150,8 @@ sudo py -3 setup.py build install
     | LocalizationResult    | Dictionary<LocalizationResult>    |
     | DetailedResult        | Dictionary<DetailedResult>        |
     | ExtendedResults       | List<ExtendedResult>              |
-    ```
 
-    ```
+  
     | LocalizationResult        | Type              |
     | --------------------------|-------------------|
     | TerminatePhase            | LONG              |
@@ -177,10 +175,10 @@ sudo py -3 setup.py build install
     | ResultCoordinateType      | LONG              |
     | AccompanyingTextBytes     | ByteArray         |
     | Confidence                | LONG              |
-    ``` 
 
     ```
     DetailedReuslt depends on BarcodeFormat:
+    ```
 
     | DetailedReuslt                                | Type              |
     | ----------------------------------------------|-------------------|
@@ -197,9 +195,7 @@ sudo py -3 setup.py build install
     | DataRegionColumns(DataMatrix)                 | LONG              |
     | DataRegionNumber(DataMatrix)                  | LONG              |
     | LayerNumber(AZTEC)                            | LONG              |
-    ```
 
-    ```
     | ExtendedResult            | Type                      |
     | --------------------------|---------------------------|
     | ResultType                | LONG                      |
@@ -213,17 +209,13 @@ sudo py -3 setup.py build install
     | Deformation               | LONG                      |
     | SamplingImage             | Dictionary<IMResultData>  |
     | Clarity                   | LONG                      |
-    ```
 
-    ```
     | SamplingImage            | Type              |
     | -------------------------|-------------------|
     | Bytes                    | ByteArray         |
     | Width                    | LONG              |
     | Height                   | LONG              |
-    ```
 
-    ```
     | IntermediateResult            | Type              |
     | ------------------------------|-------------------|
     | DataType                      | LONG              |
@@ -253,10 +245,10 @@ sudo py -3 setup.py build install
     | CCMIndex                      | LONG              |
     | ScaleDownRatio                | LONG              |
     | FrameId                       | LONG              |
-    ```
 
     ```
     IMResultData depends on DataType:
+    ```
 
     | IMResultData                                  | Type                          |
     | ----------------------------------------------|-------------------------------|
@@ -271,14 +263,12 @@ sudo py -3 setup.py build install
     | ROIId(IMRDT_REGIONOFINTEREST)                 | LONG                          |
     | Point(IMRDT_REGIONOFINTEREST)                 | Dictionary<Point>             |
     | LocalizationRsult(IMRDT_LOCALIZATIONRESULT)   | Dictionary<LocalizationResult>|
-    ```
 
-    ```
+
     | Point                | Type              |
     | ---------------------|-------------------|
     | X                    | LONG              |
     | Y                    | LONG              |
-    ```
 
 
 - StartVideoMode(max_buffer, max_results, video_width, video_height, image_format, callback)
@@ -316,7 +306,6 @@ sudo py -3 setup.py build install
     errorCode = UpdataRuntimeSettings(settings)
     ```
 
-    ```
     | RuntimeSettings               | Type              |
     | ------------------------------|-------------------|
     | TerminatePhase                | LONG              |
@@ -354,7 +343,7 @@ sudo py -3 setup.py build install
     | RegionMeasuredByPercentage    | LONG              |
     | MinBarcodeTextLength          | LONG              |
     | MinResultConfidence           | LONG              |
-    ```
+
 - ResetRuntimeSettings()
 - SetModeArgument(modesName, index, argumentName, argumentValue)
 - GetModeArgument(modesName, index, argumentName)
@@ -363,7 +352,7 @@ sudo py -3 setup.py build install
     errorCode = SetModeArgument("BinarizationModes", 0, "BlockSizeX", "3")
     argumentValue = GetModeArgument("BinarizationModes", 0, "BlockSizeX")
     ```
-    ```
+
     | ModesName                     | ArgumentName                  |
     | ------------------------------|-------------------------------|
     | BarcodeColourModes            | LightReflection               |
@@ -394,7 +383,7 @@ sudo py -3 setup.py build install
     | TextFilterModes               | MinImageDimension             |
     | TextFilterModes               | Sensitivity                   |
     | TextureDetectionModes         | Sensitivity                   |
-    ```
+
 
 ## Old Functions
 ```
