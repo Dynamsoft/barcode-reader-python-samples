@@ -118,7 +118,7 @@ sudo py -3 setup.py build install
 
 - InitLicense(license-key)
 - DecodeFile(filename) 
-- DecodeBuffer(frame-by-opencv-capture)
+- DecodeBuffer(frame-by-opencv-capture, height, width, stride, channels)
 - DecodeFileStream(fileStream, fileSize)
     ```
     Code Snippet:
@@ -266,7 +266,7 @@ sudo py -3 setup.py build install
     | Y                    | LONG              |
 
 
-- StartVideoMode(max_buffer, max_results, video_width, video_height, image_format, callback)
+- StartVideoMode(max_buffer, max_results, video_width, video_height, stride, channels, callback)
 - StopVideoMode()
 - AppendVideoFrame(frame-by-opencv-capture)
 - InitLicenseFromLicenseContent(license-key, license-content)
