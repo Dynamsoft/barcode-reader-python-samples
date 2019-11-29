@@ -1878,7 +1878,7 @@ static PyObject * InitLicense(PyObject *obj, PyObject *args)
 
     int ret = DBR_InitLicense(self->hBarcode, pszLicense);
     const char* errorString = DBR_GetErrorString(ret);
-    printf("%s", errorString);
+    printf("%s\n", errorString);
     return Py_BuildValue("i", ret);
 }
 
