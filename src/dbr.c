@@ -1317,6 +1317,7 @@ decodeBuffer(PyObject *obj, PyObject *args)
     nd = (int)(view->ndim);
     int len = (int)(view->len);
     int stride = (int)(view->strides[0]);
+    int channels = (int)(view->strides[1]);
     int width = (int)(view->strides[0] / view->strides[1]);
     int height = len / stride;
 #else
@@ -1342,6 +1343,7 @@ decodeBuffer(PyObject *obj, PyObject *args)
     char *buffer = (char *)pai->data;  // The address of image data
     int width = (int)pai->shape[1];    // image width
     int height = (int)pai->shape[0];   // image height
+    int channels = (int)pai->shape[2];
     int stride = (int)pai->strides[0]; // image stride
 #endif
 
@@ -1349,23 +1351,32 @@ decodeBuffer(PyObject *obj, PyObject *args)
     TextResultArray *pResults = NULL;
 
     // Detect barcodes
-    ImagePixelFormat format = IPF_RGB_888;
+    ImagePixelFormat imagePixelFormat = IPF_RGB_888;
 
-    if (width == stride)
+    switch (channels)
     {
-        format = IPF_GRAYSCALED;
-    }
-    else if (width * 3 == stride)
-    {
-        format = IPF_RGB_888;
-    }
-    else if (width * 4 == stride)
-    {
-        format = IPF_ARGB_8888;
+    case 1:
+        imagePixelFormat = IPF_GRAYSCALED;
+        break;
+    case 2:
+        imagePixelFormat = IPF_RGB_555;
+        break;
+    case 3:
+        imagePixelFormat = IPF_RGB_888;
+        break;
+    case 4:
+        imagePixelFormat = IPF_ARGB_8888;
+        break;
+    case 5:
+        imagePixelFormat = IPF_RGB_161616;
+        break;
+    case 6:
+        imagePixelFormat = IPF_ARGB_16161616;
+        break;
     }
 
     PyObject *list = NULL;
-    int ret = DBR_DecodeBuffer(self->hBarcode, buffer, width, height, stride, format, templateName ? templateName : "");
+    int ret = DBR_DecodeBuffer(self->hBarcode, buffer, width, height, stride, imagePixelFormat, templateName ? templateName : "");
     if (ret)
     {
         printf("Detection error: %s\n", DBR_GetErrorString(ret));
@@ -1720,8 +1731,8 @@ startVideoMode(PyObject *obj, PyObject *args)
     DynamsoftBarcodeReader *self = (DynamsoftBarcodeReader *)obj;
 
     PyObject *callback = NULL;
-    int maxListLength, maxResultListLength, width, height, imageformat, iFormat, stride;
-    if (!PyArg_ParseTuple(args, "iiiiiiO", &maxListLength, &maxResultListLength, &width, &height, &imageformat, &iFormat, &callback))
+    int maxListLength, maxResultListLength, width, height, channels, stride, iFormat;
+    if (!PyArg_ParseTuple(args, "iiiiiiiO", &maxListLength, &maxResultListLength, &width, &height, &stride, &channels, &iFormat, &callback))
     {
         return NULL;
     }
@@ -1740,22 +1751,33 @@ startVideoMode(PyObject *obj, PyObject *args)
         self->py_callback = callback;
     }
 
-    ImagePixelFormat format = IPF_RGB_888;
+    ImagePixelFormat imagePixelFormat = IPF_RGB_888;
 
-    if (imageformat == 0)
+    switch (channels)
     {
-        stride = width;
-        format = IPF_GRAYSCALED;
-    }
-    else
-    {
-        stride = width * 3;
-        format = IPF_RGB_888;
+    case 1:
+        imagePixelFormat = IPF_GRAYSCALED;
+        break;
+    case 2:
+        imagePixelFormat = IPF_RGB_555;
+        break;
+    case 3:
+        imagePixelFormat = IPF_RGB_888;
+        break;
+    case 4:
+        imagePixelFormat = IPF_ARGB_8888;
+        break;
+    case 5:
+        imagePixelFormat = IPF_RGB_161616;
+        break;
+    case 6:
+        imagePixelFormat = IPF_ARGB_16161616;
+        break;
     }
 
     DBR_SetTextResultCallback(self->hBarcode, onResultCallback, self);
 
-    int ret = DBR_StartFrameDecoding(self->hBarcode, maxListLength, maxResultListLength, width, height, stride, format, "");
+    int ret = DBR_StartFrameDecoding(self->hBarcode, maxListLength, maxResultListLength, width, height, stride, imagePixelFormat, "");
     return Py_BuildValue("i", ret);
 }
 
@@ -1793,7 +1815,6 @@ appendVideoFrame(PyObject *obj, PyObject *args)
 #if defined(IS_PY3K)
     //Refer to numpy/core/src/multiarray/ctors.c
     Py_buffer *view;
-    int nd;
     PyObject *memoryview = PyMemoryView_FromObject(o);
     if (memoryview == NULL)
     {
@@ -1803,11 +1824,7 @@ appendVideoFrame(PyObject *obj, PyObject *args)
 
     view = PyMemoryView_GET_BUFFER(memoryview);
     unsigned char *buffer = (unsigned char *)(view->buf);
-    nd = (int)(view->ndim);
-    int len = (int)(view->len);
-    int stride = (int)(view->strides[0]);
-    int width = (int)(view->strides[0] / view->strides[1]);
-    int height = len / stride;
+
 #else
 
     PyObject *ao = PyObject_GetAttrString(o, "__array_struct__");
@@ -1829,29 +1846,8 @@ appendVideoFrame(PyObject *obj, PyObject *args)
 
     // Get image information
     unsigned char *buffer = (unsigned char *)pai->data; // The address of image data
-    int width = (int)pai->shape[1];                     // image width
-    int height = (int)pai->shape[0];                    // image height
-    int stride = (int)pai->strides[0];                  // image stride
+
 #endif
-
-    // Initialize Dynamsoft Barcode Reader
-    TextResultArray *pResults = NULL;
-
-    // Detect barcodes
-    ImagePixelFormat format = IPF_RGB_888;
-
-    if (width == stride)
-    {
-        format = IPF_GRAYSCALED;
-    }
-    else if (width == stride * 3)
-    {
-        format = IPF_RGB_888;
-    }
-    else if (width == stride * 4)
-    {
-        format = IPF_ARGB_8888;
-    }
 
     int frameId = DBR_AppendFrame(self->hBarcode, buffer);
     return 0;
@@ -2142,8 +2138,9 @@ static PyObject * DecodeBuffer(PyObject *obj, PyObject *args)
 
     PyObject *o;
     char *templateName = NULL;
+    int width, height, channels, stride;
     // char *encoding = NULL;
-    if (!PyArg_ParseTuple(args, "O|s", &o, &templateName))
+    if (!PyArg_ParseTuple(args, "Oiiii|s", &o, &height, &width, &stride, &channels, &templateName))
         return NULL;
 
 
@@ -2160,11 +2157,11 @@ static PyObject * DecodeBuffer(PyObject *obj, PyObject *args)
 
     view = PyMemoryView_GET_BUFFER(memoryview);
     char *buffer = (char *)(view->buf);
-    nd = (int)(view->ndim);
-    int len = (int)(view->len);
-    int stride = (int)(view->strides[0]);
-    int width = (int)(view->strides[0] / view->strides[1]);
-    int height = len / stride;
+    // nd = (int)(view->ndim);
+    // int len = (int)(view->len);
+    // int stride = (int)(view->strides[0]);
+    // int width = (int)(view->strides[0] / view->strides[1]);
+    // int height = len / stride;
 #else
 
     PyObject *ao = PyObject_GetAttrString(o, "__array_struct__");
@@ -2186,35 +2183,45 @@ static PyObject * DecodeBuffer(PyObject *obj, PyObject *args)
 
     // Get image information
     char *buffer = (char *)pai->data;  // The address of image data
-    int width = (int)pai->shape[1];    // image width
-    int height = (int)pai->shape[0];   // image height
-    int stride = (int)pai->strides[0]; // image stride
+    // int width = (int)pai->shape[1];    // image width
+    // int height = (int)pai->shape[0];   // image height
+    // int channels = (int)pai->shape[2];
+    // int stride = (int)pai->strides[0]; // image stride
 #endif
 
     // Initialize Dynamsoft Barcode Reader
     TextResultArray *pResults = NULL;
 
     // Detect barcodes
-    ImagePixelFormat format = IPF_RGB_888;
+    ImagePixelFormat imagePixelFormat = IPF_RGB_888;
 
-    if (width == stride)
+    switch (channels)
     {
-        format = IPF_GRAYSCALED;
-    }
-    else if (width * 3 == stride)
-    {
-        format = IPF_RGB_888;
-    }
-    else if (width * 4 == stride)
-    {
-        format = IPF_ARGB_8888;
+    case 1:
+        imagePixelFormat = IPF_GRAYSCALED;
+        break;
+    case 2:
+        imagePixelFormat = IPF_RGB_555;
+        break;
+    case 3:
+        imagePixelFormat = IPF_RGB_888;
+        break;
+    case 4:
+        imagePixelFormat = IPF_ARGB_8888;
+        break;
+    case 5:
+        imagePixelFormat = IPF_RGB_161616;
+        break;
+    case 6:
+        imagePixelFormat = IPF_ARGB_16161616;
+        break;
     }
 
     if(templateName == NULL)
     {
         templateName = "";
     }
-    int ret = DBR_DecodeBuffer(self->hBarcode, buffer, width, height, stride, format, templateName);
+    int ret = DBR_DecodeBuffer(self->hBarcode, buffer, width, height, stride, imagePixelFormat, templateName);
     if (ret)
     {
         printf("Detection error: %s\n", DBR_GetErrorString(ret));
@@ -2328,8 +2335,8 @@ static PyObject * StartVideoMode(PyObject *obj, PyObject *args)
     DynamsoftBarcodeReader *self = (DynamsoftBarcodeReader *)obj;
 
     PyObject *callback = NULL;
-    int maxListLength, maxResultListLength, width, height, imageformat, stride;
-    if (!PyArg_ParseTuple(args, "iiiiiO", &maxListLength, &maxResultListLength, &width, &height, &imageformat, &callback))
+    int maxListLength, maxResultListLength, width, height, channels, stride;
+    if (!PyArg_ParseTuple(args, "iiiiiiO", &maxListLength, &maxResultListLength, &width, &height, &stride, &channels, &callback))
     {
         return NULL;
     }
@@ -2346,22 +2353,33 @@ static PyObject * StartVideoMode(PyObject *obj, PyObject *args)
         self->py_callback = callback;
     }
 
-    ImagePixelFormat format = IPF_RGB_888;
+    ImagePixelFormat imagePixelFormat = IPF_RGB_888;
 
-    if (imageformat == 0)
+    switch (channels)
     {
-        stride = width;
-        format = IPF_GRAYSCALED;
-    }
-    else
-    {
-        stride = width * 3;
-        format = IPF_RGB_888;
+    case 1:
+        imagePixelFormat = IPF_GRAYSCALED;
+        break;
+    case 2:
+        imagePixelFormat = IPF_RGB_555;
+        break;
+    case 3:
+        imagePixelFormat = IPF_RGB_888;
+        break;
+    case 4:
+        imagePixelFormat = IPF_ARGB_8888;
+        break;
+    case 5:
+        imagePixelFormat = IPF_RGB_161616;
+        break;
+    case 6:
+        imagePixelFormat = IPF_ARGB_16161616;
+        break;
     }
 
     DBR_SetTextResultCallback(self->hBarcode, OnResultCallback, self);
 
-    int ret = DBR_StartFrameDecoding(self->hBarcode, maxListLength, maxResultListLength, width, height, stride, format, "");
+    int ret = DBR_StartFrameDecoding(self->hBarcode, maxListLength, maxResultListLength, width, height, stride, imagePixelFormat, "");
     return Py_BuildValue("i", ret);
 }
 
@@ -2389,7 +2407,6 @@ static PyObject * AppendVideoFrame(PyObject *obj, PyObject *args)
 #if defined(IS_PY3K)
     //Refer to numpy/core/src/multiarray/ctors.c
     Py_buffer *view;
-    int nd;
     PyObject *memoryview = PyMemoryView_FromObject(o);
     if (memoryview == NULL)
     {
@@ -2399,11 +2416,7 @@ static PyObject * AppendVideoFrame(PyObject *obj, PyObject *args)
 
     view = PyMemoryView_GET_BUFFER(memoryview);
     unsigned char *buffer = (unsigned char *)view->buf;
-    nd = (int)(view->ndim);
-    int len = (int)(view->len);
-    int stride = (int)(view->strides[0]);
-    int width = (int)(view->strides[0] / view->strides[1]);
-    int height = len / stride;
+
 #else
 
     PyObject *ao = PyObject_GetAttrString(o, "__array_struct__");
@@ -2425,29 +2438,8 @@ static PyObject * AppendVideoFrame(PyObject *obj, PyObject *args)
 
     // Get image information
     unsigned char *buffer = (unsigned char *)pai->data; // The address of image data
-    int width = (int)pai->shape[1];                     // image width
-    int height = (int)pai->shape[0];                    // image height
-    int stride = (int)pai->strides[0];                  // image stride
+
 #endif
-
-    // Initialize Dynamsoft Barcode Reader
-    TextResultArray *pResults = NULL;
-
-    // Detect barcodes
-    ImagePixelFormat format = IPF_RGB_888;
-
-    if (width == stride)
-    {
-        format = IPF_GRAYSCALED;
-    }
-    else if (width == stride * 3)
-    {
-        format = IPF_RGB_888;
-    }
-    else if (width == stride * 4)
-    {
-        format = IPF_ARGB_8888;
-    }
 
     int frameId = DBR_AppendFrame(self->hBarcode, buffer);
     return 0;
