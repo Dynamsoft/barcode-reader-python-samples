@@ -1,4 +1,4 @@
-# DBR Python Extension
+# Python Barcode Extension
 Version 7.2.2
 
 The repository aims to help developers build **Python barcode** apps with [Dynamsoft Barcode Reader](https://www.dynamsoft.com/Products/Dynamic-Barcode-Reader.aspx) in Windows, Linux, macOS, and Raspberry Pi.
@@ -380,10 +380,8 @@ sudo py -3 setup.py build install
     | TextureDetectionModes         | Sensitivity                   |
 
 
-## Old Functions
-```
-Although these APIs will deprecate in a future version, it still works for now. However, we recommend you use the new APIs.
-```
+## Deprecated Functions
+
 - initLicense(license-key)
 - decodeFile(filename, format) 
 - decodeBuffer(frame-by-opencv-capture, format)
@@ -398,6 +396,4 @@ Although these APIs will deprecate in a future version, it still works for now. 
 - setParameters(json-string)
 - getParameters()
 
-## Online Documentation
-https://www.dynamsoft.com/Products/Barcode-Reader-Resources.aspx#documentation
 
