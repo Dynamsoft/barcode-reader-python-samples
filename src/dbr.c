@@ -442,6 +442,69 @@ static PyObject * CreatePyRuntimeSettings(PublicRuntimeSettings pSettings)
     return pySettings;
 }
 
+PublicRuntimeSettings CreateCRuntimeSettings(PyObject *o)
+{
+    PublicRuntimeSettings pSettings;
+    pSettings.terminatePhase            = (TerminatePhase)(PyLong_AsLong(PyDict_GetItem(o, Py_BuildValue("s", "TerminatePhase"))));
+    pSettings.timeout                   = PyLong_AsLong(PyDict_GetItem(o, Py_BuildValue("s", "Timeout")));
+    pSettings.maxAlgorithmThreadCount   = PyLong_AsLong(PyDict_GetItem(o, Py_BuildValue("s", "MaxAlgorithmThreadCount")));
+    pSettings.expectedBarcodesCount     = PyLong_AsLong(PyDict_GetItem(o, Py_BuildValue("s", "ExpectedBarcodesCount")));
+    pSettings.barcodeFormatIds          = PyLong_AsLong(PyDict_GetItem(o, Py_BuildValue("s", "BarcodeFormatIds")));
+    pSettings.barcodeFormatIds_2        = PyLong_AsLong(PyDict_GetItem(o, Py_BuildValue("s", "BarcodeFormatIds_2")));
+    pSettings.pdfRasterDPI              = PyLong_AsLong(PyDict_GetItem(o, Py_BuildValue("s", "PDFRasterDPI")));
+    pSettings.scaleDownThreshold        = PyLong_AsLong(PyDict_GetItem(o, Py_BuildValue("s", "ScaleDownThreshold")));
+
+    PyObject * binarizationModes            = PyDict_GetItem(o, Py_BuildValue("s", "BinarizationModes"));
+    PyObject * localizationModes            = PyDict_GetItem(o, Py_BuildValue("s", "LocalizationModes"));
+    PyObject * colourClusteringModes        = PyDict_GetItem(o, Py_BuildValue("s", "ColourClusteringModes"));
+    PyObject * colourConversionModes        = PyDict_GetItem(o, Py_BuildValue("s", "ColourConversionModes"));
+    PyObject * grayscaleTransformationModes = PyDict_GetItem(o, Py_BuildValue("s", "GrayscaleTransformationModes"));
+    PyObject * regionPredetectionModes      = PyDict_GetItem(o, Py_BuildValue("s", "RegionPredetectionModes"));
+    PyObject * imagePreprocessingModes      = PyDict_GetItem(o, Py_BuildValue("s", "ImagePreprocessingModes"));
+    PyObject * textureDetectionModes        = PyDict_GetItem(o, Py_BuildValue("s", "TextureDetectionModes"));
+    PyObject * textFilterModes              = PyDict_GetItem(o, Py_BuildValue("s", "TextFilterModes"));
+    PyObject * dpmCodeReadingModes          = PyDict_GetItem(o, Py_BuildValue("s", "DPMCodeReadingModes"));
+    PyObject * deformationResistingModes    = PyDict_GetItem(o, Py_BuildValue("s", "DeformationResistingModes"));
+    PyObject * barcodeComplementModes       = PyDict_GetItem(o, Py_BuildValue("s", "BarcodeComplementModes"));
+    PyObject * barcodeColourModes           = PyDict_GetItem(o, Py_BuildValue("s", "BarcodeColourModes"));
+    PyObject * textResultOrderModes         = PyDict_GetItem(o, Py_BuildValue("s", "TextResultOrderModes"));
+
+
+    for(int i = 0; i < 8; ++i)
+    {
+        pSettings.binarizationModes[i]                          = (BinarizationMode)(PyLong_AsLong(PyList_GetItem(binarizationModes, i)));
+        pSettings.localizationModes[i]                          = (LocalizationMode)(PyLong_AsLong(PyList_GetItem(localizationModes, i)));
+        pSettings.furtherModes.colourClusteringModes[i]         = (ColourClusteringMode)(PyLong_AsLong(PyList_GetItem(colourClusteringModes, i)));
+        pSettings.furtherModes.colourConversionModes[i]         = (ColourConversionMode)(PyLong_AsLong(PyList_GetItem(colourConversionModes, i)));
+        pSettings.furtherModes.grayscaleTransformationModes[i]  = (GrayscaleTransformationMode)(PyLong_AsLong(PyList_GetItem(grayscaleTransformationModes, i)));
+        pSettings.furtherModes.regionPredetectionModes[i]       = (RegionPredetectionMode)(PyLong_AsLong(PyList_GetItem(regionPredetectionModes, i)));
+        pSettings.furtherModes.imagePreprocessingModes[i]       = (ImagePreprocessingMode)(PyLong_AsLong(PyList_GetItem(imagePreprocessingModes, i)));
+        pSettings.furtherModes.textureDetectionModes[i]         = (TextureDetectionMode)(PyLong_AsLong(PyList_GetItem(textureDetectionModes, i)));
+        pSettings.furtherModes.textFilterModes[i]               = (TextFilterMode)(PyLong_AsLong(PyList_GetItem(textFilterModes, i)));
+        pSettings.furtherModes.dpmCodeReadingModes[i]           = (DPMCodeReadingMode)(PyLong_AsLong(PyList_GetItem(dpmCodeReadingModes, i)));
+        pSettings.furtherModes.deformationResistingModes[i]     = (DeformationResistingMode)(PyLong_AsLong(PyList_GetItem(deformationResistingModes, i)));
+        pSettings.furtherModes.barcodeComplementModes[i]        = (BarcodeComplementMode)(PyLong_AsLong(PyList_GetItem(barcodeComplementModes, i)));
+        pSettings.furtherModes.barcodeColourModes[i]            = (BarcodeColourMode)(PyLong_AsLong(PyList_GetItem(barcodeColourModes, i)));
+        pSettings.textResultOrderModes[i]                       = (TextResultOrderMode)(PyLong_AsLong(PyList_GetItem(textResultOrderModes, i)));
+    }
+
+    pSettings.furtherModes.textAssistedCorrectionMode               = (TextAssistedCorrectionMode)(PyLong_AsLong(PyDict_GetItem(o, Py_BuildValue("s", "TextAssistedCorrectionMode"))));
+    pSettings.deblurLevel                                           = PyLong_AsLong(PyDict_GetItem(o, Py_BuildValue("s", "DeblurLevel")));
+    pSettings.intermediateResultTypes                               = PyLong_AsLong(PyDict_GetItem(o, Py_BuildValue("s", "IntermediateResultTypes")));
+    pSettings.intermediateResultSavingMode                          = (IntermediateResultSavingMode)(PyLong_AsLong(PyDict_GetItem(o, Py_BuildValue("s", "IntermediateResultSavingMode"))));
+    pSettings.resultCoordinateType                                  = (ResultCoordinateType)(PyLong_AsLong(PyDict_GetItem(o, Py_BuildValue("s", "ResultCoordinateType"))));
+    pSettings.returnBarcodeZoneClarity                              = PyLong_AsLong(PyDict_GetItem(o, Py_BuildValue("s", "ReturnBarcodeZoneClarity")));
+    pSettings.region.regionTop                                      = PyLong_AsLong(PyDict_GetItem(o, Py_BuildValue("s", "RegionTop")));
+    pSettings.region.regionBottom                                   = PyLong_AsLong(PyDict_GetItem(o, Py_BuildValue("s", "RegionBottom")));
+    pSettings.region.regionLeft                                     = PyLong_AsLong(PyDict_GetItem(o, Py_BuildValue("s", "RegionLeft")));
+    pSettings.region.regionRight                                    = PyLong_AsLong(PyDict_GetItem(o, Py_BuildValue("s", "RegionRight")));
+    pSettings.region.regionMeasuredByPercentage                     = PyLong_AsLong(PyDict_GetItem(o, Py_BuildValue("s", "RegionMeasuredByPercentage")));
+    pSettings.minBarcodeTextLength                                  = PyLong_AsLong(PyDict_GetItem(o, Py_BuildValue("s", "MinBarcodeTextLength")));
+    pSettings.minResultConfidence                                   = PyLong_AsLong(PyDict_GetItem(o, Py_BuildValue("s", "MinResultConfidence")));
+
+    return pSettings;
+}
+
 static PyObject * CreatePySamplingImageData(SamplingImageData samplingImage)
 {
     //create SamplingImage
@@ -1100,6 +1163,90 @@ static PyObject * CreatePyIntermediateResults(IntermediateResultArray * pResults
     return pyIntermediateResults;
 }
 
+static PyObject * CreatePyFrameDecodingParameters(FrameDecodingParameters * pParameters)
+{
+    PyObject * pyParameters = PyDict_New();
+    if(pyParameters == NULL)
+    {
+        printf("FrameDecodingParameters:New Dict failure\n");   
+        return NULL;     
+    }
+
+    PyObject * pyMaxQueueLength             = Py_BuildValue("i", pParameters->maxQueueLength);
+    PyObject * pyMaxQueueLengthKey          = Py_BuildValue("s", "MaxQueueLength");
+    PyDict_SetItem(pyParameters, pyMaxQueueLengthKey, pyMaxQueueLength);
+
+    PyObject * pyMaxResultQueueLength             = Py_BuildValue("i", pParameters->maxResultQueueLength);
+    PyObject * pyMaxResultQueueLengthKey          = Py_BuildValue("s", "MaxResultQueueLength");
+    PyDict_SetItem(pyParameters, pyMaxResultQueueLengthKey, pyMaxResultQueueLength);
+
+    PyObject * pyWidth             = Py_BuildValue("i", pParameters->width);
+    PyObject * pyWidthKey          = Py_BuildValue("s", "Width");
+    PyDict_SetItem(pyParameters, pyWidthKey, pyWidth);
+
+    PyObject * pyHeight             = Py_BuildValue("i", pParameters->height);
+    PyObject * pyHeightKey          = Py_BuildValue("s", "Height");
+    PyDict_SetItem(pyParameters, pyHeightKey, pyHeight);
+
+    PyObject * pyStride             = Py_BuildValue("i", pParameters->stride);
+    PyObject * pyStrideKey          = Py_BuildValue("s", "Stride");
+    PyDict_SetItem(pyParameters, pyStrideKey, pyStride);
+
+    PyObject * pyImagePixelFormat             = Py_BuildValue("i", pParameters->imagePixelFormat);
+    PyObject * pyImagePixelFormatKey          = Py_BuildValue("s", "ImagePixelFormat");
+    PyDict_SetItem(pyParameters, pyImagePixelFormatKey, pyImagePixelFormat);
+
+    PyObject * pyRegionTop             = Py_BuildValue("i", pParameters->region.regionTop);
+    PyObject * pyRegionTopKey          = Py_BuildValue("s", "RegionTop");
+    PyDict_SetItem(pyParameters, pyRegionTopKey, pyRegionTop);
+
+    PyObject * pyRegionLeft             = Py_BuildValue("i", pParameters->region.regionLeft);
+    PyObject * pyRegionLeftKey          = Py_BuildValue("s", "RegionLeft");
+    PyDict_SetItem(pyParameters, pyRegionLeftKey, pyRegionLeft);
+
+    PyObject * pyRegionRight             = Py_BuildValue("i", pParameters->region.regionRight);
+    PyObject * pyRegionRightKey          = Py_BuildValue("s", "RegionRight");
+    PyDict_SetItem(pyParameters, pyRegionRightKey, pyRegionRight);
+
+    PyObject * pyRegionBottom             = Py_BuildValue("i", pParameters->region.regionBottom);
+    PyObject * pyRegionBottomKey          = Py_BuildValue("s", "RegionBottom");
+    PyDict_SetItem(pyParameters, pyRegionBottomKey, pyRegionBottom);
+
+    PyObject * pyRegionMeasuredByPercentage             = Py_BuildValue("i", pParameters->region.regionMeasuredByPercentage);
+    PyObject * pyRegionMeasuredByPercentageKey          = Py_BuildValue("s", "RegionMeasuredByPercentage");
+    PyDict_SetItem(pyParameters, pyRegionMeasuredByPercentageKey, pyRegionMeasuredByPercentage);
+
+    PyObject * pyThreshold             = Py_BuildValue("f", pParameters->threshold);
+    PyObject * pyThresholdKey          = Py_BuildValue("s", "Threshold");
+    PyDict_SetItem(pyParameters, pyThresholdKey, pyThreshold);
+
+    PyObject * pyFPS             = Py_BuildValue("i", pParameters->fps);
+    PyObject * pyFPSKey          = Py_BuildValue("s", "FPS");
+    PyDict_SetItem(pyParameters, pyFPSKey, pyFPS);
+
+    return pyParameters;
+}
+
+FrameDecodingParameters CreateCFrameDecodingParameters(PyObject * pyParameters)
+{
+    FrameDecodingParameters parameters;
+    parameters.maxQueueLength                       = PyLong_AsLong(PyDict_GetItem(pyParameters, Py_BuildValue("s", "MaxQueueLength")));
+    parameters.maxResultQueueLength                 = PyLong_AsLong(PyDict_GetItem(pyParameters, Py_BuildValue("s", "MaxResultQueueLength")));
+    parameters.width                                = PyLong_AsLong(PyDict_GetItem(pyParameters, Py_BuildValue("s", "Width")));
+    parameters.height                               = PyLong_AsLong(PyDict_GetItem(pyParameters, Py_BuildValue("s", "Height")));
+    parameters.stride                               = PyLong_AsLong(PyDict_GetItem(pyParameters, Py_BuildValue("s", "Stride")));
+    parameters.imagePixelFormat                     = PyLong_AsLong(PyDict_GetItem(pyParameters, Py_BuildValue("s", "ImagePixelFormat")));
+    parameters.region.regionBottom                  = PyLong_AsLong(PyDict_GetItem(pyParameters, Py_BuildValue("s", "RegionBottom")));
+    parameters.region.regionLeft                    = PyLong_AsLong(PyDict_GetItem(pyParameters, Py_BuildValue("s", "RegionLeft")));
+    parameters.region.regionRight                   = PyLong_AsLong(PyDict_GetItem(pyParameters, Py_BuildValue("s", "RegionRight")));
+    parameters.region.regionTop                     = PyLong_AsLong(PyDict_GetItem(pyParameters, Py_BuildValue("s", "RegionTop")));
+    parameters.region.regionMeasuredByPercentage    = PyLong_AsLong(PyDict_GetItem(pyParameters, Py_BuildValue("s", "RegionMeasuredByPercentage")));
+    parameters.threshold                            = (float)PyFloat_AsDouble(PyDict_GetItem(pyParameters, Py_BuildValue("s", "Threshold")));
+    parameters.fps                                  = PyLong_AsLong(PyDict_GetItem(pyParameters, Py_BuildValue("s", "FPS")));
+
+    return parameters;
+}
+
 #pragma region DeprecatedFunctions
 /**
  * Set Dynamsoft Barcode Reader license. This API will be deprecated in a future version.
@@ -1118,7 +1265,7 @@ initLicense(PyObject *obj, PyObject *args)
     }
 
     int ret = DBR_InitLicense(self->hBarcode, pszLicense);
-    printf("Although this API will deprecate in a future version, it still works for now. However, we recommend you use the new API \"InitLicense\"");
+    printf("Although this API will deprecate in a future version, it still works for now. However, we recommend you use the new API \"InitLicense\"\n");
     return Py_BuildValue("i", ret);
 }
 
@@ -1245,7 +1392,7 @@ void updateFormat(DynamsoftBarcodeReader *self, int format)
 static PyObject *
 decodeFile(PyObject *obj, PyObject *args)
 {
-    printf("Although this API will deprecate in a future version, it still works for now. However, we recommend you use the new API \"DecodeFile\"");
+    printf("Although this API will deprecate in a future version, it still works for now. However, we recommend you use the new API \"DecodeFile\"\n");
     DynamsoftBarcodeReader *self = (DynamsoftBarcodeReader *)obj;
 #if defined(_WIN32)
     printf("Windows\n");
@@ -1289,14 +1436,15 @@ decodeFile(PyObject *obj, PyObject *args)
 static PyObject *
 decodeBuffer(PyObject *obj, PyObject *args)
 {
-    printf("Although this API will deprecate in a future version, it still works for now. However, we recommend you use the new API \"DecodeBuffer\"");
+    printf("Although this API will deprecate in a future version, it still works for now. However, we recommend you use the new API \"DecodeBuffer\"\n");
     DynamsoftBarcodeReader *self = (DynamsoftBarcodeReader *)obj;
 
     PyObject *o;
     int iFormat;
     char *templateName = NULL;
     char *encoding = NULL;
-    if (!PyArg_ParseTuple(args, "Oi|ss", &o, &iFormat, &templateName, &encoding))
+    int imagePixelFormat = IPF_RGB_888;
+    if (!PyArg_ParseTuple(args, "Oi|iss", &o, &iFormat, &imagePixelFormat, &templateName, &encoding))
         return NULL;
 
     updateFormat(self, iFormat);
@@ -1350,31 +1498,6 @@ decodeBuffer(PyObject *obj, PyObject *args)
     // Initialize Dynamsoft Barcode Reader
     TextResultArray *pResults = NULL;
 
-    // Detect barcodes
-    ImagePixelFormat imagePixelFormat = IPF_RGB_888;
-
-    switch (channels)
-    {
-    case 1:
-        imagePixelFormat = IPF_GRAYSCALED;
-        break;
-    case 2:
-        imagePixelFormat = IPF_RGB_555;
-        break;
-    case 3:
-        imagePixelFormat = IPF_RGB_888;
-        break;
-    case 4:
-        imagePixelFormat = IPF_ARGB_8888;
-        break;
-    case 5:
-        imagePixelFormat = IPF_RGB_161616;
-        break;
-    case 6:
-        imagePixelFormat = IPF_ARGB_16161616;
-        break;
-    }
-
     PyObject *list = NULL;
     int ret = DBR_DecodeBuffer(self->hBarcode, buffer, width, height, stride, imagePixelFormat, templateName ? templateName : "");
     if (ret)
@@ -1400,7 +1523,7 @@ decodeBuffer(PyObject *obj, PyObject *args)
 static PyObject *
 decodeFileStream(PyObject *obj, PyObject *args)
 {
-    printf("Although this API will deprecate in a future version, it still works for now. However, we recommend you use the new API \"DecodeFileStream\"");
+    printf("Although this API will deprecate in a future version, it still works for now. However, we recommend you use the new API \"DecodeFileStream\"\n");
     DynamsoftBarcodeReader *self = (DynamsoftBarcodeReader *)obj;
 #if defined(_WIN32)
     printf("Windows\n");
@@ -1452,7 +1575,7 @@ decodeFileStream(PyObject *obj, PyObject *args)
 static PyObject *
 initLicenseFromLicenseContent(PyObject *obj, PyObject *args)
 {
-    printf("Although this API will deprecate in a future version, it still works for now. However, we recommend you use the new API \"InitLicenseFromLicenseContent\"");
+    printf("Although this API will deprecate in a future version, it still works for now. However, we recommend you use the new API \"InitLicenseFromLicenseContent\"\n");
     DynamsoftBarcodeReader *self = (DynamsoftBarcodeReader *)obj;
 
     char *pszLicenseKey;
@@ -1474,7 +1597,7 @@ initLicenseFromLicenseContent(PyObject *obj, PyObject *args)
 static PyObject *
 outputLicenseToString(PyObject *obj, PyObject *args)
 {
-    printf("Although this API will deprecate in a future version, it still works for now. However, we recommend you use the new API \"OutputLicenseToString\"");
+    printf("Although this API will deprecate in a future version, it still works for now. However, we recommend you use the new API \"OutputLicenseToString\"\n");
     DynamsoftBarcodeReader *self = (DynamsoftBarcodeReader *)obj;
 
     char content[512];
@@ -1500,7 +1623,7 @@ outputLicenseToString(PyObject *obj, PyObject *args)
 static PyObject *
 initLicenseFromServer(PyObject *obj, PyObject *args)
 {
-    printf("Although this API will deprecate in a future version, it still works for now. However, we recommend you use the new API \"InitLicenseFromServer\"");
+    printf("Although this API will deprecate in a future version, it still works for now. However, we recommend you use the new API \"InitLicenseFromServer\"\n");
     DynamsoftBarcodeReader *self = (DynamsoftBarcodeReader *)obj;
 
     char *pszLicenseKey, *pLicenseServer;
@@ -1601,7 +1724,7 @@ static void setModeValue(DynamsoftBarcodeReader *self, PyObject *iter, char *mod
 static PyObject *
 setFurtherModes(PyObject *obj, PyObject *args)
 {
-    printf("Although this API will deprecate in a future version, it still works for now. However, we recommend you use the new API \"UpdateRuntimeSettings\"");
+    printf("Although this API will deprecate in a future version, it still works for now. However, we recommend you use the new API \"UpdateRuntimeSettings\"\n");
     DynamsoftBarcodeReader *self = (DynamsoftBarcodeReader *)obj;
 
     char *mode;
@@ -1632,7 +1755,7 @@ setFurtherModes(PyObject *obj, PyObject *args)
 static PyObject *
 setParameters(PyObject *obj, PyObject *args)
 {
-    printf("Although this API will deprecate in a future version, it still works for now. However, we recommend you use the new API \"InitRuntimeSettingsByJsonString\"");
+    printf("Although this API will deprecate in a future version, it still works for now. However, we recommend you use the new API \"InitRuntimeSettingsByJsonString\"\n");
     DynamsoftBarcodeReader *self = (DynamsoftBarcodeReader *)obj;
 
     char *json;
@@ -1660,7 +1783,7 @@ setParameters(PyObject *obj, PyObject *args)
 static PyObject *
 getParameters(PyObject *obj, PyObject *args)
 {
-    printf("Although this API will deprecate in a future version, it still works for now. However, we recommend you use the new API \"OutputSettingsToJsonString\"");
+    printf("Although this API will deprecate in a future version, it still works for now. However, we recommend you use the new API \"OutputSettingsToJsonString\"\n");
     DynamsoftBarcodeReader *self = (DynamsoftBarcodeReader *)obj;
 
     char errorMessage[DEFAULT_MEMORY_SIZE];
@@ -1726,13 +1849,14 @@ void onResultCallback(int frameId, TextResultArray *pResults, void *pUser)
 static PyObject *
 startVideoMode(PyObject *obj, PyObject *args)
 {
-    printf("Although this API will deprecate in a future version, it still works for now. However, we recommend you use the new API \"StartVideoMode\"");
+    printf("Although this API will deprecate in a future version, it still works for now. However, we recommend you use the new API \"StartVideoMode\"\n");
     printf("Start the video mode\n");
     DynamsoftBarcodeReader *self = (DynamsoftBarcodeReader *)obj;
 
     PyObject *callback = NULL;
-    int maxListLength, maxResultListLength, width, height, channels, stride, iFormat;
-    if (!PyArg_ParseTuple(args, "iiiiiiiO", &maxListLength, &maxResultListLength, &width, &height, &stride, &channels, &iFormat, &callback))
+    int maxListLength, maxResultListLength, width, height, stride, iFormat;
+    int imagePixelFormat = IPF_RGB_888;
+    if (!PyArg_ParseTuple(args, "iiiiiiO|i", &maxListLength, &maxResultListLength, &width, &height, &stride, &iFormat, &callback, &imagePixelFormat))
     {
         return NULL;
     }
@@ -1751,29 +1875,6 @@ startVideoMode(PyObject *obj, PyObject *args)
         self->py_callback = callback;
     }
 
-    ImagePixelFormat imagePixelFormat = IPF_RGB_888;
-
-    switch (channels)
-    {
-    case 1:
-        imagePixelFormat = IPF_GRAYSCALED;
-        break;
-    case 2:
-        imagePixelFormat = IPF_RGB_555;
-        break;
-    case 3:
-        imagePixelFormat = IPF_RGB_888;
-        break;
-    case 4:
-        imagePixelFormat = IPF_ARGB_8888;
-        break;
-    case 5:
-        imagePixelFormat = IPF_RGB_161616;
-        break;
-    case 6:
-        imagePixelFormat = IPF_ARGB_16161616;
-        break;
-    }
 
     DBR_SetTextResultCallback(self->hBarcode, onResultCallback, self);
 
@@ -1787,7 +1888,7 @@ startVideoMode(PyObject *obj, PyObject *args)
 static PyObject *
 stopVideoMode(PyObject *obj, PyObject *args)
 {
-    printf("Although this API will deprecate in a future version, it still works for now. However, we recommend you use the new API \"StopVideoMode\"");
+    printf("Although this API will deprecate in a future version, it still works for now. However, we recommend you use the new API \"StopVideoMode\"\n");
     DynamsoftBarcodeReader *self = (DynamsoftBarcodeReader *)obj;
     printf("Stop the video mode\n");
     if (self->hBarcode)
@@ -1805,7 +1906,7 @@ stopVideoMode(PyObject *obj, PyObject *args)
 static PyObject *
 appendVideoFrame(PyObject *obj, PyObject *args)
 {
-    printf("Although this API will deprecate in a future version, it still works for now. However, we recommend you use the new API \"AppendVideoFrame\"");
+    printf("Although this API will deprecate in a future version, it still works for now. However, we recommend you use the new API \"AppendVideoFrame\"\n");
     DynamsoftBarcodeReader *self = (DynamsoftBarcodeReader *)obj;
 
     PyObject *o;
@@ -1887,10 +1988,10 @@ static PyObject * GetRuntimeSettings(PyObject *obj, PyObject *args)
 {
     DynamsoftBarcodeReader *self = (DynamsoftBarcodeReader *)obj;
 
-    PublicRuntimeSettings pSettings;
-    int errorCode = DBR_GetRuntimeSettings(self->hBarcode, &pSettings);
+    PublicRuntimeSettings settings;
+    int errorCode = DBR_GetRuntimeSettings(self->hBarcode, &settings);
 
-    PyObject * pySettings = CreatePyRuntimeSettings(pSettings);
+    PyObject * pySettings = CreatePyRuntimeSettings(settings);
 
     return pySettings;
 }
@@ -1905,86 +2006,19 @@ static PyObject * GetRuntimeSettings(PyObject *obj, PyObject *args)
 static PyObject * UpdataRuntimeSettings(PyObject *obj, PyObject *args)
 {
     DynamsoftBarcodeReader *self = (DynamsoftBarcodeReader *)obj;
-    PyObject *o;
-    if (!PyArg_ParseTuple(args, "O", &o))
+    PyObject *pyParameters;
+    if (!PyArg_ParseTuple(args, "O", &pyParameters))
     {
         return NULL;
     }
-    if(!PyDict_Check(o))
+    if(!PyDict_Check(pyParameters))
     {
-        printf("the parameter should be a dictionaty.");
+        printf("the parameter should be a dictionary.");
         return NULL;
     }
-    PublicRuntimeSettings pSettings;
-    pSettings.terminatePhase            = (TerminatePhase)(PyLong_AsLong(PyDict_GetItem(o, Py_BuildValue("s", "TerminatePhase"))));
-    pSettings.timeout                   = PyLong_AsLong(PyDict_GetItem(o, Py_BuildValue("s", "Timeout")));
-    pSettings.maxAlgorithmThreadCount   = PyLong_AsLong(PyDict_GetItem(o, Py_BuildValue("s", "MaxAlgorithmThreadCount")));
-    pSettings.expectedBarcodesCount     = PyLong_AsLong(PyDict_GetItem(o, Py_BuildValue("s", "ExpectedBarcodesCount")));
-    pSettings.barcodeFormatIds          = PyLong_AsLong(PyDict_GetItem(o, Py_BuildValue("s", "BarcodeFormatIds")));
-    pSettings.barcodeFormatIds_2        = PyLong_AsLong(PyDict_GetItem(o, Py_BuildValue("s", "BarcodeFormatIds_2")));
-    pSettings.pdfRasterDPI              = PyLong_AsLong(PyDict_GetItem(o, Py_BuildValue("s", "PDFRasterDPI")));
-    pSettings.scaleDownThreshold        = PyLong_AsLong(PyDict_GetItem(o, Py_BuildValue("s", "ScaleDownThreshold")));
-
-    PyObject * binarizationModes            = PyDict_GetItem(o, Py_BuildValue("s", "BinarizationModes"));
-    PyObject * localizationModes            = PyDict_GetItem(o, Py_BuildValue("s", "LocalizationModes"));
-    PyObject * colourClusteringModes        = PyDict_GetItem(o, Py_BuildValue("s", "ColourClusteringModes"));
-    PyObject * colourConversionModes        = PyDict_GetItem(o, Py_BuildValue("s", "ColourConversionModes"));
-    PyObject * grayscaleTransformationModes = PyDict_GetItem(o, Py_BuildValue("s", "GrayscaleTransformationModes"));
-    PyObject * regionPredetectionModes      = PyDict_GetItem(o, Py_BuildValue("s", "RegionPredetectionModes"));
-    PyObject * imagePreprocessingModes      = PyDict_GetItem(o, Py_BuildValue("s", "ImagePreprocessingModes"));
-    PyObject * textureDetectionModes        = PyDict_GetItem(o, Py_BuildValue("s", "TextureDetectionModes"));
-    PyObject * textFilterModes              = PyDict_GetItem(o, Py_BuildValue("s", "TextFilterModes"));
-    PyObject * dpmCodeReadingModes          = PyDict_GetItem(o, Py_BuildValue("s", "DPMCodeReadingModes"));
-    PyObject * deformationResistingModes    = PyDict_GetItem(o, Py_BuildValue("s", "DeformationResistingModes"));
-    PyObject * barcodeComplementModes       = PyDict_GetItem(o, Py_BuildValue("s", "BarcodeComplementModes"));
-    PyObject * barcodeColourModes           = PyDict_GetItem(o, Py_BuildValue("s", "BarcodeColourModes"));
-    PyObject * textResultOrderModes         = PyDict_GetItem(o, Py_BuildValue("s", "TextResultOrderModes"));
-
-    if(PyList_Check(binarizationModes)              && PyList_Check(localizationModes)          && PyList_Check(colourClusteringModes)  && PyList_Check(colourConversionModes)  &&
-       PyList_Check(grayscaleTransformationModes)   && PyList_Check(regionPredetectionModes)    && PyList_Check(imagePreprocessingModes)&& PyList_Check(textureDetectionModes)  &&
-       PyList_Check(textFilterModes)                && PyList_Check(deformationResistingModes)  && PyList_Check(dpmCodeReadingModes)    && PyList_Check(barcodeComplementModes) &&
-       PyList_Check(barcodeColourModes)             && PyList_Check(textResultOrderModes))
-    {
-        for(int i = 0; i < 8; ++i)
-        {
-            pSettings.binarizationModes[i]                          = (BinarizationMode)(PyLong_AsLong(PyList_GetItem(binarizationModes, i)));
-            pSettings.localizationModes[i]                          = (LocalizationMode)(PyLong_AsLong(PyList_GetItem(localizationModes, i)));
-            pSettings.furtherModes.colourClusteringModes[i]         = (ColourClusteringMode)(PyLong_AsLong(PyList_GetItem(colourClusteringModes, i)));
-            pSettings.furtherModes.colourConversionModes[i]         = (ColourConversionMode)(PyLong_AsLong(PyList_GetItem(colourConversionModes, i)));
-            pSettings.furtherModes.grayscaleTransformationModes[i]  = (GrayscaleTransformationMode)(PyLong_AsLong(PyList_GetItem(grayscaleTransformationModes, i)));
-            pSettings.furtherModes.regionPredetectionModes[i]       = (RegionPredetectionMode)(PyLong_AsLong(PyList_GetItem(regionPredetectionModes, i)));
-            pSettings.furtherModes.imagePreprocessingModes[i]       = (ImagePreprocessingMode)(PyLong_AsLong(PyList_GetItem(imagePreprocessingModes, i)));
-            pSettings.furtherModes.textureDetectionModes[i]         = (TextureDetectionMode)(PyLong_AsLong(PyList_GetItem(textureDetectionModes, i)));
-            pSettings.furtherModes.textFilterModes[i]               = (TextFilterMode)(PyLong_AsLong(PyList_GetItem(textFilterModes, i)));
-            pSettings.furtherModes.dpmCodeReadingModes[i]           = (DPMCodeReadingMode)(PyLong_AsLong(PyList_GetItem(dpmCodeReadingModes, i)));
-            pSettings.furtherModes.deformationResistingModes[i]     = (DeformationResistingMode)(PyLong_AsLong(PyList_GetItem(deformationResistingModes, i)));
-            pSettings.furtherModes.barcodeComplementModes[i]        = (BarcodeComplementMode)(PyLong_AsLong(PyList_GetItem(barcodeComplementModes, i)));
-            pSettings.furtherModes.barcodeColourModes[i]            = (BarcodeColourMode)(PyLong_AsLong(PyList_GetItem(barcodeColourModes, i)));
-            pSettings.textResultOrderModes[i]                       = (TextResultOrderMode)(PyLong_AsLong(PyList_GetItem(textResultOrderModes, i)));
-        }
-    }
-    else
-    {
-        printf("the Modes should be a list.");
-        return NULL;
-    }
-
-    pSettings.furtherModes.textAssistedCorrectionMode               = (TextAssistedCorrectionMode)(PyLong_AsLong(PyDict_GetItem(o, Py_BuildValue("s", "TextAssistedCorrectionMode"))));
-    pSettings.deblurLevel                                           = PyLong_AsLong(PyDict_GetItem(o, Py_BuildValue("s", "DeblurLevel")));
-    pSettings.intermediateResultTypes                               = PyLong_AsLong(PyDict_GetItem(o, Py_BuildValue("s", "IntermediateResultTypes")));
-    pSettings.intermediateResultSavingMode                          = (IntermediateResultSavingMode)(PyLong_AsLong(PyDict_GetItem(o, Py_BuildValue("s", "IntermediateResultSavingMode"))));
-    pSettings.resultCoordinateType                                  = (ResultCoordinateType)(PyLong_AsLong(PyDict_GetItem(o, Py_BuildValue("s", "ResultCoordinateType"))));
-    pSettings.returnBarcodeZoneClarity                              = PyLong_AsLong(PyDict_GetItem(o, Py_BuildValue("s", "ReturnBarcodeZoneClarity")));
-    pSettings.region.regionTop                                      = PyLong_AsLong(PyDict_GetItem(o, Py_BuildValue("s", "RegionTop")));
-    pSettings.region.regionBottom                                   = PyLong_AsLong(PyDict_GetItem(o, Py_BuildValue("s", "RegionBottom")));
-    pSettings.region.regionLeft                                     = PyLong_AsLong(PyDict_GetItem(o, Py_BuildValue("s", "RegionLeft")));
-    pSettings.region.regionRight                                    = PyLong_AsLong(PyDict_GetItem(o, Py_BuildValue("s", "RegionRight")));
-    pSettings.region.regionMeasuredByPercentage                     = PyLong_AsLong(PyDict_GetItem(o, Py_BuildValue("s", "RegionMeasuredByPercentage")));
-    pSettings.minBarcodeTextLength                                  = PyLong_AsLong(PyDict_GetItem(o, Py_BuildValue("s", "MinBarcodeTextLength")));
-    pSettings.minResultConfidence                                   = PyLong_AsLong(PyDict_GetItem(o, Py_BuildValue("s", "MinResultConfidence")));
-
+    PublicRuntimeSettings settings = CreateCRuntimeSettings(pyParameters);
     char szErrorMsgBuffer[256];
-    int errorCode = DBR_UpdateRuntimeSettings(self->hBarcode, &pSettings, szErrorMsgBuffer, 256);
+    int errorCode = DBR_UpdateRuntimeSettings(self->hBarcode, &settings, szErrorMsgBuffer, 256);
     if(errorCode != 0)
     {
         printf("Error:%s\n", szErrorMsgBuffer);
@@ -2138,16 +2172,17 @@ static PyObject * DecodeBuffer(PyObject *obj, PyObject *args)
 
     PyObject *o;
     char *templateName = NULL;
-    int width, height, channels, stride;
+    int width, height, stride;
+    int imagePixelFormat = IPF_RGB_888;
     // char *encoding = NULL;
-    if (!PyArg_ParseTuple(args, "Oiiii|s", &o, &height, &width, &stride, &channels, &templateName))
+    if (!PyArg_ParseTuple(args, "Oiii|is", &o, &height, &width, &stride, &imagePixelFormat, &templateName))
         return NULL;
 
 
 #if defined(IS_PY3K)
     //Refer to numpy/core/src/multiarray/ctors.c
     Py_buffer *view;
-    int nd;
+    // int nd;
     PyObject *memoryview = PyMemoryView_FromObject(o);
     if (memoryview == NULL)
     {
@@ -2191,31 +2226,6 @@ static PyObject * DecodeBuffer(PyObject *obj, PyObject *args)
 
     // Initialize Dynamsoft Barcode Reader
     TextResultArray *pResults = NULL;
-
-    // Detect barcodes
-    ImagePixelFormat imagePixelFormat = IPF_RGB_888;
-
-    switch (channels)
-    {
-    case 1:
-        imagePixelFormat = IPF_GRAYSCALED;
-        break;
-    case 2:
-        imagePixelFormat = IPF_RGB_555;
-        break;
-    case 3:
-        imagePixelFormat = IPF_RGB_888;
-        break;
-    case 4:
-        imagePixelFormat = IPF_ARGB_8888;
-        break;
-    case 5:
-        imagePixelFormat = IPF_RGB_161616;
-        break;
-    case 6:
-        imagePixelFormat = IPF_ARGB_16161616;
-        break;
-    }
 
     if(templateName == NULL)
     {
@@ -2326,21 +2336,75 @@ void OnResultCallback(int frameId, TextResultArray *pResults, void *pUser)
     DBR_FreeTextResults(&pResults);
 }
 
+// static PyObject * SetErrorCallback(PyObject *obj, PyObject *args)
+// {
+//     DynamsoftBarcodeReader *self = (DynamsoftBarcodeReader *)obj;
+
+//     PyObject * callBackFunc = NULL;
+//     PyObject * pyUserData = NULL;
+
+//     if (!PyArg_ParseTuple(args, "OO", &callBackFunc, &pyUserData))
+//     {
+//         return NULL;
+//     }
+
+//     if (!PyCallable_Check(callBackFunc))
+//     {
+//         PyErr_SetString(PyExc_TypeError, "parameter must be callable");
+//         return NULL;
+//     }
+//     else
+//     {
+//         Py_XINCREF(callBackFunc);    /* Add a reference to new callback */
+//         Py_XDECREF(self->py_callback); /* Dispose of previous callback */
+//         self->py_callback = callback;
+//     }
+
+//     DBR_SetTextResultCallback(self->hBarcode, OnResultCallback, (void*)pyUserData);
+// }
+
+// static PyObject * SetTextResultCallback(PyObject *obj, PyObject *args)
+// {
+
+// }
+
+// static PyObject * SetIntermediateResultCallback(PyObject *obj, PyObject *args)
+// {
+
+// }
+
+/**
+* Init frame decoding parameters.
+*/
+static PyObject * InitFrameDecodingParameters(PyObject *obj, PyObject *args)
+{
+    DynamsoftBarcodeReader *self = (DynamsoftBarcodeReader *)obj;
+    FrameDecodingParameters pSettings;
+    DBR_InitFrameDecodingParameters(self->hBarcode, &pSettings);
+    PyObject * frameParameters = CreatePyFrameDecodingParameters(&pSettings);
+    return frameParameters;
+}
+
 /**
  * Read barcodes from continuous video frames
  */
 static PyObject * StartVideoMode(PyObject *obj, PyObject *args)
 {
-    printf("Start the video mode\n");
     DynamsoftBarcodeReader *self = (DynamsoftBarcodeReader *)obj;
 
+    PyObject *pyParameters = NULL;
     PyObject *callback = NULL;
-    int maxListLength, maxResultListLength, width, height, channels, stride;
-    if (!PyArg_ParseTuple(args, "iiiiiiO", &maxListLength, &maxResultListLength, &width, &height, &stride, &channels, &callback))
+    char * templateName = NULL;
+    if (!PyArg_ParseTuple(args, "OO|s",&pyParameters, &callback, &templateName))
     {
         return NULL;
     }
 
+    if(!PyDict_Check(pyParameters))
+    {
+        printf("the first parameter should be a dictionary.");
+        return NULL;
+    }
     if (!PyCallable_Check(callback))
     {
         PyErr_SetString(PyExc_TypeError, "parameter must be callable");
@@ -2353,33 +2417,13 @@ static PyObject * StartVideoMode(PyObject *obj, PyObject *args)
         self->py_callback = callback;
     }
 
-    ImagePixelFormat imagePixelFormat = IPF_RGB_888;
-
-    switch (channels)
-    {
-    case 1:
-        imagePixelFormat = IPF_GRAYSCALED;
-        break;
-    case 2:
-        imagePixelFormat = IPF_RGB_555;
-        break;
-    case 3:
-        imagePixelFormat = IPF_RGB_888;
-        break;
-    case 4:
-        imagePixelFormat = IPF_ARGB_8888;
-        break;
-    case 5:
-        imagePixelFormat = IPF_RGB_161616;
-        break;
-    case 6:
-        imagePixelFormat = IPF_ARGB_16161616;
-        break;
-    }
-
     DBR_SetTextResultCallback(self->hBarcode, OnResultCallback, self);
-
-    int ret = DBR_StartFrameDecoding(self->hBarcode, maxListLength, maxResultListLength, width, height, stride, imagePixelFormat, "");
+    FrameDecodingParameters parameters = CreateCFrameDecodingParameters(pyParameters);
+    if(templateName == NULL)
+    {
+        templateName = "";
+    }
+    int ret = DBR_StartFrameDecodingEx(self->hBarcode, parameters, templateName);
     return Py_BuildValue("i", ret);
 }
 
@@ -2889,6 +2933,7 @@ static PyMethodDef dbr_methods[] = {
     {"ResetRuntimeSettings",            ResetRuntimeSettings,               METH_VARARGS, NULL},
     {"SetModeArgument",                 SetModeArgument,                    METH_VARARGS, NULL},
     {"GetModeArgument",                 GetModeArgument,                    METH_VARARGS, NULL},
+    {"InitFrameDecodingParameters",     InitFrameDecodingParameters,        METH_VARARGS, NULL},
     {NULL,                              NULL,                               0,            NULL}
 };
 

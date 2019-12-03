@@ -118,7 +118,7 @@ sudo py -3 setup.py build install
 
 - InitLicense(license-key)
 - DecodeFile(filename) 
-- DecodeBuffer(frame-by-opencv-capture, height, width, stride, channels)
+- DecodeBuffer(frame-by-opencv-capture, height, width, stride)
 - DecodeFileStream(fileStream, fileSize)
     ```
     Code Snippet:
@@ -265,8 +265,24 @@ sudo py -3 setup.py build install
     | X                    | LONG              |
     | Y                    | LONG              |
 
+- InitFrameDecodingParameters()
+- StartVideoMode(frameDecodingParameters, callback)
+    | FrameDecodingParameters     | Type              |
+    | ----------------------------|-------------------|
+    | MaxQueueLength              | LONG              |
+    | MaxResultQueueLength        | LONG              |
+    | Width                       | LONG              |
+    | Height                      | LONG              |
+    | Stride                      | LONG              |
+    | ImagePixelFormat            | LONG              |
+    | RegionBottom                | LONG              |
+    | RegionLeft                  | LONG              |
+    | RegionRight                 | LONG              |
+    | RegionTop                   | LONG              |
+    | RegionMeasuredByPercentage  | LONG              |
+    | Threshold                   | Float             |
+    | FPS                         | LONG              |
 
-- StartVideoMode(max_buffer, max_results, video_width, video_height, stride, channels, callback)
 - StopVideoMode()
 - AppendVideoFrame(frame-by-opencv-capture)
 - InitLicenseFromLicenseContent(license-key, license-content)
