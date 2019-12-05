@@ -514,9 +514,21 @@ static PyObject * CreatePySamplingImageData(SamplingImageData samplingImage)
         printf("SamplingImageData:New Dict failure\n");   
         return NULL;     
     }
-    PyObject * pySamplingImageBytes     = PyByteArray_FromStringAndSize(samplingImage.bytes, samplingImage.width * samplingImage.height);
-    PyObject * pySamplingImageBytesKey  = Py_BuildValue("s", "Bytes");
-    PyDict_SetItem(pySamplingImage, pySamplingImageBytesKey, pySamplingImageBytes);
+
+    if(samplingImage.bytes != NULL)
+    {
+        PyObject * pySamplingImageBytes     = PyByteArray_FromStringAndSize(samplingImage.bytes, samplingImage.width * samplingImage.height);
+        PyObject * pySamplingImageBytesKey  = Py_BuildValue("s", "Bytes");
+        PyDict_SetItem(pySamplingImage, pySamplingImageBytesKey, pySamplingImageBytes);
+    }
+    else
+    {
+        PyObject * pySamplingImageBytes     = Py_BuildValue("s", "NULL");
+        PyObject * pySamplingImageBytesKey  = Py_BuildValue("s", "Bytes");
+        PyDict_SetItem(pySamplingImage, pySamplingImageBytesKey, pySamplingImageBytes);
+    }
+
+
     PyObject * pySamplingImageWidth     = Py_BuildValue("i", samplingImage.width);
     PyObject * pySamplingImageWidthKey  = Py_BuildValue("s", "Width");
     PyDict_SetItem(pySamplingImage, pySamplingImageWidthKey, pySamplingImageWidth);
@@ -548,17 +560,45 @@ static PyObject * CreatePyDetailedResult(void * pResult, int format)
         PyObject * pyModuleSizeKey      = Py_BuildValue("s", "ModuleSize");
         PyDict_SetItem(pyResult, pyModuleSizeKey, pyModuleSize);
 
-        PyObject * pyStartCharsBytes    = PyByteArray_FromStringAndSize(((OneDCodeDetails *)pResult)->startCharsBytes, ((OneDCodeDetails *)pResult)->startCharsBytesLength);
-        PyObject * pyStartCharsBytesKey = Py_BuildValue("s", "StartCharsBytes");
-        PyDict_SetItem(pyResult, pyStartCharsBytesKey, pyStartCharsBytes);
+        if(((OneDCodeDetails *)pResult)->startCharsBytes != NULL)
+        {
+            PyObject * pyStartCharsBytes    = PyByteArray_FromStringAndSize(((OneDCodeDetails *)pResult)->startCharsBytes, ((OneDCodeDetails *)pResult)->startCharsBytesLength);
+            PyObject * pyStartCharsBytesKey = Py_BuildValue("s", "StartCharsBytes");
+            PyDict_SetItem(pyResult, pyStartCharsBytesKey, pyStartCharsBytes);
+        }
+        else
+        {
+            PyObject * pyStartCharsBytes    = Py_BuildValue("s", "NULL");
+            PyObject * pyStartCharsBytesKey = Py_BuildValue("s", "StartCharsBytes");
+            PyDict_SetItem(pyResult, pyStartCharsBytesKey, pyStartCharsBytes);
+        }
 
-        PyObject * pyStopCharsBytes     = PyByteArray_FromStringAndSize(((OneDCodeDetails *)pResult)->stopCharsBytes, ((OneDCodeDetails *)pResult)->stopCharsBytesLength);
-        PyObject * pyStopCharsBytesKey  = Py_BuildValue("s", "StopCharsBytes");
-        PyDict_SetItem(pyResult, pyStopCharsBytesKey, pyStopCharsBytes);
+        if(((OneDCodeDetails *)pResult)->stopCharsBytes != NULL)
+        {
+            PyObject * pyStopCharsBytes     = PyByteArray_FromStringAndSize(((OneDCodeDetails *)pResult)->stopCharsBytes, ((OneDCodeDetails *)pResult)->stopCharsBytesLength);
+            PyObject * pyStopCharsBytesKey  = Py_BuildValue("s", "StopCharsBytes");
+            PyDict_SetItem(pyResult, pyStopCharsBytesKey, pyStopCharsBytes);
+        }
+        else
+        {
+            PyObject * pyStopCharsBytes     = Py_BuildValue("s", "NULL");
+            PyObject * pyStopCharsBytesKey  = Py_BuildValue("s", "StopCharsBytes");
+            PyDict_SetItem(pyResult, pyStopCharsBytesKey, pyStopCharsBytes);
+        }
+        
 
-        PyObject * pyCheckDigitBytes    = PyByteArray_FromStringAndSize(((OneDCodeDetails *)pResult)->checkDigitBytes, ((OneDCodeDetails *)pResult)->checkDigitBytesLength);
-        PyObject * pyCheckDigitBytesKey = Py_BuildValue("s", "CheckDigitBytes");
-        PyDict_SetItem(pyResult, pyCheckDigitBytesKey, pyCheckDigitBytes);
+        if(((OneDCodeDetails *)pResult)->checkDigitBytes != NULL)
+        {
+            PyObject * pyCheckDigitBytes    = PyByteArray_FromStringAndSize(((OneDCodeDetails *)pResult)->checkDigitBytes, ((OneDCodeDetails *)pResult)->checkDigitBytesLength);
+            PyObject * pyCheckDigitBytesKey = Py_BuildValue("s", "CheckDigitBytes");
+            PyDict_SetItem(pyResult, pyCheckDigitBytesKey, pyCheckDigitBytes);
+        }
+        else
+        {
+            PyObject * pyCheckDigitBytes    = Py_BuildValue("s", "NULL");
+            PyObject * pyCheckDigitBytesKey = Py_BuildValue("s", "CheckDigitBytes");
+            PyDict_SetItem(pyResult, pyCheckDigitBytesKey, pyCheckDigitBytes);
+        }
     }
     else if(format == BF_QR_CODE)
     {
@@ -674,17 +714,37 @@ static PyObject * CreatePyLocalizationResult(LocalizationResult * pResult)
     PyObject * pyBarcodeFormatKey       = Py_BuildValue("s", "BarcodeFormat");
     PyDict_SetItem(pyResult, pyBarcodeFormatKey, pyBarcodeFormat);
 
-    PyObject *pyBarcodeFormatString     = Py_BuildValue("s",pResult->barcodeFormatString);
-    PyObject * pyBarcodeFormatStringKey = Py_BuildValue("s", "BarcodeFormatString");
-    PyDict_SetItem(pyResult, pyBarcodeFormatStringKey, pyBarcodeFormatString);
+    if(pResult->barcodeFormatString != NULL)
+    {
+        PyObject *pyBarcodeFormatString     = Py_BuildValue("s", pResult->barcodeFormatString);
+        PyObject * pyBarcodeFormatStringKey = Py_BuildValue("s", "BarcodeFormatString");
+        PyDict_SetItem(pyResult, pyBarcodeFormatStringKey, pyBarcodeFormatString);
+    }
+    else
+    {
+        PyObject *pyBarcodeFormatString     = Py_BuildValue("s", "NULL");
+        PyObject * pyBarcodeFormatStringKey = Py_BuildValue("s", "BarcodeFormatString");
+        PyDict_SetItem(pyResult, pyBarcodeFormatStringKey, pyBarcodeFormatString);
+    }
+    
 
     PyObject * pyBarcodeFormat_2        = Py_BuildValue("i", pResult->barcodeFormat_2);
     PyObject * pyBarcodeFormatKey_2     = Py_BuildValue("s", "BarcodeFormat_2");
     PyDict_SetItem(pyResult, pyBarcodeFormatKey_2, pyBarcodeFormat_2);
 
-    PyObject * pyBarcodeFormatString_2    = Py_BuildValue("s",pResult->barcodeFormatString_2);
-    PyObject * pyBarcodeFormatStringKey_2 = Py_BuildValue("s", "BarcodeFormatString_2");
-    PyDict_SetItem(pyResult, pyBarcodeFormatStringKey_2, pyBarcodeFormatString_2);
+    if(pResult->barcodeFormatString_2 != NULL)
+    {
+        PyObject * pyBarcodeFormatString_2    = Py_BuildValue("s", pResult->barcodeFormatString_2);
+        PyObject * pyBarcodeFormatStringKey_2 = Py_BuildValue("s", "BarcodeFormatString_2");
+        PyDict_SetItem(pyResult, pyBarcodeFormatStringKey_2, pyBarcodeFormatString_2);
+    }
+    else
+    {
+        PyObject * pyBarcodeFormatString_2    = Py_BuildValue("s", "NULL");
+        PyObject * pyBarcodeFormatStringKey_2 = Py_BuildValue("s", "BarcodeFormatString_2");
+        PyDict_SetItem(pyResult, pyBarcodeFormatStringKey_2, pyBarcodeFormatString_2);
+    }
+    
 
     PyObject * pyX1                     = Py_BuildValue("i", pResult->x1);
     PyObject * pyX1Key                  = Py_BuildValue("s", "X1");
@@ -730,21 +790,51 @@ static PyObject * CreatePyLocalizationResult(LocalizationResult * pResult)
     PyObject * pyPageNumberKey          = Py_BuildValue("s", "PageNumber");
     PyDict_SetItem(pyResult, pyBarcodeFormatKey, pyBarcodeFormat);
 
-    PyObject * pyRegionName             = Py_BuildValue("s", pResult->regionName);
-    PyObject * pyRegionNameKey          = Py_BuildValue("s", "RegionName");
-    PyDict_SetItem(pyResult, pyRegionNameKey, pyRegionName);
+    if(pResult->regionName != NULL)
+    {
+        PyObject * pyRegionName             = Py_BuildValue("s", pResult->regionName);
+        PyObject * pyRegionNameKey          = Py_BuildValue("s", "RegionName");
+        PyDict_SetItem(pyResult, pyRegionNameKey, pyRegionName);
+    }
+    else
+    {
+        PyObject * pyRegionName             = Py_BuildValue("s", "NULL");
+        PyObject * pyRegionNameKey          = Py_BuildValue("s", "RegionName");
+        PyDict_SetItem(pyResult, pyRegionNameKey, pyRegionName);
+    }
+    
 
-    PyObject * pyDocumentName           = Py_BuildValue("s", pResult->documentName);
-    PyObject * pyDocumentNameKey        = Py_BuildValue("s", "DocumentName");
-    PyDict_SetItem(pyResult, pyDocumentNameKey, pyDocumentName);
+    if(pResult->documentName != NULL)
+    {
+        PyObject * pyDocumentName           = Py_BuildValue("s", pResult->documentName);
+        PyObject * pyDocumentNameKey        = Py_BuildValue("s", "DocumentName");
+        PyDict_SetItem(pyResult, pyDocumentNameKey, pyDocumentName);
+    }
+    else
+    {
+        PyObject * pyDocumentName           = Py_BuildValue("s", "NULL");
+        PyObject * pyDocumentNameKey        = Py_BuildValue("s", "DocumentName");
+        PyDict_SetItem(pyResult, pyDocumentNameKey, pyDocumentName);
+    }
+    
 
     PyObject * pyResultCoordinateType   = Py_BuildValue("i", pResult->resultCoordinateType);
     PyObject * pyResultCoordinateTypeKey= Py_BuildValue("s", "ResultCoordinateType");
     PyDict_SetItem(pyResult, pyResultCoordinateTypeKey, pyResultCoordinateType);
 
-    PyObject * pyAccompanyingTextBytes    = PyByteArray_FromStringAndSize(pResult->accompanyingTextBytes, pResult->accompanyingTextBytesLength);
-    PyObject * pyAccompanyingTextBytesKey = Py_BuildValue("s", "AccompanyingTextBytes");
-    PyDict_SetItem(pyResult, pyAccompanyingTextBytesKey, pyAccompanyingTextBytes);
+    if(!(pResult->accompanyingTextBytes == NULL || pResult->accompanyingTextBytesLength == 0))
+    {
+        PyObject * pyAccompanyingTextBytes    = PyByteArray_FromStringAndSize(pResult->accompanyingTextBytes, pResult->accompanyingTextBytesLength);
+        PyObject * pyAccompanyingTextBytesKey = Py_BuildValue("s", "AccompanyingTextBytes");
+        PyDict_SetItem(pyResult, pyAccompanyingTextBytesKey, pyAccompanyingTextBytes);
+    }
+    else
+    {
+        PyObject * pyAccompanyingTextBytes    = Py_BuildValue("s", "NULL");
+        PyObject * pyAccompanyingTextBytesKey = Py_BuildValue("s", "AccompanyingTextBytes");
+        PyDict_SetItem(pyResult, pyAccompanyingTextBytesKey, pyAccompanyingTextBytes);
+    }
+    
 
     PyObject * pyConfidence             = Py_BuildValue("i", pResult->confidence);
     PyObject * pyConfidenceKey          = Py_BuildValue("s", "Confidence");
@@ -776,37 +866,85 @@ static PyObject * CreatePyExtendedResult(ExtendedResult * pResult)
     PyObject * pyBarcodeFormatKey       = Py_BuildValue("s", "BarcodeFormat");
     PyDict_SetItem(pyResult, pyBarcodeFormatKey, pyBarcodeFormat);
 
-    PyObject * pyBarcodeFormatString    = Py_BuildValue("s",pResult->barcodeFormatString);
-    PyObject * pyBarcodeFormatStringKey = Py_BuildValue("s", "BarcodeFormatString");
-    PyDict_SetItem(pyResult, pyBarcodeFormatStringKey, pyBarcodeFormatString);
+    if(pResult->barcodeFormatString != NULL)
+    {
+        PyObject * pyBarcodeFormatString    = Py_BuildValue("s", pResult->barcodeFormatString);
+        PyObject * pyBarcodeFormatStringKey = Py_BuildValue("s", "BarcodeFormatString");
+        PyDict_SetItem(pyResult, pyBarcodeFormatStringKey, pyBarcodeFormatString);
+    }
+    else
+    {
+        PyObject * pyBarcodeFormatString    = Py_BuildValue("s", "NULL");
+        PyObject * pyBarcodeFormatStringKey = Py_BuildValue("s", "BarcodeFormatString");
+        PyDict_SetItem(pyResult, pyBarcodeFormatStringKey, pyBarcodeFormatString);
+    }
+    
 
     PyObject * pyBarcodeFormat_2        = Py_BuildValue("i", pResult->barcodeFormat_2);
     PyObject * pyBarcodeFormatKey_2     = Py_BuildValue("s", "BarcodeFormat_2");
     PyDict_SetItem(pyResult, pyBarcodeFormatKey_2, pyBarcodeFormat_2);
 
-    PyObject * pyBarcodeFormatString_2    = Py_BuildValue("s", pResult->barcodeFormatString_2);
-    PyObject * pyBarcodeFormatStringKey_2 = Py_BuildValue("s", "BarcodeFormatString_2");
-    PyDict_SetItem(pyResult, pyBarcodeFormatStringKey_2, pyBarcodeFormatString_2);
+    if(pResult->barcodeFormatString_2 != NULL)
+    {
+        PyObject * pyBarcodeFormatString_2    = Py_BuildValue("s", pResult->barcodeFormatString_2);
+        PyObject * pyBarcodeFormatStringKey_2 = Py_BuildValue("s", "BarcodeFormatString_2");
+        PyDict_SetItem(pyResult, pyBarcodeFormatStringKey_2, pyBarcodeFormatString_2);
+    }
+    else
+    {
+        PyObject * pyBarcodeFormatString_2    = Py_BuildValue("s", "NULL");
+        PyObject * pyBarcodeFormatStringKey_2 = Py_BuildValue("s", "BarcodeFormatString_2");
+        PyDict_SetItem(pyResult, pyBarcodeFormatStringKey_2, pyBarcodeFormatString_2);
+    }
 
     PyObject * pyConfidence             = Py_BuildValue("i",pResult->confidence);
     PyObject * pyConfidenceKey          = Py_BuildValue("s", "Confidence");
     PyDict_SetItem(pyResult, pyConfidenceKey, pyConfidence);
 
-    PyObject * pyBytes                  = PyByteArray_FromStringAndSize(pResult->bytes, pResult->bytesLength);
-    PyObject * pyBytesKey               = Py_BuildValue("s", "Bytes");
-    PyDict_SetItem(pyResult, pyBytesKey, pyBytes);
+    if(pResult->bytes != NULL)
+    {
+        PyObject * pyBytes                  = PyByteArray_FromStringAndSize(pResult->bytes, pResult->bytesLength);
+        PyObject * pyBytesKey               = Py_BuildValue("s", "Bytes");
+        PyDict_SetItem(pyResult, pyBytesKey, pyBytes);
+    }
+    else
+    {
+        PyObject * pyBytes                  = Py_BuildValue("s", "NULL");
+        PyObject * pyBytesKey               = Py_BuildValue("s", "Bytes");
+        PyDict_SetItem(pyResult, pyBytesKey, pyBytes);
+    }
 
-    PyObject * pyAccompanyingTextBytes    = PyByteArray_FromStringAndSize(pResult->accompanyingTextBytes, pResult->accompanyingTextBytesLength);
-    PyObject * pyAccompanyingTextBytesKey = Py_BuildValue("s", "AccompanyingTextBytes");
-    PyDict_SetItem(pyResult, pyAccompanyingTextBytesKey, pyAccompanyingTextBytes);
+    if(pResult->accompanyingTextBytes != NULL)
+    {
+        PyObject * pyAccompanyingTextBytes    = PyByteArray_FromStringAndSize(pResult->accompanyingTextBytes, pResult->accompanyingTextBytesLength);
+        PyObject * pyAccompanyingTextBytesKey = Py_BuildValue("s", "AccompanyingTextBytes");
+        PyDict_SetItem(pyResult, pyAccompanyingTextBytesKey, pyAccompanyingTextBytes);
+    }
+    else
+    {
+        PyObject * pyAccompanyingTextBytes    = Py_BuildValue("s", "NULL");
+        PyObject * pyAccompanyingTextBytesKey = Py_BuildValue("s", "AccompanyingTextBytes");
+        PyDict_SetItem(pyResult, pyAccompanyingTextBytesKey, pyAccompanyingTextBytes);
+    }
+    
 
-    PyObject * pyDeformation            = Py_BuildValue("i",pResult->deformation);
+    PyObject * pyDeformation            = Py_BuildValue("i", pResult->deformation);
     PyObject * pyDeformationKey         = Py_BuildValue("s", "Deformation");
     PyDict_SetItem(pyResult, pyDeformationKey, pyDeformation);
 
-    PyObject * pyDetailedResult         = CreatePyDetailedResult(pResult->detailedResult, pResult->barcodeFormat);
-    PyObject * pyDetailedResultKey      = Py_BuildValue("s", "DetailedResult");
-    PyDict_SetItem(pyResult, pyDetailedResultKey, pyDetailedResult);
+    if(pResult->detailedResult != NULL)
+    {
+        PyObject * pyDetailedResult         = CreatePyDetailedResult(pResult->detailedResult, pResult->barcodeFormat);
+        PyObject * pyDetailedResultKey      = Py_BuildValue("s", "DetailedResult");
+        PyDict_SetItem(pyResult, pyDetailedResultKey, pyDetailedResult);
+    }
+    else
+    {
+        PyObject * pyDetailedResult         = Py_BuildValue("s", "NULL");
+        PyObject * pyDetailedResultKey      = Py_BuildValue("s", "DetailedResult");
+        PyDict_SetItem(pyResult, pyDetailedResultKey, pyDetailedResult);
+    }
+    
     
     PyObject * pySamplingImage          = CreatePySamplingImageData(pResult->samplingImage);
     PyObject * pySamplingImageKey       = Py_BuildValue("s", "SamplingImage");
@@ -845,42 +983,111 @@ static PyObject * CreatePyTextResults(TextResultArray *pResults)
         PyObject * pyBarcodeFormatKey   = Py_BuildValue("s", "BarcodeFormat");
         PyDict_SetItem(pyTextResult, pyBarcodeFormatKey, pyBarcodeFormat);
 
-        PyObject * pyBarcodeFormatString    = Py_BuildValue("s",pResults->results[i]->barcodeFormatString);
-        PyObject * pyBarcodeFormatStringKey = Py_BuildValue("s", "BarcodeFormatString");
-        PyDict_SetItem(pyTextResult, pyBarcodeFormatStringKey, pyBarcodeFormatString);
+        if(pResults->results[i]->barcodeFormatString != NULL)
+        {
+            PyObject * pyBarcodeFormatString    = Py_BuildValue("s", pResults->results[i]->barcodeFormatString);
+            PyObject * pyBarcodeFormatStringKey = Py_BuildValue("s", "BarcodeFormatString");
+            PyDict_SetItem(pyTextResult, pyBarcodeFormatStringKey, pyBarcodeFormatString);
+        }
+        else
+        {
+            PyObject * pyBarcodeFormatString    = Py_BuildValue("s", "NULL");
+            PyObject * pyBarcodeFormatStringKey = Py_BuildValue("s", "BarcodeFormatString");
+            PyDict_SetItem(pyTextResult, pyBarcodeFormatStringKey, pyBarcodeFormatString);
+        }
+        
 
         PyObject * pyBarcodeFormat_2    = Py_BuildValue("i", pResults->results[i]->barcodeFormat_2);
         PyObject * pyBarcodeFormatKey_2 = Py_BuildValue("s", "BarcodeFormat_2");
         PyDict_SetItem(pyTextResult, pyBarcodeFormatKey_2, pyBarcodeFormat_2);
 
-        PyObject * pyBarcodeFormatString_2    = Py_BuildValue("s",pResults->results[i]->barcodeFormatString_2);
-        PyObject * pyBarcodeFormatStringKey_2 = Py_BuildValue("s", "BarcodeFormatString_2");
-        PyDict_SetItem(pyTextResult, pyBarcodeFormatStringKey_2, pyBarcodeFormatString_2);
-
-        PyObject * pyBarcodeText        = Py_BuildValue("s",pResults->results[i]->barcodeText);
-        PyObject * pyBarcodeTextKey     = Py_BuildValue("s", "BarcodeText");
-        PyDict_SetItem(pyTextResult, pyBarcodeTextKey, pyBarcodeText);
-
-        PyObject * pyBarcodeBytes       = PyByteArray_FromStringAndSize(pResults->results[i]->barcodeBytes, pResults->results[i]->barcodeBytesLength);
-        PyObject * pyBarcodeBytesKey    = Py_BuildValue("s", "BarcodeBytes");
-        PyDict_SetItem(pyTextResult, pyBarcodeBytesKey, pyBarcodeBytes);
-
-        PyObject * pyLocalizationResult     = CreatePyLocalizationResult(pResults->results[i]->localizationResult);
-        PyObject * pyLocalizationResultKey  = Py_BuildValue("s", "LocalizationResult");
-        PyDict_SetItem(pyTextResult, pyLocalizationResultKey, pyLocalizationResult);
-
-        PyObject * pyDetailedResult     = CreatePyDetailedResult(pResults->results[i]->detailedResult, pResults->results[i]->barcodeFormat);
-        PyObject * pyDetailedResultKey  = Py_BuildValue("s", "DetailedResult");
-        PyDict_SetItem(pyTextResult, pyDetailedResultKey, pyDetailedResult);
-
-        PyObject * pyExtendedResults    = PyList_New(pResults->results[i]->resultsCount);
-        for(int j = 0; j < pResults->results[i]->resultsCount; ++j)
+        if(pResults->results[i]->barcodeFormatString_2 != NULL)
         {
-            PyObject * pyExtendedResult = CreatePyExtendedResult(pResults->results[i]->results[j]);
-            PyList_SetItem(pyExtendedResults, j, pyExtendedResult);
+            PyObject * pyBarcodeFormatString_2    = Py_BuildValue("s", pResults->results[i]->barcodeFormatString_2);
+            PyObject * pyBarcodeFormatStringKey_2 = Py_BuildValue("s", "BarcodeFormatString_2");
+            PyDict_SetItem(pyTextResult, pyBarcodeFormatStringKey_2, pyBarcodeFormatString_2);
         }
-        PyObject * pyExtendedResultsKey = Py_BuildValue("s", "ExtendedResults");
-        PyDict_SetItem(pyTextResult, pyExtendedResultsKey, pyExtendedResults);
+        else
+        {
+            PyObject * pyBarcodeFormatString_2    = Py_BuildValue("s", "NULL");
+            PyObject * pyBarcodeFormatStringKey_2 = Py_BuildValue("s", "BarcodeFormatString_2");
+            PyDict_SetItem(pyTextResult, pyBarcodeFormatStringKey_2, pyBarcodeFormatString_2);
+        }
+        
+
+        if(pResults->results[i]->barcodeText != NULL)
+        {
+            PyObject * pyBarcodeText        = Py_BuildValue("s", pResults->results[i]->barcodeText);
+            PyObject * pyBarcodeTextKey     = Py_BuildValue("s", "BarcodeText");
+            PyDict_SetItem(pyTextResult, pyBarcodeTextKey, pyBarcodeText);
+        }
+        else
+        {
+            PyObject * pyBarcodeText        = Py_BuildValue("s", "NULL");
+            PyObject * pyBarcodeTextKey     = Py_BuildValue("s", "BarcodeText");
+            PyDict_SetItem(pyTextResult, pyBarcodeTextKey, pyBarcodeText);
+        }
+
+        if(!(pResults->results[i]->barcodeBytes == NULL || pResults->results[i]->barcodeBytesLength == 0))
+        {
+            PyObject * pyBarcodeBytes       = PyByteArray_FromStringAndSize(pResults->results[i]->barcodeBytes, pResults->results[i]->barcodeBytesLength);
+            PyObject * pyBarcodeBytesKey    = Py_BuildValue("s", "BarcodeBytes");
+            PyDict_SetItem(pyTextResult, pyBarcodeBytesKey, pyBarcodeBytes);
+        }
+        else
+        {
+            PyObject * pyBarcodeBytes       = Py_BuildValue("s", "NULL");
+            PyObject * pyBarcodeBytesKey    = Py_BuildValue("s", "BarcodeBytes");
+            PyDict_SetItem(pyTextResult, pyBarcodeBytesKey, pyBarcodeBytes);
+        }
+        
+        
+        if(pResults->results[i]->localizationResult != NULL)
+        {
+            PyObject * pyLocalizationResult     = CreatePyLocalizationResult(pResults->results[i]->localizationResult);
+            PyObject * pyLocalizationResultKey  = Py_BuildValue("s", "LocalizationResult");
+            PyDict_SetItem(pyTextResult, pyLocalizationResultKey, pyLocalizationResult);
+        }
+        else
+        {
+            PyObject * pyLocalizationResult     = Py_BuildValue("s", "NULL");
+            PyObject * pyLocalizationResultKey  = Py_BuildValue("s", "LocalizationResult");
+            PyDict_SetItem(pyTextResult, pyLocalizationResultKey, pyLocalizationResult);
+        }
+        
+
+        if(pResults->results[i]->detailedResult != NULL)
+        {
+            PyObject * pyDetailedResult     = CreatePyDetailedResult(pResults->results[i]->detailedResult, pResults->results[i]->barcodeFormat);
+            PyObject * pyDetailedResultKey  = Py_BuildValue("s", "DetailedResult");
+            PyDict_SetItem(pyTextResult, pyDetailedResultKey, pyDetailedResult);
+        }
+        else
+        {
+            PyObject * pyDetailedResult     = Py_BuildValue("s", "NULL");
+            PyObject * pyDetailedResultKey  = Py_BuildValue("s", "DetailedResult");
+            PyDict_SetItem(pyTextResult, pyDetailedResultKey, pyDetailedResult);
+        }
+        
+
+        if(pResults->results[i]->resultsCount != 0)
+        {
+            PyObject * pyExtendedResults    = PyList_New(pResults->results[i]->resultsCount);
+            for(int j = 0; j < pResults->results[i]->resultsCount; ++j)
+            {
+                PyObject * pyExtendedResult = CreatePyExtendedResult(pResults->results[i]->results[j]);
+                PyList_SetItem(pyExtendedResults, j, pyExtendedResult);
+            }
+            PyObject * pyExtendedResultsKey = Py_BuildValue("s", "ExtendedResults");
+            PyDict_SetItem(pyTextResult, pyExtendedResultsKey, pyExtendedResults);
+        }
+        else
+        {
+            PyObject * pyExtendedResults = Py_BuildValue("s", "NULL");
+            PyObject * pyExtendedResultsKey = Py_BuildValue("s", "ExtendedResults");
+            PyDict_SetItem(pyTextResult, pyExtendedResultsKey, pyExtendedResults);
+        }
+        
 
         PyList_SetItem(pyTextResults, i, pyTextResult);
     }
@@ -901,9 +1108,19 @@ static PyObject * CreateIntermediateResultDatas(const void** ppResults, int coun
         {
             PyObject * pyImageData = PyDict_New();
 
-            PyObject * pyBytes       = PyByteArray_FromStringAndSize(((ImageData *)(ppResults[i]))->bytes, ((ImageData *)(ppResults[i]))->bytesLength);
-            PyObject * pyBytesKey    = Py_BuildValue("s", "Bytes");
-            PyDict_SetItem(pyImageData, pyBytesKey, pyBytes);
+            if(((ImageData *)(ppResults[i]))->bytes == NULL)
+            {
+                PyObject * pyBytes       = PyByteArray_FromStringAndSize(((ImageData *)(ppResults[i]))->bytes, ((ImageData *)(ppResults[i]))->bytesLength);
+                PyObject * pyBytesKey    = Py_BuildValue("s", "Bytes");
+                PyDict_SetItem(pyImageData, pyBytesKey, pyBytes);
+            }
+            else
+            {
+                PyObject * pyBytes       = Py_BuildValue("s", "NULL");
+                PyObject * pyBytesKey    = Py_BuildValue("s", "Bytes");
+                PyDict_SetItem(pyImageData, pyBytesKey, pyBytes);
+            }
+            
 
             PyObject * pyWidth      = Py_BuildValue("i", ((ImageData *)(ppResults[i]))->width);
             PyObject * pyWidthKey   = Py_BuildValue("s", "Width");
@@ -923,24 +1140,35 @@ static PyObject * CreateIntermediateResultDatas(const void** ppResults, int coun
         {
             PyObject * pyContour = PyDict_New();
             int pointCount = ((Contour *)(ppResults[i]))->pointsCount;
-            PyObject * pyPoints = PyList_New(pointCount);
-            for(int j = 0; j < pointCount; ++j)
+            if(pointCount != 0)
             {
-                PyObject * pyPoint = PyDict_New();
+                PyObject * pyPoints = PyList_New(pointCount);
+                for(int j = 0; j < pointCount; ++j)
+                {
+                    PyObject * pyPoint = PyDict_New();
 
-                PyObject * pyPointX = Py_BuildValue("i",((Contour *)(ppResults[i]))->points[j].x);
-                PyObject * pyPointXKey   = Py_BuildValue("s", "X");
-                PyDict_SetItem(pyPoint, pyPointXKey, pyPointX);
+                    PyObject * pyPointX = Py_BuildValue("i",((Contour *)(ppResults[i]))->points[j].x);
+                    PyObject * pyPointXKey   = Py_BuildValue("s", "X");
+                    PyDict_SetItem(pyPoint, pyPointXKey, pyPointX);
 
-                PyObject * pyPointY = Py_BuildValue("i",((Contour *)(ppResults[i]))->points[j].y);
-                PyObject * pyPointYKey   = Py_BuildValue("s", "Y");
-                PyDict_SetItem(pyPoint, pyPointYKey, pyPointY);
+                    PyObject * pyPointY = Py_BuildValue("i",((Contour *)(ppResults[i]))->points[j].y);
+                    PyObject * pyPointYKey   = Py_BuildValue("s", "Y");
+                    PyDict_SetItem(pyPoint, pyPointYKey, pyPointY);
 
-                PyList_SetItem(pyPoints, j, pyPoint);
+                    PyList_SetItem(pyPoints, j, pyPoint);
+                }
+                PyObject * pyPointsKey   = Py_BuildValue("s", "Points");
+                PyDict_SetItem(pyContour, pyPointsKey, pyPoints);
+                PyList_SetItem(pyResults, i, pyContour);
             }
-            PyObject * pyContourKey   = Py_BuildValue("s", "Points");
-            PyDict_SetItem(pyContour, pyContourKey, pyPoints);
-            PyList_SetItem(pyResults, i, pyContour);
+            else
+            {
+                PyObject * pyPoints   = Py_BuildValue("s", "NULL");
+                PyObject * pyPointsKey   = Py_BuildValue("s", "Points");
+                PyDict_SetItem(pyContour, pyPointsKey, pyPoints);
+                PyList_SetItem(pyResults, i, pyContour);
+            }
+            
         }
         else if(dataType == IMRDT_LINESEGMENT)
         {
@@ -968,13 +1196,23 @@ static PyObject * CreateIntermediateResultDatas(const void** ppResults, int coun
             PyObject * pyEndPointKey   = Py_BuildValue("s", "EndPoint");
             PyDict_SetItem(pyLineSegment, pyEndPointKey, pyEndPoint);
 
-            PyObject * pyLinesConfidenceCoefficients = PyList_New(4);
-            for(int j = 0; j < 4; ++j)
+            if(((LineSegment *)(ppResults[i]))->linesConfidenceCoefficients != NULL)
             {
-                PyList_SetItem(pyLinesConfidenceCoefficients, j, Py_BuildValue("i",((LineSegment *)(ppResults[i]))->linesConfidenceCoefficients[j]));
+                PyObject * pyLinesConfidenceCoefficients = PyList_New(4);
+                for(int j = 0; j < 4; ++j)
+                {
+                    PyList_SetItem(pyLinesConfidenceCoefficients, j, Py_BuildValue("i",((LineSegment *)(ppResults[i]))->linesConfidenceCoefficients[j]));
+                }
+                PyObject * pyLinesConfidenceCoefficientsKey   = Py_BuildValue("s", "LinesConfidenceCoefficients");
+                PyDict_SetItem(pyLineSegment, pyLinesConfidenceCoefficientsKey, pyLinesConfidenceCoefficients);
             }
-            PyObject * pyLinesConfidenceCoefficientsKey   = Py_BuildValue("s", "LinesConfidenceCoefficients");
-            PyDict_SetItem(pyLineSegment, pyLinesConfidenceCoefficientsKey, pyLinesConfidenceCoefficients);
+            else
+            {
+                PyObject * pyLinesConfidenceCoefficients   = Py_BuildValue("s", "NULL");
+                PyObject * pyLinesConfidenceCoefficientsKey   = Py_BuildValue("s", "LinesConfidenceCoefficients");
+                PyDict_SetItem(pyLineSegment, pyLinesConfidenceCoefficientsKey, pyLinesConfidenceCoefficients);
+            }
+            
 
             PyList_SetItem(pyResults, i, pyLineSegment);
         }
@@ -982,9 +1220,20 @@ static PyObject * CreateIntermediateResultDatas(const void** ppResults, int coun
         {
             PyObject * pyLR = PyDict_New();
             PyObject * pyLocalizationResult = CreatePyLocalizationResult((LocalizationResult *)(ppResults[i]));
-            PyObject * pyLRKey   = Py_BuildValue("s", "LocalizationRsult");
-            PyDict_SetItem(pyLR, pyLRKey, pyLocalizationResult);
-            PyList_SetItem(pyResults, i, pyLR);
+            if(pyLocalizationResult != NULL)
+            {
+                PyObject * pyLRKey   = Py_BuildValue("s", "LocalizationRsult");
+                PyDict_SetItem(pyLR, pyLRKey, pyLocalizationResult);
+                PyList_SetItem(pyResults, i, pyLR);
+            }
+            else
+            {
+                PyObject * pyLocalizationResult   = Py_BuildValue("s", "NULL");
+                PyObject * pyLRKey   = Py_BuildValue("s", "LocalizationRsult");
+                PyDict_SetItem(pyLR, pyLRKey, pyLocalizationResult);
+                PyList_SetItem(pyResults, i, pyLR);
+            }
+            
         }
         else if(dataType == IMRDT_REGIONOFINTEREST)
         {
@@ -1047,9 +1296,19 @@ static PyObject * CreatePyIntermediateResults(IntermediateResultArray * pResults
         PyObject * pyDataTypeKey   = Py_BuildValue("s", "DataType");
         PyDict_SetItem(pyIntermediateResult, pyDataTypeKey, pyDataType);
 
-        PyObject * pyResults      = CreateIntermediateResultDatas(pResults->results[i]->results, pResults->results[i]->resultsCount, pResults->results[i]->dataType);
-        PyObject * pyResultsKey   = Py_BuildValue("s", "IMResults");
-        PyDict_SetItem(pyIntermediateResult, pyResultsKey, pyResults);
+        if(pResults->results[i]->results != NULL)
+        {
+            PyObject * pyResults      = CreateIntermediateResultDatas(pResults->results[i]->results, pResults->results[i]->resultsCount, pResults->results[i]->dataType);
+            PyObject * pyResultsKey   = Py_BuildValue("s", "IMResults");
+            PyDict_SetItem(pyIntermediateResult, pyResultsKey, pyResults);
+        }
+        else
+        {
+            PyObject * pyResults   = Py_BuildValue("s", "NULL");
+            PyObject * pyResultsKey   = Py_BuildValue("s", "IMResults");
+            PyDict_SetItem(pyIntermediateResult, pyResultsKey, pyResults);
+        }
+        
 
         PyObject * pyResultType      = Py_BuildValue("i", pResults->results[i]->resultType);
         PyObject * pyResultTypeKey   = Py_BuildValue("s", "ResultType");
@@ -1265,7 +1524,6 @@ initLicense(PyObject *obj, PyObject *args)
     }
 
     int ret = DBR_InitLicense(self->hBarcode, pszLicense);
-    printf("Although this API will deprecate in a future version, it still works for now. However, we recommend you use the new API \"InitLicense\"\n");
     return Py_BuildValue("i", ret);
 }
 
@@ -1392,7 +1650,6 @@ void updateFormat(DynamsoftBarcodeReader *self, int format)
 static PyObject *
 decodeFile(PyObject *obj, PyObject *args)
 {
-    printf("Although this API will deprecate in a future version, it still works for now. However, we recommend you use the new API \"DecodeFile\"\n");
     DynamsoftBarcodeReader *self = (DynamsoftBarcodeReader *)obj;
 #if defined(_WIN32)
     printf("Windows\n");
@@ -1436,7 +1693,6 @@ decodeFile(PyObject *obj, PyObject *args)
 static PyObject *
 decodeBuffer(PyObject *obj, PyObject *args)
 {
-    printf("Although this API will deprecate in a future version, it still works for now. However, we recommend you use the new API \"DecodeBuffer\"\n");
     DynamsoftBarcodeReader *self = (DynamsoftBarcodeReader *)obj;
 
     PyObject *o;
@@ -1523,7 +1779,6 @@ decodeBuffer(PyObject *obj, PyObject *args)
 static PyObject *
 decodeFileStream(PyObject *obj, PyObject *args)
 {
-    printf("Although this API will deprecate in a future version, it still works for now. However, we recommend you use the new API \"DecodeFileStream\"\n");
     DynamsoftBarcodeReader *self = (DynamsoftBarcodeReader *)obj;
 #if defined(_WIN32)
     printf("Windows\n");
@@ -1575,7 +1830,6 @@ decodeFileStream(PyObject *obj, PyObject *args)
 static PyObject *
 initLicenseFromLicenseContent(PyObject *obj, PyObject *args)
 {
-    printf("Although this API will deprecate in a future version, it still works for now. However, we recommend you use the new API \"InitLicenseFromLicenseContent\"\n");
     DynamsoftBarcodeReader *self = (DynamsoftBarcodeReader *)obj;
 
     char *pszLicenseKey;
@@ -1597,7 +1851,6 @@ initLicenseFromLicenseContent(PyObject *obj, PyObject *args)
 static PyObject *
 outputLicenseToString(PyObject *obj, PyObject *args)
 {
-    printf("Although this API will deprecate in a future version, it still works for now. However, we recommend you use the new API \"OutputLicenseToString\"\n");
     DynamsoftBarcodeReader *self = (DynamsoftBarcodeReader *)obj;
 
     char content[512];
@@ -1623,7 +1876,6 @@ outputLicenseToString(PyObject *obj, PyObject *args)
 static PyObject *
 initLicenseFromServer(PyObject *obj, PyObject *args)
 {
-    printf("Although this API will deprecate in a future version, it still works for now. However, we recommend you use the new API \"InitLicenseFromServer\"\n");
     DynamsoftBarcodeReader *self = (DynamsoftBarcodeReader *)obj;
 
     char *pszLicenseKey, *pLicenseServer;
@@ -1724,7 +1976,6 @@ static void setModeValue(DynamsoftBarcodeReader *self, PyObject *iter, char *mod
 static PyObject *
 setFurtherModes(PyObject *obj, PyObject *args)
 {
-    printf("Although this API will deprecate in a future version, it still works for now. However, we recommend you use the new API \"UpdateRuntimeSettings\"\n");
     DynamsoftBarcodeReader *self = (DynamsoftBarcodeReader *)obj;
 
     char *mode;
@@ -1755,7 +2006,6 @@ setFurtherModes(PyObject *obj, PyObject *args)
 static PyObject *
 setParameters(PyObject *obj, PyObject *args)
 {
-    printf("Although this API will deprecate in a future version, it still works for now. However, we recommend you use the new API \"InitRuntimeSettingsByJsonString\"\n");
     DynamsoftBarcodeReader *self = (DynamsoftBarcodeReader *)obj;
 
     char *json;
@@ -1783,7 +2033,6 @@ setParameters(PyObject *obj, PyObject *args)
 static PyObject *
 getParameters(PyObject *obj, PyObject *args)
 {
-    printf("Although this API will deprecate in a future version, it still works for now. However, we recommend you use the new API \"OutputSettingsToJsonString\"\n");
     DynamsoftBarcodeReader *self = (DynamsoftBarcodeReader *)obj;
 
     char errorMessage[DEFAULT_MEMORY_SIZE];
@@ -1849,7 +2098,6 @@ void onResultCallback(int frameId, TextResultArray *pResults, void *pUser)
 static PyObject *
 startVideoMode(PyObject *obj, PyObject *args)
 {
-    printf("Although this API will deprecate in a future version, it still works for now. However, we recommend you use the new API \"StartVideoMode\"\n");
     printf("Start the video mode\n");
     DynamsoftBarcodeReader *self = (DynamsoftBarcodeReader *)obj;
 
@@ -1888,7 +2136,6 @@ startVideoMode(PyObject *obj, PyObject *args)
 static PyObject *
 stopVideoMode(PyObject *obj, PyObject *args)
 {
-    printf("Although this API will deprecate in a future version, it still works for now. However, we recommend you use the new API \"StopVideoMode\"\n");
     DynamsoftBarcodeReader *self = (DynamsoftBarcodeReader *)obj;
     printf("Stop the video mode\n");
     if (self->hBarcode)
@@ -1906,7 +2153,6 @@ stopVideoMode(PyObject *obj, PyObject *args)
 static PyObject *
 appendVideoFrame(PyObject *obj, PyObject *args)
 {
-    printf("Although this API will deprecate in a future version, it still works for now. However, we recommend you use the new API \"AppendVideoFrame\"\n");
     DynamsoftBarcodeReader *self = (DynamsoftBarcodeReader *)obj;
 
     PyObject *o;
@@ -2247,9 +2493,9 @@ static PyObject * DecodeBuffer(PyObject *obj, PyObject *args)
     PyObject * pyTextResults = CreatePyTextResults(pResults);
     PyObject * pyTextResultsKey = Py_BuildValue("s","TextResults");
     PyDict_SetItem(results, pyTextResultsKey, pyTextResults);
-    PyObject * pyIntermediateResults = CreatePyIntermediateResults(pIResults);
-    PyObject * pyIntermediateResultsKey = Py_BuildValue("s","IntermediateResults");
-    PyDict_SetItem(results, pyIntermediateResultsKey, pyIntermediateResults);
+    // PyObject * pyIntermediateResults = CreatePyIntermediateResults(pIResults);
+    // PyObject * pyIntermediateResultsKey = Py_BuildValue("s","IntermediateResults");
+    // PyDict_SetItem(results, pyIntermediateResultsKey, pyIntermediateResults);
 
 #if defined(IS_PY3K)
     Py_DECREF(memoryview);
@@ -2303,9 +2549,9 @@ static PyObject * DecodeFileStream(PyObject *obj, PyObject *args)
     PyObject * pyTextResults = CreatePyTextResults(pResults);
     PyObject * pyTextResultsKey = Py_BuildValue("s","TextResults");
     PyDict_SetItem(results, pyTextResultsKey, pyTextResults);
-    PyObject * pyIntermediateResults = CreatePyIntermediateResults(pIResults);
-    PyObject * pyIntermediateResultsKey = Py_BuildValue("s","IntermediateResults");
-    PyDict_SetItem(results, pyIntermediateResultsKey, pyIntermediateResults);
+    // PyObject * pyIntermediateResults = CreatePyIntermediateResults(pIResults);
+    // PyObject * pyIntermediateResultsKey = Py_BuildValue("s","IntermediateResults");
+    // PyDict_SetItem(results, pyIntermediateResultsKey, pyIntermediateResults);
 
     return results;
 }
@@ -2323,17 +2569,40 @@ void OnResultCallback(int frameId, TextResultArray *pResults, void *pUser)
     gstate = PyGILState_Ensure();
 
     PyObject * pyTextResults = CreatePyTextResults(pResults);
+    if(pyTextResults != NULL)
+    {
+        PyObject * result = PyObject_CallFunction(self->py_callback, "O", pyTextResults);
+        if (result != NULL)
+            Py_DECREF(result);
+    }
 
-    PyObject * result = PyObject_CallFunction(self->py_callback, "O", pyTextResults);
-    if (result == NULL)
-        return;
-    Py_DECREF(result);
+    // PyObject *list = PyList_New(count);
+    // for (; i < count; i++)
+    // {
+    //     LocalizationResult *pLocalizationResult = pResults->results[i]->localizationResult;
+    //     int x1 = pLocalizationResult->x1;
+    //     int y1 = pLocalizationResult->y1;
+    //     int x2 = pLocalizationResult->x2;
+    //     int y2 = pLocalizationResult->y2;
+    //     int x3 = pLocalizationResult->x3;
+    //     int y3 = pLocalizationResult->y3;
+    //     int x4 = pLocalizationResult->x4;
+    //     int y4 = pLocalizationResult->y4;
+
+    //     PyObject *tempObject = Py_BuildValue("ssiiiiiiii", pResults->results[i]->barcodeFormatString, pResults->results[i]->barcodeText, x1, y1, x2, y2, x3, y3, x4, y4);
+    //     PyList_SetItem(list, i, tempObject); // Add results to list
+    // }
+    
+
+    // PyObject * result = PyObject_CallFunction(self->py_callback, "O", list);
+    // if (result != NULL)
+    //     Py_DECREF(result);
 
     PyGILState_Release(gstate);
     /////////////////////////////////////////////
 
     // Release memory
-    DBR_FreeTextResults(&pResults);
+    // DBR_FreeTextResults(&pResults);
 }
 
 // static PyObject * SetErrorCallback(PyObject *obj, PyObject *args)
