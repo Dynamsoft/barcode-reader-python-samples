@@ -402,7 +402,7 @@ sudo py -3 setup.py build install
 - decodeFile(filename, format) 
 - decodeBuffer(frame-by-opencv-capture, format)
 - decodeFileStream(fileStream, fileSize, format)
-- startVideoMode(max_buffer, max_results, video_width, video_height, image_format, format, callback)
+- startVideoMode(max_buffer, max_results, video_width, video_height, stride, format, callback)
 - stopVideoMode()
 - appendVideoFrame(frame-by-opencv-capture)
 - initLicenseFromLicenseContent(license-key, license-content)
