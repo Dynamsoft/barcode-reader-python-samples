@@ -23,11 +23,9 @@ def DecodeFile(fileName, templateName = ""):
         textResults = results["TextResults"]
         intermediateResults = results["IntermediateResults"]
         for textResult in textResults:
-            print(textResult)
-            print(textResult.keys())
             # print(textResult["BarcodeFormat"])
-            # print(textResult["BarcodeFormatString"])
-            # print(textResult["BarcodeText"])
+            print(textResult["BarcodeFormatString"])
+            print(textResult["BarcodeText"])
             # print(textResult["BarcodeBytes"])
             # # LocalizationResult is a dictionary object, you can use the same method as textResult to get the key-value. 
             # print(textResult["LocalizationResult"])
@@ -39,17 +37,16 @@ def DecodeFile(fileName, templateName = ""):
             #     print(extendedResult)
         # intermediateResults is a list object, the following program will output each whole intermediate result.
         # if you just want some individual results in intermediateResult, you can get all keys in intermediateResult and get the value by the key.
-        for intermediateResult in intermediateResults:
-            print(intermediateResult)
-            print(intermediateResult.keys())
+        # for intermediateResult in intermediateResults:
+        #     print(intermediateResult)
+        #     print(intermediateResult.keys())
     except Exception as err:
         print(err)
 
 def DecodeBuffer(image, templateName = ""):
-    results = dbr.DecodeBuffer(image, templateName)
+    results = dbr.DecodeBuffer(image, image.shape[0], image.shape[1], image.strides[0], dbr.IPF_RGB_888, templateName)
     textResults = results["TextResults"]
-    thickness = 2
-    color = (0,255,0)
+
     for textResult in textResults:
         print("barcode format: " + textResult["BarcodeFormatString"])
         print("barcode text: " + textResult["BarcodeText"])
@@ -62,14 +59,10 @@ def DecodeBuffer(image, templateName = ""):
         y3 = localizationResult["Y3"]
         x4 = localizationResult["X4"]
         y4 = localizationResult["Y4"]
+        localizationPoints = [(x1,y1),(x2,y2),(x3,y3),(x4,y4)]
+        print(localizationPoints)
 
-        cv2.line(image, (x1, y1), (x2, y2), color, thickness)
-        cv2.line(image, (x2, y2), (x3, y3), color, thickness)
-        cv2.line(image, (x3, y3), (x4, y4), color, thickness)
-        cv2.line(image, (x4, y4), (x1, y1), color, thickness)
-
-    cv2.imshow("Localization", image)
-    cv2.waitKey(0)
+    # cv2.waitKey(0)
 
 def DecodeFileStream(imagePath, templateName = ""):
     with open(imagePath, "rb") as fread:
@@ -100,5 +93,6 @@ if __name__ == "__main__":
         ret = dbr.UpdataRuntimeSettings(params)
         
         DecodeFile(barcode_image)
-        image = cv2.imread(barcode_image, 1)
+        image = cv2.imread(barcode_image)
         DecodeBuffer(image)
+        print("Over")

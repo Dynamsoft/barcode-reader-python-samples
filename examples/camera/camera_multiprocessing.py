@@ -25,17 +25,16 @@ def dbr_run(frame_queue, finish_queue):
     while finish_queue.qsize() == 0:
         try:
             inputframe = frame_queue.get_nowait()
-            results = dbr.DecodeBuffer(inputframe)
+            
+            results = dbr.DecodeBuffer(inputframe, inputframe.shape[0], inputframe.shape[1], inputframe.strides[0])
             # textResults is a list object, the following program will output each whole text result.
             # if you just want some individual results in textResult, you can get all keys in text result and get the value by the key.
             textResults = results["TextResults"]
             intermediateResults = results["IntermediateResults"]
             for textResult in textResults:
-                print(textResult)
-                print(textResult.keys())
                 # print(textResult["BarcodeFormat"])
-                # print(textResult["BarcodeFormatString"])
-                # print(textResult["BarcodeText"])
+                print(textResult["BarcodeFormatString"])
+                print(textResult["BarcodeText"])
                 # print(textResult["BarcodeBytes"])
                 # # LocalizationResult is a dictionary object, you can use the same method as textResult to get the key-value. 
                 # print(textResult["LocalizationResult"])
@@ -47,9 +46,9 @@ def dbr_run(frame_queue, finish_queue):
                 #     print(extendedResult)
             # intermediateResults is a list object, the following program will output each whole intermediate result.
             # if you just want some individual results in intermediateResult, you can get all keys in intermediateResult and get the value by the key.
-            for intermediateResult in intermediateResults:
-                print(intermediateResult)
-                print(intermediateResult.keys())
+            # for intermediateResult in intermediateResults:
+            #     print(intermediateResult)
+            #     print(intermediateResult.keys())
         except:
             pass
 
