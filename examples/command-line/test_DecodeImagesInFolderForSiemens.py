@@ -12,7 +12,7 @@ from dbr import DynamsoftBarcodeReader
 
 # %matplotlib inline 
 
-KEY = "t0068MgAAAE/JLbpY2i8Xz7pGt6NhN1wRL9QxaFE2kQRYi/5sq8P0uddejL4moxsvWxBAt3PmH+bxNQxnLt9AaBY+JTZOwy0="
+KEY = "Input your own license"
 PATH_TO_PARAM = r'D:\Work\test\template.txt'
 PATH_TO_IMAGEs = r'D:\DBR\DBR7.2.2\DLL\Images'
 
@@ -50,7 +50,7 @@ PATH_TO_IMAGEs = r'D:\DBR\DBR7.2.2\DLL\Images'
 def dynamsoftReader (fileName,key, path_to_param):
     
     dbr = DynamsoftBarcodeReader()
-    dbr.initLicense(key)
+    dbr.InitLicense(key)
     
     # with open(path_to_param, 'r') as file:
     #     params = file.read().replace('\n', '')
@@ -59,15 +59,14 @@ def dynamsoftReader (fileName,key, path_to_param):
     try:
         image = cv2.imread(fileName)
 
-#         results = dbr.decodeFile(fileName, dbr.BF_ALL)
+#         results = dbr.DecodeFile(fileName)
         results = dbr.DecodeBuffer(image, image.shape[0], image.shape[1], image.strides[0])
 
         if results:
             textResults = results["TextResults"]
             for textResult in textResults:
-                print("BarcodeFormat: {0}".format(textResult["BarcodeFormatString"]))
-                print("BarcodeText: {0}".format(textResult["BarcodeText"]))
-
+                print("BarcodeFormat : " + format(textResult["BarcodeFormatString"]))
+                print("BarcodeText : " + format(textResult["BarcodeText"]))
         else:
             print('No Barcode Found.')
     except Exception as err:
