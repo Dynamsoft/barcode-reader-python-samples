@@ -1,0 +1,5 @@
+
+*.exp
+*.pyd
+*.lib
+*.obj
