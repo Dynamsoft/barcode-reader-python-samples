@@ -34,7 +34,7 @@ typedef void* HANDLE;
 * Dynamsoft Barcode Reader - C/C++ APIs Description.
 */
 
-#define DBR_VERSION                  "7.2.1.1022"
+#define DBR_VERSION                  "7.2.2.1113"
 
 #pragma region ErrorCode
 

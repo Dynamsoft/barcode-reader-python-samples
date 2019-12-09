@@ -41,64 +41,17 @@ Expanded, Expanded Stacked)
 - GS1 Composite Code
 
 ## Installation
-* [Dynamsoft Barcode Reader SDK](https://www.dynamsoft.com/Downloads/Dynamic-Barcode-Reader-Download.aspx).
-* OpenCV
 
-    ```
-    py -2 -m pip install opencv-python
-    py -3 -m pip install opencv-python
-    ```
-    
-    For **Raspberry Pi**
-    
-    ```
-    sudo apt-get install libopencv-dev python-opencv
-    ```
-    
-* NumPy
-	
-    ```
-    py -2 -m pip install numpy
-    py -3 -m pip install numpy
-    ```
-    
-## HowTo
 ### Windows
-Set **Visual Studio** in **cmd.exe**. For example, **Visual Studio 2015**:
 
 ```
-SET VS90COMNTOOLS=%VS140COMNTOOLS%
-```
-
-Edit `setup.py`. Replace the **dbr_lib_dir** and **dbr_dll** with yours:
-
-```
-dbr_lib_dir = r'e:\Program Files (x86)\Dynamsoft\Barcode Reader 7.2.2\Components\C_C++\Lib'
-dbr_dll = r'e:\Program Files (x86)\Dynamsoft\Barcode Reader 7.2.2\Components\C_C++\Redist\x64'
-```
-
-Build and install the Python extension:
-
-```
-cd src
-py -2 setup.py build install
-py -3 setup.py build install
+pip install dbr
 ```
 
 ### Linux, macOS and Raspberry Pi
-Copy **libDynamsoftBarcodeReader.so**/**libDynamsoftBarcodeReader.dylib** to `/usr/lib`. If you don't have access to `/usr/lib`, try to copy the library to `/usr/local/lib` and set the **LD_LIBRARY_PATH** as follows:
 
-```bash
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
-```
+[Build from source](src/README.md).
 
-Build and install the Python extension:
-
-```
-cd src
-sudo py -2 setup.py build install
-sudo py -3 setup.py build install
-```
 
 ## Examples
  
