@@ -220,6 +220,7 @@ pip install dbr
 
 - InitFrameDecodingParameters()
 - StartVideoMode(frameDecodingParameters, callback)
+
     | FrameDecodingParameters     | Type              |
     | ----------------------------|-------------------|
     | MaxQueueLength              | LONG              |
