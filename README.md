@@ -267,6 +267,7 @@ sudo py -3 setup.py build install
 
 - InitFrameDecodingParameters()
 - StartVideoMode(frameDecodingParameters, callback)
+
     | FrameDecodingParameters     | Type              |
     | ----------------------------|-------------------|
     | MaxQueueLength              | LONG              |
