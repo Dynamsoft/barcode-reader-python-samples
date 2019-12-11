@@ -750,7 +750,7 @@ static PyObject * CreatePyLocalizationResult(LocalizationResult * pResult)
     PyObject * pyX1Key                  = Py_BuildValue("s", "X1");
     PyDict_SetItem(pyResult, pyX1Key, pyX1);
 
-    PyObject * pyY1                     = Py_BuildValue("i", pResult->y2);
+    PyObject * pyY1                     = Py_BuildValue("i", pResult->y1);
     PyObject * pyY1Key                  = Py_BuildValue("s", "Y1");
     PyDict_SetItem(pyResult, pyY1Key, pyY1);
 
