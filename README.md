@@ -155,6 +155,7 @@ pip install dbr
     | Bytes                     | ByteArray                 |
     | AccompanyingTextBytes     | ByteArray                 |
     | Deformation               | LONG                      |
+    | DetailedResult            | Dictionary<DetailedResult>|
     | SamplingImage             | Dictionary<IMResultData>  |
     | Clarity                   | LONG                      |
 
