@@ -788,7 +788,7 @@ static PyObject * CreatePyLocalizationResult(LocalizationResult * pResult)
 
     PyObject * pyPageNumber             = Py_BuildValue("i", pResult->pageNumber);
     PyObject * pyPageNumberKey          = Py_BuildValue("s", "PageNumber");
-    PyDict_SetItem(pyResult, pyBarcodeFormatKey, pyBarcodeFormat);
+    PyDict_SetItem(pyResult, pyPageNumberKey, pyPageNumber);
 
     if(pResult->regionName != NULL)
     {
@@ -927,7 +927,6 @@ static PyObject * CreatePyExtendedResult(ExtendedResult * pResult)
         PyDict_SetItem(pyResult, pyAccompanyingTextBytesKey, pyAccompanyingTextBytes);
     }
     
-
     PyObject * pyDeformation            = Py_BuildValue("i", pResult->deformation);
     PyObject * pyDeformationKey         = Py_BuildValue("s", "Deformation");
     PyDict_SetItem(pyResult, pyDeformationKey, pyDeformation);
