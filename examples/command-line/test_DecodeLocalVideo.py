@@ -23,7 +23,7 @@ def read_barcode():
     global results
     video_width = 0
     video_height = 0
-    testVideo = r"D:\Work\TestVideoOrImage\20191202145135.mp4"
+    testVideo = r"F:\Work\TestVideoOrImage\(QRCODE)JavaScript Barcode Reader Demo.mp4"
     
     vc = cv2.VideoCapture(testVideo)
     video_width  = vc.get(cv2.CAP_PROP_FRAME_WIDTH)
