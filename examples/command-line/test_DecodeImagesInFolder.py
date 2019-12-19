@@ -9,7 +9,7 @@ from dbr import DynamsoftBarcodeReader
 
 
 LICENSE_KEY = "Input your own license"
-PATH_TO_IMAGEs = r'F:\Work\TestVideoOrImage\code128\code128'
+PATH_TO_IMAGEs = r"Please input your own images library path"
               
 def dynamsoftReader (fileName, key):
     

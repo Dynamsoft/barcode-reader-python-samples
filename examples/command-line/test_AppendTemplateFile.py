@@ -35,9 +35,9 @@ if __name__ == "__main__":
 
 #you can change the following five variables' value to your own value.
     licenseKey = "Input your own license"
-    inputFileName = r"D:\Work\InputFile\Input20191206-1.json"
-    appendFileName = r"D:\Work\InputFile\Input20191206-2.json"
-    outputFileName = r"D:\Work\OutputFile\Output20191206-2.json"
+    inputFileName = r"Please input your own template path"
+    appendFileName = r"Please input your own template path"
+    outputFileName = r"Please input your own output template path"
     #conflictMode has two optional values : dbr.CM_OVERWRITE and dbr.CM_IGNORE
     conflictMode = dbr.CM_OVERWRITE
 

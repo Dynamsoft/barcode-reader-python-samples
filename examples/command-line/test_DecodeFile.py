@@ -39,8 +39,8 @@ if __name__ == "__main__":
 
 #you can change the following three variables' value to your own value.
     licenseKey = "Input your own license"
-    fileName = r"F:\Work\TestVideoOrImage\IN1910101311400312803-01.jpg"
-    inputFileName = r"F:\Work\InputFile\templatesettings.json"
+    fileName = r"Please input your own image path"
+    inputFileName = r"Please input your own template path"
 
     InitLicense(licenseKey)
     errorCode = dbr.InitRuntimeSettingsByJsonFile(inputFileName)

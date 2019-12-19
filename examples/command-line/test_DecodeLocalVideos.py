@@ -8,7 +8,7 @@ import sys
 sys.path.append('../')
 
 license_ = "Input your own license"
-batch_folder_path = ""
+batch_folder_path = "Input your own local videos library path"
 
 # import config
 
