@@ -37,9 +37,15 @@ def DecodeFile(fileName):
 
 if __name__ == "__main__":
 
-#you can change the following two variables' value to your own value.
+#you can change the following three variables' value to your own value.
     licenseKey = "Input your own license"
     fileName = r"F:\Work\TestVideoOrImage\IN1910101311400312803-01.jpg"
+    inputFileName = r"F:\Work\InputFile\templatesettings.json"
 
     InitLicense(licenseKey)
+    errorCode = dbr.InitRuntimeSettingsByJsonFile(inputFileName)
+    if errorCode != 0:
+        print("Failed!")
+    else:
+        print("Successful")
     DecodeFile(fileName)
