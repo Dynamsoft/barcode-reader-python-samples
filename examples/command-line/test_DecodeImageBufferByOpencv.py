@@ -33,7 +33,7 @@ if __name__ == "__main__":
 
 #you can change the following two variables' value to your own value.
     licenseKey = "Input your own license"
-    fileName = r"D:\Work\Python\python-barcode\images\test.jpg"
+    fileName = r"Please input your own image path"
 
     InitLicense(licenseKey)
     image = cv2.imread(fileName)
