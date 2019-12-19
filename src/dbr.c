@@ -2555,7 +2555,7 @@ appendVideoFrame(PyObject *obj, PyObject *args)
 
     view = PyMemoryView_GET_BUFFER(memoryview);
     unsigned char *buffer = (unsigned char *)(view->buf);
-
+    Py_DECREF(memoryview);
 #else
 
     PyObject *ao = PyObject_GetAttrString(o, "__array_struct__");
@@ -2577,7 +2577,7 @@ appendVideoFrame(PyObject *obj, PyObject *args)
 
     // Get image information
     unsigned char *buffer = (unsigned char *)pai->data; // The address of image data
-
+    Py_DECREF(ao);
 #endif
 
     int frameId = DBR_AppendFrame(self->hBarcode, buffer);
@@ -2647,7 +2647,6 @@ static PyObject * UpdataRuntimeSettings(PyObject *obj, PyObject *args)
         return NULL;
     }
     PublicRuntimeSettings settings = CreateCRuntimeSettings(pyParameters);
-    Py_DECREF(pyParameters);
     char szErrorMsgBuffer[256];
     int errorCode = DBR_UpdateRuntimeSettings(self->hBarcode, &settings, szErrorMsgBuffer, 256);
     if(errorCode != 0)
@@ -2847,6 +2846,7 @@ static PyObject * DecodeBuffer(PyObject *obj, PyObject *args)
 
     view = PyMemoryView_GET_BUFFER(memoryview);
     char *buffer = (char *)(view->buf);
+
     // nd = (int)(view->ndim);
     // int len = (int)(view->len);
     // int stride = (int)(view->strides[0]);
@@ -2873,6 +2873,7 @@ static PyObject * DecodeBuffer(PyObject *obj, PyObject *args)
 
     // Get image information
     char *buffer = (char *)pai->data;  // The address of image data
+
     // int width = (int)pai->shape[1];    // image width
     // int height = (int)pai->shape[0];   // image height
     // int channels = (int)pai->shape[2];
@@ -3153,6 +3154,7 @@ static PyObject * AppendVideoFrame(PyObject *obj, PyObject *args)
 
     view = PyMemoryView_GET_BUFFER(memoryview);
     unsigned char *buffer = (unsigned char *)view->buf;
+    Py_DECREF(memoryview);
 
 #else
 
@@ -3175,6 +3177,7 @@ static PyObject * AppendVideoFrame(PyObject *obj, PyObject *args)
 
     // Get image information
     unsigned char *buffer = (unsigned char *)pai->data; // The address of image data
+    Py_DECREF(ao);
 
 #endif
 
