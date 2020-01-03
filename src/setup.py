@@ -29,8 +29,6 @@ elif sys.platform == "win32":
     dbr_lib_name = 'DBRx64'
     dbr_lib_dir = r'c:\Program Files (x86)\Dynamsoft\Barcode Reader 7.2.2\Components\C_C++\Lib'
     dbr_dll = r'c:\Program Files (x86)\Dynamsoft\Barcode Reader 7.2.2\Components\C_C++\Redist\x64'
-    # dbr_lib_dir = r'..\Lib'
-    # dbr_dll = r'..\bin'
 
 if sys.platform == "linux" or sys.platform == "linux2":
     ext_args = dict(
