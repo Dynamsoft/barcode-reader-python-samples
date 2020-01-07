@@ -119,7 +119,7 @@ if __name__ == "__main__":
     batch_folder = batch_folder_path
     onlyfiles = [f for f in listdir(batch_folder) if isfile(join(batch_folder, f))]
     for item in onlyfiles:
-        fileName = batch_folder+"\\"+item
+        fileName = batch_folder+"/"+item
         print ('processing',str(fileName))
         read_barcode(fileName)
     print("-------------------over------------------------")
