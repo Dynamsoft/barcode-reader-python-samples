@@ -42,13 +42,13 @@ Expanded, Expanded Stacked)
 
 ## Installation
 
-### Windows
+### Windows, Linux and macOS
 
 ```
 pip install dbr
 ```
 
-### Linux, macOS and Raspberry Pi
+### Raspberry Pi
 
 [Build from source](src/README.md).
 
