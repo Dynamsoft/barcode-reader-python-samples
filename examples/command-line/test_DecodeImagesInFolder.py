@@ -52,6 +52,5 @@ for idx, img in enumerate(glob.glob(os.path.join(PATH_TO_IMAGEs, "*.*"))):
     print(img)
     print('Test', idx+1)
     print(40*'#')
-    print('Dynamsoft Barcode Reader 7.2.0.09242:')
     dynamsoftReader(img, LICENSE_KEY)
     print(40*'#')
