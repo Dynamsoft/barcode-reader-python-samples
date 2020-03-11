@@ -4,7 +4,7 @@ Version 7.2.2
 The repository aims to help developers build **Python barcode** apps with [Dynamsoft Barcode Reader](https://www.dynamsoft.com/Products/Dynamic-Barcode-Reader.aspx) in Windows, Linux, macOS, and Raspberry Pi.
 
 ## License
-Get the trial license [here](https://www.dynamsoft.com/CustomerPortal/Portal/Triallicense.aspx). Then replace the old license with the newly generated one in the **config.py** file.
+Get the trial license [here](https://www.dynamsoft.com/CustomerPortal/Portal/Triallicense.aspx). Replace the old license with the newly generated one.
 
 ## Contact Us
 <support@dynamsoft.com>
@@ -289,7 +289,7 @@ sudo py -3 setup.py build install
 - AppendVideoFrame(frame-by-opencv-capture)
 - InitLicenseFromLicenseContent(license-key, license-content)
 - OutputLicenseToString()
-- InitLicenseFromServer(license-key, license-server)
+- InitLicenseFromServer(license-server, license-key)
 - InitRuntimeSettingsByJsonString(jsonTemplateString)
 - OutputSettingsToJsonString()
 - InitRuntimeSettingsByJsonFile(jsonTmeplateFile)
