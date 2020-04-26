@@ -32,7 +32,7 @@ for idx, img in enumerate(glob.glob(os.path.join(image_folder, "*.*"))):
     try:
         text_results = reader.decode_file(img)
 # if your python version is equal to or higher than python3.6, you can use the following code to replace the above code
-        text_results:List[TextResult] = reader.decode_file(img)
+        #text_results:List[TextResult] = reader.decode_file(img)
 
         if text_results != None:
             for text_result in text_results:
