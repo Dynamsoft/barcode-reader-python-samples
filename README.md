@@ -1,370 +1,814 @@
-# Python Barcode Extension
-Version 7.2.2
+# Welcome to Dynamsoft Barcode Reader - Python Edition
 
-The repository aims to help developers build **Python barcode** apps with [Dynamsoft Barcode Reader](https://www.dynamsoft.com/Products/Dynamic-Barcode-Reader.aspx) in Windows, Linux, macOS, and Raspberry Pi.
+![Dynamsoft](https://dynamsoft.github.io/styleguide/assets/img-icon/logo-dynamsoft-whiteBg-190x47.png "Dynamsoft")  | ![dbr](https://dynamsoft.github.io/styleguide/assets/img-icon/logo-dbr-88x88.png "dbr")
 
-## License
-Get the trial license [here](https://www.dynamsoft.com/CustomerPortal/Portal/Triallicense.aspx). Replace the old license with the newly generated one.
+**[Dynamsoft's Barcode Reader SDK](https://www.dynamsoft.com/Products/Dynamic-Barcode-Reader.aspx) enables you to efficiently embed barcode reading functionality in your web, desktop or mobile application using just a few lines of code. Saving you months of added development time and resources, our SDK can create high-speed and reliable barcode scanner software applications to meet your business needs.**
 
-## Contact Us
+## Dynamsoft Barcode Reader - Python Edition
+
+*Dynamsoft Barcode Reader's Python Edition comes with all the general features of Dynamsoft Barcode Reader, bringing convenience for customers who develop in Python. In addition, you could refer to the Python samples available in our [Github](https://github.com/dynamsoft-dbr/python-barcode) when building your own application. If you have any inquiries about our product, please contact us at support@dynamsoft.com.*
+
+## Table Of Contents
+- [Version](#Version)
+- [Supported Platforms](#Supported-Platforms)
+- [Installation](#Installation)
+- [Supported Symbologies](#Supported-Symbologies)
+- [Release Notes](#Release-Notes)
+- [Interfaces](#Interfaces)
+	- [Enum Interfaces](#Enum-Interfaces)
+	- [Struct Interfaces](#Struct-Interfaces)
+	- [Exception Class Interface](#Exception-Class-Interface)
+	- [Main Class Interface](#Main-Class-Interface)
+- [Appendix](#Appendix)
+	- [Code Snippet](#Code-Snippet)
+	- [Mode Argument List](#Mode-Argument-List)
+- [Contact Us](#Contact-Us)
+
+
+### Version
+- **7.3**
+> Version 7.3 marks the initial release of Dynamsoft Barcode Reader Python SDK. This release is not compatible with previous versions and will require code changes in your application.
+
+### Supported Platforms
+- **Windows x64**
+
+- **Linux**
+
+- **Mac OS**
+
+### Supported Python Versions
+- **Python3.5**
+
+- **Python3.6**
+
+- **Python3.7**
+
+- **Python3.8**
+
+### Installation
+
+>**pip install dbr**
+
+*If you want to use DBR Python Edition in Raspberry Pi, please contact us.*
+
+
+### Supported Symbologies
+*We support all major barcodes symbologies across a variety of industries such as government, finance, retail, warehouse inventory, and healthcare.*
+
+- **Linear Barcodes (1D)** :
+    - Code 39 *(including Code 39 Extended)*
+	- Code 93
+	- Code 128
+	- Codabar
+	- Interleaved 2 of 5
+	- EAN-8
+	- EAN-13
+	- UPC-A
+	- UPC-E
+	- Industrial 2 of 5
+- **2D Barcodes** :
+	- QR Code *(including Micro QR Code)*
+	- Data Matrix
+	- PDF417 *(including Micro PDF417)*
+	- Aztec Code
+	- MaxiCode *(mode 2-5)*
+- **Patch Code**
+- **GS1 Composite Code**
+- **GS1 DataBar** :
+	- Omnidirectional
+	- Truncated
+	- Stacked
+	- Stacked Omnidirectional
+	- Limited
+	- Expanded
+	- Expanded Stacked
+- **Postal Codes** :
+	- USPS Intelligent Mail
+	- Postnet
+	- Planet
+	- Australian Post
+	- UK Royal Mail
+
+### Release Notes 
+All that is new and improved
+>1. In version 7.3, we made significant changes to the packaging structure of the Python SDK. We added the Python layer based on the previous CPython layer encapsulation. Now the Python layer is the interface layer, which is responsible for direct interaction with developers. The CPython layer is the middle payer, which is responsible for the transformation between the C interface and the Python interface.
+
+>2. The Python layer now makes full use of Python's object-oriented features. It encapsulates enumerations, structures, methods, and also optimizes exception throwing and handling.
+
+>3. Added new samples to help you get started with our Python SDK.
+
+>4. The Python SDK can now support Postal Codes including USPS Intelligent Mail, Postnet, Planet, Australia Post barcode, RM4SCC.
+
+>5. Added a new localization mode LM_STATISTICS_POSTAL_CODE in the struct PublicRuntimeSettings -> LocalizationModes to recognize Postal Codes.
+
+>6. Implemented the ability to recognize distorted QR codes. It can be can be controlled via the struct PublicRuntimeSettings -> deformation_resisting_modes.
+
+>7. Implemented the ability to complement missing parts of QR and Datamatrix codes. It can be enabled by turning on the struct PublicRuntimeSettings -> barcode_complement_modes.
+
+>8. Added a new setting ScaleUpModes to set the scale-up mode for linear barcodes with small module size. It can be controlled via the struct PublicRuntimeSettings -> scale_up_modes.
+
+>9. Obtain accompanying texts that appear above or below a linear barcode. This feature can now be enabled by turning on the struct PublicRuntimeSettings -> accompanying_text_recognition_modes.
+
+>10. Improved the decoding accuracy for DataMatrix that has a narrow quiet zone.
+
+>11. Improved the decoding accuracy for 1D barcode that has a small module size.
+
+### Interfaces
+
+#### Enum Interfaces
+
+
+- **EnumAccompanyingTextRecognitionMode** : Describes the accompanying text recognition mode.
+	- ATRM_GENERAL : Recognizes accompanying texts using the general algorithm.
+	- ATRM_SKIP : Skips the accompanying text recognition.
+- **EnumBarcodeComplementMode** : Describes the barcode complement mode.
+	- BCM_AUTO : Not supported yet.
+	- BCM_GENERAL : Complements the barcode using the general algorithm.
+	- BCM_SKIP : Skips the barcode complement.
+- **EnumBarcodeColourMode** : Describes the barcode colour mode.
+	- BICM_DARK_ON_LIGHT : Dark items on a light background. 
+	- BICM_LIGHT_ON_DARK : Light items on a dark background. Not supported yet.
+	- BICM_DARK_ON_DARK : Dark items on a dark background. Not supported yet.
+	- BICM_LIGHT_ON_LIGHT : Light items on a light background. Not supported yet.
+	- BICM_DARK_LIGHT_MIXED : The background is mixed by dark and light. Not supported yet.
+	- BICM_DARK_ON_LIGHT_DARK_SURROUNDING : Dark item on a light background surrounded by dark.
+	- BICM_SKIP : Skips the barcode colour operation.
+- **EnumBarcodeFormat** : Describes the barcode types in BarcodeFormat group 1.
+	- BF_ALL : All supported formats in BarcodeFormat group 1
+	- BF_ONED : Combined value of BF_CODABAR, BF_CODE_128, BF_CODE_39, BF_CODE_39_Extended, BF_CODE_93, BF_EAN_13, BF_EAN_8, INDUSTRIAL_25, BF_ITF, BF_UPC_A, BF_UPC_E
+	- BF_GS1_DATABAR : Combined value of BF_GS1_DATABAR_OMNIDIRECTIONAL, BF_GS1_DATABAR_TRUNCATED, BF_GS1_DATABAR_STACKED, BF_GS1_DATABAR_STACKED_OMNIDIRECTIONAL, BF_GS1_DATABAR_EXPANDED, BF_GS1_DATABAR_EXPANDED_STACKED, BF_GS1_DATABAR_LIMITED
+	- BF_CODE_39 : Code 39
+	- BF_CODE_128 : Code 128
+	- BF_CODE_93 : Code 93
+	- BF_CODABAR : Codabar
+	- BF_ITF : Interleaved 2 of 5
+	- BF_EAN_13 : EAN-13
+	- BF_EAN_8 : EAN-8
+	- BF_UPC_A : UPC-A
+	- BF_UPC_E : UPC-E
+	- BF_INDUSTRIAL_25 : Industrial 2 of 5
+	- BF_CODE_39_EXTENDED : CODE39 Extended
+	- BF_GS1_DATABAR_OMNIDIRECTIONAL : GS1 Databar Omnidirectional
+	- BF_GS1_DATABAR_TRUNCATED : GS1 Databar Truncated
+	- BF_GS1_DATABAR_STACKED : GS1 Databar Stacked
+	- BF_GS1_DATABAR_STACKED_OMNIDIRECTIONAL : GS1 Databar Stacked Omnidirectional
+	- BF_GS1_DATABAR_EXPANDED : GS1 Databar Expanded
+	- BF_GS1_DATABAR_EXPANDED_STACKED : GS1 Databar Expaned Stacked
+	- BF_GS1_DATABAR_LIMITED : GS1 Databar Limited
+	- BF_PATCHCODE : Patch code
+	- BF_PDF417 : PDF417
+	- BF_QR_CODE : QRCode
+	- BF_DATAMATRIX : DataMatrix
+	- BF_AZTEC : AZTEC
+	- BF_MAXICODE : MAXICODE
+	- BF_MICRO_QR : Micro QR Code
+	- BF_MICRO_PDF417 : Micro PDF417
+	- BF_GS1_COMPOSITE : GS1 Composite Code
+	- BF_NULL : No barcode format in BarcodeFormat group 1
+- **EnumBarcodeFormat_2** : Describes the barcode types in BarcodeFormat group 2.
+	- BF2_NULL : No barcode format in BarcodeFormat group 2
+	- BF2_POSTALCODE : Combined value of BF2_USPSINTELLIGENTMAIL, BF2_POSTNET, BF2_PLANET, BF2_AUSTRALIANPOST, BF2_RM4SCC.
+	- BF2_NONSTANDARD_BARCODE : Nonstandard barcode
+	- BF2_USPSINTELLIGENTMAIL : USPS Intelligent Mail
+	- BF2_POSTNET : Postnet
+	- BF2_PLANET : Planet
+	- BF2_AUSTRALIANPOST : Australian Post
+	- BF2_RM4SCC : Royal Mail 4-State Customer Barcode
+- **EnumBinarizationMode** : Describes the binarization mode.
+	- BM_AUTO : Not supported yet.
+	- BM_LOCAL_BLOCK : Binarizes the image based on the local block.
+	- BM_SKIP : Skips the binarization.
+- **EnumColourClusteringMode** : Describes the colour clustering mode.
+	- CCM_AUTO : Not supported yet.
+	- CCM_GENERAL_HSV : Clusters colours using the general algorithm based on HSV.
+	- CCM_SKIP : Skips the colour clustering.
+- **EnumColourConversionMode** : Describes the colour conversion mode.
+	- CICM_GENERAL : Converts a colour image to a grayscale image using the general algorithm.
+	- CICM_SKIP : Skips the colour conversion.
+- **EnumConflictMode** : Describes the conflict mode.
+	- CM_IGNORE : Ignores new settings and inherits the previous settings.
+	- CM_OVERWRITE : Overwrites the old settings with new settings.
+- **EnumDeformationResistingMode** : Describes the deformation resisting mode.
+	- DRM_AUTO : Not supported yet.
+	- DRM_GENERAL : Resists deformation using the general algorithm.
+	- DRM_SKIP : Skips deformation resisting.
+- **EnumDPMCodeReadingMode** : Describes the DPM code reading mode.
+	- DPMCRM_AUTO : Not supported yet.
+	- DPMCRM_GENERAL : Reads DPM code using the general algorithm.
+	- DPMCRM_SKIP : Skips DPM code reading.
+- **EnumErrorCode** : Describes error code
+- **EnumGrayscaleTransformationMode** : Describes the grayscale transformation mode.
+	- GTM_INVERTED : Transforms to inverted grayscale. Recommended for light on dark images.
+	- GTM_ORIGINAL : Keeps the original grayscale. Recommended for dark on light images.
+	- GTM_SKIP : Skips grayscale transformation.
+- **EnumImagePixelFormat** : Describes the image pixel format.
+	- IPF_BINARY : 0:Black, 1:White
+	- IPF_BINARYINVERTED : 0:White, 1:Black
+	- IPF_GRAYSCALED : 8bit gray
+	- IPF_NV21 : NV21
+	- IPF_RGB_565 : 16bit
+	- IPF_RGB_555 : 16bit
+	- IPF_RGB_888 : 24bit
+	- IPF_ARGB_8888 : 32bit
+	- IPF_RGB_161616 : 48bit
+	- IPF_ARGB_16161616 : 64bit
+- **EnumImagePreprocessingMode** : Describes the image preprocessing mode.
+	- IPM_AUTO : Not supported yet.
+	- IPM_GENERAL : Takes the unpreprocessed image for following operations.
+	- IPM_GRAY_EQUALIZE : Preprocesses the image using the gray equalization algorithm.
+	- IPM_GRAY_SMOOTH : Preprocesses the image using the gray smoothing algorithm.
+	- IPM_SHARPEN_SMOOTH : Preprocesses the image using the sharpening and smoothing algorithm.
+	- IPM_SKIP : Skips image preprocessing.
+- **EnumIMResultDataType** : Describes the intermediate result data type.
+	- IMRDT_IMAGE : Specifies the ImageData
+	- IMRDT_CONTOUR : Specifies the Contour
+	- IMRDT_LINESEGMENT : Specifies the LineSegment
+	- IMRDT_LOCALIZATIONRESULT : Specifies the LocalizationResult
+	- IMRDT_REGIONOFINTEREST : Specifies the RegionOfInterest
+- **EnumIntermediateResultSavingMode** : Describes the intermediate result saving mode.
+	- IRSM_MEMORY : Saves intermediate results in memory.
+	- IRSM_FILESYSTEM : Saves intermediate results in file system.
+	- IRSM_BOTH : Saves intermediate results in both memory and file system.
+- **EnumIntermediateResultType** : Describes the intermediate result type.
+	- IRT_NO_RESULT : No intermediate result
+	- IRT_ORIGINAL_IMAGE : Original image
+	- IRT_COLOUR_CLUSTERED_IMAGE : Colour clustered image. Not supported yet.
+	- IRT_COLOUR_CONVERTED_GRAYSCALE_IMAGE : Colour image converted to grayscale
+	- IRT_TRANSFORMED_GRAYSCALE_IMAGE : Transformed grayscale image
+	- IRT_PREDETECTED_REGION : Predetected region
+	- IRT_PREPROCESSED_IMAGE : Preprocessed image
+	- IRT_BINARIZED_IMAGE : Binarized image
+	- IRT_TEXT_ZONE : Text zone
+	- IRT_CONTOUR : Contour
+	- IRT_LINE_SEGMENT : Line segment
+	- IRT_FORM : Form. Not supported yet.
+	- IRT_SEGMENTATION_BLOCK : Segmentation block. Not supported yet.
+	- IRT_TYPED_BARCODE_ZONE : Typed barcode zone
+- **EnumLocalizationMode** : Describes the localization mode.
+	- LM_AUTO : Not supported yet.
+	- LM_CONNECTED_BLOCKS : Localizes barcodes by searching for connected blocks. This algorithm usually gives best result and it is recommended to set ConnectedBlocks to the highest priority.
+	- LM_STATISTICS : Localizes barcodes by groups of contiguous black-white regions. This is optimized for QRCode and DataMatrix.
+	- LM_LINES : Localizes barcodes by searching for groups of lines. This is optimized for 1D and PDF417 barcodes.
+	- LM_SCAN_DIRECTLY : Localizes barcodes quickly. This mode is recommended in interactive scenario.
+	- LM_STATISTICS_MARKS : Localizes barcodes by groups of marks.This is optimized for DPM codes.
+	- LM_STATISTICS_POSTAL_CODE : Localizes barcodes by groups of connected blocks and lines.This is optimized for postal codes.
+	- LM_SKIP : Skips localization.
+- **EnumQRCodeErrorCorrectionLevel** : Describes the QR Code error correction level.
+	- QRECL_ERROR_CORRECTION_H : Error Correction Level H (high)
+	- QRECL_ERROR_CORRECTION_L : Error Correction Level L (low)
+	- QRECL_ERROR_CORRECTION_M : Error Correction Level M (medium-low)
+	- QRECL_ERROR_CORRECTION_Q : Error Correction Level Q (medium-high)
+- **EnumRegionPredetectionMode** : Describes the region predetection mode.
+	- RPM_AUTO : Lets the library choose an algorithm automatically to detect region.
+	- RPM_GENERAL : Takes the whole image as a region.
+	- RPM_GENERAL_RGB_CONTRAST : Detects region using the general algorithm based on RGB colour contrast.
+	- RPM_GENERAL_GRAY_CONTRAST : Detects region using the general algorithm based on gray contrast.
+	- RPM_GENERAL_HSV_CONTRAST : Detects region using the general algorithm based on HSV colour contrast.
+	- RPM_SKIP : Skips region detection.
+- **EnumResultCoordinateType** : Describes the result coordinate type.
+	- RCT_PIXEL : Returns the coordinate in pixel value.
+	- RCT_PERCENTAGE : Returns the coordinate as a percentage.
+- **EnumResultType** : Describes the extended result type.
+	- RT_STANDARD_TEXT : Specifies the standard text. This means the barcode value.
+	- RT_RAW_TEXT : Specifies the raw text. This means the text that includes start/stop characters, check digits, etc.
+	- RT_CANDIDATE_TEXT : Specifies all the candidate text. This means all the standard text results decoded from the barcode.
+	- RT_PARTIAL_TEXT : Specifies the partial text. This means part of the text result decoded from the barcode.
+- **EnumScaleUpMode** : Describes the scale up mode.
+	- SUM_AUTO : The library chooses an interpolation method automatically to scale up.
+	- SUM_LINEAR_INTERPOLATION : Scales up using the linear interpolation method.
+	- SUM_NEAREST_NEIGHBOUR_INTERPOLATION : Scales up using the nearest-neighbour interpolation method.
+	- SUM_SKIP : Skip the scale-up process.
+- **EnumTerminatePhase** : Describes the terminate phase.
+	- TP_REGION_PREDETECTED : Exits the barcode reading algorithm after the region predetection is done.
+	- TP_IMAGE_PREPROCESSED : Exits the barcode reading algorithm after the region predetection and image pre-processing is done.
+	- TP_IMAGE_BINARIZED : Exits the barcode reading algorithm after the region predetection, image pre-processing, and image binarization are done.
+	- TP_BARCODE_LOCALIZED : Exits the barcode reading algorithm after the region predetection, image pre-processing, image binarization, and barcode localization are done.
+	- TP_BARCODE_TYPE_DETERMINED : Exits the barcode reading algorithm after the region predetection, image pre-processing, image binarization, barcode localization, and barcode type determining are done.
+	- TP_BARCODE_RECOGNIZED : Exits the barcode reading algorithm after the region predetection, image pre-processing, image binarization, barcode localization, barcode type determining, and barcode recognition are done.
+- **EnumTextAssistedCorrectionMode** : Describes the text assisted correction mode.
+	- TACM_AUTO : Not supported yet.
+	- TACM_VERIFYING : Uses the accompanying text to verify the decoded barcode result.
+	- TACM_VERIFYING_PATCHING : Uses the accompanying text to verify and patch the decoded barcode result.
+	- TACM_SKIP : Skips the text assisted correction.
+- **EnumTextFilterMode** : Describes the text filter mode.
+	- TFM_AUTO : Not supported yet.
+	- TFM_GENERAL_CONTOUR : Filters text using the general algorithm based on contour.
+	- TFM_SKIP : Skips text filtering.
+- **EnumTextResultOrderMode** : Describes the text result order mode.
+	- TROM_CONFIDENCE : Returns the text results in descending order by confidence.
+	- TROM_POSITION : Returns the text results in position order, from top to bottom, then left to right.
+	- TROM_FORMAT : Returns the text results in alphabetical and numerical order by barcode format string.
+	- TROM_SKIP : Skips the result ordering operation.
+- **EnumTextureDetectionMode** : Describes the texture detection mode.
+	- TDM_AUTO : Not supported yet.
+	- TDM_GENERAL_WIDTH_CONCENTRATION : Detects texture using the general algorithm.
+	- TDM_SKIP : Skips texture detection.
+
+
+#### Struct Interfaces
+
+- **SamplingImageData** : Stores the sampling image data.
+	- ***Attributes*** :
+
+		- bytes  : The sampling image data in a byte array.
+		- width  : The width of the sampling image.
+		- height : The height of the sampling image.
+
+
+- **FrameDecodingParameters** : Defines a class to configure the frame decoding Parameters.
+	- ***Attributes*** :
+
+		- max_queue_length              : The maximum number of frames waiting for decoding.
+		- max_result_queue_length       : The maximum number of frames waiting results (text result/localization result) will be kept for further reference.
+		- width                         : The width of the frame image in pixels.
+		- height                        : The height of the frame image in pixels.
+		- stride                        : The stride (or scan width) of the frame image.
+		- image_pixel_format            : The image pixel format used in the image byte array.
+		- region_top                    : The region definition of the frame to calculate the internal indicator.The top-most coordinate or percentage of the region.
+		- region_left                   : The region definition of the frame to calculate the internal indicator.The left-most coordinate or percentage of the region.
+		- region_right                  : The region definition of the frame to calculate the internal indicator.The right-most coordinate or percentage of the region.
+		- region_bottom                 : The region definition of the frame to calculate the internal indicator.The bottom-most coordinate or percentage of the region.
+		- region_measured_by_percentage : Sets whether or not to use percentage to measure the region size.
+		- threshold                     : The threshold used for filtering frames.
+		- fps                           : The frequency of calling AppendFrame() per second.
+		- auto_filter                   : Sets whether to filter frames automatically.
+
+
+- **PublicRuntimeSetting** : Defines a struct to configure the barcode reading runtime settings. These settings control the barcode recognition process such as which barcode types to decode.
+	- ***Attributes*** :
+
+		- terminate_phase : Sets the phase to stop the barcode reading algorithm.
+		- timeout         : Sets the maximum amount of time (in milliseconds) that should be spent searching for a barcode per page. It does not include the time taken to load/decode an image (TIFF, PNG, etc.) from disk into memory.
+		- max_algorithm_thread_count : Sets the number of threads the image processing algorithm will use to decode barcodes.
+		- expected_barcodes_count    : Sets the number of barcodes expected to be detected for each image.
+		- barcode_format_ids         : Sets the formats of the barcode in BarcodeFormat group 1 to be read. Barcode formats in BarcodeFormat group 1 can be combined.
+		- barcode_format_ids_2       : Sets the formats of the barcode in BarcodeFormat group 2 to be read. Barcode formats in BarcodeFormat group 2 can be combined.
+		- pdf_raster_dpi             : Sets the output image resolution.
+		- scale_down_threshold       : Sets the threshold for the image shrinking.
+		- binarization_modes         : Sets the mode and priority for binarization.
+		- localization_modes         : Sets the mode and priority for localization algorithms.
+		- colour_clustering_modes    : Sets the mode and priority for colour categorization. Not supported yet.
+		- colour_conversion_modes    : Sets the mode and priority for converting a colour image to a grayscale image.
+		- grayscale_transformation_modes : Sets the mode and priority for the grayscale image conversion.
+		- region_predetection_modes      : Sets the region pre-detection mode for barcodes search.
+		- image_preprocessing_modes      : Sets the mode and priority for image preprocessing algorithms.
+		- texture_detection_modes        : Sets the mode and priority for texture detection.
+		- text_filter_modes              : Sets the mode and priority for text filter.
+		- dpm_code_reading_modes         : Sets the mode and priority for DPM code reading.
+		- deformation_resisting_modes    : Sets the mode and priority for deformation resisting.
+		- barcode_complement_modes       : Sets the mode and priority to complement the missing parts in the barcode.
+		- barcode_colour_modes           : Sets the mode and priority for the barcode colour mode used to process the barcode zone.
+		- accompanying_text_recognition_modes : Sets the mode and priority to recognize accompanying text.
+		- text_result_order_modes             : Sets the mode and priority for the order of the text results returned.
+		- scale_up_modes                      : Sets the mode and priority to control the sampling methods of scale-up for linear barcode with small module sizes.
+		- text_assisted_correction_mode       : Sets the mode of text assisted correction for barcode decoding. Not supported yet.
+		- intermediate_result_saving_mode     : Sets the mode for saving intermediate result.
+		- deblur_level                        : Sets the degree of blurriness of the barcode.
+		- intermediate_result_types           : Sets which types of intermediate result to be kept for further reference. Intermediate result types can be combined.
+		- result_coordinate_type              : Specifies the format for the coordinates returned.
+		- return_barcode_zone_clarity         : Sets whether or not to return the clarity of the barcode zone.
+		- region_top    : The top-most coordinate or percentage of the region.
+		- region_bottom : The bottom-most coordinate or percentage of the region.
+		- region_left   : The left-most coordinate or percentage of the region.
+		- region_right  : The right-most coordinate or percentage of the region.
+		- region_measured_by_percentage : Sets whether or not to use percentage to measure the region size.
+		- min_barcode_text_length       : Sets the range of barcode text length for barcodes search.
+		- min_result_confidence         : The minimum confidence of the result.
+
+
+- **OnedDetailedResult** : Stores the OneD code details.
+	- ***Attributes*** :
+
+		- module_size       : The barcode module size (the minimum bar width in pixel)
+		- start_chars_bytes : The start chars in a byte array
+		- stop_chars_bytes  : The stop chars in a byte array
+		- check_digit_bytes : The check digit chars in a byte array
+
+
+- **QRCodeDetailedResult** : Stores the QRCode details.
+	- ***Attributes*** :
+
+		- module_size            : The barcode module size (the minimum bar width in pixel)
+		- rows                   : The row count of the barcode
+		- columns                : The column count of the barcode
+		- error_correction_level : The error correction level of the barcode
+		- versions               : The version of the QR Code
+		- model                  : Number of the models
+
+
+- **DataMatrixDetailedResult** : Stores the DataMatrix details.
+	- ***Attributes*** :
+
+		- module_size         : The barcode module size (the minimum bar width in pixel)
+		- rows                : The row count of the barcode
+		- columns             : The column count of the barcode
+		- data_region_rows    : The data region row count of the barcode
+		- data_region_columns : The data region column count of the barcode
+		- data_region_number  : The data region count
+
+
+- **PDFDetailedResult** : Stores the PDF details.
+	- ***Attributes*** :
+
+		- module_size            : The barcode module size (the minimum bar width in pixel)
+		- rows                   : The row count of the barcode
+		- columns                : The column count of the barcode
+		- error_correction_level : The error correction level of the barcode
+
+
+- **AztecDetailedResult** : Stores the Aztec details.
+	- ***Attributes*** :
+
+		- module_size  : The barcode module size (the minimum bar width in pixel)
+		- rows         : The row count of the barcode
+		- columns      : The column count of the barcode
+		- layer_number : A negative number (-1, -2, -3, -4) specifies a compact Aztec code. A positive number (1, 2, .. 32) specifies a normal (full-rang) Aztec code.
+
+
+- **ExtendedResult** : Stores the extended result.
+	- ***Attributes*** :
+
+		- result_type             : Extended result type
+		- barcode_format          : Barcode type in BarcodeFormat group 1
+		- barcode_format_string   : Barcode type in BarcodeFormat group 1 as string
+		- barcode_format_2        : Barcode type in BarcodeFormat group 2
+		- barcode_format_string_2 : Barcode type in BarcodeFormat group 2 as string
+		- confidence              : The confidence of the result
+		- bytes                   : The content in a byte array
+		- accompanying_text_bytes : The accompanying text content in a byte array
+		- deformation             : The deformation value
+		- detailed_result         : One of the following: OnedDetailedResult, PDFDetailedResult, DataMatrixDetailedResult, AztecDetailedResult, QRCodeDetailedResult
+		- sampling_image          : The sampling image info
+		- clarity                 : The clarity of the barcode zone in percentage.
+
+
+- **LocalizationResult** : Stores the localization result.
+	- ***Attributes*** :
+
+		- terminate_phase         : The terminate phase of localization result
+		- barcode_format          : Barcode type in BarcodeFormat group 1
+		- barcode_format_string   : Barcode type in BarcodeFormat group 1 as string
+		- barcode_format_2        : Barcode type in BarcodeFormat group 2
+		- barcode_format_string_2 : Barcode type in BarcodeFormat group 2 as string
+		- localization_points     : Extended result type
+		- result_type             : The 4 localization points
+		- angle                   : The angle of a barcode. Values range is from 0 to 360
+		- module_size             : The barcode module size (the minimum bar width in pixel)
+		- page_number             : The page number the barcode located in. The index is 0-based
+		- region_name             : The region name the barcode located in
+		- document_name           : The document name
+		- result_coordinate_type  : The coordinate type
+		- accompanying_text_bytes : The accompanying text content in a byte array
+		- confidence              : The confidence of the localization result
+
+
+- **TextResult** : Stores the text result.
+	- ***Attributes*** :
+
+		- barcode_format          : Barcode type in BarcodeFormat group 1
+		- barcode_format_string   : Barcode type in BarcodeFormat group 1 as string
+		- barcode_format_2        : Barcode type in BarcodeFormat group 2
+		- barcode_format_string_2 : Barcode type in BarcodeFormat group 2 as string
+		- barcode_text            : The barcode text
+		- barcode_bytes           : The barcode content in a byte array
+		- localization_result     : The corresponding localization result
+		- detailed_result         : One of the following: OnedDetailedResult, PDFDetailedResult, DataMatrixDetailedResult, AztecDetailedResult, QRCodeDetailedResult
+		- extended_results        : The extended result list
+
+
+- **Point** : Stores an x- and y-coordinate pair in two-dimensional space.
+	- ***Attributes*** :
+
+		- x : The X coordinate of the point
+		- y : The Y coordinate of the point
+
+
+- **ImageData** : Stores the image data.
+	- ***Attributes*** :
+
+		- bytes              : The image data content in a byte array
+		- width              : The width of the image in pixels
+		- height             : The height of the image in pixels
+		- stride             : The image data content in a byte array
+		- image_pixel_format : The image data content in a byte array
+
+
+- **Contour** : Stores the contour.
+	- ***Attributes*** :
+
+		- points : The points list
+
+
+- **LineSegment** : Stores line segment data.
+	- ***Attributes*** :
+
+		- start_point                   : The start point of the line segment
+		- end_point                     : The end point of the line segment
+		- lines_confidence_coefficients : The end point of the line segment
+
+
+- **RegionOfInterest** : Stores the region of interest.
+	- ***Attributes*** :
+
+		- roi_id : The ID generated by the SDK
+		- point  : The left top point of the region
+		- width  : The width of the region
+		- height : The height of the region
+
+
+- **IntermediateResult** : Stores the intermediate result.
+	- ***Attributes*** :
+
+		- data_type                     : The data type of the intermediate result
+		- results                       : One of the following types: List of class Contour, List of class ImageData, List of class LineSegment, List of class LocalizationResult, List of class RegionOfInterest
+		- result_type                   : Intermediate result type
+		- barcode_complement_mode       : The BarcodeComplementMode used when generating the current intermediate result
+		- bcm_index                     : The list index of current used ColourClusteringMode in the ColourClusteringModes setting
+		- deformation_resisting_mode    : The DeformationResistingMode used when generating the current intermediate result
+		- drm_index                     : The list index of current used DeformationResistingMode in the DeformationResistingModes setting
+		- dpm_code_reading_mode         : The DPMCodeReadingMode used when generating the current intermediate result
+		- dpmcrm_index                  : The list index of current used DPMCodeReadingMode in the DPMCodeReadingModes setting
+		- text_filter_mode              : The TextFilterMode used when generating the current intermediate result
+		- tfm_index                     : The list index of current used TextFilterMode in the TextFilterModes setting
+		- localization_mode             : The LocalizationMode used when generating the current intermediate result
+		- lm_index                      : The list index of current used LocalizationMode in the LocalizationModes setting
+		- binarization_mode             : The BinarizationMode used when generating the current intermediate result
+		- bm_index                      : The list index of current used BinarizationMode in the BinarizationModes setting
+		- image_preprocessing_mode      : The ImagePreprocessingMode used when generating the current intermediate result
+		- ipm_index                     : The list index of current used ImagePreprocessingMode in the ImagePreprocessingModes setting
+		- region_predetection_mode      : The RegionPredetectionMode used when generating the current intermediate result
+		- rpm_index                     : The list index of current used RegionPredetectionMode in the RegionPredetectionModes setting
+		- grayscale_transformation_mode : The GrayscaleTransformationMode used when generating the current intermediate result
+		- gtm_index                     : The list index of current used GrayscaleTransformationMode in the GrayscaleTransformationModes setting
+		- colour_conversion_mode        : The ColourConversionMode used when generating the current intermediate result
+		- cicm_index                    : The list index of current used ColourConversionMode in the ColourConversionModes setting
+		- colour_clustering_mode        : The ColourClusteringMode used when generating the current intermediate result
+		- ccm_index                     : The list index of current used ColourClusteringMode in the ColourClusteringModes setting
+		- rotation_matrix               : The rotation matrix
+		- roi_id                        : The ID of the ROI (Region Of Interest) generated by the SDK. -1 means the original image.
+		- scale_down_ratio              : The scale down ratio
+		- frame_id                      : The ID of the operated frame
+
+
+#### Exception Class Interface
+- **BarcodeReaderError**
+
+#### Main Class Interface
+- **BarcodeReader** : Defines a class that provides functions for decoding barcodes in images. This is the main interface for recognizing barcodes.
+	- ***Attributes*** :
+
+		- version     : The Dynamsoft Barcode Reader - Python Edition version
+		- dbr_version : The Dynamsoft Barcode Reader version
+
+	- ***Methods*** :
+
+		- get_error_string(error_code)
+			- @description Gets the detailed error message by error code
+			- @param  error_code   <int> : Error code
+			- @return error_string <str> : The detailed error message
+
+		- init_license(dbr_license)
+			- @description Reads product key and activates the SDK.
+			- @param  dbr_license <str>   : The product keys
+			- @return error       <tuple> : error_code = error[0], error_message = error[1].
+
+		- init_license_from_server(license_server, license_key)
+			- @description Initializes barcode reader license and connects to the specified server for online verification.
+			- @param  license_server <str>   : The name/IP of the license server.
+			- @param  license_key    <str>   : The license key.
+			- @return error          <tuple> : error_code = error[0], error_message = error[1].
+
+		- init_license_from_license_content(license_key, license_content)
+			- @description Initializes barcode reader license from the license content on the client machine for offline verification.
+			- @param  license_key     <str>   : The license key.
+			- @param  license_content <str>   : An encrypted string representing the license content (quota, expiration date, barcode type, etc.) obtained from the method output_license_to_string().
+			- @return error           <tuple> : error_code = error[0], error_message = error[1].
+
+		- output_license_to_string()
+			- @description Outputs the license content as an encrypted string from the license server to be used for offline license verification.
+			- @return license_string  <str> : An encrypted string which stores the content of license.
+			- @exception BarcodeReaderError
+
+		- get_runtime_settings()
+			- @description Gets current runtime settings.
+			- @return runtime_settings <class PublicRuntimeSetting> : The PublicRuntimeSetting object of current runtime settings.
+
+		- update_runtime_settings(settings)
+			- @description Update runtime settings with a PublicRuntimeSetting object.
+			- @param settings <class PublicRuntimeSetting> : a PublicRuntimeSetting object.
+			- @exception BarcodeReaderError
+
+		- reset_runtime_settings(settings)
+			- @description Resets all parameters to default values.
+
+		- set_mode_argument(modes_name, index, argument_name, argument_value)
+			- @description Sets the optional argument for a specified mode in Modes(Mode) parameters. Check [Mode Argument List](#Mode-Argument-List) for available argument settings.
+			- @param  modes_name     <str>   : The modes(mode) parameter name to set argument.
+			- @param  index          <int>   : The array index of modes parameter to indicate a specific mode.
+			- @param  argument_name  <str>   : The name of the argument to set.
+			- @param  argument_value <str>   : The value of the argument to set.
+			- @return error          <tuple> : error_code = error[0], error_message = error[1].
+
+		- get_mode_argument(modes_name, index, argument_name)
+			- @description Gets the optional argument for a specified mode in Modes(Mode) parameters.Check [Mode Argument List](#Mode-Argument-List) for available argument settings.
+			- @param  modes_name      <str> : The modes(mode) parameter name to get argument.
+			- @param  index           <int> : The array index of modes parameter to indicate a specific mode.
+			- @param  argument_name   <str> : The name of the argument to get.
+			- @return argument_value  <str> : The value of the argument to get.
+			- @exception BarcodeReaderError
+
+		- init_runtime_settings_with_string(json_string, conflict_mode=EnumConflictMode.CM_OVERWRITE)
+			- @description Initializes runtime settings with the parameters obtained from a JSON string.
+			- @param  json_string     <str> : A JSON string that represents the content of the settings.
+			- @param  conflict_mode   <EnumConflictMode> : The parameter setting mode, which decides whether to inherit parameters from previous template setting or to overwrite previous settings with the new template.
+			- @return error           <tuple> : error_code = error[0], error_message = error[1].
+
+		- init_runtime_settings_with_file(json_file, conflict_mode=EnumConflictMode.CM_OVERWRITE)
+			- @description Initializes runtime settings with the parameters obtained from a JSON file.
+			- @param json_file        <str> : A JSON template file.
+			- @param conflict_mode    <EnumConflictMode> : The parameter setting mode, which decides whether to inherit parameters from previous template setting or to overwrite previous settings with the new template.
+			- @return error           <tuple> : error_code = error[0], error_message = error[1].
+
+		- append_template_string_to_runtime_settings(json_string, conflict_mode)
+			- @description Appends a new template string to the current runtime settings.
+			- @param json_string      <str> : A JSON string that represents the content of the settings.
+			- @param conflict_mode    <EnumConflictMode> : The parameter setting mode, which decides whether to inherit parameters from previous template setting or to overwrite previous settings with the new template.
+			- @return error           <tuple> : error_code = error[0], error_message = error[1].
+
+		- append_template_file_to_runtime_settings(json_file, conflict_mode)
+			- @description Appends a new template file to the current runtime settings.
+			- @param json_file        <str> : A JSON template file.
+			- @param conflict_mode    <EnumConflictMode> : The parameter setting mode, which decides whether to inherit parameters from previous template setting or to overwrite previous settings with the new template.
+			- @return error           <tuple> : error_code = error[0], error_message = error[1].
+
+		- output_settings_to_json_string()
+			- @description Outputs runtime settings to a json string.
+			- @return settings_string <str> : The output string which stores the contents of current settings.
+
+		- output_settings_to_json_file(save_file_path)
+			- @description Outputs runtime settings and save them into a settings file (JSON file).
+			- @param save_file_path   <str> : The path of the output file which stores current settings.
+			- @return error           <tuple> : error_code = error[0], error_message = error[1].
+
+		- get_all_template_names()
+			- @description Gets all parameter template names.
+			- @return template_names  <list[str]> : all parameter template names
+
+		- decode_file(image_file_name, template_name="")
+			- @description Decodes barcodes in the specified image file.
+			- @param  image_file_name  <str> : A string defining the file name.
+			- @param  template_name    <str> : The template name.
+			- @return text_results     <list[class TextResult]> : All text results.
+			- @exception BarcodeReaderError
+
+		- decode_buffer(image, image_pixel_format=EnumImagePixelFormat.IPF_RGB_888, template_name="")
+			- @description Decodes barcodes from the memory buffer containing image pixels in defined format.
+			- @param image              <class numpy.ndarray> : The image which is processed by opencv.
+			- @param image_pixel_format <EnumImagePixelFormat> : The image pixel format used in the image byte array.
+			- @param template_name      <str> : The template name.
+			- @return text_results      <list[class TextResult]> : All text results.
+			- @exception BarcodeReaderError
+
+		- decode_file_stream(file_stream, template_name="")
+			- @description Decodes barcodes from an image file in memory.
+			- @param file_stream <bytearray> : The image file bytes in memory.
+			- @return text_results     <list[class TextResult]> : All text results.
+			- @exception BarcodeReaderError
+
+		- get_all_intermediate_results()
+			- @description Returns intermediate results containing the original image, the colour clustered image, the binarized image, contours, lines, text blocks, etc.
+			- @return intermediate_results      <liset[class IntermediateResult]> : All intermediate results.
+
+		- init_frame_decoding_parameters()
+			- @description Init frame decoding parameters.
+			- @return frame_decoding_parameters <class FrameDecodingParameters> : The frame decoding parameters.
+
+		- start_video_mode(frame_decoding_parameters, call_back_func, template_name="")
+			- @description Starts a new thread to decode barcodes from the inner frame queue.
+			- @param frame_decoding_parameters <class FrameDecodingParameters> : The frame decoding parameters. You can get it by init_frame_decoding_parameters(), then modify its attributes value.
+			- @param call_back_func            <function pointer> : Sets callback function to process text results generated during frame decoding.
+			- @param template_name             <str> : The template name.
+			- @exception BarcodeReaderError
+
+		- append_video_frame(video_frame)
+			- @description Appends a video frame to the inner frame queue.
+			- @param video_frame : Gets by opencv.
+			- @return frame_id <int> : Current frame id.
+
+		- stop_video_mode()
+			- @description Stops the frame decoding thread created by start_video_mode().
+			- @exception BarcodeReaderError
+
+		- get_length_of_frame_queue()
+			- @description Gets current length of the inner frame queue.
+			- @return frame_queue_length <int> : The length of the inner frame queue.
+	```
+
+### Appendix
+
+#### Code Snippet
+
+```
+import os
+import sys
+import cv2
+import json
+from typing import List
+from dbr import *
+
+# you can replace the following variables' value with yours.
+license_key = "Input your own license"
+#license_server = "Input the name/IP of the license server"
+json_file = r"Please input your own template path"
+image = r"Please input your own image path"
+
+reader = BarcodeReader()
+
+reader.init_license(license_key)
+#reader.init_license_from_server(license_server, license_key)
+#license_content = reader.output_license_to_string()
+#reader.init_license_from_license_content(license_key, license_content)
+
+error = reader.init_runtime_settings_with_file(json_file)
+if error[0] != EnumErrorCode.DBR_OK:
+    print(error[1])
+
+if sys.version_info.major == 3 and sys.version_info.minor >= 6:
+
+    try:
+        text_results:List[TextResult] = reader.decode_file(image)
+
+        if text_results != None:
+            for text_result in text_results:
+                print("Barcode Format :")
+                print(text_result.barcode_format_string)
+                print("Barcode Text :")
+                print(text_result.barcode_text)
+                print("Localization Points : ")
+                print(text_result.localization_result.localization_points)
+                print("-------------")
+    except BarcodeReaderError as bre:
+        print(bre)
+
+else:
+    try:
+        text_results = reader.decode_file(image)
+
+        if text_results != None:
+            for text_result in text_results:
+                print("Barcode Format :")
+                print(text_result.barcode_format_string)
+                print("Barcode Text :")
+                print(text_result.barcode_text)
+                print("Localization Points : ")
+                print(text_result.localization_result.localization_points)
+                print("-------------")
+    except BarcodeReaderError as bre:
+        print(bre)
+```
+
+#### Mode Argument List
+
+>***You can refer to this list when you use set_mode_argument() or get_mode_argument().***
+
+| Mode Parameter Name | Argument Name | Argument Description
+| --------------------| ------------- | ---------------------
+| AccompanyingTextRecognitionModes | RegionBottom | Specifies the y-coordinate of the bottom-right corner of the region in percentage. This value is relative to the top-left corner of the barcode.  <br> <b>Value Range : </b><br>[-255, 255] <br> <b>Default Value : </b><br>0 <br> <b>Remarks: </b><br>Valid for ATRM_GENERAL<br>If RegionLeft, RegionTop, RegionRight and RegionBottom are all equal to 0, the accompanying text zone will be detected automatically by the SDK.<br>For more info on how to set a custom area for accompanying texts, please refer to [this article](https://www.dynamsoft.com/help/Barcode-Reader/devguide/HowTo/SetCustomeAreaForAccompanyingTexts.html)|
+| AccompanyingTextRecognitionModes | RegionLeft | Specifies the x-coordinate of the top-left corner of the region in percentage. This value is relative to the top-left corner of the barcode. <br> <b>Value Range : </b><br>[-255, 255] <br> <b>Default Value : </b><br>0 <br> <b>Remarks: </b><br>Valid for ATRM_GENERAL<br>If RegionLeft, RegionTop, RegionRight and RegionBottom are all equal to 0, the accompanying text zone will be detected automatically by the SDK.<br>For more info on how to set a custom area for accompanying texts, please refer to [this article](https://www.dynamsoft.com/help/Barcode-Reader/devguide/HowTo/SetCustomeAreaForAccompanyingTexts.html)|
+| AccompanyingTextRecognitionModes | RegionRight | Specifies the x-coordinate of the bottom-right corner of the region in percentage. This value is relative to the top-left corner of the barcode. <br> <b>Value Range : </b><br>[-255, 255] <br> <b>Default Value : </b><br>0 <br> <b>Remarks: </b><br>Valid for ATRM_GENERAL<br>If RegionLeft, RegionTop, RegionRight and RegionBottom are all equal to 0, the accompanying text zone will be detected automatically by the SDK.<br>For more info on how to set a custom area for accompanying texts, please refer to [this article](https://www.dynamsoft.com/help/Barcode-Reader/devguide/HowTo/SetCustomeAreaForAccompanyingTexts.html)|
+| AccompanyingTextRecognitionModes | RegionTop | Specifies the y-coordinate of the top-left corner of the region in percentage. This value is relative to the top-left corner of the barcode. <br> <b>Value Range : </b><br>[-255, 255] <br> <b>Default Value : </b><br>0 <br> <b>Remarks: </b><br>Valid for ATRM_GENERAL<br>If RegionLeft, RegionTop, RegionRight and RegionBottom are all equal to 0, the accompanying text zone will be detected automatically by the SDK.<br>For more info on how to set a custom area for accompanying texts, please refer to [this article](https://www.dynamsoft.com/help/Barcode-Reader/devguide/HowTo/SetCustomeAreaForAccompanyingTexts.html)|
+| BarcodeColourModes | LightReflection | Sets if there is light reflection on the barocde zone. <br> <b>Value Range : </b><br>[0, 1] <br> <b>Default Value : </b><br>1 <br> <b>Remarks: </b><br>Valid for BICM_DARK_LIGHT_MIXED; BICM_DARK_ON_DARK; BICM_DARK_ON_LIGHT; BICM_LIGHT_ON_DARK;BICM_LIGHT_ON_LIGHT; BICM_DARK_ON_LIGHT_DARK_SURROUNDING<br>0: no light reflection<br>1: has light reflection|
+| BinarizationModes | BlockSizeX | Sets the horizontal block size for the binarization process. <br> <b>Value Range : </b><br>[0, 1000] <br> <b>Default Value : </b><br>0 <br> <b>Remarks: </b><br>Valid for BM_LOCAL_BLOCK<br>0: the block size used for binarization will be set to a value which is calculated automatically.<br>N: <br>1 <= N <= 3: the block size used for binarization will be set to 3. <br>N > 3: the block size used for binarization will be set to N.<br>Block size refers to the size of a pixel neighborhood used to calculate a threshold value for the pixel.<br>An appropriate value for binarizationBlockSize can help generate a high quality binary image and increase the accuracy of barcode localization.|
+| BinarizationModes | BlockSizeY | Sets the vertical block size for the binarization process. <br> <b>Value Range : </b><br>[0, 1000] <br> <b>Default Value : </b><br>0 <br> <b>Remarks: </b><br>Valid for BM_LOCAL_BLOCK<br>0: the block size used for binarization will be set to a value which is calculated automatically.<br>N: <br>1 <= N <= 3: the block size used for binarization will be set to 3. <br>N > 3: the block size used for binarization will be set to N.<br>Block size refers to the size of a pixel neighborhood used to calculate a threshold value for the pixel.<br>An appropriate value for binarizationBlockSize can help generate a high quality binary image to increase the accuracy of barcode localization.|
+| BinarizationModes | EnableFillBinaryVacancy | Sets whether to enable binary vacancy filling. <br> <b>Value Range : </b><br>[0, 1] <br> <b>Default Value : </b><br>1 <br> <b>Remarks: </b><br>Valid for BM_LOCAL_BLOCK<br>0 - disable, 1 - enable<br>For barcodes with a large module size, there might be a vacant area in the position detection pattern after binarization. The vacant area may result in decoding failure. Setting this to True will fill in the vacant area with black and may help improve the decoding success rate. Better accuracy for images with a large module size.|
+| BinarizationModes | ImagePreprocessingModesIndex | The index of a specific image preprocessing mode in the ImagePreprocessingModes parameter which the current binarization mode is applied to. <br> <b>Value Range : </b><br>[-1, 0x7fffffff] <br> <b>Default Value : </b><br>-1 <br> <b>Remarks: </b><br>Valid for BM_LOCAL_BLOCK<br>-1: The current binarization mode is applied to all modes in parameter ImagePreprocessingModes.|
+| BinarizationModes | ThreshValueCoefficient | Constant subtracted from the mean or weighted mean. Normally, it is positive but may be zero or negative as well. <br> <b>Value Range : </b><br>[-255, 255] <br> <b>Default Value : </b><br>10 <br> <b>Remarks: </b><br>Valid for BM_LOCAL_BLOCK|
+| ColourClusteringModes | Sensitivity | Sets the sensitivity used for colour categorization. <br> <b>Value Range : </b><br>[1, 9] <br> <b>Default Value : </b><br>5 <br> <b>Remarks: </b><br>Valid for CCM_GENERAL_HSV<br>A higher level means less colours will be clustered as the same colour.|
+| ColourConversionModes | BlueChannelWeight | Sets the weight value of Blue Colour Channel used for converting a colour image to a grayscale image. <br> <b>Value Range : </b><br>[-1, 1000] <br> <b>Default Value : </b><br>-1 <br> <b>Remarks: </b><br>Valid for CICM_GENERAL<br>-1: The weight value will be set automatically by the SDK.|
+| ColourConversionModes | GreenChannelWeight | Sets the weight value of Green Colour Channel used for converting a colour image to a grayscale image. <br> <b>Value Range : </b><br>[-1, 1000] <br> <b>Default Value : </b><br>-1 <br> <b>Remarks: </b><br>Valid for CICM_GENERAL<br>-1: The weight value will be set automatically by the SDK.|
+| ColourConversionModes | RedChannelWeight | Sets the weight value of Red Colour Channel used for converting a colour image to a grayscale image. <br> <b>Value Range : </b><br>[-1, 1000] <br> <b>Default Value : </b><br>-1 <br> <b>Remarks: </b><br>Valid for CICM_GENERAL<br>-1: The weight value will be set automatically by the SDK.|
+| DeformationResistingModes | Level | Sets the effort level used for deformation resisting.Not supported yet. <br> <b>Value Range : </b><br>[1, 9] <br> <b>Default Value : </b><br>5 <br> <b>Remarks: </b><br>Valid for DRM_GENERAL<br>A larger value means the library will take more effort to resist deformation.|
+| ImagePreprocessingModes | Sensitivity | Sets the sensitivity used for gray equalization. <br> <b>Value Range : </b><br>[1, 9] <br> <b>Default Value : </b><br>5 <br> <b>Remarks: </b><br>Valid for IPM_GRAY_EQUALIZE<br>If you have an image with a low level of contrast, you can set the property to a larger value.<br>A larger value means a higher possibility that gray equalization will be activated.<br>This may cause adverse effect on images with a high level of contrast.|
+| ImagePreprocessingModes | SmoothBlockSizeX | Sets the horizontal block size for the smoothing process. <br> <b>Value Range : </b><br>[3, 1000] <br> <b>Default Value : </b><br>3 <br> <b>Remarks: </b><br>Valid for IPM_GRAY_SMOOTH;IPM_SHARPEN_SMOOTH<br>Block size refers to the size of a pixel neighborhood used to calculate the threshold for the pixel.<br>An appropriate value can help increase the accuracy of barcode localization.|
+| ImagePreprocessingModes | SmoothBlockSizeY | Sets the vertical block size for the smoothing process. <br> <b>Value Range : </b><br>[3, 1000] <br> <b>Default Value : </b><br>3 <br> <b>Remarks: </b><br>Valid for IPM_GRAY_SMOOTH;IPM_SHARPEN_SMOOTH<br>Block size refers to the size of a pixel neighborhood used to calculate the threshold for the pixel.<br>An appropriate value can help increase the accuracy of barcode localization.|
+| ImagePreprocessingModes | SharpenBlockSizeX | Sets the horizontal block size for the sharpening process. <br> <b>Value Range : </b><br>[3, 1000] <br> <b>Default Value : </b><br>3 <br> <b>Remarks: </b><br>Valid for IPM_SHARPEN_SMOOTH<br>Block size refers to the size of a pixel neighborhood used to calculate the threshold for the pixel.<br>An appropriate value can help increase the accuracy of barcode localization.|
+| ImagePreprocessingModes | SharpenBlockSizeY | Sets the vertical block size for the sharpening process. <br> <b>Value Range : </b><br>[3, 1000] <br> <b>Default Value : </b><br>3 <br> <b>Remarks: </b><br>Valid for IPM_SHARPEN_SMOOTH<br>Block size refers to the size of a pixel neighborhood used to calculate the threshold for the pixel.<br>An appropriate value can help increase the accuracy of barcode localization.|
+| IntermediateResultSavingMode | FolderPath | Sets the path of the output folder which stores intermediate results. <br> <b>Value Range : </b><br>A string value representing the folder path with max length 480. <br> <b>Default Value : </b><br>"" <br> <b>Remarks: </b><br>Valid for IRSM_FILESYSTEM;IRSM_BOTH<br>"": The library path.<br>Please make sure the path exists and your application has the appropriate permissions for saving the results.|
+| IntermediateResultSavingMode | RecordsetSizeOfLatestImages | Sets the maximum count of recordset to store the latest images' intermediate results. <br> <b>Value Range : </b><br>[0,0x7fffffff] <br> <b>Default Value : </b><br>0 <br> <b>Remarks: </b><br>0 means no limitation on the count of recordset. <br>When the count exceeds, the old recordset will be replaced by the new one.|
+| LocalizationModes | ScanStride | Sets the stride in pixels between scans when searching for barcodes. <br> <b>Value Range : </b><br>[0, 0x7fffffff] <br> <b>Default Value : </b><br>0 <br> <b>Remarks: </b><br>Valid for LM_SCAN_DIRECTLY<br>0: means automatically set by the library.<br>When the set value is greater than half the width or height of the current image, the actual processing is 0.|
+| LocalizationModes | ScanDirection | Sets the scan direction when searching barcode. <br> <b>Value Range : </b>[0,2] <br> <b>Default Value : </b><br>0 <br> <b>Remarks: </b><br>0: Both vertical and horizontal direction <br>1: Vertical direction <br>2: Horizontal direction.|
+| RegionPredetectionModes | MinImageDimension | Sets the minimum image dimension (in pixels) to pre-detect barcode regions. <br> <b>Value Range : </b><br>[262144, 0x7fffffff] <br> <b>Default Value : </b><br>262144 <br> <b>Remarks: </b><br>Valid for RPM_GENERAL_GRAY_CONTRAST;RPM_GENERAL_HSV_CONTRAST;RPM_GENERAL_RGB_CONTRAST<br>If the image dimension is larger than the given value, the library will enable the feature of pre-detecting barcode regions. Otherwise, it will skip this step when searching for barcodes.|
+| RegionPredetectionModes | Sensitivity | Sets the sensitivity used for region predetection algorithm. <br> <b>Value Range : </b><br>[1, 9] <br> <b>Default Value : </b><br>1 <br> <b>Remarks: </b><br>Valid for RPM_GENERAL_GRAY_CONTRAST;RPM_GENERAL_HSV_CONTRAST;RPM_GENERAL_RGB_CONTRAST<br>A larger value means the library will take more effort to detect regions.|
+| ScaleUpModes | AcuteAngleWithXThreshold | Sets the acute angle threshold for scale-up. <br> <b>Value Range : </b><br>[-1, 90] <br> <b>Default Value : </b><br>-1 <br> <b>Remarks: </b><br>Valid for SUM_LINEAR_INTERPOLATION, SUM_NEAREST_NEIGHBOUR_INTERPOLATION<br>-1 : means automatically set by the library. <br>If the module size of the barcode is smaller than the ModuleSizeThreshold and the acute angle with X of the barcode is larger than the AcuteAngleWithXThreshold, the barcode will be enlarged to N times (N=1,2,3...) till N * modulesize >= TargetModuleSize. <br>For more info on how to custom scale up rules, please refer to [this article](https://www.dynamsoft.com/help/Barcode-Reader/devguide/HowTo/EnableScaleUp.html)|
+| ScaleUpModes | ModuleSizeThreshold | Sets the module size threshold for scale-up. <br> <b>Value Range : </b><br>[0, 0x7fffffff] <br> <b>Default Value : </b><br>0 <br> <b>Remarks: </b><br>Valid for SUM_LINEAR_INTERPOLATION, SUM_NEAREST_NEIGHBOUR_INTERPOLATION<br>0 : means automatically set by the library. <br>If the module size of the barcode is smaller than the ModuleSizeThreshold and the acute angle with X of the barcode is larger than the AcuteAngleWithXThreshold, the barcode will be enlarged to N times (N=1,2,3...) till N * modulesize >= TargetModuleSize. <br>For more info on how to custom scale up rules, please refer to [this article](https://www.dynamsoft.com/help/Barcode-Reader/devguide/HowTo/EnableScaleUp.html)|
+| ScaleUpModes | TargetModuleSize | Sets the target module size for scale-up. <br> <b>Value Range : </b><br>[0, 0x7fffffff] <br> <b>Default Value : </b><br>0 <br> <b>Remarks: </b><br>Valid for SUM_LINEAR_INTERPOLATION, SUM_NEAREST_NEIGHBOUR_INTERPOLATION<br>0 : means automatically set by the library. <br>If the module size of the barcode is smaller than the ModuleSizeThreshold and the acute angle with X of the barcode is larger than the AcuteAngleWithXThreshold, the barcode will be enlarged to N times (N=1,2,3...) till N * modulesize >= TargetModuleSize. <br>For more info on how to custom scale up rules, please refer to [this article](https://www.dynamsoft.com/help/Barcode-Reader/devguide/HowTo/EnableScaleUp.html)|
+| TextAssistedCorrectionMode | BottomTextPercentageSize | Sets the percentage of the bottom accompanying text zone comparing to the barcode zone. <br> <b>Value Range : </b><br>[0, 255] <br> <b>Default Value : </b><br>0 <br> <b>Remarks: </b><br>Valid for TACM_VERIFYING;TACM_VERIFYING_PATCHING<br>255: The accompanying text zone will be detected automatically by the SDK.|
+| TextAssistedCorrectionMode | LeftTextPercentageSize | Sets the percentage of the left accompanying text zone comparing to the barcode zone. <br> <b>Value Range : </b><br>[0, 255] <br> <b>Default Value : </b><br>0 <br> <b>Remarks: </b><br>Valid for TACM_VERIFYING;TACM_VERIFYING_PATCHING<br>255: The accompanying text zone will be detected automatically by the SDK.|
+| TextAssistedCorrectionMode | RightTextPercentageSize | Sets the percentage of the right accompanying text zone comparing to the barcode zone. <br> <b>Value Range : </b><br>[0, 255] <br> <b>Default Value : </b><br>0 <br> <b>Remarks: </b><br>Valid for TACM_VERIFYING;TACM_VERIFYING_PATCHING<br>255: The accompanying text zone will be detected automatically by the SDK.|
+| TextAssistedCorrectionMode | TopTextPercentageSize | Sets the percentage of the top accompanying text zone comparing to the barcode zone. <br> <b>Value Range : </b><br>[0, 255] <br> <b>Default Value : </b><br>0 <br> <b>Remarks: </b><br>Valid for TACM_VERIFYING;TACM_VERIFYING_PATCHING<br>255: The accompanying text zone will be detected automatically by the SDK.|
+| TextFilterModes | MinImageDimension | Sets the minimum image dimension (in pixels) to filter the text. <br> <b>Value Range : </b><br>[65536, 0x7fffffff] <br> <b>Default Value : </b><br>65536 <br> <b>Remarks: </b><br>Valid for TFM_GENERAL_CONTOUR<br>If the image dimension is larger than the given value, the library will enable the text filtering feature. Otherwise, it will skip this step when doing barcode recognition.<br>The feature can speed up the recognition process.|
+| TextFilterModes | Sensitivity | Sets the sensitivity used for text filtering. <br> <b>Value Range : </b><br>[0, 9] <br> <b>Default Value : </b><br>0 <br> <b>Remarks: </b><br>Valid for TFM_GENERAL_CONTOUR<br>0: means automatically set by the library.<br>A larger value means the library will take more effort to filter text.|
+| TextureDetectionModes | Sensitivity | Sets the sensitivity used for texture detection. <br> <b>Value Range : </b><br>[1, 9] <br> <b>Default Value : </b><br>5 <br> <b>Remarks: </b><br>Valid for TDM_GENERAL_WIDTH_CONCENTRATION<br>A larger value means the library will take more effort to detect texture.|
+
+### Contact Us
 <support@dynamsoft.com>
-
-## Environment
-**Python 2/3**
-
-## Supported Symbologies
-- Linear Barcodes (1D)
-
-    - Code 39 (including Code 39 Extended)
-    - Code 93
-    - Code 128
-    - Codabar
-    - Interleaved 2 of 5
-    - EAN-8
-    - EAN-13
-    - UPC-A
-    - UPC-E
-    - Industrial 2 of 5
-
-- 2D Barcodes:
-    - QR Code (including Micro QR Code)
-    - Data Matrix
-    - PDF417 (including Micro PDF417)
-    - Aztec Code
-    - MaxiCode (mode 2-5)
-
-- Patch Code
-- GS1 DataBar (Omnidirectional,
-Truncated, Stacked, Stacked
-Omnidirectional, Limited,
-Expanded, Expanded Stacked)
-- GS1 Composite Code
-
-## Installation
-
-### Windows, Linux and macOS
-
-```
-pip install dbr
-```
-
-### Raspberry Pi
-
-[Build from source](src/README.md).
-
-
-## Examples
- 
-- examples/camera
-
-    ```
-    python camera-decodevideo.py
-    ```
-    
-- examples/command-line
-
-    ```
-    python test.py
-    ```
-
-## Functions
-
-- InitLicense(license-key)
-- DecodeFile(filename) 
-- DecodeBuffer(frame-by-opencv-capture, height, width, stride)
-- DecodeFileStream(fileStream, fileSize)
-    ```
-    Code Snippet:
-        # The value returned by every decode method is a dictionary object, it includes two items: TextResults and IntermediateResults.And the two items are both list objects.
-        results = DecodeFile(fileName)
-        textResults = results["TextResults"]
-        intermediateResults = results["IntermediateResults"]
-        # Each item in textResults or intermediateResults is a dictionary object. 
-        # if you want some individual results in textResult or intermediateReuslt, you can get all keys in textResult or intermediateReuslt and get the value by the key.
-        for textResult in textResults:
-            print(textResult.keys())
-            print("BarcodeFormat:" + textResult["BarcodeFormatString"])
-            print("BarcodeText:" + textResult["BarcodeText"])
-    ```
-
-    | TextReuslt            | Type                              |
-    | --------------------- |-----------------------------------|
-    | BarcodeFormat         | LONG                              |
-    | BarcodeFormatString   | String                            |
-    | BarcodeFormat_2       | LONG                              |
-    | BarcodeFormatString_2 | String                            |
-    | BarcodeText           | String                            |
-    | BarcodeBytes          | ByteArray                         |
-    | LocalizationResult    | Dictionary<LocalizationResult>    |
-    | DetailedResult        | Dictionary<DetailedResult>        |
-    | ExtendedResults       | List<ExtendedResult>              |
-
-  
-    | LocalizationResult        | Type              |
-    | --------------------------|-------------------|
-    | TerminatePhase            | LONG              |
-    | BarcodeFormat             | LONG              |
-    | BarcodeFormatString       | String            |
-    | BarcodeFormat_2           | LONG              |
-    | BarcodeFormatString_2     | String            |
-    | X1                        | LONG              |
-    | Y1                        | LONG              |
-    | X2                        | LONG              |
-    | Y2                        | LONG              |
-    | X3                        | LONG              |
-    | Y3                        | LONG              |
-    | X4                        | LONG              |
-    | Y4                        | LONG              |
-    | Angle                     | LONG              |
-    | ModuleSize                | LONG              |
-    | PageNumber                | LONG              |
-    | RegionName                | String            |
-    | DocumentName              | String            |
-    | ResultCoordinateType      | LONG              |
-    | AccompanyingTextBytes     | ByteArray         |
-    | Confidence                | LONG              |
-
-    ```
-    DetailedReuslt depends on BarcodeFormat:
-    ```
-
-    | DetailedReuslt                                | Type              |
-    | ----------------------------------------------|-------------------|
-    | ModuleSize(OneD,QR,DataMatrix,PDF417,AZTEC)   | LONG              |
-    | StartCharsBytes(OneD)                         | ByteArray         |
-    | StopCharsBytes(OneD)                          | ByteArray         |
-    | CheckDigitBytes(Oned)                         | ByteArray         |
-    | Rows(QR,DataMatrix,PDF417,AZTEC)              | LONG              |
-    | Columns(QR,DataMatrix,PDF417,AZTEC)           | LONG              |
-    | ErrorCorrectionLevel(QR,PDF417)               | LONG              |
-    | version(QR)                                   | LONG              |
-    | model(QR)                                     | LONG              |
-    | DataRegionRows(DataMatrix)                    | LONG              |
-    | DataRegionColumns(DataMatrix)                 | LONG              |
-    | DataRegionNumber(DataMatrix)                  | LONG              |
-    | LayerNumber(AZTEC)                            | LONG              |
-
-    | ExtendedResult            | Type                      |
-    | --------------------------|---------------------------|
-    | ResultType                | LONG                      |
-    | BarcodeFormat             | LONG                      |
-    | BarcodeFormatString       | String                    |
-    | BarcodeFormat_2           | LONG                      |
-    | BarcodeFormatString_2     | String                    |
-    | Confidence                | LONG                      |
-    | Bytes                     | ByteArray                 |
-    | AccompanyingTextBytes     | ByteArray                 |
-    | Deformation               | LONG                      |
-    | DetailedResult            | Dictionary<DetailedResult>|
-    | SamplingImage             | Dictionary<IMResultData>  |
-    | Clarity                   | LONG                      |
-
-    | SamplingImage            | Type              |
-    | -------------------------|-------------------|
-    | Bytes                    | ByteArray         |
-    | Width                    | LONG              |
-    | Height                   | LONG              |
-
-    | IntermediateResult            | Type              |
-    | ------------------------------|-------------------|
-    | DataType                      | LONG              |
-    | IMResults                     | List<IMResultData>|
-    | ResultType                    | LONG              |
-    | BarcodeComplementMode         | LONG              |
-    | BCMIndex                      | LONG              |
-    | DPMCodeReadingMode            | LONG              |
-    | DPMCRMIndex                   | LONG              |
-    | RotationMatrix                | List[9]<double>   |
-    | TextFilterMode                | LONG              |
-    | TFMIndex                      | LONG              |
-    | LocalizationMode              | LONG              |
-    | LMIndex                       | LONG              |
-    | BinarizationMode              | LONG              |
-    | BMIndex                       | LONG              |
-    | ImagePreprocessingMode        | LONG              |
-    | IPMIndex                      | LONG              |
-    | ROIId                         | LONG              |
-    | RegionPredetectionMode        | LONG              |
-    | RPMIndex                      | LONG              |
-    | GrayscaleTransformationMode   | LONG              |
-    | GTMIndex                      | LONG              |
-    | ColourConversionMode          | LONG              |
-    | CICMIndex                     | LONG              |
-    | ColourClusteringMode          | LONG              |
-    | CCMIndex                      | LONG              |
-    | ScaleDownRatio                | LONG              |
-    | FrameId                       | LONG              |
-
-    ```
-    IMResultData depends on DataType:
-    ```
-
-    | IMResultData                                  | Type                          |
-    | ----------------------------------------------|-------------------------------|
-    | Bytes(IMRDT_IMAGE)                            | ByteArray                     |
-    | Width(IMRDT_IMAGE,IMRDT_REGIONOFINTEREST)     | LONG                          |
-    | Height(IMRDT_IMAGE,IMRDT_REGIONOFINTEREST)    | LONG                          |
-    | Stride(IMRDT_IMAGE)                           | LONG                          |
-    | Points(IMRDT_CONTOUR)                         | List<Point>                   |
-    | StartPoint(IMRDT_LINESEGMENT)                 | Dictionary<Point>             |
-    | EndPoint(IMRDT_LINESEGMENT)                   | Dictionary<Point>             |
-    | LinesConfidenceCoefficients(IMRDT_LINESEGMENT)| List<LONG>                    |
-    | ROIId(IMRDT_REGIONOFINTEREST)                 | LONG                          |
-    | Point(IMRDT_REGIONOFINTEREST)                 | Dictionary<Point>             |
-    | LocalizationRsult(IMRDT_LOCALIZATIONRESULT)   | Dictionary<LocalizationResult>|
-
-
-    | Point                | Type              |
-    | ---------------------|-------------------|
-    | X                    | LONG              |
-    | Y                    | LONG              |
-
-- InitFrameDecodingParameters()
-- StartVideoMode(frameDecodingParameters, callback)
-
-    | FrameDecodingParameters     | Type              |
-    | ----------------------------|-------------------|
-    | MaxQueueLength              | LONG              |
-    | MaxResultQueueLength        | LONG              |
-    | Width                       | LONG              |
-    | Height                      | LONG              |
-    | Stride                      | LONG              |
-    | ImagePixelFormat            | LONG              |
-    | RegionBottom                | LONG              |
-    | RegionLeft                  | LONG              |
-    | RegionRight                 | LONG              |
-    | RegionTop                   | LONG              |
-    | RegionMeasuredByPercentage  | LONG              |
-    | Threshold                   | Float             |
-    | FPS                         | LONG              |
-
-- StopVideoMode()
-- AppendVideoFrame(frame-by-opencv-capture)
-- InitLicenseFromLicenseContent(license-key, license-content)
-- OutputLicenseToString()
-- InitLicenseFromServer(license-server, license-key)
-- InitRuntimeSettingsByJsonString(jsonTemplateString)
-- OutputSettingsToJsonString()
-- InitRuntimeSettingsByJsonFile(jsonTmeplateFile)
-- OutputSettingsToJsonFile(outputJsonFile)
-- AppendTplStringToRuntimeSettings(jsonTemplateString, conflictMode)
-- AppendTplFileToRuntimeSettings(jsonTmeplateFile, conflictMode)
-
-    ```
-    conflictMode = dbr.CM_IGNORE or dbr.CM_OVERWRITE
-    ```
-
-- GetAllTemplateNames()
-- GetRuntimeSettings()
-- UpdataRuntimeSettings(settings)
-
-    ```
-    Code Snippet:
-    # if you want to modify some values in RuntimeSettings, you can refer to the following code.
-    # Attention: before using the UpdataRuntimeSettings() method, you must use the GetRuntimeSettings() method to get the current runtime settings.
-    settings = GetRuntimeSettings()
-    settings["BarcodeFormatIds"] = dbr.BF_ONED | dbr.BF_GS1_DATABAR
-    settings["ExpectedBarcodesCount"] = 10
-    settings["BinarizationModes"] = [dbr.BM_LOCAL_BLOCK, 0,0,0,0,0,0,0]
-    settings["LocalizationModes"] = [dbr.LM_CONNECTED_BLOCKS, 0,0,0,0,0,0,0]
-    settings["IntermediateResultSavingMode"] = dbr.IRSM_BOTH
-    settings["IntermediateResultTypes"] = dbr.IRT_ORIGINAL_IMAGE | dbr.IRT_BINARIZED_IMAGE
-    errorCode = UpdataRuntimeSettings(settings)
-    ```
-
-    | RuntimeSettings               | Type              |
-    | ------------------------------|-------------------|
-    | TerminatePhase                | LONG              |
-    | Timeout                       | LONG              |
-    | MaxAlgorithmThreadCount       | LONG              |
-    | ExpectedBarcodesCount         | LONG              |
-    | BarcodeFormatIds              | LONG              |
-    | BarcodeFormatIds_2            | LONG              |
-    | PDFRasterDPI                  | LONG              |
-    | ScaleDownThreshold            | LONG              |
-    | BinarizationModes             | List[8]           |
-    | LocalizationModes             | List[8]           |
-    | ColourClusteringModes         | List[8]           |
-    | ColourConversionModes         | List[8]           |
-    | GrayscaleTransformationModes  | List[8]           |
-    | RegionPredetectionModes       | List[8]           |
-    | ImagePreprocessingModes       | List[8]           |
-    | TextureDetectionModes         | List[8]           |
-    | TextFilterModes               | List[8]           |
-    | DPMCodeReadingModes           | List[8]           |
-    | DeformationResistingModes     | List[8]           |
-    | BarcodeComplementModes        | List[8]           |
-    | BarcodeColourModes            | List[8]           |
-    | TextResultOrderModes          | List[8]           |
-    | TextAssistedCorrectionMode    | LONG              |
-    | DeblurLevel                   | LONG              |
-    | IntermediateResultTypes       | LONG              |
-    | IntermediateResultSavingMode  | LONG              |
-    | ResultCoordinateType          | LONG              |
-    | ReturnBarcodeZoneClarity      | LONG              |
-    | RegionTop                     | LONG              |
-    | RegionBottom                  | LONG              |
-    | RegionLeft                    | LONG              |
-    | RegionRight                   | LONG              |
-    | RegionMeasuredByPercentage    | LONG              |
-    | MinBarcodeTextLength          | LONG              |
-    | MinResultConfidence           | LONG              |
-
-- ResetRuntimeSettings()
-- SetModeArgument(modesName, index, argumentName, argumentValue)
-- GetModeArgument(modesName, index, argumentName)
-    ```
-    Code Snippet:
-    errorCode = SetModeArgument("BinarizationModes", 0, "BlockSizeX", "3")
-    argumentValue = GetModeArgument("BinarizationModes", 0, "BlockSizeX")
-    ```
-
-    | ModesName                     | ArgumentName                  |
-    | ------------------------------|-------------------------------|
-    | BarcodeColourModes            | LightReflection               |
-    | BinarizationModes             | BlockSizeX                    |
-    | BinarizationModes             | BlockSizeY                    |
-    | BinarizationModes             | EnableFillBinaryVacancy       |
-    | BinarizationModes             | ImagePreprocessingModesIndex  |
-    | BinarizationModes             | ThreshValueCoefficient        |
-    | ColourClusteringModes         | Sensitivity                   |
-    | ColourConversionModes         | BlueChannelWeight             |
-    | ColourConversionModes         | GreenChannelWeight            |
-    | ColourConversionModes         | RedChannelWeight              |
-    | DeformationResistingModes     | Level                         |
-    | ImagePreprocessingModes       | Sensitivity                   |
-    | ImagePreprocessingModes       | SmoothBlockSizeX              |
-    | ImagePreprocessingModes       | SmoothBlockSizeY              |
-    | ImagePreprocessingModes       | SharpenBlockSizeX             |
-    | ImagePreprocessingModes       | SharpenBlockSizeY             |
-    | IntermediateResultSavingMode  | FolderPath                    |
-    | IntermediateResultSavingMode  | RecordsetSizeOfLatestImages   |
-    | LocalizationModes             | ScanStride                    |
-    | RegionPredetectionModes       | MinImageDimension             |
-    | RegionPredetectionModes       | Sensitivity                   |
-    | TextAssistedCorrectionMode    | BottomTextPercentageSize      |
-    | TextAssistedCorrectionMode    | LeftTextPercentageSize        |
-    | TextAssistedCorrectionMode    | RightTextPercentageSize       |
-    | TextAssistedCorrectionMode    | TopTextPercentageSize         |
-    | TextFilterModes               | MinImageDimension             |
-    | TextFilterModes               | Sensitivity                   |
-    | TextureDetectionModes         | Sensitivity                   |
-
-
-## Deprecated Functions
-
-- initLicense(license-key)
-- decodeFile(filename, format) 
-- decodeBuffer(frame-by-opencv-capture, format)
-- decodeFileStream(fileStream, fileSize, format)
-- startVideoMode(max_buffer, max_results, video_width, video_height, stride, format, callback)
-- stopVideoMode()
-- appendVideoFrame(frame-by-opencv-capture)
-- initLicenseFromLicenseContent(license-key, license-content)
-- outputLicenseToString()
-- initLicenseFromServer(license-key, license-server)
-- setFurtherModes(mode, [values])
-- setParameters(json-string)
-- getParameters()
-
-
