@@ -26,8 +26,7 @@
 
 
 ### Version
-- **7.3**
-> Version 7.3 marks the initial release of Dynamsoft Barcode Reader Python SDK. This release is not compatible with previous versions and will require code changes in your application.
+- **7.4**
 
 ### Supported Platforms
 - **Windows x64**
@@ -90,28 +89,8 @@
 	- UK Royal Mail
 
 ### Release Notes 
-All that is new and improved
->1. In version 7.3, we made significant changes to the packaging structure of the Python SDK. We added the Python layer based on the previous CPython layer encapsulation. Now the Python layer is the interface layer, which is responsible for direct interaction with developers. The CPython layer is the middle payer, which is responsible for the transformation between the C interface and the Python interface.
 
->2. The Python layer now makes full use of Python's object-oriented features. It encapsulates enumerations, structures, methods, and also optimizes exception throwing and handling.
-
->3. Added new samples to help you get started with our Python SDK.
-
->4. The Python SDK can now support Postal Codes including USPS Intelligent Mail, Postnet, Planet, Australia Post barcode, RM4SCC.
-
->5. Added a new localization mode LM_STATISTICS_POSTAL_CODE in the struct PublicRuntimeSettings -> LocalizationModes to recognize Postal Codes.
-
->6. Implemented the ability to recognize distorted QR codes. It can be can be controlled via the struct PublicRuntimeSettings -> deformation_resisting_modes.
-
->7. Implemented the ability to complement missing parts of QR and Datamatrix codes. It can be enabled by turning on the struct PublicRuntimeSettings -> barcode_complement_modes.
-
->8. Added a new setting ScaleUpModes to set the scale-up mode for linear barcodes with small module size. It can be controlled via the struct PublicRuntimeSettings -> scale_up_modes.
-
->9. Obtain accompanying texts that appear above or below a linear barcode. This feature can now be enabled by turning on the struct PublicRuntimeSettings -> accompanying_text_recognition_modes.
-
->10. Improved the decoding accuracy for DataMatrix that has a narrow quiet zone.
-
->11. Improved the decoding accuracy for 1D barcode that has a small module size.
+https://www.dynamsoft.com/Products/Dynamic-Barcode-Reader-News.aspx
 
 ### Interfaces
 
@@ -174,6 +153,7 @@ All that is new and improved
 	- BF2_PLANET : Planet
 	- BF2_AUSTRALIANPOST : Australian Post
 	- BF2_RM4SCC : Royal Mail 4-State Customer Barcode
+	- BF2_DOTCODE : DotCode
 - **EnumBinarizationMode** : Describes the binarization mode.
 	- BM_AUTO : Not supported yet.
 	- BM_LOCAL_BLOCK : Binarizes the image based on the local block.
@@ -206,18 +186,22 @@ All that is new and improved
 	- IPF_BINARYINVERTED : 0:White, 1:Black
 	- IPF_GRAYSCALED : 8bit gray
 	- IPF_NV21 : NV21
-	- IPF_RGB_565 : 16bit
-	- IPF_RGB_555 : 16bit
-	- IPF_RGB_888 : 24bit
-	- IPF_ARGB_8888 : 32bit
-	- IPF_RGB_161616 : 48bit
-	- IPF_ARGB_16161616 : 64bit
+	- IPF_RGB_565 : 16bit with RGB channel order stored in memory from high to low address
+	- IPF_RGB_555 : 16bit with RGB channel order stored in memory from high to low address
+	- IPF_RGB_888 : 24bit with RGB channel order stored in memory from high to low address
+	- IPF_ARGB_8888 : 32bit with ARGB channel order stored in memory from high to low address
+	- IPF_RGB_161616 : 48bit with RGB channel order stored in memory from high to low address
+	- IPF_ARGB_16161616 : 64bit with ARGB channel order stored in memory from high to low address
+	- IPF_ABGR_8888 : 32bit with ABGR channel order stored in memory from high to low address
+	- IPF_ABGR_16161616 : 64bit with ABGR channel order stored in memory from high to low address
+	- IPF_BGR_888 : 24bit with BGR channel order stored in memory from high to low address
 - **EnumImagePreprocessingMode** : Describes the image preprocessing mode.
 	- IPM_AUTO : Not supported yet.
 	- IPM_GENERAL : Takes the unpreprocessed image for following operations.
 	- IPM_GRAY_EQUALIZE : Preprocesses the image using the gray equalization algorithm.
 	- IPM_GRAY_SMOOTH : Preprocesses the image using the gray smoothing algorithm.
 	- IPM_SHARPEN_SMOOTH : Preprocesses the image using the sharpening and smoothing algorithm.
+	- IPM_MORPHOLOGY : Preprocesses the image using the morphology algorithm.
 	- IPM_SKIP : Skips image preprocessing.
 - **EnumIMResultDataType** : Describes the intermediate result data type.
 	- IMRDT_IMAGE : Specifies the ImageData
@@ -225,6 +209,7 @@ All that is new and improved
 	- IMRDT_LINESEGMENT : Specifies the LineSegment
 	- IMRDT_LOCALIZATIONRESULT : Specifies the LocalizationResult
 	- IMRDT_REGIONOFINTEREST : Specifies the RegionOfInterest
+	- IMRDT_QUADRILATERAL : Specifies the Quadrilateral
 - **EnumIntermediateResultSavingMode** : Describes the intermediate result saving mode.
 	- IRSM_MEMORY : Saves intermediate results in memory.
 	- IRSM_FILESYSTEM : Saves intermediate results in file system.
@@ -244,6 +229,7 @@ All that is new and improved
 	- IRT_FORM : Form. Not supported yet.
 	- IRT_SEGMENTATION_BLOCK : Segmentation block. Not supported yet.
 	- IRT_TYPED_BARCODE_ZONE : Typed barcode zone
+	- IRT_PREDETECTED_QUADRILATERAL : Predetected quadrilateral
 - **EnumLocalizationMode** : Describes the localization mode.
 	- LM_AUTO : Not supported yet.
 	- LM_CONNECTED_BLOCKS : Localizes barcodes by searching for connected blocks. This algorithm usually gives best result and it is recommended to set ConnectedBlocks to the highest priority.
@@ -303,6 +289,14 @@ All that is new and improved
 	- TDM_AUTO : Not supported yet.
 	- TDM_GENERAL_WIDTH_CONCENTRATION : Detects texture using the general algorithm.
 	- TDM_SKIP : Skips texture detection.
+- **EnumClarityCalculationMethod** : Describes the clarity calculation method.
+	- ECCM_CONTRAST : Calculates clarity using the contrast method.
+- **EnumClarityFilterMode** : Describes the clarity filter mode.
+	- CFM_GENERAL : The frames using the general algorithm based on calculated clarity.
+- **EnumPDFReadingMode** : Describes the clarity filter mode.
+	- PDFRM_AUTO : Lets the library choose the reading mode automatically. 
+	- PDFRM_VECTOR : Detects barcode from vector data in PDF file. 
+	- PDFRM_RASTER : Converts the PDF file to image(s) first, then perform barcode recognition. 
 
 
 #### Struct Interfaces
@@ -332,6 +326,8 @@ All that is new and improved
 		- threshold                     : The threshold used for filtering frames.
 		- fps                           : The frequency of calling AppendFrame() per second.
 		- auto_filter                   : Sets whether to filter frames automatically.
+		- clarity_calculation_method    : Sets the method used for calculating the clarity of the frames.
+		- clarity_filter_mode           : Sets the mode used for filtering frames by calculated clarity.
 
 
 - **PublicRuntimeSetting** : Defines a struct to configure the barcode reading runtime settings. These settings control the barcode recognition process such as which barcode types to decode.
@@ -374,6 +370,7 @@ All that is new and improved
 		- region_measured_by_percentage : Sets whether or not to use percentage to measure the region size.
 		- min_barcode_text_length       : Sets the range of barcode text length for barcodes search.
 		- min_result_confidence         : The minimum confidence of the result.
+		- pdf_reading_mode              : Sets the way to detect barcodes from a PDF file when using the DecodeFile method.
 
 
 - **OnedDetailedResult** : Stores the OneD code details.
@@ -515,12 +512,16 @@ All that is new and improved
 		- width  : The width of the region
 		- height : The height of the region
 
+- **Quadrilateral** : Stores the quadrilateral.
+	- ***Attributes*** :
+
+		- points : Four vertexes in a clockwise direction of a quadrilateral. Index 0 represents the left-most vertex.
 
 - **IntermediateResult** : Stores the intermediate result.
 	- ***Attributes*** :
 
 		- data_type                     : The data type of the intermediate result
-		- results                       : One of the following types: List of class Contour, List of class ImageData, List of class LineSegment, List of class LocalizationResult, List of class RegionOfInterest
+		- results                       : One of the following types: List of class Contour, List of class ImageData, List of class LineSegment, List of class LocalizationResult, List of class RegionOfInterest, List of class Quadrilateral
 		- result_type                   : Intermediate result type
 		- barcode_complement_mode       : The BarcodeComplementMode used when generating the current intermediate result
 		- bcm_index                     : The list index of current used ColourClusteringMode in the ColourClusteringModes setting
