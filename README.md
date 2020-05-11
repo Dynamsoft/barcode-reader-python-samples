@@ -98,19 +98,19 @@ https://www.dynamsoft.com/Products/Dynamic-Barcode-Reader-News.aspx
 
 
 - **EnumAccompanyingTextRecognitionMode** : Describes the accompanying text recognition mode.
-	- ATRM_GENERAL : Recognizes accompanying texts using the general algorithm.
+	- ATRM_GENERAL : Recognizes accompanying texts using the general algorithm. Check [Mode Argument List](#Mode-Argument-List) for available argument settings.
 	- ATRM_SKIP : Skips the accompanying text recognition.
 - **EnumBarcodeComplementMode** : Describes the barcode complement mode.
 	- BCM_AUTO : Not supported yet.
 	- BCM_GENERAL : Complements the barcode using the general algorithm.
 	- BCM_SKIP : Skips the barcode complement.
 - **EnumBarcodeColourMode** : Describes the barcode colour mode.
-	- BICM_DARK_ON_LIGHT : Dark items on a light background. 
-	- BICM_LIGHT_ON_DARK : Light items on a dark background. Not supported yet.
-	- BICM_DARK_ON_DARK : Dark items on a dark background. Not supported yet.
-	- BICM_LIGHT_ON_LIGHT : Light items on a light background. Not supported yet.
-	- BICM_DARK_LIGHT_MIXED : The background is mixed by dark and light. Not supported yet.
-	- BICM_DARK_ON_LIGHT_DARK_SURROUNDING : Dark item on a light background surrounded by dark.
+	- BICM_DARK_ON_LIGHT : Dark items on a light background. Check [Mode Argument List](#Mode-Argument-List) for available argument settings.
+	- BICM_LIGHT_ON_DARK : Light items on a dark background. Not supported yet. Check [Mode Argument List](#Mode-Argument-List) for available argument settings.
+	- BICM_DARK_ON_DARK : Dark items on a dark background. Not supported yet. Check [Mode Argument List](#Mode-Argument-List) for available argument settings.
+	- BICM_LIGHT_ON_LIGHT : Light items on a light background. Not supported yet. Check [Mode Argument List](#Mode-Argument-List) for available argument settings.
+	- BICM_DARK_LIGHT_MIXED : The background is mixed by dark and light. Not supported yet. Check [Mode Argument List](#Mode-Argument-List) for available argument settings.
+	- BICM_DARK_ON_LIGHT_DARK_SURROUNDING : Dark item on a light background surrounded by dark. Check [Mode Argument List](#Mode-Argument-List) for available argument settings.
 	- BICM_SKIP : Skips the barcode colour operation.
 - **EnumBarcodeFormat** : Describes the barcode types in BarcodeFormat group 1.
 	- BF_ALL : All supported formats in BarcodeFormat group 1
@@ -156,21 +156,25 @@ https://www.dynamsoft.com/Products/Dynamic-Barcode-Reader-News.aspx
 	- BF2_DOTCODE : DotCode
 - **EnumBinarizationMode** : Describes the binarization mode.
 	- BM_AUTO : Not supported yet.
-	- BM_LOCAL_BLOCK : Binarizes the image based on the local block.
+	- BM_LOCAL_BLOCK : Binarizes the image based on the local block. Check [Mode Argument List](#Mode-Argument-List) for available argument settings.
 	- BM_SKIP : Skips the binarization.
+- **EnumClarityCalculationMethod** : Describes the clarity calculation method.
+	- ECCM_CONTRAST : Calculates clarity using the contrast method.
+- **EnumClarityFilterMode** : Describes the clarity filter mode.
+	- CFM_GENERAL : The frames using the general algorithm based on calculated clarity.
 - **EnumColourClusteringMode** : Describes the colour clustering mode.
 	- CCM_AUTO : Not supported yet.
-	- CCM_GENERAL_HSV : Clusters colours using the general algorithm based on HSV.
+	- CCM_GENERAL_HSV : Clusters colours using the general algorithm based on HSV. Check [Mode Argument List](#Mode-Argument-List) for available argument settings.
 	- CCM_SKIP : Skips the colour clustering.
 - **EnumColourConversionMode** : Describes the colour conversion mode.
-	- CICM_GENERAL : Converts a colour image to a grayscale image using the general algorithm.
+	- CICM_GENERAL : Converts a colour image to a grayscale image using the general algorithm. Check [Mode Argument List](#Mode-Argument-List) for available argument settings.
 	- CICM_SKIP : Skips the colour conversion.
 - **EnumConflictMode** : Describes the conflict mode.
 	- CM_IGNORE : Ignores new settings and inherits the previous settings.
 	- CM_OVERWRITE : Overwrites the old settings with new settings.
 - **EnumDeformationResistingMode** : Describes the deformation resisting mode.
 	- DRM_AUTO : Not supported yet.
-	- DRM_GENERAL : Resists deformation using the general algorithm.
+	- DRM_GENERAL : Resists deformation using the general algorithm. Check [Mode Argument List](#Mode-Argument-List) for available argument settings.
 	- DRM_SKIP : Skips deformation resisting.
 - **EnumDPMCodeReadingMode** : Describes the DPM code reading mode.
 	- DPMCRM_AUTO : Not supported yet.
@@ -197,11 +201,11 @@ https://www.dynamsoft.com/Products/Dynamic-Barcode-Reader-News.aspx
 	- IPF_BGR_888 : 24bit with BGR channel order stored in memory from high to low address
 - **EnumImagePreprocessingMode** : Describes the image preprocessing mode.
 	- IPM_AUTO : Not supported yet.
-	- IPM_GENERAL : Takes the unpreprocessed image for following operations.
-	- IPM_GRAY_EQUALIZE : Preprocesses the image using the gray equalization algorithm.
-	- IPM_GRAY_SMOOTH : Preprocesses the image using the gray smoothing algorithm.
-	- IPM_SHARPEN_SMOOTH : Preprocesses the image using the sharpening and smoothing algorithm.
-	- IPM_MORPHOLOGY : Preprocesses the image using the morphology algorithm.
+	- IPM_GENERAL : Takes the unpreprocessed image for following operations. Check [Mode Argument List](#Mode-Argument-List) for available argument settings.
+	- IPM_GRAY_EQUALIZE : Preprocesses the image using the gray equalization algorithm. Check [Mode Argument List](#Mode-Argument-List) for available argument settings.
+	- IPM_GRAY_SMOOTH : Preprocesses the image using the gray smoothing algorithm. Check [Mode Argument List](#Mode-Argument-List) for available argument settings.
+	- IPM_SHARPEN_SMOOTH : Preprocesses the image using the sharpening and smoothing algorithm. Check [Mode Argument List](#Mode-Argument-List) for available argument settings.
+	- IPM_MORPHOLOGY : Preprocesses the image using the morphology algorithm. Check [Mode Argument List](#Mode-Argument-List) for available argument settings.
 	- IPM_SKIP : Skips image preprocessing.
 - **EnumIMResultDataType** : Describes the intermediate result data type.
 	- IMRDT_IMAGE : Specifies the ImageData
@@ -212,8 +216,8 @@ https://www.dynamsoft.com/Products/Dynamic-Barcode-Reader-News.aspx
 	- IMRDT_QUADRILATERAL : Specifies the Quadrilateral
 - **EnumIntermediateResultSavingMode** : Describes the intermediate result saving mode.
 	- IRSM_MEMORY : Saves intermediate results in memory.
-	- IRSM_FILESYSTEM : Saves intermediate results in file system.
-	- IRSM_BOTH : Saves intermediate results in both memory and file system.
+	- IRSM_FILESYSTEM : Saves intermediate results in file system. Check [Mode Argument List](#Mode-Argument-List) for available argument settings.
+	- IRSM_BOTH : Saves intermediate results in both memory and file system. Check [Mode Argument List](#Mode-Argument-List) for available argument settings.
 - **EnumIntermediateResultType** : Describes the intermediate result type.
 	- IRT_NO_RESULT : No intermediate result
 	- IRT_ORIGINAL_IMAGE : Original image
@@ -235,10 +239,14 @@ https://www.dynamsoft.com/Products/Dynamic-Barcode-Reader-News.aspx
 	- LM_CONNECTED_BLOCKS : Localizes barcodes by searching for connected blocks. This algorithm usually gives best result and it is recommended to set ConnectedBlocks to the highest priority.
 	- LM_STATISTICS : Localizes barcodes by groups of contiguous black-white regions. This is optimized for QRCode and DataMatrix.
 	- LM_LINES : Localizes barcodes by searching for groups of lines. This is optimized for 1D and PDF417 barcodes.
-	- LM_SCAN_DIRECTLY : Localizes barcodes quickly. This mode is recommended in interactive scenario.
+	- LM_SCAN_DIRECTLY : Localizes barcodes quickly. This mode is recommended in interactive scenario. Check [Mode Argument List](#Mode-Argument-List) for available argument settings.
 	- LM_STATISTICS_MARKS : Localizes barcodes by groups of marks.This is optimized for DPM codes.
 	- LM_STATISTICS_POSTAL_CODE : Localizes barcodes by groups of connected blocks and lines.This is optimized for postal codes.
 	- LM_SKIP : Skips localization.
+- **EnumPDFReadingMode** : Describes the clarity filter mode.
+	- PDFRM_AUTO : Lets the library choose the reading mode automatically. 
+	- PDFRM_VECTOR : Detects barcode from vector data in PDF file. 
+	- PDFRM_RASTER : Converts the PDF file to image(s) first, then perform barcode recognition. 
 - **EnumQRCodeErrorCorrectionLevel** : Describes the QR Code error correction level.
 	- QRECL_ERROR_CORRECTION_H : Error Correction Level H (high)
 	- QRECL_ERROR_CORRECTION_L : Error Correction Level L (low)
@@ -247,9 +255,9 @@ https://www.dynamsoft.com/Products/Dynamic-Barcode-Reader-News.aspx
 - **EnumRegionPredetectionMode** : Describes the region predetection mode.
 	- RPM_AUTO : Lets the library choose an algorithm automatically to detect region.
 	- RPM_GENERAL : Takes the whole image as a region.
-	- RPM_GENERAL_RGB_CONTRAST : Detects region using the general algorithm based on RGB colour contrast.
-	- RPM_GENERAL_GRAY_CONTRAST : Detects region using the general algorithm based on gray contrast.
-	- RPM_GENERAL_HSV_CONTRAST : Detects region using the general algorithm based on HSV colour contrast.
+	- RPM_GENERAL_RGB_CONTRAST : Detects region using the general algorithm based on RGB colour contrast. Check [Mode Argument List](#Mode-Argument-List) for available argument settings.
+	- RPM_GENERAL_GRAY_CONTRAST : Detects region using the general algorithm based on gray contrast. Check [Mode Argument List](#Mode-Argument-List) for available argument settings.
+	- RPM_GENERAL_HSV_CONTRAST : Detects region using the general algorithm based on HSV colour contrast. Check [Mode Argument List](#Mode-Argument-List) for available argument settings.
 	- RPM_SKIP : Skips region detection.
 - **EnumResultCoordinateType** : Describes the result coordinate type.
 	- RCT_PIXEL : Returns the coordinate in pixel value.
@@ -261,8 +269,8 @@ https://www.dynamsoft.com/Products/Dynamic-Barcode-Reader-News.aspx
 	- RT_PARTIAL_TEXT : Specifies the partial text. This means part of the text result decoded from the barcode.
 - **EnumScaleUpMode** : Describes the scale up mode.
 	- SUM_AUTO : The library chooses an interpolation method automatically to scale up.
-	- SUM_LINEAR_INTERPOLATION : Scales up using the linear interpolation method.
-	- SUM_NEAREST_NEIGHBOUR_INTERPOLATION : Scales up using the nearest-neighbour interpolation method.
+	- SUM_LINEAR_INTERPOLATION : Scales up using the linear interpolation method. Check [Mode Argument List](#Mode-Argument-List) for available argument settings.
+	- SUM_NEAREST_NEIGHBOUR_INTERPOLATION : Scales up using the nearest-neighbour interpolation method. Check [Mode Argument List](#Mode-Argument-List) for available argument settings.
 	- SUM_SKIP : Skip the scale-up process.
 - **EnumTerminatePhase** : Describes the terminate phase.
 	- TP_REGION_PREDETECTED : Exits the barcode reading algorithm after the region predetection is done.
@@ -273,12 +281,12 @@ https://www.dynamsoft.com/Products/Dynamic-Barcode-Reader-News.aspx
 	- TP_BARCODE_RECOGNIZED : Exits the barcode reading algorithm after the region predetection, image pre-processing, image binarization, barcode localization, barcode type determining, and barcode recognition are done.
 - **EnumTextAssistedCorrectionMode** : Describes the text assisted correction mode.
 	- TACM_AUTO : Not supported yet.
-	- TACM_VERIFYING : Uses the accompanying text to verify the decoded barcode result.
-	- TACM_VERIFYING_PATCHING : Uses the accompanying text to verify and patch the decoded barcode result.
+	- TACM_VERIFYING : Uses the accompanying text to verify the decoded barcode result. Check [Mode Argument List](#Mode-Argument-List) for available argument settings.
+	- TACM_VERIFYING_PATCHING : Uses the accompanying text to verify and patch the decoded barcode result. Check [Mode Argument List](#Mode-Argument-List) for available argument settings.
 	- TACM_SKIP : Skips the text assisted correction.
 - **EnumTextFilterMode** : Describes the text filter mode.
 	- TFM_AUTO : Not supported yet.
-	- TFM_GENERAL_CONTOUR : Filters text using the general algorithm based on contour.
+	- TFM_GENERAL_CONTOUR : Filters text using the general algorithm based on contour. Check [Mode Argument List](#Mode-Argument-List) for available argument settings.
 	- TFM_SKIP : Skips text filtering.
 - **EnumTextResultOrderMode** : Describes the text result order mode.
 	- TROM_CONFIDENCE : Returns the text results in descending order by confidence.
@@ -287,16 +295,10 @@ https://www.dynamsoft.com/Products/Dynamic-Barcode-Reader-News.aspx
 	- TROM_SKIP : Skips the result ordering operation.
 - **EnumTextureDetectionMode** : Describes the texture detection mode.
 	- TDM_AUTO : Not supported yet.
-	- TDM_GENERAL_WIDTH_CONCENTRATION : Detects texture using the general algorithm.
+	- TDM_GENERAL_WIDTH_CONCENTRATION : Detects texture using the general algorithm. Check [Mode Argument List](#Mode-Argument-List) for available argument settings.
 	- TDM_SKIP : Skips texture detection.
-- **EnumClarityCalculationMethod** : Describes the clarity calculation method.
-	- ECCM_CONTRAST : Calculates clarity using the contrast method.
-- **EnumClarityFilterMode** : Describes the clarity filter mode.
-	- CFM_GENERAL : The frames using the general algorithm based on calculated clarity.
-- **EnumPDFReadingMode** : Describes the clarity filter mode.
-	- PDFRM_AUTO : Lets the library choose the reading mode automatically. 
-	- PDFRM_VECTOR : Detects barcode from vector data in PDF file. 
-	- PDFRM_RASTER : Converts the PDF file to image(s) first, then perform barcode recognition. 
+
+
 
 
 #### Struct Interfaces
