@@ -26,8 +26,7 @@
 
 
 ### Version
-- **7.3**
-> Version 7.3 marks the initial release of Dynamsoft Barcode Reader Python SDK. This release is not compatible with previous versions and will require code changes in your application.
+- **7.4**
 
 ### Supported Platforms
 - **Windows x64**
@@ -90,28 +89,8 @@
 	- UK Royal Mail
 
 ### Release Notes 
-All that is new and improved
->1. In version 7.3, we made significant changes to the packaging structure of the Python SDK. We added the Python layer based on the previous CPython layer encapsulation. Now the Python layer is the interface layer, which is responsible for direct interaction with developers. The CPython layer is the middle payer, which is responsible for the transformation between the C interface and the Python interface.
 
->2. The Python layer now makes full use of Python's object-oriented features. It encapsulates enumerations, structures, methods, and also optimizes exception throwing and handling.
-
->3. Added new samples to help you get started with our Python SDK.
-
->4. The Python SDK can now support Postal Codes including USPS Intelligent Mail, Postnet, Planet, Australia Post barcode, RM4SCC.
-
->5. Added a new localization mode LM_STATISTICS_POSTAL_CODE in the struct PublicRuntimeSettings -> LocalizationModes to recognize Postal Codes.
-
->6. Implemented the ability to recognize distorted QR codes. It can be can be controlled via the struct PublicRuntimeSettings -> deformation_resisting_modes.
-
->7. Implemented the ability to complement missing parts of QR and Datamatrix codes. It can be enabled by turning on the struct PublicRuntimeSettings -> barcode_complement_modes.
-
->8. Added a new setting ScaleUpModes to set the scale-up mode for linear barcodes with small module size. It can be controlled via the struct PublicRuntimeSettings -> scale_up_modes.
-
->9. Obtain accompanying texts that appear above or below a linear barcode. This feature can now be enabled by turning on the struct PublicRuntimeSettings -> accompanying_text_recognition_modes.
-
->10. Improved the decoding accuracy for DataMatrix that has a narrow quiet zone.
-
->11. Improved the decoding accuracy for 1D barcode that has a small module size.
+https://www.dynamsoft.com/Products/Dynamic-Barcode-Reader-News.aspx
 
 ### Interfaces
 
@@ -119,19 +98,19 @@ All that is new and improved
 
 
 - **EnumAccompanyingTextRecognitionMode** : Describes the accompanying text recognition mode.
-	- ATRM_GENERAL : Recognizes accompanying texts using the general algorithm.
+	- ATRM_GENERAL : Recognizes accompanying texts using the general algorithm. Check [Arguments of AccompanyingTextRecognitionModes](#Arguments-of-AccompanyingTextRecognitionModes) for available argument settings.
 	- ATRM_SKIP : Skips the accompanying text recognition.
 - **EnumBarcodeComplementMode** : Describes the barcode complement mode.
 	- BCM_AUTO : Not supported yet.
 	- BCM_GENERAL : Complements the barcode using the general algorithm.
 	- BCM_SKIP : Skips the barcode complement.
 - **EnumBarcodeColourMode** : Describes the barcode colour mode.
-	- BICM_DARK_ON_LIGHT : Dark items on a light background. 
-	- BICM_LIGHT_ON_DARK : Light items on a dark background. Not supported yet.
-	- BICM_DARK_ON_DARK : Dark items on a dark background. Not supported yet.
-	- BICM_LIGHT_ON_LIGHT : Light items on a light background. Not supported yet.
-	- BICM_DARK_LIGHT_MIXED : The background is mixed by dark and light. Not supported yet.
-	- BICM_DARK_ON_LIGHT_DARK_SURROUNDING : Dark item on a light background surrounded by dark.
+	- BICM_DARK_ON_LIGHT : Dark items on a light background. Check [Arguments of BarcodeColourModes](#Arguments-of-BarcodeColourModes) for available argument settings.
+	- BICM_LIGHT_ON_DARK : Light items on a dark background. Not supported yet. Check [Arguments of BarcodeColourModes](#Arguments-of-BarcodeColourModes) for available argument settings.
+	- BICM_DARK_ON_DARK : Dark items on a dark background. Not supported yet. Check [Arguments of BarcodeColourModes](#Arguments-of-BarcodeColourModes) for available argument settings.
+	- BICM_LIGHT_ON_LIGHT : Light items on a light background. Not supported yet. Check [Arguments of BarcodeColourModes](#Arguments-of-BarcodeColourModes) for available argument settings.
+	- BICM_DARK_LIGHT_MIXED : The background is mixed by dark and light. Not supported yet. Check [Arguments of BarcodeColourModes](#Arguments-of-BarcodeColourModes) for available argument settings.
+	- BICM_DARK_ON_LIGHT_DARK_SURROUNDING : Dark item on a light background surrounded by dark. Check [Arguments of BarcodeColourModes](#Arguments-of-BarcodeColourModes) for available argument settings.
 	- BICM_SKIP : Skips the barcode colour operation.
 - **EnumBarcodeFormat** : Describes the barcode types in BarcodeFormat group 1.
 	- BF_ALL : All supported formats in BarcodeFormat group 1
@@ -174,23 +153,28 @@ All that is new and improved
 	- BF2_PLANET : Planet
 	- BF2_AUSTRALIANPOST : Australian Post
 	- BF2_RM4SCC : Royal Mail 4-State Customer Barcode
+	- BF2_DOTCODE : DotCode
 - **EnumBinarizationMode** : Describes the binarization mode.
 	- BM_AUTO : Not supported yet.
-	- BM_LOCAL_BLOCK : Binarizes the image based on the local block.
+	- BM_LOCAL_BLOCK : Binarizes the image based on the local block. Check [Arguments of BinarizationModes](#Arguments-of-BinarizationModes) for available argument settings.
 	- BM_SKIP : Skips the binarization.
+- **EnumClarityCalculationMethod** : Describes the clarity calculation method.
+	- ECCM_CONTRAST : Calculates clarity using the contrast method.
+- **EnumClarityFilterMode** : Describes the clarity filter mode.
+	- CFM_GENERAL : The frames using the general algorithm based on calculated clarity.
 - **EnumColourClusteringMode** : Describes the colour clustering mode.
 	- CCM_AUTO : Not supported yet.
-	- CCM_GENERAL_HSV : Clusters colours using the general algorithm based on HSV.
+	- CCM_GENERAL_HSV : Clusters colours using the general algorithm based on HSV. Check [Arguments of ColourClusteringModes](#Arguments-of-ColourClusteringModes) for available argument settings.
 	- CCM_SKIP : Skips the colour clustering.
 - **EnumColourConversionMode** : Describes the colour conversion mode.
-	- CICM_GENERAL : Converts a colour image to a grayscale image using the general algorithm.
+	- CICM_GENERAL : Converts a colour image to a grayscale image using the general algorithm. Check [Arguments of ColourConversionModes](#Arguments-of-ColourConversionModes) for available argument settings.
 	- CICM_SKIP : Skips the colour conversion.
 - **EnumConflictMode** : Describes the conflict mode.
 	- CM_IGNORE : Ignores new settings and inherits the previous settings.
 	- CM_OVERWRITE : Overwrites the old settings with new settings.
 - **EnumDeformationResistingMode** : Describes the deformation resisting mode.
 	- DRM_AUTO : Not supported yet.
-	- DRM_GENERAL : Resists deformation using the general algorithm.
+	- DRM_GENERAL : Resists deformation using the general algorithm. Check [Arguments of DeformationResistingModes](#Arguments-of-DeformationResistingModes) for available argument settings.
 	- DRM_SKIP : Skips deformation resisting.
 - **EnumDPMCodeReadingMode** : Describes the DPM code reading mode.
 	- DPMCRM_AUTO : Not supported yet.
@@ -206,18 +190,22 @@ All that is new and improved
 	- IPF_BINARYINVERTED : 0:White, 1:Black
 	- IPF_GRAYSCALED : 8bit gray
 	- IPF_NV21 : NV21
-	- IPF_RGB_565 : 16bit
-	- IPF_RGB_555 : 16bit
-	- IPF_RGB_888 : 24bit
-	- IPF_ARGB_8888 : 32bit
-	- IPF_RGB_161616 : 48bit
-	- IPF_ARGB_16161616 : 64bit
+	- IPF_RGB_565 : 16bit with RGB channel order stored in memory from high to low address
+	- IPF_RGB_555 : 16bit with RGB channel order stored in memory from high to low address
+	- IPF_RGB_888 : 24bit with RGB channel order stored in memory from high to low address
+	- IPF_ARGB_8888 : 32bit with ARGB channel order stored in memory from high to low address
+	- IPF_RGB_161616 : 48bit with RGB channel order stored in memory from high to low address
+	- IPF_ARGB_16161616 : 64bit with ARGB channel order stored in memory from high to low address
+	- IPF_ABGR_8888 : 32bit with ABGR channel order stored in memory from high to low address
+	- IPF_ABGR_16161616 : 64bit with ABGR channel order stored in memory from high to low address
+	- IPF_BGR_888 : 24bit with BGR channel order stored in memory from high to low address
 - **EnumImagePreprocessingMode** : Describes the image preprocessing mode.
 	- IPM_AUTO : Not supported yet.
-	- IPM_GENERAL : Takes the unpreprocessed image for following operations.
-	- IPM_GRAY_EQUALIZE : Preprocesses the image using the gray equalization algorithm.
-	- IPM_GRAY_SMOOTH : Preprocesses the image using the gray smoothing algorithm.
-	- IPM_SHARPEN_SMOOTH : Preprocesses the image using the sharpening and smoothing algorithm.
+	- IPM_GENERAL : Takes the unpreprocessed image for following operations. Check [Arguments of ImagePreprocessingModes](#Arguments-of-ImagePreprocessingModes) for available argument settings.
+	- IPM_GRAY_EQUALIZE : Preprocesses the image using the gray equalization algorithm. Check [Arguments of ImagePreprocessingModes](#Arguments-of-ImagePreprocessingModes) for available argument settings.
+	- IPM_GRAY_SMOOTH : Preprocesses the image using the gray smoothing algorithm. Check [Arguments of ImagePreprocessingModes](#Arguments-of-ImagePreprocessingModes) for available argument settings.
+	- IPM_SHARPEN_SMOOTH : Preprocesses the image using the sharpening and smoothing algorithm. Check [Arguments of ImagePreprocessingModes](#Arguments-of-ImagePreprocessingModes) for available argument settings.
+	- IPM_MORPHOLOGY : Preprocesses the image using the morphology algorithm. Check [Arguments of ImagePreprocessingModes](#Arguments-of-ImagePreprocessingModes) for available argument settings.
 	- IPM_SKIP : Skips image preprocessing.
 - **EnumIMResultDataType** : Describes the intermediate result data type.
 	- IMRDT_IMAGE : Specifies the ImageData
@@ -225,10 +213,11 @@ All that is new and improved
 	- IMRDT_LINESEGMENT : Specifies the LineSegment
 	- IMRDT_LOCALIZATIONRESULT : Specifies the LocalizationResult
 	- IMRDT_REGIONOFINTEREST : Specifies the RegionOfInterest
+	- IMRDT_QUADRILATERAL : Specifies the Quadrilateral
 - **EnumIntermediateResultSavingMode** : Describes the intermediate result saving mode.
 	- IRSM_MEMORY : Saves intermediate results in memory.
-	- IRSM_FILESYSTEM : Saves intermediate results in file system.
-	- IRSM_BOTH : Saves intermediate results in both memory and file system.
+	- IRSM_FILESYSTEM : Saves intermediate results in file system. Check [Arguments of IntermediateResultSavingMode](#Arguments-of-IntermediateResultSavingMode) for available argument settings.
+	- IRSM_BOTH : Saves intermediate results in both memory and file system. Check [Arguments of IntermediateResultSavingMode](#Arguments-of-IntermediateResultSavingMode) for available argument settings.
 - **EnumIntermediateResultType** : Describes the intermediate result type.
 	- IRT_NO_RESULT : No intermediate result
 	- IRT_ORIGINAL_IMAGE : Original image
@@ -244,15 +233,20 @@ All that is new and improved
 	- IRT_FORM : Form. Not supported yet.
 	- IRT_SEGMENTATION_BLOCK : Segmentation block. Not supported yet.
 	- IRT_TYPED_BARCODE_ZONE : Typed barcode zone
+	- IRT_PREDETECTED_QUADRILATERAL : Predetected quadrilateral
 - **EnumLocalizationMode** : Describes the localization mode.
 	- LM_AUTO : Not supported yet.
 	- LM_CONNECTED_BLOCKS : Localizes barcodes by searching for connected blocks. This algorithm usually gives best result and it is recommended to set ConnectedBlocks to the highest priority.
 	- LM_STATISTICS : Localizes barcodes by groups of contiguous black-white regions. This is optimized for QRCode and DataMatrix.
 	- LM_LINES : Localizes barcodes by searching for groups of lines. This is optimized for 1D and PDF417 barcodes.
-	- LM_SCAN_DIRECTLY : Localizes barcodes quickly. This mode is recommended in interactive scenario.
+	- LM_SCAN_DIRECTLY : Localizes barcodes quickly. This mode is recommended in interactive scenario. Check [Arguments of LocalizationModes](#Arguments-of-LocalizationModes) for available argument settings.
 	- LM_STATISTICS_MARKS : Localizes barcodes by groups of marks.This is optimized for DPM codes.
 	- LM_STATISTICS_POSTAL_CODE : Localizes barcodes by groups of connected blocks and lines.This is optimized for postal codes.
 	- LM_SKIP : Skips localization.
+- **EnumPDFReadingMode** : Describes the clarity filter mode.
+	- PDFRM_AUTO : Lets the library choose the reading mode automatically. 
+	- PDFRM_VECTOR : Detects barcode from vector data in PDF file. 
+	- PDFRM_RASTER : Converts the PDF file to image(s) first, then perform barcode recognition. 
 - **EnumQRCodeErrorCorrectionLevel** : Describes the QR Code error correction level.
 	- QRECL_ERROR_CORRECTION_H : Error Correction Level H (high)
 	- QRECL_ERROR_CORRECTION_L : Error Correction Level L (low)
@@ -261,9 +255,9 @@ All that is new and improved
 - **EnumRegionPredetectionMode** : Describes the region predetection mode.
 	- RPM_AUTO : Lets the library choose an algorithm automatically to detect region.
 	- RPM_GENERAL : Takes the whole image as a region.
-	- RPM_GENERAL_RGB_CONTRAST : Detects region using the general algorithm based on RGB colour contrast.
-	- RPM_GENERAL_GRAY_CONTRAST : Detects region using the general algorithm based on gray contrast.
-	- RPM_GENERAL_HSV_CONTRAST : Detects region using the general algorithm based on HSV colour contrast.
+	- RPM_GENERAL_RGB_CONTRAST : Detects region using the general algorithm based on RGB colour contrast. Check [Arguments of RegionPredetectionModes](#Arguments-of-RegionPredetectionModes) for available argument settings.
+	- RPM_GENERAL_GRAY_CONTRAST : Detects region using the general algorithm based on gray contrast. Check [Arguments of RegionPredetectionModes](#Arguments-of-RegionPredetectionModes) for available argument settings.
+	- RPM_GENERAL_HSV_CONTRAST : Detects region using the general algorithm based on HSV colour contrast. Check [Arguments of RegionPredetectionModes](#Arguments-of-RegionPredetectionModes) for available argument settings.
 	- RPM_SKIP : Skips region detection.
 - **EnumResultCoordinateType** : Describes the result coordinate type.
 	- RCT_PIXEL : Returns the coordinate in pixel value.
@@ -275,8 +269,8 @@ All that is new and improved
 	- RT_PARTIAL_TEXT : Specifies the partial text. This means part of the text result decoded from the barcode.
 - **EnumScaleUpMode** : Describes the scale up mode.
 	- SUM_AUTO : The library chooses an interpolation method automatically to scale up.
-	- SUM_LINEAR_INTERPOLATION : Scales up using the linear interpolation method.
-	- SUM_NEAREST_NEIGHBOUR_INTERPOLATION : Scales up using the nearest-neighbour interpolation method.
+	- SUM_LINEAR_INTERPOLATION : Scales up using the linear interpolation method. Check [Arguments of ScaleUpModes](#Arguments-of-ScaleUpModes) for available argument settings.
+	- SUM_NEAREST_NEIGHBOUR_INTERPOLATION : Scales up using the nearest-neighbour interpolation method. Check [Arguments of ScaleUpModes](#Arguments-of-ScaleUpModes) for available argument settings.
 	- SUM_SKIP : Skip the scale-up process.
 - **EnumTerminatePhase** : Describes the terminate phase.
 	- TP_REGION_PREDETECTED : Exits the barcode reading algorithm after the region predetection is done.
@@ -287,12 +281,12 @@ All that is new and improved
 	- TP_BARCODE_RECOGNIZED : Exits the barcode reading algorithm after the region predetection, image pre-processing, image binarization, barcode localization, barcode type determining, and barcode recognition are done.
 - **EnumTextAssistedCorrectionMode** : Describes the text assisted correction mode.
 	- TACM_AUTO : Not supported yet.
-	- TACM_VERIFYING : Uses the accompanying text to verify the decoded barcode result.
-	- TACM_VERIFYING_PATCHING : Uses the accompanying text to verify and patch the decoded barcode result.
+	- TACM_VERIFYING : Uses the accompanying text to verify the decoded barcode result. Check [Arguments of TextAssistedCorrectionMode](#Arguments-of-TextAssistedCorrectionMode) for available argument settings.
+	- TACM_VERIFYING_PATCHING : Uses the accompanying text to verify and patch the decoded barcode result. Check [Arguments of TextAssistedCorrectionMode](#Arguments-of-TextAssistedCorrectionMode) for available argument settings.
 	- TACM_SKIP : Skips the text assisted correction.
 - **EnumTextFilterMode** : Describes the text filter mode.
 	- TFM_AUTO : Not supported yet.
-	- TFM_GENERAL_CONTOUR : Filters text using the general algorithm based on contour.
+	- TFM_GENERAL_CONTOUR : Filters text using the general algorithm based on contour. Check [Arguments of TextFilterModes](#Arguments-of-TextFilterModes) for available argument settings.
 	- TFM_SKIP : Skips text filtering.
 - **EnumTextResultOrderMode** : Describes the text result order mode.
 	- TROM_CONFIDENCE : Returns the text results in descending order by confidence.
@@ -301,8 +295,10 @@ All that is new and improved
 	- TROM_SKIP : Skips the result ordering operation.
 - **EnumTextureDetectionMode** : Describes the texture detection mode.
 	- TDM_AUTO : Not supported yet.
-	- TDM_GENERAL_WIDTH_CONCENTRATION : Detects texture using the general algorithm.
+	- TDM_GENERAL_WIDTH_CONCENTRATION : Detects texture using the general algorithm. Check [Arguments of TextureDetectionModes](#Arguments-of-TextureDetectionModes) for available argument settings.
 	- TDM_SKIP : Skips texture detection.
+
+
 
 
 #### Struct Interfaces
@@ -332,6 +328,8 @@ All that is new and improved
 		- threshold                     : The threshold used for filtering frames.
 		- fps                           : The frequency of calling AppendFrame() per second.
 		- auto_filter                   : Sets whether to filter frames automatically.
+		- clarity_calculation_method    : Sets the method used for calculating the clarity of the frames.
+		- clarity_filter_mode           : Sets the mode used for filtering frames by calculated clarity.
 
 
 - **PublicRuntimeSetting** : Defines a struct to configure the barcode reading runtime settings. These settings control the barcode recognition process such as which barcode types to decode.
@@ -374,6 +372,7 @@ All that is new and improved
 		- region_measured_by_percentage : Sets whether or not to use percentage to measure the region size.
 		- min_barcode_text_length       : Sets the range of barcode text length for barcodes search.
 		- min_result_confidence         : The minimum confidence of the result.
+		- pdf_reading_mode              : Sets the way to detect barcodes from a PDF file when using the DecodeFile method.
 
 
 - **OnedDetailedResult** : Stores the OneD code details.
@@ -515,12 +514,16 @@ All that is new and improved
 		- width  : The width of the region
 		- height : The height of the region
 
+- **Quadrilateral** : Stores the quadrilateral.
+	- ***Attributes*** :
+
+		- points : Four vertexes in a clockwise direction of a quadrilateral. Index 0 represents the left-most vertex.
 
 - **IntermediateResult** : Stores the intermediate result.
 	- ***Attributes*** :
 
 		- data_type                     : The data type of the intermediate result
-		- results                       : One of the following types: List of class Contour, List of class ImageData, List of class LineSegment, List of class LocalizationResult, List of class RegionOfInterest
+		- results                       : One of the following types: List of class Contour, List of class ImageData, List of class LineSegment, List of class LocalizationResult, List of class RegionOfInterest, List of class Quadrilateral
 		- result_type                   : Intermediate result type
 		- barcode_complement_mode       : The BarcodeComplementMode used when generating the current intermediate result
 		- bcm_index                     : The list index of current used ColourClusteringMode in the ColourClusteringModes setting
@@ -771,43 +774,96 @@ else:
 
 >***You can refer to this list when you use set_mode_argument() or get_mode_argument().***
 
+##### Arguments of AccompanyingTextRecognitionModes
 | Mode Parameter Name | Argument Name | Argument Description
 | --------------------| ------------- | ---------------------
 | AccompanyingTextRecognitionModes | RegionBottom | Specifies the y-coordinate of the bottom-right corner of the region in percentage. This value is relative to the top-left corner of the barcode.  <br> <b>Value Range : </b><br>[-255, 255] <br> <b>Default Value : </b><br>0 <br> <b>Remarks: </b><br>Valid for ATRM_GENERAL<br>If RegionLeft, RegionTop, RegionRight and RegionBottom are all equal to 0, the accompanying text zone will be detected automatically by the SDK.<br>For more info on how to set a custom area for accompanying texts, please refer to [this article](https://www.dynamsoft.com/help/Barcode-Reader/devguide/HowTo/SetCustomeAreaForAccompanyingTexts.html)|
 | AccompanyingTextRecognitionModes | RegionLeft | Specifies the x-coordinate of the top-left corner of the region in percentage. This value is relative to the top-left corner of the barcode. <br> <b>Value Range : </b><br>[-255, 255] <br> <b>Default Value : </b><br>0 <br> <b>Remarks: </b><br>Valid for ATRM_GENERAL<br>If RegionLeft, RegionTop, RegionRight and RegionBottom are all equal to 0, the accompanying text zone will be detected automatically by the SDK.<br>For more info on how to set a custom area for accompanying texts, please refer to [this article](https://www.dynamsoft.com/help/Barcode-Reader/devguide/HowTo/SetCustomeAreaForAccompanyingTexts.html)|
 | AccompanyingTextRecognitionModes | RegionRight | Specifies the x-coordinate of the bottom-right corner of the region in percentage. This value is relative to the top-left corner of the barcode. <br> <b>Value Range : </b><br>[-255, 255] <br> <b>Default Value : </b><br>0 <br> <b>Remarks: </b><br>Valid for ATRM_GENERAL<br>If RegionLeft, RegionTop, RegionRight and RegionBottom are all equal to 0, the accompanying text zone will be detected automatically by the SDK.<br>For more info on how to set a custom area for accompanying texts, please refer to [this article](https://www.dynamsoft.com/help/Barcode-Reader/devguide/HowTo/SetCustomeAreaForAccompanyingTexts.html)|
 | AccompanyingTextRecognitionModes | RegionTop | Specifies the y-coordinate of the top-left corner of the region in percentage. This value is relative to the top-left corner of the barcode. <br> <b>Value Range : </b><br>[-255, 255] <br> <b>Default Value : </b><br>0 <br> <b>Remarks: </b><br>Valid for ATRM_GENERAL<br>If RegionLeft, RegionTop, RegionRight and RegionBottom are all equal to 0, the accompanying text zone will be detected automatically by the SDK.<br>For more info on how to set a custom area for accompanying texts, please refer to [this article](https://www.dynamsoft.com/help/Barcode-Reader/devguide/HowTo/SetCustomeAreaForAccompanyingTexts.html)|
+
+##### Arguments of BarcodeColourModes
+| Mode Parameter Name | Argument Name | Argument Description
+| --------------------| ------------- | ---------------------
 | BarcodeColourModes | LightReflection | Sets if there is light reflection on the barocde zone. <br> <b>Value Range : </b><br>[0, 1] <br> <b>Default Value : </b><br>1 <br> <b>Remarks: </b><br>Valid for BICM_DARK_LIGHT_MIXED; BICM_DARK_ON_DARK; BICM_DARK_ON_LIGHT; BICM_LIGHT_ON_DARK;BICM_LIGHT_ON_LIGHT; BICM_DARK_ON_LIGHT_DARK_SURROUNDING<br>0: no light reflection<br>1: has light reflection|
+
+##### Arguments of BinarizationModes
+| Mode Parameter Name | Argument Name | Argument Description
+| --------------------| ------------- | ---------------------
 | BinarizationModes | BlockSizeX | Sets the horizontal block size for the binarization process. <br> <b>Value Range : </b><br>[0, 1000] <br> <b>Default Value : </b><br>0 <br> <b>Remarks: </b><br>Valid for BM_LOCAL_BLOCK<br>0: the block size used for binarization will be set to a value which is calculated automatically.<br>N: <br>1 <= N <= 3: the block size used for binarization will be set to 3. <br>N > 3: the block size used for binarization will be set to N.<br>Block size refers to the size of a pixel neighborhood used to calculate a threshold value for the pixel.<br>An appropriate value for binarizationBlockSize can help generate a high quality binary image and increase the accuracy of barcode localization.|
 | BinarizationModes | BlockSizeY | Sets the vertical block size for the binarization process. <br> <b>Value Range : </b><br>[0, 1000] <br> <b>Default Value : </b><br>0 <br> <b>Remarks: </b><br>Valid for BM_LOCAL_BLOCK<br>0: the block size used for binarization will be set to a value which is calculated automatically.<br>N: <br>1 <= N <= 3: the block size used for binarization will be set to 3. <br>N > 3: the block size used for binarization will be set to N.<br>Block size refers to the size of a pixel neighborhood used to calculate a threshold value for the pixel.<br>An appropriate value for binarizationBlockSize can help generate a high quality binary image to increase the accuracy of barcode localization.|
 | BinarizationModes | EnableFillBinaryVacancy | Sets whether to enable binary vacancy filling. <br> <b>Value Range : </b><br>[0, 1] <br> <b>Default Value : </b><br>1 <br> <b>Remarks: </b><br>Valid for BM_LOCAL_BLOCK<br>0 - disable, 1 - enable<br>For barcodes with a large module size, there might be a vacant area in the position detection pattern after binarization. The vacant area may result in decoding failure. Setting this to True will fill in the vacant area with black and may help improve the decoding success rate. Better accuracy for images with a large module size.|
 | BinarizationModes | ImagePreprocessingModesIndex | The index of a specific image preprocessing mode in the ImagePreprocessingModes parameter which the current binarization mode is applied to. <br> <b>Value Range : </b><br>[-1, 0x7fffffff] <br> <b>Default Value : </b><br>-1 <br> <b>Remarks: </b><br>Valid for BM_LOCAL_BLOCK<br>-1: The current binarization mode is applied to all modes in parameter ImagePreprocessingModes.|
 | BinarizationModes | ThreshValueCoefficient | Constant subtracted from the mean or weighted mean. Normally, it is positive but may be zero or negative as well. <br> <b>Value Range : </b><br>[-255, 255] <br> <b>Default Value : </b><br>10 <br> <b>Remarks: </b><br>Valid for BM_LOCAL_BLOCK|
+
+##### Arguments of ColourClusteringModes
+| Mode Parameter Name | Argument Name | Argument Description
+| --------------------| ------------- | ---------------------
 | ColourClusteringModes | Sensitivity | Sets the sensitivity used for colour categorization. <br> <b>Value Range : </b><br>[1, 9] <br> <b>Default Value : </b><br>5 <br> <b>Remarks: </b><br>Valid for CCM_GENERAL_HSV<br>A higher level means less colours will be clustered as the same colour.|
+
+##### Arguments of ColourConversionModes
+| Mode Parameter Name | Argument Name | Argument Description
+| --------------------| ------------- | ---------------------
 | ColourConversionModes | BlueChannelWeight | Sets the weight value of Blue Colour Channel used for converting a colour image to a grayscale image. <br> <b>Value Range : </b><br>[-1, 1000] <br> <b>Default Value : </b><br>-1 <br> <b>Remarks: </b><br>Valid for CICM_GENERAL<br>-1: The weight value will be set automatically by the SDK.|
 | ColourConversionModes | GreenChannelWeight | Sets the weight value of Green Colour Channel used for converting a colour image to a grayscale image. <br> <b>Value Range : </b><br>[-1, 1000] <br> <b>Default Value : </b><br>-1 <br> <b>Remarks: </b><br>Valid for CICM_GENERAL<br>-1: The weight value will be set automatically by the SDK.|
 | ColourConversionModes | RedChannelWeight | Sets the weight value of Red Colour Channel used for converting a colour image to a grayscale image. <br> <b>Value Range : </b><br>[-1, 1000] <br> <b>Default Value : </b><br>-1 <br> <b>Remarks: </b><br>Valid for CICM_GENERAL<br>-1: The weight value will be set automatically by the SDK.|
+
+##### Arguments of DeformationResistingModes
+| Mode Parameter Name | Argument Name | Argument Description
+| --------------------| ------------- | ---------------------
 | DeformationResistingModes | Level | Sets the effort level used for deformation resisting.Not supported yet. <br> <b>Value Range : </b><br>[1, 9] <br> <b>Default Value : </b><br>5 <br> <b>Remarks: </b><br>Valid for DRM_GENERAL<br>A larger value means the library will take more effort to resist deformation.|
+
+##### Arguments of ImagePreprocessingModes
+| Mode Parameter Name | Argument Name | Argument Description
+| --------------------| ------------- | ---------------------
 | ImagePreprocessingModes | Sensitivity | Sets the sensitivity used for gray equalization. <br> <b>Value Range : </b><br>[1, 9] <br> <b>Default Value : </b><br>5 <br> <b>Remarks: </b><br>Valid for IPM_GRAY_EQUALIZE<br>If you have an image with a low level of contrast, you can set the property to a larger value.<br>A larger value means a higher possibility that gray equalization will be activated.<br>This may cause adverse effect on images with a high level of contrast.|
 | ImagePreprocessingModes | SmoothBlockSizeX | Sets the horizontal block size for the smoothing process. <br> <b>Value Range : </b><br>[3, 1000] <br> <b>Default Value : </b><br>3 <br> <b>Remarks: </b><br>Valid for IPM_GRAY_SMOOTH;IPM_SHARPEN_SMOOTH<br>Block size refers to the size of a pixel neighborhood used to calculate the threshold for the pixel.<br>An appropriate value can help increase the accuracy of barcode localization.|
 | ImagePreprocessingModes | SmoothBlockSizeY | Sets the vertical block size for the smoothing process. <br> <b>Value Range : </b><br>[3, 1000] <br> <b>Default Value : </b><br>3 <br> <b>Remarks: </b><br>Valid for IPM_GRAY_SMOOTH;IPM_SHARPEN_SMOOTH<br>Block size refers to the size of a pixel neighborhood used to calculate the threshold for the pixel.<br>An appropriate value can help increase the accuracy of barcode localization.|
 | ImagePreprocessingModes | SharpenBlockSizeX | Sets the horizontal block size for the sharpening process. <br> <b>Value Range : </b><br>[3, 1000] <br> <b>Default Value : </b><br>3 <br> <b>Remarks: </b><br>Valid for IPM_SHARPEN_SMOOTH<br>Block size refers to the size of a pixel neighborhood used to calculate the threshold for the pixel.<br>An appropriate value can help increase the accuracy of barcode localization.|
 | ImagePreprocessingModes | SharpenBlockSizeY | Sets the vertical block size for the sharpening process. <br> <b>Value Range : </b><br>[3, 1000] <br> <b>Default Value : </b><br>3 <br> <b>Remarks: </b><br>Valid for IPM_SHARPEN_SMOOTH<br>Block size refers to the size of a pixel neighborhood used to calculate the threshold for the pixel.<br>An appropriate value can help increase the accuracy of barcode localization.|
+
+##### Arguments of IntermediateResultSavingMode
+| Mode Parameter Name | Argument Name | Argument Description
+| --------------------| ------------- | ---------------------
 | IntermediateResultSavingMode | FolderPath | Sets the path of the output folder which stores intermediate results. <br> <b>Value Range : </b><br>A string value representing the folder path with max length 480. <br> <b>Default Value : </b><br>"" <br> <b>Remarks: </b><br>Valid for IRSM_FILESYSTEM;IRSM_BOTH<br>"": The library path.<br>Please make sure the path exists and your application has the appropriate permissions for saving the results.|
 | IntermediateResultSavingMode | RecordsetSizeOfLatestImages | Sets the maximum count of recordset to store the latest images' intermediate results. <br> <b>Value Range : </b><br>[0,0x7fffffff] <br> <b>Default Value : </b><br>0 <br> <b>Remarks: </b><br>0 means no limitation on the count of recordset. <br>When the count exceeds, the old recordset will be replaced by the new one.|
+
+##### Arguments of LocalizationModes
+| Mode Parameter Name | Argument Name | Argument Description
+| --------------------| ------------- | ---------------------
 | LocalizationModes | ScanStride | Sets the stride in pixels between scans when searching for barcodes. <br> <b>Value Range : </b><br>[0, 0x7fffffff] <br> <b>Default Value : </b><br>0 <br> <b>Remarks: </b><br>Valid for LM_SCAN_DIRECTLY<br>0: means automatically set by the library.<br>When the set value is greater than half the width or height of the current image, the actual processing is 0.|
 | LocalizationModes | ScanDirection | Sets the scan direction when searching barcode. <br> <b>Value Range : </b>[0,2] <br> <b>Default Value : </b><br>0 <br> <b>Remarks: </b><br>0: Both vertical and horizontal direction <br>1: Vertical direction <br>2: Horizontal direction.|
+
+##### Arguments of RegionPredetectionModes
+| Mode Parameter Name | Argument Name | Argument Description
+| --------------------| ------------- | ---------------------
 | RegionPredetectionModes | MinImageDimension | Sets the minimum image dimension (in pixels) to pre-detect barcode regions. <br> <b>Value Range : </b><br>[262144, 0x7fffffff] <br> <b>Default Value : </b><br>262144 <br> <b>Remarks: </b><br>Valid for RPM_GENERAL_GRAY_CONTRAST;RPM_GENERAL_HSV_CONTRAST;RPM_GENERAL_RGB_CONTRAST<br>If the image dimension is larger than the given value, the library will enable the feature of pre-detecting barcode regions. Otherwise, it will skip this step when searching for barcodes.|
 | RegionPredetectionModes | Sensitivity | Sets the sensitivity used for region predetection algorithm. <br> <b>Value Range : </b><br>[1, 9] <br> <b>Default Value : </b><br>1 <br> <b>Remarks: </b><br>Valid for RPM_GENERAL_GRAY_CONTRAST;RPM_GENERAL_HSV_CONTRAST;RPM_GENERAL_RGB_CONTRAST<br>A larger value means the library will take more effort to detect regions.|
+
+##### Arguments of ScaleUpModes
+| Mode Parameter Name | Argument Name | Argument Description
+| --------------------| ------------- | ---------------------
 | ScaleUpModes | AcuteAngleWithXThreshold | Sets the acute angle threshold for scale-up. <br> <b>Value Range : </b><br>[-1, 90] <br> <b>Default Value : </b><br>-1 <br> <b>Remarks: </b><br>Valid for SUM_LINEAR_INTERPOLATION, SUM_NEAREST_NEIGHBOUR_INTERPOLATION<br>-1 : means automatically set by the library. <br>If the module size of the barcode is smaller than the ModuleSizeThreshold and the acute angle with X of the barcode is larger than the AcuteAngleWithXThreshold, the barcode will be enlarged to N times (N=1,2,3...) till N * modulesize >= TargetModuleSize. <br>For more info on how to custom scale up rules, please refer to [this article](https://www.dynamsoft.com/help/Barcode-Reader/devguide/HowTo/EnableScaleUp.html)|
 | ScaleUpModes | ModuleSizeThreshold | Sets the module size threshold for scale-up. <br> <b>Value Range : </b><br>[0, 0x7fffffff] <br> <b>Default Value : </b><br>0 <br> <b>Remarks: </b><br>Valid for SUM_LINEAR_INTERPOLATION, SUM_NEAREST_NEIGHBOUR_INTERPOLATION<br>0 : means automatically set by the library. <br>If the module size of the barcode is smaller than the ModuleSizeThreshold and the acute angle with X of the barcode is larger than the AcuteAngleWithXThreshold, the barcode will be enlarged to N times (N=1,2,3...) till N * modulesize >= TargetModuleSize. <br>For more info on how to custom scale up rules, please refer to [this article](https://www.dynamsoft.com/help/Barcode-Reader/devguide/HowTo/EnableScaleUp.html)|
 | ScaleUpModes | TargetModuleSize | Sets the target module size for scale-up. <br> <b>Value Range : </b><br>[0, 0x7fffffff] <br> <b>Default Value : </b><br>0 <br> <b>Remarks: </b><br>Valid for SUM_LINEAR_INTERPOLATION, SUM_NEAREST_NEIGHBOUR_INTERPOLATION<br>0 : means automatically set by the library. <br>If the module size of the barcode is smaller than the ModuleSizeThreshold and the acute angle with X of the barcode is larger than the AcuteAngleWithXThreshold, the barcode will be enlarged to N times (N=1,2,3...) till N * modulesize >= TargetModuleSize. <br>For more info on how to custom scale up rules, please refer to [this article](https://www.dynamsoft.com/help/Barcode-Reader/devguide/HowTo/EnableScaleUp.html)|
+
+##### Arguments of TextAssistedCorrectionMode
+| Mode Parameter Name | Argument Name | Argument Description
+| --------------------| ------------- | ---------------------
 | TextAssistedCorrectionMode | BottomTextPercentageSize | Sets the percentage of the bottom accompanying text zone comparing to the barcode zone. <br> <b>Value Range : </b><br>[0, 255] <br> <b>Default Value : </b><br>0 <br> <b>Remarks: </b><br>Valid for TACM_VERIFYING;TACM_VERIFYING_PATCHING<br>255: The accompanying text zone will be detected automatically by the SDK.|
 | TextAssistedCorrectionMode | LeftTextPercentageSize | Sets the percentage of the left accompanying text zone comparing to the barcode zone. <br> <b>Value Range : </b><br>[0, 255] <br> <b>Default Value : </b><br>0 <br> <b>Remarks: </b><br>Valid for TACM_VERIFYING;TACM_VERIFYING_PATCHING<br>255: The accompanying text zone will be detected automatically by the SDK.|
 | TextAssistedCorrectionMode | RightTextPercentageSize | Sets the percentage of the right accompanying text zone comparing to the barcode zone. <br> <b>Value Range : </b><br>[0, 255] <br> <b>Default Value : </b><br>0 <br> <b>Remarks: </b><br>Valid for TACM_VERIFYING;TACM_VERIFYING_PATCHING<br>255: The accompanying text zone will be detected automatically by the SDK.|
 | TextAssistedCorrectionMode | TopTextPercentageSize | Sets the percentage of the top accompanying text zone comparing to the barcode zone. <br> <b>Value Range : </b><br>[0, 255] <br> <b>Default Value : </b><br>0 <br> <b>Remarks: </b><br>Valid for TACM_VERIFYING;TACM_VERIFYING_PATCHING<br>255: The accompanying text zone will be detected automatically by the SDK.|
+
+##### Arguments of TextFilterModes
+| Mode Parameter Name | Argument Name | Argument Description
+| --------------------| ------------- | ---------------------
 | TextFilterModes | MinImageDimension | Sets the minimum image dimension (in pixels) to filter the text. <br> <b>Value Range : </b><br>[65536, 0x7fffffff] <br> <b>Default Value : </b><br>65536 <br> <b>Remarks: </b><br>Valid for TFM_GENERAL_CONTOUR<br>If the image dimension is larger than the given value, the library will enable the text filtering feature. Otherwise, it will skip this step when doing barcode recognition.<br>The feature can speed up the recognition process.|
 | TextFilterModes | Sensitivity | Sets the sensitivity used for text filtering. <br> <b>Value Range : </b><br>[0, 9] <br> <b>Default Value : </b><br>0 <br> <b>Remarks: </b><br>Valid for TFM_GENERAL_CONTOUR<br>0: means automatically set by the library.<br>A larger value means the library will take more effort to filter text.|
+
+##### Arguments of TextureDetectionModes
+| Mode Parameter Name | Argument Name | Argument Description
+| --------------------| ------------- | ---------------------
 | TextureDetectionModes | Sensitivity | Sets the sensitivity used for texture detection. <br> <b>Value Range : </b><br>[1, 9] <br> <b>Default Value : </b><br>5 <br> <b>Remarks: </b><br>Valid for TDM_GENERAL_WIDTH_CONCENTRATION<br>A larger value means the library will take more effort to detect texture.|
 
 ### Contact Us
