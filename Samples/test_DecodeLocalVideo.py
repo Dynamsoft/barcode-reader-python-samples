@@ -1,8 +1,8 @@
 import os
 import sys
 import time
-import cv2
 from dbr import *
+import cv2
 
 # you can change the following variables' value to your own value.
 license_key = "Input your own license"

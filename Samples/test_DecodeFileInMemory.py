@@ -1,5 +1,4 @@
 import os
-import cv2
 import sys
 from typing import List
 from dbr import *

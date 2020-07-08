@@ -1,8 +1,8 @@
 import os
-import cv2
 import sys
 from typing import List
 from dbr import *
+import cv2
 
 
 # you can change the following variables' value to your own value.

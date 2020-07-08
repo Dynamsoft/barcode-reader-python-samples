@@ -1,6 +1,5 @@
 import os
 import sys
-import cv2
 import json
 from typing import List
 from dbr import *
