@@ -2,10 +2,10 @@ import os
 import random
 import glob
 import time
-import cv2
 import numpy as np
 from typing import List
 from dbr import *
+import cv2
 
 # you can change the following variables' value to your own value.
 license_key = "Input your own license"

@@ -3,8 +3,8 @@ import os
 import time
 from os import listdir
 from os.path import isfile,join
-import cv2
 from dbr import *
+import cv2
 
 # you can change the following variables' value to your own value.
 license_key = "Input your own license"
