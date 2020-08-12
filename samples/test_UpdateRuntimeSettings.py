@@ -9,7 +9,9 @@ license_key = "Input your own license"
 
 reader = BarcodeReader()
 
+# Apply for a trial license: https://www.dynamsoft.com/CustomerPortal/Portal/Triallicense.aspx
 reader.init_license(license_key)
+
 #reader.init_license_from_server(license_server, license_key)
 #license_content = reader.output_license_to_string()
 #reader.init_license_from_license_content(license_key, license_content)
