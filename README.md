@@ -35,6 +35,8 @@
 
 - **Mac OS**
 
+- **Raspberry Pi OS**
+
 ### Supported Python Versions
 - **Python3.5**
 
@@ -47,9 +49,6 @@
 ### Installation
 
 >**pip install dbr**
-
-*If you want to use DBR Python Edition in Raspberry Pi, please contact us.*
-
 
 ### Supported Symbologies
 *We support all major barcodes symbologies across a variety of industries such as government, finance, retail, warehouse inventory, and healthcare.*
