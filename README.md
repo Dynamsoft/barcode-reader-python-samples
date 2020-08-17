@@ -9,24 +9,27 @@
 *Dynamsoft Barcode Reader's Python Edition comes with all the general features of Dynamsoft Barcode Reader, bringing convenience for customers who develop in Python. In addition, you could refer to the Python samples available in our [Github](https://github.com/dynamsoft-dbr/python-barcode) when building your own application. If you have any inquiries about our product, please contact us at support@dynamsoft.com.*
 
 ## Table Of Contents
-- [Version](#Version)
-- [Supported Platforms](#Supported-Platforms)
-- [Installation](#Installation)
-- [Supported Symbologies](#Supported-Symbologies)
-- [Release Notes](#Release-Notes)
-- [Interfaces](#Interfaces)
-	- [Enum Interfaces](#Enum-Interfaces)
-	- [Struct Interfaces](#Struct-Interfaces)
-	- [Exception Class Interface](#Exception-Class-Interface)
-	- [Main Class Interface](#Main-Class-Interface)
-- [Appendix](#Appendix)
-	- [Code Snippet](#Code-Snippet)
-	- [Mode Argument List](#Mode-Argument-List)
-- [Contact Us](#Contact-Us)
-
+- [Version](#version)
+- [Supported Python Version](#supported-python-version)
+- [Supported Platforms](#supported-platforms)
+- [Installation](#installation)
+- [Supported Symbologies](#supported-symbologies)
+- [Release Notes](#release-notes)
+- [Interfaces](#interfaces)
+	- [Enum Interfaces](#enum-interfaces)
+	- [Struct Interfaces](#struct-interfaces)
+	- [Exception Class Interface](#exception-class-interface)
+	- [Main Class Interface](#main-class-interface)
+- [Appendix](#appendix)
+	- [Code Snippet](#code-snippet)
+	- [Mode Argument List](#mode-argument-list)
+- [Contact Us](#contact-us)
 
 ### Version
 - **7.5**
+
+## Supported Python Version
+3.6, 3.7, and 3.8
 
 ### Supported Platforms
 - **Windows x64**
