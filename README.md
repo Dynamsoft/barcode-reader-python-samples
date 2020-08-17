@@ -28,9 +28,6 @@
 ### Version
 - **7.5**
 
-## Supported Python Version
-3.6, 3.7, and 3.8
-
 ### Supported Platforms
 - **Windows x64**
 
@@ -41,7 +38,6 @@
 - **Raspberry Pi OS**
 
 ### Supported Python Versions
-- **Python3.5**
 
 - **Python3.6**
 
@@ -136,133 +132,133 @@ https://www.dynamsoft.com/Products/Dynamic-Barcode-Reader-News.aspx
 ##### EnumAccompanyingTextRecognitionMode 
 	Describes the accompanying text recognition mode.
 
-	- ATRM_GENERAL : Recognizes accompanying texts using the general algorithm. Check [Arguments of AccompanyingTextRecognitionModes](#Arguments-of-AccompanyingTextRecognitionModes) for available argument settings.
-	- ATRM_REV : Reserved setting for accompanying text recognition mode.
-	- ATRM_SKIP : Skips the accompanying text recognition.
+- ATRM_GENERAL : Recognizes accompanying texts using the general algorithm. Check [Arguments of AccompanyingTextRecognitionModes](#Arguments-of-AccompanyingTextRecognitionModes) for available argument settings.
+- ATRM_REV : Reserved setting for accompanying text recognition mode.
+- ATRM_SKIP : Skips the accompanying text recognition.
 
 ##### EnumBarcodeComplementMode 
 	Describes the barcode complement mode.
 
-	- BCM_AUTO : Not supported yet.
-	- BCM_GENERAL : Complements the barcode using the general algorithm.
-	- BCM_REV : Reserved setting for barcode complement mode.
-	- BCM_SKIP : Skips the barcode complement.
+- BCM_AUTO : Not supported yet.
+- BCM_GENERAL : Complements the barcode using the general algorithm.
+- BCM_REV : Reserved setting for barcode complement mode.
+- BCM_SKIP : Skips the barcode complement.
 
 ##### EnumBarcodeColourMode
 	Describes the barcode colour mode.
 
-	- BICM_DARK_ON_LIGHT : Dark items on a light background. Check [Arguments of BarcodeColourModes](#Arguments-of-BarcodeColourModes) for available argument settings.
-	- BICM_LIGHT_ON_DARK : Light items on a dark background. Not supported yet. Check [Arguments of BarcodeColourModes](#Arguments-of-BarcodeColourModes) for available argument settings.
-	- BICM_DARK_ON_DARK : Dark items on a dark background. Not supported yet. Check [Arguments of BarcodeColourModes](#Arguments-of-BarcodeColourModes) for available argument settings.
-	- BICM_LIGHT_ON_LIGHT : Light items on a light background. Not supported yet. Check [Arguments of BarcodeColourModes](#Arguments-of-BarcodeColourModes) for available argument settings.
-	- BICM_DARK_LIGHT_MIXED : The background is mixed by dark and light. Not supported yet. Check [Arguments of BarcodeColourModes](#Arguments-of-BarcodeColourModes) for available argument settings.
-	- BICM_DARK_ON_LIGHT_DARK_SURROUNDING : Dark item on a light background surrounded by dark. Check [Arguments of BarcodeColourModes](#Arguments-of-BarcodeColourModes) for available argument settings.
-	- BICM_REV : Reserved setting for barcode colour mode.
-	- BICM_SKIP : Skips the barcode colour operation.
+- BICM_DARK_ON_LIGHT : Dark items on a light background. Check [Arguments of BarcodeColourModes](#Arguments-of-BarcodeColourModes) for available argument settings.
+- BICM_LIGHT_ON_DARK : Light items on a dark background. Not supported yet. Check [Arguments of BarcodeColourModes](#Arguments-of-BarcodeColourModes) for available argument settings.
+- BICM_DARK_ON_DARK : Dark items on a dark background. Not supported yet. Check [Arguments of BarcodeColourModes](#Arguments-of-BarcodeColourModes) for available argument settings.
+- BICM_LIGHT_ON_LIGHT : Light items on a light background. Not supported yet. Check [Arguments of BarcodeColourModes](#Arguments-of-BarcodeColourModes) for available argument settings.
+- BICM_DARK_LIGHT_MIXED : The background is mixed by dark and light. Not supported yet. Check [Arguments of BarcodeColourModes](#Arguments-of-BarcodeColourModes) for available argument settings.
+- BICM_DARK_ON_LIGHT_DARK_SURROUNDING : Dark item on a light background surrounded by dark. Check [Arguments of BarcodeColourModes](#Arguments-of-BarcodeColourModes) for available argument settings.
+- BICM_REV : Reserved setting for barcode colour mode.
+- BICM_SKIP : Skips the barcode colour operation.
 
 ##### EnumBarcodeFormat 
 	Describes the barcode types in BarcodeFormat group 1.
 
-	- BF_ALL : All supported formats in BarcodeFormat group 1
-	- BF_ONED : Combined value of BF_CODABAR, BF_CODE_128, BF_CODE_39, BF_CODE_39_Extended, BF_CODE_93, BF_EAN_13, BF_EAN_8, INDUSTRIAL_25, BF_ITF, BF_UPC_A, BF_UPC_E
-	- BF_GS1_DATABAR : Combined value of BF_GS1_DATABAR_OMNIDIRECTIONAL, BF_GS1_DATABAR_TRUNCATED, BF_GS1_DATABAR_STACKED, BF_GS1_DATABAR_STACKED_OMNIDIRECTIONAL, BF_GS1_DATABAR_EXPANDED, BF_GS1_DATABAR_EXPANDED_STACKED, BF_GS1_DATABAR_LIMITED
-	- BF_CODE_39 : Code 39
-	- BF_CODE_128 : Code 128
-	- BF_CODE_93 : Code 93
-	- BF_CODABAR : Codabar
-	- BF_ITF : Interleaved 2 of 5
-	- BF_EAN_13 : EAN-13
-	- BF_EAN_8 : EAN-8
-	- BF_UPC_A : UPC-A
-	- BF_UPC_E : UPC-E
-	- BF_INDUSTRIAL_25 : Industrial 2 of 5
-	- BF_CODE_39_EXTENDED : CODE39 Extended
-	- BF_GS1_DATABAR_OMNIDIRECTIONAL : GS1 Databar Omnidirectional
-	- BF_GS1_DATABAR_TRUNCATED : GS1 Databar Truncated
-	- BF_GS1_DATABAR_STACKED : GS1 Databar Stacked
-	- BF_GS1_DATABAR_STACKED_OMNIDIRECTIONAL : GS1 Databar Stacked Omnidirectional
-	- BF_GS1_DATABAR_EXPANDED : GS1 Databar Expanded
-	- BF_GS1_DATABAR_EXPANDED_STACKED : GS1 Databar Expaned Stacked
-	- BF_GS1_DATABAR_LIMITED : GS1 Databar Limited
-	- BF_PATCHCODE : Patch code
-	- BF_PDF417 : PDF417
-	- BF_QR_CODE : QRCode
-	- BF_DATAMATRIX : DataMatrix
-	- BF_AZTEC : AZTEC
-	- BF_MAXICODE : MAXICODE
-	- BF_MICRO_QR : Micro QR Code
-	- BF_MICRO_PDF417 : Micro PDF417
-	- BF_GS1_COMPOSITE : GS1 Composite Code
-	- BF_NULL : No barcode format in BarcodeFormat group 1
+- BF_ALL : All supported formats in BarcodeFormat group 1
+- BF_ONED : Combined value of BF_CODABAR, BF_CODE_128, BF_CODE_39, BF_CODE_39_Extended, BF_CODE_93, BF_EAN_13, BF_EAN_8, INDUSTRIAL_25, BF_ITF, BF_UPC_A, BF_UPC_E
+- BF_GS1_DATABAR : Combined value of BF_GS1_DATABAR_OMNIDIRECTIONAL, BF_GS1_DATABAR_TRUNCATED, BF_GS1_DATABAR_STACKED, BF_GS1_DATABAR_STACKED_OMNIDIRECTIONAL, BF_GS1_DATABAR_EXPANDED, BF_GS1_DATABAR_EXPANDED_STACKED, BF_GS1_DATABAR_LIMITED
+- BF_CODE_39 : Code 39
+- BF_CODE_128 : Code 128
+- BF_CODE_93 : Code 93
+- BF_CODABAR : Codabar
+- BF_ITF : Interleaved 2 of 5
+- BF_EAN_13 : EAN-13
+- BF_EAN_8 : EAN-8
+- BF_UPC_A : UPC-A
+- BF_UPC_E : UPC-E
+- BF_INDUSTRIAL_25 : Industrial 2 of 5
+- BF_CODE_39_EXTENDED : CODE39 Extended
+- BF_GS1_DATABAR_OMNIDIRECTIONAL : GS1 Databar Omnidirectional
+- BF_GS1_DATABAR_TRUNCATED : GS1 Databar Truncated
+- BF_GS1_DATABAR_STACKED : GS1 Databar Stacked
+- BF_GS1_DATABAR_STACKED_OMNIDIRECTIONAL : GS1 Databar Stacked Omnidirectional
+- BF_GS1_DATABAR_EXPANDED : GS1 Databar Expanded
+- BF_GS1_DATABAR_EXPANDED_STACKED : GS1 Databar Expaned Stacked
+- BF_GS1_DATABAR_LIMITED : GS1 Databar Limited
+- BF_PATCHCODE : Patch code
+- BF_PDF417 : PDF417
+- BF_QR_CODE : QRCode
+- BF_DATAMATRIX : DataMatrix
+- BF_AZTEC : AZTEC
+- BF_MAXICODE : MAXICODE
+- BF_MICRO_QR : Micro QR Code
+- BF_MICRO_PDF417 : Micro PDF417
+- BF_GS1_COMPOSITE : GS1 Composite Code
+- BF_NULL : No barcode format in BarcodeFormat group 1
 
 ##### EnumBarcodeFormat_2 
 	Describes the barcode types in BarcodeFormat group 2.
 
-	- BF2_NULL : No barcode format in BarcodeFormat group 2
-	- BF2_POSTALCODE : Combined value of BF2_USPSINTELLIGENTMAIL, BF2_POSTNET, BF2_PLANET, BF2_AUSTRALIANPOST, BF2_RM4SCC. When you set this barcode format, the library will automatically add LM_STATISTICS_POSTAL_CODE to LocalizationModes if you doesn't set it. 
-	- BF2_NONSTANDARD_BARCODE : Nonstandard barcode
-	- BF2_USPSINTELLIGENTMAIL : USPS Intelligent Mail. When you set this barcode format, the library will automatically add LM_STATISTICS_POSTAL_CODE to LocalizationModes if you doesn't set it. 
-	- BF2_POSTNET : Postnet. When you set this barcode format, the library will automatically add LM_STATISTICS_POSTAL_CODE to LocalizationModes if you doesn't set it. 
-	- BF2_PLANET : Planet. When you set this barcode format, the library will automatically add LM_STATISTICS_POSTAL_CODE to LocalizationModes if you doesn't set it. 
-	- BF2_AUSTRALIANPOST : Australian Post. When you set this barcode format, the library will automatically add LM_STATISTICS_POSTAL_CODE to LocalizationModes if you doesn't set it. 
-	- BF2_RM4SCC : Royal Mail 4-State Customer Barcode. When you set this barcode format, the library will automatically add LM_STATISTICS_POSTAL_CODE to LocalizationModes if you doesn't set it. 
-	- BF2_DOTCODE : DotCode. When you set this barcode format, the library will automatically add LM_STATISTICS_MARKS to LocalizationModes if you doesn't set it. 
+- BF2_NULL : No barcode format in BarcodeFormat group 2
+- BF2_POSTALCODE : Combined value of BF2_USPSINTELLIGENTMAIL, BF2_POSTNET, BF2_PLANET, BF2_AUSTRALIANPOST, BF2_RM4SCC. When you set this barcode format, the library will automatically add LM_STATISTICS_POSTAL_CODE to LocalizationModes if you doesn't set it. 
+- BF2_NONSTANDARD_BARCODE : Nonstandard barcode
+- BF2_USPSINTELLIGENTMAIL : USPS Intelligent Mail. When you set this barcode format, the library will automatically add LM_STATISTICS_POSTAL_CODE to LocalizationModes if you doesn't set it. 
+- BF2_POSTNET : Postnet. When you set this barcode format, the library will automatically add LM_STATISTICS_POSTAL_CODE to LocalizationModes if you doesn't set it. 
+- BF2_PLANET : Planet. When you set this barcode format, the library will automatically add LM_STATISTICS_POSTAL_CODE to LocalizationModes if you doesn't set it. 
+- BF2_AUSTRALIANPOST : Australian Post. When you set this barcode format, the library will automatically add LM_STATISTICS_POSTAL_CODE to LocalizationModes if you doesn't set it. 
+- BF2_RM4SCC : Royal Mail 4-State Customer Barcode. When you set this barcode format, the library will automatically add LM_STATISTICS_POSTAL_CODE to LocalizationModes if you doesn't set it. 
+- BF2_DOTCODE : DotCode. When you set this barcode format, the library will automatically add LM_STATISTICS_MARKS to LocalizationModes if you doesn't set it. 
 
 ##### EnumBinarizationMode 
 	Describes the binarization mode.
 	
-	- BM_AUTO : Not supported yet.
-	- BM_LOCAL_BLOCK : Binarizes the image based on the local block. Check [Arguments of BinarizationModes](#Arguments-of-BinarizationModes) for available argument settings.
-	- BM_THRESHOLD : Performs image binarization based on the givern threshold.Check [Arguments of BinarizationModes](#Arguments-of-BinarizationModes) for available argument settings.
-	- BM_REV : Reserved setting for binarization mode.
-	- BM_SKIP : Skips the binarization.
+- BM_AUTO : Not supported yet.
+- BM_LOCAL_BLOCK : Binarizes the image based on the local block. Check [Arguments of BinarizationModes](#Arguments-of-BinarizationModes) for available argument settings.
+- BM_THRESHOLD : Performs image binarization based on the givern threshold.Check [Arguments of BinarizationModes](#Arguments-of-BinarizationModes) for available argument settings.
+- BM_REV : Reserved setting for binarization mode.
+- BM_SKIP : Skips the binarization.
 
 ##### EnumClarityCalculationMethod 
 	Describes the clarity calculation method.
 	
-	- ECCM_CONTRAST : Calculates clarity using the contrast method.
+- ECCM_CONTRAST : Calculates clarity using the contrast method.
 
 ##### EnumClarityFilterMode 
 	Describes the clarity filter mode.
 	
-	- CFM_GENERAL : The frames using the general algorithm based on calculated clarity.
+- CFM_GENERAL : The frames using the general algorithm based on calculated clarity.
 
 ##### EnumColourClusteringMode 
 	Describes the colour clustering mode.
 	
-	- CCM_AUTO : Not supported yet.
-	- CCM_GENERAL_HSV : Clusters colours using the general algorithm based on HSV. Check [Arguments of ColourClusteringModes](#Arguments-of-ColourClusteringModes) for available argument settings.
-	- CCM_REV : Reserved setting for colour clustering mode.
-	- CCM_SKIP : Skips the colour clustering.
+- CCM_AUTO : Not supported yet.
+- CCM_GENERAL_HSV : Clusters colours using the general algorithm based on HSV. Check [Arguments of ColourClusteringModes](#Arguments-of-ColourClusteringModes) for available argument settings.
+- CCM_REV : Reserved setting for colour clustering mode.
+- CCM_SKIP : Skips the colour clustering.
 
 ##### EnumColourConversionMode 
 	Describes the colour conversion mode.
 	
-	- CICM_GENERAL : Converts a colour image to a grayscale image using the general algorithm. Check [Arguments of ColourConversionModes](#Arguments-of-ColourConversionModes) for available argument settings.
-	- CICM_REV : Reserved setting for colour conversion mode.
-	- CICM_SKIP : Skips the colour conversion.
+- CICM_GENERAL : Converts a colour image to a grayscale image using the general algorithm. Check [Arguments of ColourConversionModes](#Arguments-of-ColourConversionModes) for available argument settings.
+- CICM_REV : Reserved setting for colour conversion mode.
+- CICM_SKIP : Skips the colour conversion.
 
 ##### EnumConflictMode 
 	Describes the conflict mode.
 	
-	- CM_IGNORE : Ignores new settings and inherits the previous settings.
-	- CM_OVERWRITE : Overwrites the old settings with new settings.
+- CM_IGNORE : Ignores new settings and inherits the previous settings.
+- CM_OVERWRITE : Overwrites the old settings with new settings.
 
 ##### EnumDeformationResistingMode 
 	Describes the deformation resisting mode.
 
-	- DRM_AUTO : Not supported yet.
-	- DRM_GENERAL : Resists deformation using the general algorithm. Check [Arguments of DeformationResistingModes](#Arguments-of-DeformationResistingModes) for available argument settings.
-	- DRM_REV : Reserved setting for deformation resisting mode.
-	- DRM_SKIP : Skips deformation resisting.
+- DRM_AUTO : Not supported yet.
+- DRM_GENERAL : Resists deformation using the general algorithm. Check [Arguments of DeformationResistingModes](#Arguments-of-DeformationResistingModes) for available argument settings.
+- DRM_REV : Reserved setting for deformation resisting mode.
+- DRM_SKIP : Skips deformation resisting.
 
 ##### EnumDPMCodeReadingMode 
 	Describes the DPM code reading mode.
 	
-	- DPMCRM_AUTO : Not supported yet.
-	- DPMCRM_GENERAL : Reads DPM code using the general algorithm. Valid only when LM_STATISTICS_MARKS is set. When this mode is set, the library will automatically add LM_STATISTICS_MARKS to LocalizationModes and add a BM_LOCAL_BLOCK to BinarizationModes which is with arguments: BlockSizeX=0, BlockSizeY=0, EnableFillBinaryVacancy=0, ImagePreprocessingModesIndex=1, ThreshValueCoefficient=15 if you doesn't set them. 
-	- DPMCRM_REV : Reserved setting for DPM code reading mode. 
-	- DPMCRM_SKIP : Skips DPM code reading.
+- DPMCRM_AUTO : Not supported yet.
+- DPMCRM_GENERAL : Reads DPM code using the general algorithm. Valid only when LM_STATISTICS_MARKS is set. When this mode is set, the library will automatically add LM_STATISTICS_MARKS to LocalizationModes and add a BM_LOCAL_BLOCK to BinarizationModes which is with arguments: BlockSizeX=0, BlockSizeY=0, EnableFillBinaryVacancy=0, ImagePreprocessingModesIndex=1, ThreshValueCoefficient=15 if you doesn't set them. 
+- DPMCRM_REV : Reserved setting for DPM code reading mode. 
+- DPMCRM_SKIP : Skips DPM code reading.
 
 ##### EnumErrorCode 
 	Describes error code
@@ -270,166 +266,166 @@ https://www.dynamsoft.com/Products/Dynamic-Barcode-Reader-News.aspx
 ##### EnumGrayscaleTransformationMode 
 	Describes the grayscale transformation mode.
 	
-	- GTM_INVERTED : Transforms to inverted grayscale. Recommended for light on dark images.
-	- GTM_ORIGINAL : Keeps the original grayscale. Recommended for dark on light images.
-	- GTM_REV : Reserved setting for grayscale transformation mode. 
-	- GTM_SKIP : Skips grayscale transformation.
+- GTM_INVERTED : Transforms to inverted grayscale. Recommended for light on dark images.
+- GTM_ORIGINAL : Keeps the original grayscale. Recommended for dark on light images.
+- GTM_REV : Reserved setting for grayscale transformation mode. 
+- GTM_SKIP : Skips grayscale transformation.
 
 ##### EnumImagePixelFormat 
 	Describes the image pixel format.
 	
-	- IPF_BINARY : 0:Black, 1:White
-	- IPF_BINARYINVERTED : 0:White, 1:Black
-	- IPF_GRAYSCALED : 8bit gray
-	- IPF_NV21 : NV21
-	- IPF_RGB_565 : 16bit with RGB channel order stored in memory from high to low address
-	- IPF_RGB_555 : 16bit with RGB channel order stored in memory from high to low address
-	- IPF_RGB_888 : 24bit with RGB channel order stored in memory from high to low address
-	- IPF_ARGB_8888 : 32bit with ARGB channel order stored in memory from high to low address
-	- IPF_RGB_161616 : 48bit with RGB channel order stored in memory from high to low address
-	- IPF_ARGB_16161616 : 64bit with ARGB channel order stored in memory from high to low address
-	- IPF_ABGR_8888 : 32bit with ABGR channel order stored in memory from high to low address
-	- IPF_ABGR_16161616 : 64bit with ABGR channel order stored in memory from high to low address
-	- IPF_BGR_888 : 24bit with BGR channel order stored in memory from high to low address
+- IPF_BINARY : 0:Black, 1:White
+- IPF_BINARYINVERTED : 0:White, 1:Black
+- IPF_GRAYSCALED : 8bit gray
+- IPF_NV21 : NV21
+- IPF_RGB_565 : 16bit with RGB channel order stored in memory from high to low address
+- IPF_RGB_555 : 16bit with RGB channel order stored in memory from high to low address
+- IPF_RGB_888 : 24bit with RGB channel order stored in memory from high to low address
+- IPF_ARGB_8888 : 32bit with ARGB channel order stored in memory from high to low address
+- IPF_RGB_161616 : 48bit with RGB channel order stored in memory from high to low address
+- IPF_ARGB_16161616 : 64bit with ARGB channel order stored in memory from high to low address
+- IPF_ABGR_8888 : 32bit with ABGR channel order stored in memory from high to low address
+- IPF_ABGR_16161616 : 64bit with ABGR channel order stored in memory from high to low address
+- IPF_BGR_888 : 24bit with BGR channel order stored in memory from high to low address
 
 ##### EnumImagePreprocessingMode 
 	Describes the image preprocessing mode.
 	
-	- IPM_AUTO : Not supported yet.
-	- IPM_GENERAL : Takes the unpreprocessed image for following operations. Check [Arguments of ImagePreprocessingModes](#Arguments-of-ImagePreprocessingModes) for available argument settings.
-	- IPM_GRAY_EQUALIZE : Preprocesses the image using the gray equalization algorithm. Check [Arguments of ImagePreprocessingModes](#Arguments-of-ImagePreprocessingModes) for available argument settings.
-	- IPM_GRAY_SMOOTH : Preprocesses the image using the gray smoothing algorithm. Check [Arguments of ImagePreprocessingModes](#Arguments-of-ImagePreprocessingModes) for available argument settings.
-	- IPM_SHARPEN_SMOOTH : Preprocesses the image using the sharpening and smoothing algorithm. Check [Arguments of ImagePreprocessingModes](#Arguments-of-ImagePreprocessingModes) for available argument settings.
-	- IPM_MORPHOLOGY : Preprocesses the image using the morphology algorithm. Check [Arguments of ImagePreprocessingModes](#Arguments-of-ImagePreprocessingModes) for available argument settings.
-	- IPM_REV : Reserved setting for image preprocessing mode. 
-	- IPM_SKIP : Skips image preprocessing.
+- IPM_AUTO : Not supported yet.
+- IPM_GENERAL : Takes the unpreprocessed image for following operations. Check [Arguments of ImagePreprocessingModes](#Arguments-of-ImagePreprocessingModes) for available argument settings.
+- IPM_GRAY_EQUALIZE : Preprocesses the image using the gray equalization algorithm. Check [Arguments of ImagePreprocessingModes](#Arguments-of-ImagePreprocessingModes) for available argument settings.
+- IPM_GRAY_SMOOTH : Preprocesses the image using the gray smoothing algorithm. Check [Arguments of ImagePreprocessingModes](#Arguments-of-ImagePreprocessingModes) for available argument settings.
+- IPM_SHARPEN_SMOOTH : Preprocesses the image using the sharpening and smoothing algorithm. Check [Arguments of ImagePreprocessingModes](#Arguments-of-ImagePreprocessingModes) for available argument settings.
+- IPM_MORPHOLOGY : Preprocesses the image using the morphology algorithm. Check [Arguments of ImagePreprocessingModes](#Arguments-of-ImagePreprocessingModes) for available argument settings.
+- IPM_REV : Reserved setting for image preprocessing mode. 
+- IPM_SKIP : Skips image preprocessing.
 
 ##### EnumIMResultDataType 
-Describes the intermediate result data type.
+	Describes the intermediate result data type.
 
-	- IMRDT_IMAGE : Specifies the ImageData
-	- IMRDT_CONTOUR : Specifies the Contour
-	- IMRDT_LINESEGMENT : Specifies the LineSegment
-	- IMRDT_LOCALIZATIONRESULT : Specifies the LocalizationResult
-	- IMRDT_REGIONOFINTEREST : Specifies the RegionOfInterest
-	- IMRDT_QUADRILATERAL : Specifies the Quadrilateral
+- IMRDT_IMAGE : Specifies the ImageData
+- IMRDT_CONTOUR : Specifies the Contour
+- IMRDT_LINESEGMENT : Specifies the LineSegment
+- IMRDT_LOCALIZATIONRESULT : Specifies the LocalizationResult
+- IMRDT_REGIONOFINTEREST : Specifies the RegionOfInterest
+- IMRDT_QUADRILATERAL : Specifies the Quadrilateral
 
 ##### EnumIntermediateResultSavingMode 
-Describes the intermediate result saving mode.
+	Describes the intermediate result saving mode.
 
-	- IRSM_MEMORY : Saves intermediate results in memory.
-	- IRSM_FILESYSTEM : Saves intermediate results in file system. Check [Arguments of IntermediateResultSavingMode](#Arguments-of-IntermediateResultSavingMode) for available argument settings.
-	- IRSM_BOTH : Saves intermediate results in both memory and file system. Check [Arguments of IntermediateResultSavingMode](#Arguments-of-IntermediateResultSavingMode) for available argument settings.
+- IRSM_MEMORY : Saves intermediate results in memory.
+- IRSM_FILESYSTEM : Saves intermediate results in file system. Check [Arguments of IntermediateResultSavingMode](#Arguments-of-IntermediateResultSavingMode) for available argument settings.
+- IRSM_BOTH : Saves intermediate results in both memory and file system. Check [Arguments of IntermediateResultSavingMode](#Arguments-of-IntermediateResultSavingMode) for available argument settings.
 
 ##### EnumIntermediateResultType 
-Describes the intermediate result type.
+	Describes the intermediate result type.
 
-	- IRT_NO_RESULT : No intermediate result
-	- IRT_ORIGINAL_IMAGE : Original image
-	- IRT_COLOUR_CLUSTERED_IMAGE : Colour clustered image. Not supported yet.
-	- IRT_COLOUR_CONVERTED_GRAYSCALE_IMAGE : Colour image converted to grayscale
-	- IRT_TRANSFORMED_GRAYSCALE_IMAGE : Transformed grayscale image
-	- IRT_PREDETECTED_REGION : Predetected region
-	- IRT_PREPROCESSED_IMAGE : Preprocessed image
-	- IRT_BINARIZED_IMAGE : Binarized image
-	- IRT_TEXT_ZONE : Text zone
-	- IRT_CONTOUR : Contour
-	- IRT_LINE_SEGMENT : Line segment
-	- IRT_FORM : Form. Not supported yet.
-	- IRT_SEGMENTATION_BLOCK : Segmentation block. Not supported yet.
-	- IRT_TYPED_BARCODE_ZONE : Typed barcode zone
-	- IRT_PREDETECTED_QUADRILATERAL : Predetected quadrilateral
+- IRT_NO_RESULT : No intermediate result
+- IRT_ORIGINAL_IMAGE : Original image
+- IRT_COLOUR_CLUSTERED_IMAGE : Colour clustered image. Not supported yet.
+- IRT_COLOUR_CONVERTED_GRAYSCALE_IMAGE : Colour image converted to grayscale
+- IRT_TRANSFORMED_GRAYSCALE_IMAGE : Transformed grayscale image
+- IRT_PREDETECTED_REGION : Predetected region
+- IRT_PREPROCESSED_IMAGE : Preprocessed image
+- IRT_BINARIZED_IMAGE : Binarized image
+- IRT_TEXT_ZONE : Text zone
+- IRT_CONTOUR : Contour
+- IRT_LINE_SEGMENT : Line segment
+- IRT_FORM : Form. Not supported yet.
+- IRT_SEGMENTATION_BLOCK : Segmentation block. Not supported yet.
+- IRT_TYPED_BARCODE_ZONE : Typed barcode zone
+- IRT_PREDETECTED_QUADRILATERAL : Predetected quadrilateral
 
 ##### EnumLocalizationMode 
-Describes the localization mode.
+	Describes the localization mode.
 
-	- LM_AUTO : Not supported yet.
-	- LM_CONNECTED_BLOCKS : Localizes barcodes by searching for connected blocks. This algorithm usually gives best result and it is recommended to set ConnectedBlocks to the highest priority.
-	- LM_STATISTICS : Localizes barcodes by groups of contiguous black-white regions. This is optimized for QRCode and DataMatrix.
-	- LM_LINES : Localizes barcodes by searching for groups of lines. This is optimized for 1D and PDF417 barcodes.
-	- LM_SCAN_DIRECTLY : Localizes barcodes quickly. This mode is recommended in interactive scenario. Check [Arguments of LocalizationModes](#Arguments-of-LocalizationModes) for available argument settings.
-	- LM_STATISTICS_MARKS : Localizes barcodes by groups of marks.This is optimized for DPM codes.
-	- LM_STATISTICS_POSTAL_CODE : Localizes barcodes by groups of connected blocks and lines.This is optimized for postal codes.
-	- LM_CENTRE : Localizes barcodes from the centre of the image. Check [Arguments of LocalizationModes](#Arguments-of-LocalizationModes) for available argument settings.
-	- LM_REV : Reserved setting for localization mode.
-	- LM_SKIP : Skips localization.
+- LM_AUTO : Not supported yet.
+- LM_CONNECTED_BLOCKS : Localizes barcodes by searching for connected blocks. This algorithm usually gives best result and it is recommended to set ConnectedBlocks to the highest priority.
+- LM_STATISTICS : Localizes barcodes by groups of contiguous black-white regions. This is optimized for QRCode and DataMatrix.
+- LM_LINES : Localizes barcodes by searching for groups of lines. This is optimized for 1D and PDF417 barcodes.
+- LM_SCAN_DIRECTLY : Localizes barcodes quickly. This mode is recommended in interactive scenario. Check [Arguments of LocalizationModes](#Arguments-of-LocalizationModes) for available argument settings.
+- LM_STATISTICS_MARKS : Localizes barcodes by groups of marks.This is optimized for DPM codes.
+- LM_STATISTICS_POSTAL_CODE : Localizes barcodes by groups of connected blocks and lines.This is optimized for postal codes.
+- LM_CENTRE : Localizes barcodes from the centre of the image. Check [Arguments of LocalizationModes](#Arguments-of-LocalizationModes) for available argument settings.
+- LM_REV : Reserved setting for localization mode.
+- LM_SKIP : Skips localization.
 
 ##### EnumPDFReadingMode 
-Describes the PDF reading mode.
+	Describes the PDF reading mode.
 
-	- PDFRM_AUTO : Lets the library choose the reading mode automatically. 
-	- PDFRM_VECTOR : Detects barcode from vector data in PDF file. 
-	- PDFRM_RASTER : Converts the PDF file to image(s) first, then perform barcode recognition. 
-	- PDFRM_REV : Reserved setting for PDF reading mode. 
+- PDFRM_AUTO : Lets the library choose the reading mode automatically. 
+- PDFRM_VECTOR : Detects barcode from vector data in PDF file. 
+- PDFRM_RASTER : Converts the PDF file to image(s) first, then perform barcode recognition. 
+- PDFRM_REV : Reserved setting for PDF reading mode. 
 
 ##### EnumQRCodeErrorCorrectionLevel 
-Describes the QR Code error correction level.
+	Describes the QR Code error correction level.
 
-	- QRECL_ERROR_CORRECTION_H : Error Correction Level H (high)
-	- QRECL_ERROR_CORRECTION_L : Error Correction Level L (low)
-	- QRECL_ERROR_CORRECTION_M : Error Correction Level M (medium-low)
-	- QRECL_ERROR_CORRECTION_Q : Error Correction Level Q (medium-high)
+- QRECL_ERROR_CORRECTION_H : Error Correction Level H (high)
+- QRECL_ERROR_CORRECTION_L : Error Correction Level L (low)
+- QRECL_ERROR_CORRECTION_M : Error Correction Level M (medium-low)
+- QRECL_ERROR_CORRECTION_Q : Error Correction Level Q (medium-high)
 
 ##### EnumRegionPredetectionMode 
-Describes the region predetection mode.
+	Describes the region predetection mode.
 
-	- RPM_AUTO : Lets the library choose an algorithm automatically to detect region.
-	- RPM_GENERAL : Takes the whole image as a region.
-	- RPM_GENERAL_RGB_CONTRAST : Detects region using the general algorithm based on RGB colour contrast. Check [Arguments of RegionPredetectionModes](#Arguments-of-RegionPredetectionModes) for available argument settings.
-	- RPM_GENERAL_GRAY_CONTRAST : Detects region using the general algorithm based on gray contrast. Check [Arguments of RegionPredetectionModes](#Arguments-of-RegionPredetectionModes) for available argument settings.
-	- RPM_GENERAL_HSV_CONTRAST : Detects region using the general algorithm based on HSV colour contrast. Check [Arguments of RegionPredetectionModes](#Arguments-of-RegionPredetectionModes) for available argument settings.
-	- RPM_REV : Reserved setting for region predetection mode.
-	- RPM_SKIP : Skips region detection.
+- RPM_AUTO : Lets the library choose an algorithm automatically to detect region.
+- RPM_GENERAL : Takes the whole image as a region.
+- RPM_GENERAL_RGB_CONTRAST : Detects region using the general algorithm based on RGB colour contrast. Check [Arguments of RegionPredetectionModes](#Arguments-of-RegionPredetectionModes) for available argument settings.
+- RPM_GENERAL_GRAY_CONTRAST : Detects region using the general algorithm based on gray contrast. Check [Arguments of RegionPredetectionModes](#Arguments-of-RegionPredetectionModes) for available argument settings.
+- RPM_GENERAL_HSV_CONTRAST : Detects region using the general algorithm based on HSV colour contrast. Check [Arguments of RegionPredetectionModes](#Arguments-of-RegionPredetectionModes) for available argument settings.
+- RPM_REV : Reserved setting for region predetection mode.
+- RPM_SKIP : Skips region detection.
 
 ##### EnumResultCoordinateType 
-Describes the result coordinate type.
+	Describes the result coordinate type.
 
-	- RCT_PIXEL : Returns the coordinate in pixel value.
-	- RCT_PERCENTAGE : Returns the coordinate as a percentage.
+- RCT_PIXEL : Returns the coordinate in pixel value.
+- RCT_PERCENTAGE : Returns the coordinate as a percentage.
 
 ##### EnumResultType 
-Describes the extended result type.
+	Describes the extended result type.
 
-	- RT_STANDARD_TEXT : Specifies the standard text. This means the barcode value.
-	- RT_RAW_TEXT : Specifies the raw text. This means the text that includes start/stop characters, check digits, etc.
-	- RT_CANDIDATE_TEXT : Specifies all the candidate text. This means all the standard text results decoded from the barcode.
-	- RT_PARTIAL_TEXT : Specifies the partial text. This means part of the text result decoded from the barcode.
+- RT_STANDARD_TEXT : Specifies the standard text. This means the barcode value.
+- RT_RAW_TEXT : Specifies the raw text. This means the text that includes start/stop characters, check digits, etc.
+- RT_CANDIDATE_TEXT : Specifies all the candidate text. This means all the standard text results decoded from the barcode.
+- RT_PARTIAL_TEXT : Specifies the partial text. This means part of the text result decoded from the barcode.
 
 ##### EnumScaleUpMode 
-Describes the scale up mode.
+	Describes the scale up mode.
 
-	- SUM_AUTO : The library chooses an interpolation method automatically to scale up.
-	- SUM_LINEAR_INTERPOLATION : Scales up using the linear interpolation method. Check [Arguments of ScaleUpModes](#Arguments-of-ScaleUpModes) for available argument settings.
-	- SUM_NEAREST_NEIGHBOUR_INTERPOLATION : Scales up using the nearest-neighbour interpolation method. Check [Arguments of ScaleUpModes](#Arguments-of-ScaleUpModes) for available argument settings.
-	- SUM_REV : Reserved setting for scale up mode.
-	- SUM_SKIP : Skip the scale-up process.
+- SUM_AUTO : The library chooses an interpolation method automatically to scale up.
+- SUM_LINEAR_INTERPOLATION : Scales up using the linear interpolation method. Check [Arguments of ScaleUpModes](#Arguments-of-ScaleUpModes) for available argument settings.
+- SUM_NEAREST_NEIGHBOUR_INTERPOLATION : Scales up using the nearest-neighbour interpolation method. Check [Arguments of ScaleUpModes](#Arguments-of-ScaleUpModes) for available argument settings.
+- SUM_REV : Reserved setting for scale up mode.
+- SUM_SKIP : Skip the scale-up process.
 
 ##### EnumTerminatePhase 
-Describes the terminate phase.
+	Describes the terminate phase.
 
-	- TP_REGION_PREDETECTED : Exits the barcode reading algorithm after the region predetection is done.
-	- TP_IMAGE_PREPROCESSED : Exits the barcode reading algorithm after the region predetection and image pre-processing is done.
-	- TP_IMAGE_BINARIZED : Exits the barcode reading algorithm after the region predetection, image pre-processing, and image binarization are done.
-	- TP_BARCODE_LOCALIZED : Exits the barcode reading algorithm after the region predetection, image pre-processing, image binarization, and barcode localization are done.
-	- TP_BARCODE_TYPE_DETERMINED : Exits the barcode reading algorithm after the region predetection, image pre-processing, image binarization, barcode localization, and barcode type determining are done.
-	- TP_BARCODE_RECOGNIZED : Exits the barcode reading algorithm after the region predetection, image pre-processing, image binarization, barcode localization, barcode type determining, and barcode recognition are done.
+- TP_REGION_PREDETECTED : Exits the barcode reading algorithm after the region predetection is done.
+- TP_IMAGE_PREPROCESSED : Exits the barcode reading algorithm after the region predetection and image pre-processing is done.
+- TP_IMAGE_BINARIZED : Exits the barcode reading algorithm after the region predetection, image pre-processing, and image binarization are done.
+- TP_BARCODE_LOCALIZED : Exits the barcode reading algorithm after the region predetection, image pre-processing, image binarization, and barcode localization are done.
+- TP_BARCODE_TYPE_DETERMINED : Exits the barcode reading algorithm after the region predetection, image pre-processing, image binarization, barcode localization, and barcode type determining are done.
+- TP_BARCODE_RECOGNIZED : Exits the barcode reading algorithm after the region predetection, image pre-processing, image binarization, barcode localization, barcode type determining, and barcode recognition are done.
 
 ##### EnumTextAssistedCorrectionMode 
-Describes the text assisted correction mode.
+	Describes the text assisted correction mode.
 
-	- TACM_AUTO : Not supported yet.
-	- TACM_VERIFYING : Uses the accompanying text to verify the decoded barcode result. Check [Arguments of TextAssistedCorrectionMode](#Arguments-of-TextAssistedCorrectionMode) for available argument settings.
-	- TACM_VERIFYING_PATCHING : Uses the accompanying text to verify and patch the decoded barcode result. Check [Arguments of TextAssistedCorrectionMode](#Arguments-of-TextAssistedCorrectionMode) for available argument settings.
-	- TACM_REV : Reserved setting for text assisted correction mode.
-	- TACM_SKIP : Skips the text assisted correction.
+- TACM_AUTO : Not supported yet.
+- TACM_VERIFYING : Uses the accompanying text to verify the decoded barcode result. Check [Arguments of TextAssistedCorrectionMode](#Arguments-of-TextAssistedCorrectionMode) for available argument settings.
+- TACM_VERIFYING_PATCHING : Uses the accompanying text to verify and patch the decoded barcode result. Check [Arguments of TextAssistedCorrectionMode](#Arguments-of-TextAssistedCorrectionMode) for available argument settings.
+- TACM_REV : Reserved setting for text assisted correction mode.
+- TACM_SKIP : Skips the text assisted correction.
 
 ##### EnumTextFilterMode 
-Describes the text filter mode.
+	Describes the text filter mode.
 
-	- TFM_AUTO : Not supported yet.
-	- TFM_GENERAL_CONTOUR : Filters text using the general algorithm based on contour. Check [Arguments of TextFilterModes](#Arguments-of-TextFilterModes) for available argument settings.
-	- TFM_REV : Reserved setting for text filter mode.
-	- TFM_SKIP : Skips text filtering.
+- TFM_AUTO : Not supported yet.
+- TFM_GENERAL_CONTOUR : Filters text using the general algorithm based on contour. Check [Arguments of TextFilterModes](#Arguments-of-TextFilterModes) for available argument settings.
+- TFM_REV : Reserved setting for text filter mode.
+- TFM_SKIP : Skips text filtering.
 
 ##### EnumTextResultOrderMode 
 Describes the text result order mode.
@@ -441,12 +437,12 @@ Describes the text result order mode.
 	- TROM_SKIP : Skips the result ordering operation.
 
 ##### EnumTextureDetectionMode 
-Describes the texture detection mode.
+	Describes the texture detection mode.
 
-	- TDM_AUTO : Not supported yet.
-	- TDM_GENERAL_WIDTH_CONCENTRATION : Detects texture using the general algorithm. Check [Arguments of TextureDetectionModes](#Arguments-of-TextureDetectionModes) for available argument settings.
-	- TDM_REV : Reserved setting for texture detection mode. 
-	- TDM_SKIP : Skips texture detection.
+- TDM_AUTO : Not supported yet.
+- TDM_GENERAL_WIDTH_CONCENTRATION : Detects texture using the general algorithm. Check [Arguments of TextureDetectionModes](#Arguments-of-TextureDetectionModes) for available argument settings.
+- TDM_REV : Reserved setting for texture detection mode. 
+- TDM_SKIP : Skips texture detection.
 
 
 
@@ -475,259 +471,261 @@ Describes the texture detection mode.
 | [`IntermediateResult`](#IntermediateResult) | Stores the intermediate result. |
 
 ##### SamplingImageData 
-Stores the sampling image data.
+	Stores the sampling image data.
 
 *Attributes* :
 
-	- bytes  : The sampling image data in a byte array.
-	- width  : The width of the sampling image.
-	- height : The height of the sampling image.
+- bytes  : The sampling image data in a byte array.
+- width  : The width of the sampling image.
+- height : The height of the sampling image.
 
 
 ##### FrameDecodingParameters 
-Defines a class to configure the frame decoding Parameters.
+	Defines a class to configure the frame decoding Parameters.
 
 *Attributes* :
 
-	- max_queue_length              : The maximum number of frames waiting for decoding.
-	- max_result_queue_length       : The maximum number of frames waiting results (text result/localization result) will be kept for further reference.
-	- width                         : The width of the frame image in pixels.
-	- height                        : The height of the frame image in pixels.
-	- stride                        : The stride (or scan width) of the frame image.
-	- image_pixel_format            : The image pixel format used in the image byte array.
-	- region_top                    : The region definition of the frame to calculate the internal indicator.The top-most coordinate or percentage of the region.
-	- region_left                   : The region definition of the frame to calculate the internal indicator.The left-most coordinate or percentage of the region.
-	- region_right                  : The region definition of the frame to calculate the internal indicator.The right-most coordinate or percentage of the region.
-	- region_bottom                 : The region definition of the frame to calculate the internal indicator.The bottom-most coordinate or percentage of the region.
-	- region_measured_by_percentage : Sets whether or not to use percentage to measure the region size.
-	- threshold                     : The threshold used for filtering frames.
-	- fps                           : The frequency of calling AppendFrame() per second.
-	- auto_filter                   : Sets whether to filter frames automatically.
-	- clarity_calculation_method    : Sets the method used for calculating the clarity of the frames.
-	- clarity_filter_mode           : Sets the mode used for filtering frames by calculated clarity.
+- max_queue_length              : The maximum number of frames waiting for decoding.
+- max_result_queue_length       : The maximum number of frames waiting results (text result/localization result) will be kept for further reference.
+- width                         : The width of the frame image in pixels.
+- height                        : The height of the frame image in pixels.
+- stride                        : The stride (or scan width) of the frame image.
+- image_pixel_format            : The image pixel format used in the image byte array.
+- region_top                    : The region definition of the frame to calculate the internal indicator.The top-most coordinate or percentage of the region.
+- region_left                   : The region definition of the frame to calculate the internal indicator.The left-most coordinate or percentage of the region.
+- region_right                  : The region definition of the frame to calculate the internal indicator.The right-most coordinate or percentage of the region.
+- region_bottom                 : The region definition of the frame to calculate the internal indicator.The bottom-most coordinate or percentage of the region.
+- region_measured_by_percentage : Sets whether or not to use percentage to measure the region size.
+- threshold                     : The threshold used for filtering frames.
+- fps                           : The frequency of calling AppendFrame() per second.
+- auto_filter                   : Sets whether to filter frames automatically.
+- clarity_calculation_method    : Sets the method used for calculating the clarity of the frames.
+- clarity_filter_mode           : Sets the mode used for filtering frames by calculated clarity.
 
 
 ##### PublicRuntimeSetting 
-Defines a struct to configure the barcode reading runtime settings. These settings control the barcode recognition process such as which barcode types to decode.
+	Defines a struct to configure the barcode reading runtime settings. These settings control the barcode recognition process such as which barcode types to decode.
 
 *Attributes* :
 
-	- terminate_phase : Sets the phase to stop the barcode reading algorithm.
-	- timeout         : Sets the maximum amount of time (in milliseconds) that should be spent searching for a barcode per page. It does not include the time taken to load/decode an image (TIFF, PNG, etc.) from disk into memory.
-	- max_algorithm_thread_count : Sets the number of threads the image processing algorithm will use to decode barcodes.
-	- expected_barcodes_count    : Sets the number of barcodes expected to be detected for each image.
-	- barcode_format_ids         : Sets the formats of the barcode in BarcodeFormat group 1 to be read. Barcode formats in BarcodeFormat group 1 can be combined.
-	- barcode_format_ids_2       : Sets the formats of the barcode in BarcodeFormat group 2 to be read. Barcode formats in BarcodeFormat group 2 can be combined.
-	- pdf_raster_dpi             : Sets the output image resolution.
-	- scale_down_threshold       : Sets the threshold for the image shrinking.
-	- binarization_modes         : Sets the mode and priority for binarization.
-	- localization_modes         : Sets the mode and priority for localization algorithms.
-	- colour_clustering_modes    : Sets the mode and priority for colour categorization. Not supported yet.
-	- colour_conversion_modes    : Sets the mode and priority for converting a colour image to a grayscale image.
-	- grayscale_transformation_modes : Sets the mode and priority for the grayscale image conversion.
-	- region_predetection_modes      : Sets the region pre-detection mode for barcodes search.
-	- image_preprocessing_modes      : Sets the mode and priority for image preprocessing algorithms.
-	- texture_detection_modes        : Sets the mode and priority for texture detection.
-	- text_filter_modes              : Sets the mode and priority for text filter.
-	- dpm_code_reading_modes         : Sets the mode and priority for DPM code reading.
-	- deformation_resisting_modes    : Sets the mode and priority for deformation resisting.
-	- barcode_complement_modes       : Sets the mode and priority to complement the missing parts in the barcode.
-	- barcode_colour_modes           : Sets the mode and priority for the barcode colour mode used to process the barcode zone.
-	- accompanying_text_recognition_modes : Sets the mode and priority to recognize accompanying text.
-	- text_result_order_modes             : Sets the mode and priority for the order of the text results returned.
-	- scale_up_modes                      : Sets the mode and priority to control the sampling methods of scale-up for linear barcode with small module sizes.
-	- text_assisted_correction_mode       : Sets the mode of text assisted correction for barcode decoding. Not supported yet.
-	- intermediate_result_saving_mode     : Sets the mode for saving intermediate result.
-	- deblur_level                        : Sets the degree of blurriness of the barcode.
-	- intermediate_result_types           : Sets which types of intermediate result to be kept for further reference. Intermediate result types can be combined.
-	- result_coordinate_type              : Specifies the format for the coordinates returned.
-	- return_barcode_zone_clarity         : Sets whether or not to return the clarity of the barcode zone.
-	- region_top    : The top-most coordinate or percentage of the region.
-	- region_bottom : The bottom-most coordinate or percentage of the region.
-	- region_left   : The left-most coordinate or percentage of the region.
-	- region_right  : The right-most coordinate or percentage of the region.
-	- region_measured_by_percentage : Sets whether or not to use percentage to measure the region size.
-	- min_barcode_text_length       : Sets the range of barcode text length for barcodes search.
-	- min_result_confidence         : The minimum confidence of the result.
-	- pdf_reading_mode              : Sets the way to detect barcodes from a PDF file when using the DecodeFile method.
+- terminate_phase : Sets the phase to stop the barcode reading algorithm.
+- timeout         : Sets the maximum amount of time (in milliseconds) that should be spent searching for a barcode per page. It does not include the time taken to load/decode an image (TIFF, PNG, etc.) from disk into memory.
+- max_algorithm_thread_count : Sets the number of threads the image processing algorithm will use to decode barcodes.
+- expected_barcodes_count    : Sets the number of barcodes expected to be detected for each image.
+- barcode_format_ids         : Sets the formats of the barcode in BarcodeFormat group 1 to be read. Barcode formats in BarcodeFormat group 1 can be combined.
+- barcode_format_ids_2       : Sets the formats of the barcode in BarcodeFormat group 2 to be read. Barcode formats in BarcodeFormat group 2 can be combined.
+- pdf_raster_dpi             : Sets the output image resolution.
+- scale_down_threshold       : Sets the threshold for the image shrinking.
+- binarization_modes         : Sets the mode and priority for binarization.
+- localization_modes         : Sets the mode and priority for localization algorithms.
+- colour_clustering_modes    : Sets the mode and priority for colour categorization. Not supported yet.
+- colour_conversion_modes    : Sets the mode and priority for converting a colour image to a grayscale image.
+- grayscale_transformation_modes : Sets the mode and priority for the grayscale image conversion.
+- region_predetection_modes      : Sets the region pre-detection mode for barcodes search.
+- image_preprocessing_modes      : Sets the mode and priority for image preprocessing algorithms.
+- texture_detection_modes        : Sets the mode and priority for texture detection.
+- text_filter_modes              : Sets the mode and priority for text filter.
+- dpm_code_reading_modes         : Sets the mode and priority for DPM code reading.
+- deformation_resisting_modes    : Sets the mode and priority for deformation resisting.
+- barcode_complement_modes       : Sets the mode and priority to complement the missing parts in the barcode.
+- barcode_colour_modes           : Sets the mode and priority for the barcode colour mode used to process the barcode zone.
+- accompanying_text_recognition_modes : Sets the mode and priority to recognize accompanying text.
+- text_result_order_modes             : Sets the mode and priority for the order of the text results returned.
+- scale_up_modes                      : Sets the mode and priority to control the sampling methods of scale-up for linear barcode with small module sizes.
+- text_assisted_correction_mode       : Sets the mode of text assisted correction for barcode decoding. Not supported yet.
+- intermediate_result_saving_mode     : Sets the mode for saving intermediate result.
+- deblur_level                        : Sets the degree of blurriness of the barcode.
+- intermediate_result_types           : Sets which types of intermediate result to be kept for further reference. Intermediate result types can be combined.
+- result_coordinate_type              : Specifies the format for the coordinates returned.
+- return_barcode_zone_clarity         : Sets whether or not to return the clarity of the barcode zone.
+- region_top    : The top-most coordinate or percentage of the region.
+- region_bottom : The bottom-most coordinate or percentage of the region.
+- region_left   : The left-most coordinate or percentage of the region.
+- region_right  : The right-most coordinate or percentage of the region.
+- region_measured_by_percentage : Sets whether or not to use percentage to measure the region size.
+- min_barcode_text_length       : Sets the range of barcode text length for barcodes search.
+- min_result_confidence         : The minimum confidence of the result.
+- pdf_reading_mode              : Sets the way to detect barcodes from a PDF file when using the DecodeFile method.
 
 
 ##### OnedDetailedResult 
-Stores the OneD code details.
+	Stores the OneD code details.
 
 *Attributes* :
 
-	- module_size       : The barcode module size (the minimum bar width in pixel)
-	- start_chars_bytes : The start chars in a byte array
-	- stop_chars_bytes  : The stop chars in a byte array
-	- check_digit_bytes : The check digit chars in a byte array
-	- start_pattern_range : The position of the start pattern relative to the barcode location. Index 0 : X coordinate of the start position in percentage value; Index 1 : X coordinate of the end position in percentage value. 
-	- middle_pattern_range : The position of the middle pattern relative to the barcode location. Index 0 : X coordinate of the start position in percentage value; Index 1 : X coordinate of the end position in percentage value. 
-	- end_pattern_range : The position of the end pattern relative to the barcode location. Index 0 : X coordinate of the start position in percentage value; Index 1 : X coordinate of the end position in percentage value. 
+- module_size       : The barcode module size (the minimum bar width in pixel)
+- start_chars_bytes : The start chars in a byte array
+- stop_chars_bytes  : The stop chars in a byte array
+- check_digit_bytes : The check digit chars in a byte array
+- start_pattern_range : The position of the start pattern relative to the barcode location. Index 0 : X coordinate of the start position in percentage value; Index 1 : X coordinate of the end position in percentage value. 
+- middle_pattern_range : The position of the middle pattern relative to the barcode location. Index 0 : X coordinate of the start position in percentage value; Index 1 : X coordinate of the end position in percentage value. 
+- end_pattern_range : The position of the end pattern relative to the barcode location. Index 0 : X coordinate of the start position in percentage value; Index 1 : X coordinate of the end position in percentage value. 
 
 ##### QRCodeDetailedResult 
-Stores the QRCode details.
+	Stores the QRCode details.
 
 *Attributes* :
 
-	- module_size            : The barcode module size (the minimum bar width in pixel)
-	- rows                   : The row count of the barcode
-	- columns                : The column count of the barcode
-	- error_correction_level : The error correction level of the barcode
-	- versions               : The version of the QR Code
-	- model                  : Number of the models
+- module_size            : The barcode module size (the minimum bar width in pixel)
+- rows                   : The row count of the barcode
+- columns                : The column count of the barcode
+- error_correction_level : The error correction level of the barcode
+- versions               : The version of the QR Code
+- model                  : Number of the models
 
 
 #### DataMatrixDetailedResult 
-Stores the DataMatrix details.
+	Stores the DataMatrix details.
 
 *Attributes* :
 
-	- module_size         : The barcode module size (the minimum bar width in pixel)
-	- rows                : The row count of the barcode
-	- columns             : The column count of the barcode
-	- data_region_rows    : The data region row count of the barcode
-	- data_region_columns : The data region column count of the barcode
-	- data_region_number  : The data region count
+- module_size         : The barcode module size (the minimum bar width in pixel)
+- rows                : The row count of the barcode
+- columns             : The column count of the barcode
+- data_region_rows    : The data region row count of the barcode
+- data_region_columns : The data region column count of the barcode
+- data_region_number  : The data region count
 
 
 #### PDFDetailedResult 
-Stores the PDF details.
+	Stores the PDF details.
 
 *Attributes* :
 
-	- module_size            : The barcode module size (the minimum bar width in pixel)
-	- rows                   : The row count of the barcode
-	- columns                : The column count of the barcode
-	- error_correction_level : The error correction level of the barcode
+- module_size            : The barcode module size (the minimum bar width in pixel)
+- rows                   : The row count of the barcode
+- columns                : The column count of the barcode
+- error_correction_level : The error correction level of the barcode
 
 
 #### AztecDetailedResult 
-Stores the Aztec details.
+	Stores the Aztec details.
 
 *Attributes* :
 
-	- module_size  : The barcode module size (the minimum bar width in pixel)
-	- rows         : The row count of the barcode
-	- columns      : The column count of the barcode
-	- layer_number : A negative number (-1, -2, -3, -4) specifies a compact Aztec code. A positive number (1, 2, .. 32) specifies a normal (full-rang) Aztec code.
+- module_size  : The barcode module size (the minimum bar width in pixel)
+- rows         : The row count of the barcode
+- columns      : The column count of the barcode
+- layer_number : A negative number (-1, -2, -3, -4) specifies a compact Aztec code. A positive number (1, 2, .. 32) specifies a normal (full-rang) Aztec code.
 
 
 #### ExtendedResult 
-Stores the extended result.
+	Stores the extended result.
 
 *Attributes* :
 
-	- result_type             : Extended result type
-	- barcode_format          : Barcode type in BarcodeFormat group 1
-	- barcode_format_string   : Barcode type in BarcodeFormat group 1 as string
-	- barcode_format_2        : Barcode type in BarcodeFormat group 2
-	- barcode_format_string_2 : Barcode type in BarcodeFormat group 2 as string
-	- confidence              : The confidence of the result
-	- bytes                   : The content in a byte array
-	- accompanying_text_bytes : The accompanying text content in a byte array
-	- deformation             : The deformation value
-	- detailed_result         : One of the following: OnedDetailedResult, PDFDetailedResult, DataMatrixDetailedResult, AztecDetailedResult, QRCodeDetailedResult
-	- sampling_image          : The sampling image info
-	- clarity                 : The clarity of the barcode zone in percentage.
+- result_type             : Extended result type
+- barcode_format          : Barcode type in BarcodeFormat group 1
+- barcode_format_string   : Barcode type in BarcodeFormat group 1 as string
+- barcode_format_2        : Barcode type in BarcodeFormat group 2
+- barcode_format_string_2 : Barcode type in BarcodeFormat group 2 as string
+- confidence              : The confidence of the result
+- bytes                   : The content in a byte array
+- accompanying_text_bytes : The accompanying text content in a byte array
+- deformation             : The deformation value
+- detailed_result         : One of the following: OnedDetailedResult, PDFDetailedResult, DataMatrixDetailedResult, AztecDetailedResult, QRCodeDetailedResult
+- sampling_image          : The sampling image info
+- clarity                 : The clarity of the barcode zone in percentage.
 
 
 #### LocalizationResult 
-Stores the localization result.
+	Stores the localization result.
 
 *Attributes* :
 
-	- terminate_phase         : The terminate phase of localization result
-	- barcode_format          : Barcode type in BarcodeFormat group 1
-	- barcode_format_string   : Barcode type in BarcodeFormat group 1 as string
-	- barcode_format_2        : Barcode type in BarcodeFormat group 2
-	- barcode_format_string_2 : Barcode type in BarcodeFormat group 2 as string
-	- localization_points     : Extended result type
-	- result_type             : The 4 localization points
-	- angle                   : The angle of a barcode. Values range is from 0 to 360
-	- module_size             : The barcode module size (the minimum bar width in pixel)
-	- page_number             : The page number the barcode located in. The index is 0-based
-	- region_name             : The region name the barcode located in
-	- document_name           : The document name
-	- result_coordinate_type  : The coordinate type
-	- accompanying_text_bytes : The accompanying text content in a byte array
-	- confidence              : The confidence of the localization result
+- terminate_phase         : The terminate phase of localization result
+- barcode_format          : Barcode type in BarcodeFormat group 1
+- barcode_format_string   : Barcode type in BarcodeFormat group 1 as string
+- barcode_format_2        : Barcode type in BarcodeFormat group 2
+- barcode_format_string_2 : Barcode type in BarcodeFormat group 2 as string
+- localization_points     : Extended result type
+- result_type             : The 4 localization points
+- angle                   : The angle of a barcode. Values range is from 0 to 360
+- module_size             : The barcode module size (the minimum bar width in pixel)
+- page_number             : The page number the barcode located in. The index is 0-based
+- region_name             : The region name the barcode located in
+- document_name           : The document name
+- result_coordinate_type  : The coordinate type
+- accompanying_text_bytes : The accompanying text content in a byte array
+- confidence              : The confidence of the localization result
 
 
 #### TextResult 
-Stores the text result.
+	Stores the text result.
 
 *Attributes* :
 
-	- barcode_format          : Barcode type in BarcodeFormat group 1
-	- barcode_format_string   : Barcode type in BarcodeFormat group 1 as string
-	- barcode_format_2        : Barcode type in BarcodeFormat group 2
-	- barcode_format_string_2 : Barcode type in BarcodeFormat group 2 as string
-	- barcode_text            : The barcode text
-	- barcode_bytes           : The barcode content in a byte array
-	- localization_result     : The corresponding localization result
-	- detailed_result         : One of the following: OnedDetailedResult, PDFDetailedResult, DataMatrixDetailedResult, AztecDetailedResult, QRCodeDetailedResult
-	- extended_results        : The extended result list
+- barcode_format          : Barcode type in BarcodeFormat group 1
+- barcode_format_string   : Barcode type in BarcodeFormat group 1 as string
+- barcode_format_2        : Barcode type in BarcodeFormat group 2
+- barcode_format_string_2 : Barcode type in BarcodeFormat group 2 as string
+- barcode_text            : The barcode text
+- barcode_bytes           : The barcode content in a byte array
+- localization_result     : The corresponding localization result
+- detailed_result         : One of the following: OnedDetailedResult, PDFDetailedResult, DataMatrixDetailedResult, AztecDetailedResult, QRCodeDetailedResult
+- extended_results        : The extended result list
 
 
 #### Point 
-Stores an x- and y-coordinate pair in two-dimensional space.
+	Stores an x- and y-coordinate pair in two-dimensional space.
+
 *Attributes* :
 
-	- x : The X coordinate of the point
-	- y : The Y coordinate of the point
+- x : The X coordinate of the point
+- y : The Y coordinate of the point
 
 
 #### ImageData 
-Stores the image data.
+	Stores the image data.
+
 *Attributes* :
 
-	- bytes              : The image data content in a byte array
-	- width              : The width of the image in pixels
-	- height             : The height of the image in pixels
-	- stride             : The image data content in a byte array
-	- image_pixel_format : The image data content in a byte array
+- bytes              : The image data content in a byte array
+- width              : The width of the image in pixels
+- height             : The height of the image in pixels
+- stride             : The image data content in a byte array
+- image_pixel_format : The image data content in a byte array
 
 
 #### Contour 
-Stores the contour.
+	Stores the contour.
 
 *Attributes* :
 
-	- points : The points list
+- points : The points list
 
 
 #### LineSegment 
-Stores line segment data.
+	Stores line segment data.
 
 *Attributes* :
 
-	- start_point                   : The start point of the line segment
-	- end_point                     : The end point of the line segment
-	- lines_confidence_coefficients : The end point of the line segment
+- start_point                   : The start point of the line segment
+- end_point                     : The end point of the line segment
+- lines_confidence_coefficients : The end point of the line segment
 
 
 #### RegionOfInterest 
-Stores the region of interest.
+	Stores the region of interest.
 
 *Attributes* :
 
-	- roi_id : The ID generated by the SDK
-	- point  : The left top point of the region
-	- width  : The width of the region
-	- height : The height of the region
+- roi_id : The ID generated by the SDK
+- point  : The left top point of the region
+- width  : The width of the region
+- height : The height of the region
 
 #### Quadrilateral 
-Stores the quadrilateral.
+	Stores the quadrilateral.
 
 *Attributes* :
 
-	- points : Four vertexes in a clockwise direction of a quadrilateral. Index 0 represents the left-most vertex.
+- points : Four vertexes in a clockwise direction of a quadrilateral. Index 0 represents the left-most vertex.
 
 #### IntermediateResult 
-Stores the intermediate result.
+	Stores the intermediate result.
 
-- ***Attributes*** :
+***Attributes*** :
 
 	- data_type                     : The data type of the intermediate result
 	- results                       : One of the following types: List of class Contour, List of class ImageData, List of class LineSegment, List of class LocalizationResult, List of class RegionOfInterest, List of class Quadrilateral
