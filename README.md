@@ -38,7 +38,6 @@
 - **Raspberry Pi OS**
 
 ### Supported Python Versions
-- **Python3.5(Except Raspberry Pi OS)**
 
 - **Python3.6**
 
