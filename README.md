@@ -768,164 +768,164 @@ Describes the text result order mode.
 #### Main Class Interface
 - **BarcodeReader** : Defines a class that provides functions for decoding barcodes in images. This is the main interface for recognizing barcodes.
 
-- ***Attributes***:
+	- ***Attributes***:
 
-	- version     : The Dynamsoft Barcode Reader - Python Edition version
-	- dbr_version : The Dynamsoft Barcode Reader version
+		- version     : The Dynamsoft Barcode Reader - Python Edition version
+		- dbr_version : The Dynamsoft Barcode Reader version
 
-- ***Methods*** :
+	- ***Methods*** :
 
-	- get_error_string(error_code)
-		- @description Gets the detailed error message by error code
-		- @param  error_code   <int> : Error code
-		- @return error_string <str> : The detailed error message
+		- get_error_string(error_code)
+			- @description Gets the detailed error message by error code
+			- @param  error_code   <int> : Error code
+			- @return error_string <str> : The detailed error message
 
-	- init_license(dbr_license)
-		- @description Reads product key and activates the SDK.
-		- @param  dbr_license <str>   : The product keys
-		- @return error       <tuple> : error_code = error[0], error_message = error[1].
+		- init_license(dbr_license)
+			- @description Reads product key and activates the SDK.
+			- @param  dbr_license <str>   : The product keys
+			- @return error       <tuple> : error_code = error[0], error_message = error[1].
 
-	- init_license_from_server(license_server, license_key)
-		- @description Initializes barcode reader license and connects to the specified server for online verification.
-		- @param  license_server <str>   : The name/IP of the license server.
-		- @param  license_key    <str>   : The license key.
-		- @return error          <tuple> : error_code = error[0], error_message = error[1].
+		- init_license_from_server(license_server, license_key)
+			- @description Initializes barcode reader license and connects to the specified server for online verification.
+			- @param  license_server <str>   : The name/IP of the license server.
+			- @param  license_key    <str>   : The license key.
+			- @return error          <tuple> : error_code = error[0], error_message = error[1].
 
-	- init_license_from_license_content(license_key, license_content)
-		- @description Initializes barcode reader license from the license content on the client machine for offline verification.
-		- @param  license_key     <str>   : The license key.
-		- @param  license_content <str>   : An encrypted string representing the license content (quota, expiration date, barcode type, etc.) obtained from the method output_license_to_string().
-		- @return error           <tuple> : error_code = error[0], error_message = error[1].
+		- init_license_from_license_content(license_key, license_content)
+			- @description Initializes barcode reader license from the license content on the client machine for offline verification.
+			- @param  license_key     <str>   : The license key.
+			- @param  license_content <str>   : An encrypted string representing the license content (quota, expiration date, barcode type, etc.) obtained from the method output_license_to_string().
+			- @return error           <tuple> : error_code = error[0], error_message = error[1].
 
-	- output_license_to_string()
-		- @description Outputs the license content as an encrypted string from the license server to be used for offline license verification.
-		- @return license_string  <str> : An encrypted string which stores the content of license.
-		- @exception BarcodeReaderError
+		- output_license_to_string()
+			- @description Outputs the license content as an encrypted string from the license server to be used for offline license verification.
+			- @return license_string  <str> : An encrypted string which stores the content of license.
+			- @exception BarcodeReaderError
 
-	- get_runtime_settings()
-		- @description Gets current runtime settings.
-		- @return runtime_settings <class PublicRuntimeSetting> : The PublicRuntimeSetting object of current runtime settings.
+		- get_runtime_settings()
+			- @description Gets current runtime settings.
+			- @return runtime_settings <class PublicRuntimeSetting> : The PublicRuntimeSetting object of current runtime settings.
 
-	- update_runtime_settings(settings)
-		- @description Update runtime settings with a PublicRuntimeSetting object.
-		- @param settings <class PublicRuntimeSetting> : a PublicRuntimeSetting object.
-		- @exception BarcodeReaderError
+		- update_runtime_settings(settings)
+			- @description Update runtime settings with a PublicRuntimeSetting object.
+			- @param settings <class PublicRuntimeSetting> : a PublicRuntimeSetting object.
+			- @exception BarcodeReaderError
 
-	- reset_runtime_settings(settings)
-		- @description Resets all parameters to default values.
+		- reset_runtime_settings(settings)
+			- @description Resets all parameters to default values.
 
-	- set_mode_argument(modes_name, index, argument_name, argument_value)
-		- @description Sets the optional argument for a specified mode in Modes(Mode) parameters. Check [Mode Argument List](#Mode-Argument-List) for available argument settings.
-		- @param  modes_name     <str>   : The modes(mode) parameter name to set argument.
-		- @param  index          <int>   : The array index of modes parameter to indicate a specific mode.
-		- @param  argument_name  <str>   : The name of the argument to set.
-		- @param  argument_value <str>   : The value of the argument to set.
-		- @return error          <tuple> : error_code = error[0], error_message = error[1].
+		- set_mode_argument(modes_name, index, argument_name, argument_value)
+			- @description Sets the optional argument for a specified mode in Modes(Mode) parameters. Check [Mode Argument List](#Mode-Argument-List) for available argument settings.
+			- @param  modes_name     <str>   : The modes(mode) parameter name to set argument.
+			- @param  index          <int>   : The array index of modes parameter to indicate a specific mode.
+			- @param  argument_name  <str>   : The name of the argument to set.
+			- @param  argument_value <str>   : The value of the argument to set.
+			- @return error          <tuple> : error_code = error[0], error_message = error[1].
 
-	- get_mode_argument(modes_name, index, argument_name)
-		- @description Gets the optional argument for a specified mode in Modes(Mode) parameters.Check [Mode Argument List](#Mode-Argument-List) for available argument settings.
-		- @param  modes_name      <str> : The modes(mode) parameter name to get argument.
-		- @param  index           <int> : The array index of modes parameter to indicate a specific mode.
-		- @param  argument_name   <str> : The name of the argument to get.
-		- @return argument_value  <str> : The value of the argument to get.
-		- @exception BarcodeReaderError
+		- get_mode_argument(modes_name, index, argument_name)
+			- @description Gets the optional argument for a specified mode in Modes(Mode) parameters.Check [Mode Argument List](#Mode-Argument-List) for available argument settings.
+			- @param  modes_name      <str> : The modes(mode) parameter name to get argument.
+			- @param  index           <int> : The array index of modes parameter to indicate a specific mode.
+			- @param  argument_name   <str> : The name of the argument to get.
+			- @return argument_value  <str> : The value of the argument to get.
+			- @exception BarcodeReaderError
 
-	- init_runtime_settings_with_string(json_string, conflict_mode=EnumConflictMode.CM_OVERWRITE)
-		- @description Initializes runtime settings with the parameters obtained from a JSON string.
-		- @param  json_string     <str> : A JSON string that represents the content of the settings.
-		- @param  conflict_mode   <EnumConflictMode> : The parameter setting mode, which decides whether to inherit parameters from previous template setting or to overwrite previous settings with the new template.
-		- @return error           <tuple> : error_code = error[0], error_message = error[1].
+		- init_runtime_settings_with_string(json_string, conflict_mode=EnumConflictMode.CM_OVERWRITE)
+			- @description Initializes runtime settings with the parameters obtained from a JSON string.
+			- @param  json_string     <str> : A JSON string that represents the content of the settings.
+			- @param  conflict_mode   <EnumConflictMode> : The parameter setting mode, which decides whether to inherit parameters from previous template setting or to overwrite previous settings with the new template.
+			- @return error           <tuple> : error_code = error[0], error_message = error[1].
 
-	- init_runtime_settings_with_file(json_file, conflict_mode=EnumConflictMode.CM_OVERWRITE)
-		- @description Initializes runtime settings with the parameters obtained from a JSON file.
-		- @param json_file        <str> : A JSON template file.
-		- @param conflict_mode    <EnumConflictMode> : The parameter setting mode, which decides whether to inherit parameters from previous template setting or to overwrite previous settings with the new template.
-		- @return error           <tuple> : error_code = error[0], error_message = error[1].
+		- init_runtime_settings_with_file(json_file, conflict_mode=EnumConflictMode.CM_OVERWRITE)
+			- @description Initializes runtime settings with the parameters obtained from a JSON file.
+			- @param json_file        <str> : A JSON template file.
+			- @param conflict_mode    <EnumConflictMode> : The parameter setting mode, which decides whether to inherit parameters from previous template setting or to overwrite previous settings with the new template.
+			- @return error           <tuple> : error_code = error[0], error_message = error[1].
 
-	- append_template_string_to_runtime_settings(json_string, conflict_mode)
-		- @description Appends a new template string to the current runtime settings.
-		- @param json_string      <str> : A JSON string that represents the content of the settings.
-		- @param conflict_mode    <EnumConflictMode> : The parameter setting mode, which decides whether to inherit parameters from previous template setting or to overwrite previous settings with the new template.
-		- @return error           <tuple> : error_code = error[0], error_message = error[1].
+		- append_template_string_to_runtime_settings(json_string, conflict_mode)
+			- @description Appends a new template string to the current runtime settings.
+			- @param json_string      <str> : A JSON string that represents the content of the settings.
+			- @param conflict_mode    <EnumConflictMode> : The parameter setting mode, which decides whether to inherit parameters from previous template setting or to overwrite previous settings with the new template.
+			- @return error           <tuple> : error_code = error[0], error_message = error[1].
 
-	- append_template_file_to_runtime_settings(json_file, conflict_mode)
-		- @description Appends a new template file to the current runtime settings.
-		- @param json_file        <str> : A JSON template file.
-		- @param conflict_mode    <EnumConflictMode> : The parameter setting mode, which decides whether to inherit parameters from previous template setting or to overwrite previous settings with the new template.
-		- @return error           <tuple> : error_code = error[0], error_message = error[1].
+		- append_template_file_to_runtime_settings(json_file, conflict_mode)
+			- @description Appends a new template file to the current runtime settings.
+			- @param json_file        <str> : A JSON template file.
+			- @param conflict_mode    <EnumConflictMode> : The parameter setting mode, which decides whether to inherit parameters from previous template setting or to overwrite previous settings with the new template.
+			- @return error           <tuple> : error_code = error[0], error_message = error[1].
 
-	- output_settings_to_json_string()
-		- @description Outputs runtime settings to a json string.
-		- @return settings_string <str> : The output string which stores the contents of current settings.
+		- output_settings_to_json_string()
+			- @description Outputs runtime settings to a json string.
+			- @return settings_string <str> : The output string which stores the contents of current settings.
 
-	- output_settings_to_json_file(save_file_path)
-		- @description Outputs runtime settings and save them into a settings file (JSON file).
-		- @param save_file_path   <str> : The path of the output file which stores current settings.
-		- @return error           <tuple> : error_code = error[0], error_message = error[1].
+		- output_settings_to_json_file(save_file_path)
+			- @description Outputs runtime settings and save them into a settings file (JSON file).
+			- @param save_file_path   <str> : The path of the output file which stores current settings.
+			- @return error           <tuple> : error_code = error[0], error_message = error[1].
 
-	- get_all_template_names()
-		- @description Gets all parameter template names.
-		- @return template_names  <list[str]> : all parameter template names
+		- get_all_template_names()
+			- @description Gets all parameter template names.
+			- @return template_names  <list[str]> : all parameter template names
 
-	- decode_file(image_file_name, template_name="")
-		- @description Decodes barcodes in the specified image file.
-		- @param  image_file_name  <str> : A string defining the file name.
-		- @param  template_name    <str> : The template name.
-		- @return text_results     <list[class TextResult]> : All text results.
-		- @exception BarcodeReaderError
+		- decode_file(image_file_name, template_name="")
+			- @description Decodes barcodes in the specified image file.
+			- @param  image_file_name  <str> : A string defining the file name.
+			- @param  template_name    <str> : The template name.
+			- @return text_results     <list[class TextResult]> : All text results.
+			- @exception BarcodeReaderError
 
-	- decode_buffer(image, image_pixel_format=EnumImagePixelFormat.IPF_RGB_888, template_name="")
-		- @description Decodes barcodes from the memory buffer containing image pixels in defined format.
-		- @param image              <class numpy.ndarray> : The image which is processed by opencv.
-		- @param image_pixel_format <EnumImagePixelFormat> : The image pixel format used in the image byte array.
-		- @param template_name      <str> : The template name.
-		- @return text_results      <list[class TextResult]> : All text results.
-		- @exception BarcodeReaderError
+		- decode_buffer(image, image_pixel_format=EnumImagePixelFormat.IPF_RGB_888, template_name="")
+			- @description Decodes barcodes from the memory buffer containing image pixels in defined format.
+			- @param image              <class numpy.ndarray> : The image which is processed by opencv.
+			- @param image_pixel_format <EnumImagePixelFormat> : The image pixel format used in the image byte array.
+			- @param template_name      <str> : The template name.
+			- @return text_results      <list[class TextResult]> : All text results.
+			- @exception BarcodeReaderError
 
-	- decode_buffer_manually(self, buffer, width, height, stride, image_pixel_format, template_name="")
-		- @description Decodes barcodes from the memory buffer containing image pixels in defined format.
-		- @param buffer <bytes or bytearray> : The array of bytes which contain the image data.
-		- @param width  <int> : The width of the image in pixels.
-		- @param height <int> : The height of the image in pixels.
-		- @param stride <int> : The stride (or scan width) of the image.
-		- @param image_pixel_format <EnumImagePixelFormat> : The image pixel format used in the image byte array.
-		- @param template_name(optional) <str> : The template name.
-		- @return text_results <list[class TextResult]> : All text results.
-		- @exception BarcodeReaderError : If error happens, this function will throw a BarcodeReaderError exception that can report the detailed error message.
+		- decode_buffer_manually(self, buffer, width, height, stride, image_pixel_format, template_name="")
+			- @description Decodes barcodes from the memory buffer containing image pixels in defined format.
+			- @param buffer <bytes or bytearray> : The array of bytes which contain the image data.
+			- @param width  <int> : The width of the image in pixels.
+			- @param height <int> : The height of the image in pixels.
+			- @param stride <int> : The stride (or scan width) of the image.
+			- @param image_pixel_format <EnumImagePixelFormat> : The image pixel format used in the image byte array.
+			- @param template_name(optional) <str> : The template name.
+			- @return text_results <list[class TextResult]> : All text results.
+			- @exception BarcodeReaderError : If error happens, this function will throw a BarcodeReaderError exception that can report the detailed error message.
 
-	- decode_file_stream(file_stream, template_name="")
-		- @description Decodes barcodes from an image file in memory.
-		- @param file_stream <bytearray> : The image file bytes in memory.
-		- @return text_results     <list[class TextResult]> : All text results.
-		- @exception BarcodeReaderError
+		- decode_file_stream(file_stream, template_name="")
+			- @description Decodes barcodes from an image file in memory.
+			- @param file_stream <bytearray> : The image file bytes in memory.
+			- @return text_results     <list[class TextResult]> : All text results.
+			- @exception BarcodeReaderError
 
-	- get_all_intermediate_results()
-		- @description Returns intermediate results containing the original image, the colour clustered image, the binarized image, contours, lines, text blocks, etc.
-		- @return intermediate_results      <liset[class IntermediateResult]> : All intermediate results.
+		- get_all_intermediate_results()
+			- @description Returns intermediate results containing the original image, the colour clustered image, the binarized image, contours, lines, text blocks, etc.
+			- @return intermediate_results      <liset[class IntermediateResult]> : All intermediate results.
 
-	- init_frame_decoding_parameters()
-		- @description Init frame decoding parameters.
-		- @return frame_decoding_parameters <class FrameDecodingParameters> : The frame decoding parameters.
+		- init_frame_decoding_parameters()
+			- @description Init frame decoding parameters.
+			- @return frame_decoding_parameters <class FrameDecodingParameters> : The frame decoding parameters.
 
-	- start_video_mode(frame_decoding_parameters, call_back_func, template_name="")
-		- @description Starts a new thread to decode barcodes from the inner frame queue.
-		- @param frame_decoding_parameters <class FrameDecodingParameters> : The frame decoding parameters. You can get it by init_frame_decoding_parameters(), then modify its attributes value.
-		- @param call_back_func            <function pointer> : Sets callback function to process text results generated during frame decoding.
-		- @param template_name             <str> : The template name.
-		- @exception BarcodeReaderError
+		- start_video_mode(frame_decoding_parameters, call_back_func, template_name="")
+			- @description Starts a new thread to decode barcodes from the inner frame queue.
+			- @param frame_decoding_parameters <class FrameDecodingParameters> : The frame decoding parameters. You can get it by init_frame_decoding_parameters(), then modify its attributes value.
+			- @param call_back_func            <function pointer> : Sets callback function to process text results generated during frame decoding.
+			- @param template_name             <str> : The template name.
+			- @exception BarcodeReaderError
 
-	- append_video_frame(video_frame)
-		- @description Appends a video frame to the inner frame queue.
-		- @param video_frame : Gets by opencv.
-		- @return frame_id <int> : Current frame id.
+		- append_video_frame(video_frame)
+			- @description Appends a video frame to the inner frame queue.
+			- @param video_frame : Gets by opencv.
+			- @return frame_id <int> : Current frame id.
 
-	- stop_video_mode()
-		- @description Stops the frame decoding thread created by start_video_mode().
-		- @exception BarcodeReaderError
+		- stop_video_mode()
+			- @description Stops the frame decoding thread created by start_video_mode().
+			- @exception BarcodeReaderError
 
-	- get_length_of_frame_queue()
-		- @description Gets current length of the inner frame queue.
-		- @return frame_queue_length <int> : The length of the inner frame queue.
+		- get_length_of_frame_queue()
+			- @description Gets current length of the inner frame queue.
+			- @return frame_queue_length <int> : The length of the inner frame queue.
 
 
 ### Appendix
