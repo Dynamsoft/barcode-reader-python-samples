@@ -34,7 +34,7 @@
 
 - **Linux(x64, ARM32, ARM64)**
 
-- **macOS**
+- **macOS (10.15+)**
 
 ### Supported Python Versions
 
