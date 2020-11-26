@@ -1,0 +1,61 @@
+import os
+import sys
+import json
+from typing import List
+from dbr import *
+
+# you can change the following variables' value to your own value.
+license_key = "Input your own license"
+#license_server = "Input the name/IP of the license server"
+json_file = r"Please input your own template path"
+image = r"Please input your own image path"
+
+reader = BarcodeReader()
+
+# Apply for a trial license: https://www.dynamsoft.com/CustomerPortal/Portal/Triallicense.aspx
+reader.init_license(license_key)
+
+#reader.init_license_from_server(license_server, license_key)
+#license_content = reader.output_license_to_string()
+#reader.init_license_from_license_content(license_key, license_content)
+
+settings = reader.get_runtime_settings()
+settings.intermediate_result_types = EnumIntermediateResultType.IRT_ORIGINAL_IMAGE | EnumIntermediateResultType.IRT_CONTOUR | EnumIntermediateResultType.IRT_BINARIZED_IMAGE
+settings.intermediate_result_saving_mode = EnumIntermediateResultSavingMode.IRSM_MEMORY
+error = reader.update_runtime_settings(settings)
+if error[0] != EnumErrorCode.DBR_OK:
+    print(error[1])
+
+try:
+    text_results = reader.decode_file(image)
+
+    # if your python version is equal to or higher than python3.6, you can use the following code to replace the above code
+    #   text_results:List[TextResult] = reader.decode_file(image)
+
+    if text_results != None:
+        for text_result in text_results:
+            print("Barcode Format :")
+            print(text_result.barcode_format_string)
+            print("Barcode Text :")
+            print(text_result.barcode_text)
+            print("Localization Points : ")
+            print(text_result.localization_result.localization_points)
+            print("-------------")
+
+    intermediate_results = reader.get_all_intermediate_results()
+
+    text_results_2 = reader.decode_intermediate_results(intermediate_results)
+    if text_results_2 != None:
+        for text_result_2 in text_results_2:
+            print("Barcode Format :")
+            print(text_result_2.barcode_format_string)
+            print("Barcode Text :")
+            print(text_result_2.barcode_text)
+            print("Localization Points : ")
+            print(text_result_2.localization_result.localization_points)
+            print("-------------")
+
+except BarcodeReaderError as bre:
+    print(bre)
+
+
