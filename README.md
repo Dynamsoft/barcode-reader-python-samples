@@ -48,7 +48,7 @@
 
 ### License
 
-Apply for a trial license: https://www.dynamsoft.com/CustomerPortal/Portal/Triallicense.aspx
+Apply for a trial license: https://www.dynamsoft.com/customer/license/trialLicense
 
 ### Supported Symbologies
 *We support all major barcodes symbologies across a variety of industries such as government, finance, retail, warehouse inventory, and healthcare.*
