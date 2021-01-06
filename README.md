@@ -25,7 +25,7 @@
 - [Contact Us](#contact-us)
 
 ### Version
-- **8.0**
+- **8.0.1**
 
 ### Supported Platforms
 - **Windows x64**
