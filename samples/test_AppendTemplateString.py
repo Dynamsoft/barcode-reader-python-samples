@@ -23,7 +23,7 @@ reader.init_license(license_key)
 # connection_paras.deployment_type = EnumDMDeploymentType.DM_DT_DESKTOP
 # connection_paras.uuid_generation_method = EnumDMUUIDGenerationMethod.DM_UUIDGM_RANDOM
 # try:
-#     error = BarcodeReader.init_licesne_from_lts(connection_paras)
+#     error = BarcodeReader.init_license_from_lts(connection_paras)
 #     if error[0] != EnumErrorCode.DBR_OK:
 #         print(error[1])
 # except BarcodeReaderError as bre:
