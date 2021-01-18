@@ -153,14 +153,16 @@ def decode_file(path):
             for text_result in text_results:
                 print("-------------")
                 print('Barcode {0}'.format(i))
-                print("Barcode Format :")
+                print("Barcode Format : ")
                 print(text_result.barcode_format_string)
-                print("Barcode Text :")
+                print("Barcode Text : ")
                 print(text_result.barcode_text)
-                print("Barcode Bytes :")
+                print("Barcode Bytes : ")
                 print(text_result.barcode_bytes)
                 print("Localization Points : ")
                 print(text_result.localization_result.localization_points)
+                print("Exception : ")
+                print(text_result.exception)
                 print("-------------")
                 i = i + 1
         else:

@@ -40,12 +40,14 @@ try:
 
     if text_results != None:
         for text_result in text_results:
-            print("Barcode Format :")
+            print("Barcode Format : ")
             print(text_result.barcode_format_string)
-            print("Barcode Text :")
+            print("Barcode Text : ")
             print(text_result.barcode_text)
             print("Localization Points : ")
             print(text_result.localization_result.localization_points)
+            print("Exception : ")
+            print(text_result.exception)
             print("-------------")
 except BarcodeReaderError as bre:
     print(bre)
