@@ -69,6 +69,7 @@ Apply for a trial license: https://www.dynamsoft.com/customer/license/trialLicen
 	- UPC-A
 	- UPC-E
 	- Industrial 2 of 5
+    - MSI Code
 - **2D Barcodes** :
 	- QR Code *(including Micro QR Code)*
 	- Data Matrix
