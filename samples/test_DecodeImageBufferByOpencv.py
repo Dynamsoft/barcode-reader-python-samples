@@ -38,17 +38,24 @@ if error[0] != EnumErrorCode.DBR_OK:
 
 try:
     text_results = reader.decode_buffer(image)
+    # buffer = image.tobytes()
+    # height = image.shape[0]
+    # width = image.shape[1]
+    # stride = image.strides[0]
+    # text_results = reader.decode_buffer_manually(buffer, width, height, stride, EnumImagePixelFormat.IPF_RGB_888, "")
 # if your python version is equal to or higher than python3.6, you can use the following code to replace the above code
     # text_results:List[TextResult] = reader.decode_buffer(image)
 
     if text_results != None:
         for text_result in text_results:
-            print("Barcode Format :")
+            print("Barcode Format : ")
             print(text_result.barcode_format_string)
-            print("Barcode Text :")
+            print("Barcode Text : ")
             print(text_result.barcode_text)
             print("Localization Points : ")
             print(text_result.localization_result.localization_points)
+            print("Exception : ")
+            print(text_result.exception)
             print("-------------")
 except BarcodeReaderError as bre:
     print(bre)

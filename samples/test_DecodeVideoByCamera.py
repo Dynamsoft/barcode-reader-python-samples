@@ -10,12 +10,68 @@ json_file = r"Please input your own template path"
 
 reader = BarcodeReader()
 
-results = None
 
-# The callback function for receiving barcode results
-def on_barcode_result(data):
-    global results
-    results = data
+def intermediate_results_callback_func(frame_id, i_results, user_data):
+        print(frame_id)
+        for result in i_results:
+            intermediate_result = IntermediateResult(result)
+            print('Intermediate Result data type : {0}'.format(intermediate_result.result_type))
+            print('Intermediate Result data : {0}'.format(intermediate_result.results))
+            print("-------------")
+## Or you can inherit the abstract class IntermediateResultCallBack to implement the abstract method intermediate_results_callback_func.
+# class SubIntermediateResultCallBack(IntermediateResultCallBack):
+#     @staticmethod
+#     def intermediate_results_callback_func(frame_id, i_results, user_data):
+#         print(frame_id)
+#         for result in i_results:
+#             intermediate_result = IntermediateResult(result)
+#             print('Intermediate Result data type : {0}'.format(intermediate_result.result_type))
+#             print('Intermediate Result data : {0}'.format(intermediate_result.results))
+#             print("-------------")
+
+
+def text_results_callback_func(frame_id, t_results, user_data):
+        print(frame_id)
+        for result in t_results:
+            text_result = TextResult(result)
+            print("Barcode Format : ")
+            print(text_result.barcode_format_string)
+            print("Barcode Text : ")
+            print(text_result.barcode_text)
+            print("Localization Points : ")
+            print(text_result.localization_result.localization_points)
+            print("Exception : ")
+            print(text_result.exception)
+            print("-------------")
+## Or you can inherit the abstract class TextResultResultCallBack to implement the abstract method text_results_callback_func.
+# class SubTextResultResultCallBack(TextResultResultCallBack):
+#     @staticmethod
+#     def text_results_callback_func(frame_id, t_results, user_data):
+#         print(frame_id)
+#         for result in t_results:
+#             text_result = TextResult(result)
+#             print("Barcode Format : ")
+#             print(text_result.barcode_format_string)
+#             print("Barcode Text : ")
+#             print(text_result.barcode_text)
+#             print("Localization Points : ")
+#             print(text_result.localization_result.localization_points)
+#             print("Exception : ")
+#             print(text_result.exception)
+#             print("-------------")
+
+
+def error_callback_func(frame_id, error_code, user_data):
+        print(frame_id)
+        error_msg = user_data.get_error_string(error_code)
+        print('Error : {0} ; {1}'.format(error_code, error_msg))
+## Or you can inherit the abstract class ErrorCallBack to implement the abstract method error_callback_func.
+# class SubErrorCallBack(ErrorCallBack):
+#     @staticmethod
+#     def error_callback_func(frame_id, error_code, user_data):
+#         print(frame_id)
+#         error_msg = user_data.get_error_string(error_code)
+#         print('Error : {0} ; {1}'.format(error_code, error_msg))
 
 def get_time():
     localtime = time.localtime()
@@ -23,7 +79,6 @@ def get_time():
     return capturetime
 
 def read_barcode():
-    global results
     video_width = 0
     video_height = 0
     
@@ -59,31 +114,13 @@ def read_barcode():
     parameters.fps = 0
     parameters.auto_filter = 1
 
-    reader.start_video_mode(parameters, on_barcode_result)
+    reader.start_video_mode(parameters, text_results_callback_func)
+    # reader.start_video_mode(parameters, SubTextResultResultCallBack.text_results_callback_func)
+    ## You can use three callbacks at the same time.
+    # reader.start_video_mode(parameters, text_results_callback_func, "", intermediate_results_callback_func, error_callback_func, reader)
+    # reader.start_video_mode(parameters, SubTextResultResultCallBack.text_results_callback_func, "", SubIntermediateResultCallBack.intermediate_results_callback_func, SubErrorCallBack.error_callback_func, reader)
 
     while True:
-        if results != None:
-            thickness = 2
-            color = (0,255,0)
-            for result in results:
-                text_result = TextResult(result)
-                print("Barcode Format :")
-                print(text_result.barcode_format_string)
-                print("Barcode Text :")
-                print(text_result.barcode_text)
-                print("Localization Points : ")
-                print(text_result.localization_result.localization_points)
-                print("-------------")
-
-                points = text_result.localization_result.localization_points
-
-                cv2.line(frame, points[0], points[1], color, thickness)
-                cv2.line(frame, points[1], points[2], color, thickness)
-                cv2.line(frame, points[2], points[3], color, thickness)
-                cv2.line(frame, points[3], points[0], color, thickness)
-                cv2.putText(frame, text_result.barcode_text, points[0], cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,255))
-            results = None
-
         cv2.imshow(windowName, frame)
         rval, frame = vc.read()
         if rval == False:
