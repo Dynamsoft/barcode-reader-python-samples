@@ -30,7 +30,7 @@
 
 ### Version
 
-- **8.1**
+- **8.1.2**
 
 ### Supported Platforms
 - **Windows x64**
@@ -46,6 +46,8 @@
 - **Python3.7**
 
 - **Python3.8**
+
+- **Python3.9**
 
 ### Installation
 
