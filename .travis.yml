@@ -1,0 +1,96 @@
+language: python
+
+jobs:
+  include:
+    - name: "Python 3.6.0 on AMD64 Linux"
+      python: 3.6
+      os: linux
+      arch: amd64
+    - name: "Python 3.7.0 on AMD64 Linux"
+      python: 3.7 
+      os: linux
+      arch: amd64
+    - name: "Python 3.8.0 on AMD64 Linux"
+      python: 3.8 
+      os: linux
+      arch: amd64
+    - name: "Python 3.9.0 on AMD64 Linux"
+      python: 3.9  
+      os: linux
+      arch: amd64
+    - name: "Python 3.6.0 on ARM64 Linux"
+      python: 3.6
+      os: linux
+      arch: arm64
+    - name: "Python 3.7.0 on ARM64 Linux"
+      python: 3.7 
+      os: linux
+      arch: arm64
+    - name: "Python 3.8.0 on ARM64 Linux"
+      python: 3.8 
+      os: linux
+      arch: arm64
+    - name: "Python 3.9.0 on ARM64 Linux"
+      python: 3.9    
+      os: linux
+      arch: arm64  
+    - name: "Python 3.7 on macOS"
+      os: osx
+      osx_image: xcode11.4 
+      language: shell    
+      before_install:
+        - python3 --version  
+    - name: "Python 3.8 on macOS"
+      os: osx
+      osx_image: xcode11.6 
+      language: shell    
+      before_install:
+        - python3 --version
+    - name: "Python 3.9 on macOS"
+      os: osx
+      osx_image: xcode12.2 
+      language: shell  
+      before_install:
+        - python3 --version    
+    - name: "Python 3.6.0 on Windows"
+      os: windows           
+      language: shell       
+      before_install:
+        - choco install python --version 3.6.0
+        - python -m pip install --upgrade pip
+      env: PATH=/c/Python36:/c/Python36/Scripts:$PATH
+    - name: "Python 3.7.0 on Windows"
+      os: windows           
+      language: shell       
+      before_install:
+        - choco install python --version 3.7.0
+        - python -m pip install --upgrade pip
+      env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
+    - name: "Python 3.8.0 on Windows"
+      os: windows           
+      language: shell       
+      before_install:
+        - choco install python --version 3.8.0
+        - python -m pip install --upgrade pip
+      env: PATH=/c/Python38:/c/Python38/Scripts:$PATH
+    - name: "Python 3.9.0 on Windows"
+      os: windows           
+      language: shell       
+      before_install:
+        - choco install python --version 3.9.0
+        - python -m pip install --upgrade pip
+      env: PATH=/c/Python39:/c/Python39/Scripts:$PATH
+
+install:
+    - if [[ ${TRAVIS_OS_NAME} == "windows" ]]; then
+        pip install dbr opencv-python-headless;
+      else
+        pip3 install dbr opencv-python;
+      fi
+
+branches:
+  only:
+    - master
+
+script:
+    - python3 -c "from dbr import *; print(dir(dbr))" || python -c "from dbr import *; print(dir(dbr))"
