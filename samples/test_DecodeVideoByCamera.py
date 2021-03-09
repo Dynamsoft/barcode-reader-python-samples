@@ -142,7 +142,7 @@ def read_barcode():
 
 print("-------------------start------------------------")
 
-# Apply for a trial license: https://www.dynamsoft.com/customer/license/trialLicense
+# Apply for a trial license: https://www.dynamsoft.com/customer/license/trialLicense?product=dbr&utm_source=github
 reader.init_license(license_key)
 
 ## The code snippet below shows how to use the full license in DBR 8.x:
