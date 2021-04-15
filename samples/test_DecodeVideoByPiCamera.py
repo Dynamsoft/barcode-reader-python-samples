@@ -109,9 +109,9 @@ def read_barcode():
     stride = 0
     stream = io.BytesIO()
     camera.capture(stream, format='jpeg')
-    # 从流构建numpy
+    # create numpy by stream
     data = np.frombuffer(stream.getvalue(), dtype=np.uint8)
-    # 通过opencv解码numpy
+    # decode numpy by opencv
     image = cv2.imdecode(data, 1)
     stride = image.strides[0]
     print(stride)
@@ -152,6 +152,7 @@ def read_barcode():
         
         # 'ESC' for quit
         key = cv2.waitKey(1)
+        # reset
         rawCapture.truncate(0)
         if key == 27:
             break
