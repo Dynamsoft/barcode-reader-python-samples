@@ -1,18 +1,18 @@
-import sys
 import os
+import sys
 import time
-from os import listdir
-from os.path import isfile,join
+import io
+import numpy as np
+from picamera import PiCamera
+from picamera.array import PiRGBArray
 from dbr import *
 import cv2
 
 # you can change the following variables' value to your own value.
 license_key = "Input your own license"
 json_file = r"Please input your own template path"
-batch_folder_path = r"Please input your own video folder path"
 
 reader = BarcodeReader()
-
 
 def intermediate_results_callback_func(frame_id, i_results, user_data):
         print(frame_id)
@@ -82,23 +82,40 @@ def get_time():
     capturetime = time.strftime("%Y%m%d%H%M%S", localtime)
     return capturetime
 
-
-def read_barcode(video_path):
+def read_barcode():
     video_width = 0
     video_height = 0
+    
+    # vc = cv2.VideoCapture(0)
+    camera = PiCamera()
+    camera.resolution = (1024, 1024) # Set image's width and height
 
-    vc = cv2.VideoCapture(video_path)
-    video_width  = vc.get(cv2.CAP_PROP_FRAME_WIDTH)
-    video_height = vc.get(cv2.CAP_PROP_FRAME_HEIGHT)
-    vc.set(3, video_width) #set width
-    vc.set(4, video_height) #set height
+    # SetPiCameraParameters(camera):
+    #     camera.saturation = 80 # Video or Image saturation
+    #     camera.brightness = 50 # Video or Image brightness
+    #     camera.shutter_speed = 6000000 # The shutter speed
+    #     camera.iso = 800 # ISO
+    #     camera.sharpness = 0 # Image Sharpness
+    #     camera.hflip = True # Whether to flip horizontally
+    #     camera.vflip = True # Whether to flip vertically
+    #     camera.rotation = 0 # Whether to rotate image
+    #     camera.resolution = (280, 160) # Set image's width and height
+
+
+    video_width = camera.resolution[0]
+    video_height = camera.resolution[1]
+    print(camera.resolution)
 
     stride = 0
-    if vc.isOpened():
-        rval, frame = vc.read()
-        stride = frame.strides[0]
-    else:
-        return
+    stream = io.BytesIO()
+    camera.capture(stream, format='jpeg')
+    # create numpy by stream
+    data = np.frombuffer(stream.getvalue(), dtype=np.uint8)
+    # decode numpy by opencv
+    image = cv2.imdecode(data, 1)
+    stride = image.strides[0]
+    print(stride)
+    rawCapture = PiRGBArray(camera, size=(video_width, video_height))
 
     windowName = "Barcode Reader"
 
@@ -120,24 +137,23 @@ def read_barcode(video_path):
     parameters.auto_filter = 1
 
     reader.start_video_mode(parameters, text_results_callback_func)
-    ## You can use three callbacks at the same time.
     # reader.start_video_mode(parameters, SubTextResultResultCallBack.text_results_callback_func)
+    ## You can use three callbacks at the same time.
     # reader.start_video_mode(parameters, text_results_callback_func, "", intermediate_results_callback_func, error_callback_func, reader)
     # reader.start_video_mode(parameters, SubTextResultResultCallBack.text_results_callback_func, "", SubIntermediateResultCallBack.intermediate_results_callback_func, SubErrorCallBack.error_callback_func, reader)
 
-    while True:
-        cv2.imshow(windowName, frame)
-        rval, frame = vc.read()
-        if rval == False:
-            break
-        
+    for frame in camera.capture_continuous(rawCapture, format='bgr', use_video_port=True):
+        image = frame.array
+
         try:
-            ret = reader.append_video_frame(frame)
+            ret = reader.append_video_frame(image)
         except:
             pass
         
         # 'ESC' for quit
         key = cv2.waitKey(1)
+        # reset
+        rawCapture.truncate(0)
         if key == 27:
             break
 
@@ -168,11 +184,5 @@ error = reader.init_runtime_settings_with_file(json_file)
 if error[0] != EnumErrorCode.DBR_OK:
     print(error[1])
 
-# list out all file in folder
-batch_folder = batch_folder_path
-only_files = [f for f in listdir(batch_folder) if isfile(join(batch_folder, f))]
-for item in only_files:
-    file_name = batch_folder+"\\"+item
-    print ('processing',str(file_name))
-    read_barcode(file_name)
+read_barcode()
 print("-------------------over------------------------")
