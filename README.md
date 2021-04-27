@@ -5,6 +5,9 @@
 
 ![Dynamsoft](https://dynamsoft.github.io/styleguide/assets/img-icon/logo-dynamsoft-whiteBg-190x47.png "Dynamsoft")  | ![dbr](https://dynamsoft.github.io/styleguide/assets/img-icon/logo-dbr-88x88.png "dbr")
 
+## What You Should Know
+- [![](https://img.shields.io/badge/Download-Offline%20SDK-orange)](https://www.dynamsoft.com/barcode-reader/downloads)
+- [![](https://img.shields.io/badge/Get-30--day%20FREE%20Trial%20License-blue)](https://www.dynamsoft.com/customer/license/trialLicense/?product=dbr)
 
 **[Dynamsoft's Barcode Reader SDK](https://www.dynamsoft.com/barcode-reader/overview/?utm_source=github) enables you to efficiently embed barcode reading functionality in your web, desktop or mobile application using just a few lines of code. Saving you months of added development time and resources, our SDK can create high-speed and reliable barcode scanner software applications to meet your business needs.**
 
@@ -17,7 +20,6 @@
 - [Supported Python Version](#supported-python-version)
 - [Supported Platforms](#supported-platforms)
 - [Installation](#installation)
-- [License](#license)
 - [Supported Symbologies](#supported-symbologies)
 - [Release Notes](#release-notes)
 - [Interfaces](#interfaces)
@@ -53,9 +55,6 @@
 
 >**pip install dbr** or **pip3 install dbr**
 
-### License
-
-Apply for a trial license: https://www.dynamsoft.com/customer/license/trialLicense?product=dbr&utm_source=github
 
 ### Supported Symbologies
 *We support all major barcodes symbologies across a variety of industries such as government, finance, retail, warehouse inventory, and healthcare.*
