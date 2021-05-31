@@ -159,6 +159,7 @@ def read_barcode():
 
     reader.stop_video_mode()
     cv2.destroyWindow(windowName)
+    camera.close()
 
 
 print("-------------------start------------------------")
