@@ -32,7 +32,7 @@
 
 ### Version
 
-- **8.2**
+- **8.4**
 
 ### Supported Platforms
 - **Windows x64**
