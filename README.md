@@ -3,7 +3,7 @@
 [![Supported Python versions](https://img.shields.io/badge/python-3.6%20%7C%203.7%20%7C%203.8%20%7C%203.9-blue)](https://www.python.org/downloads/)
 [![PyPI downloads](https://img.shields.io/pypi/dm/dbr)](https://pypistats.org/packages/dbr)
 
-![Dynamsoft](https://dynamsoft.github.io/styleguide/assets/img-icon/logo-dynamsoft-whiteBg-190x47.png "Dynamsoft")  | ![dbr](https://dynamsoft.github.io/styleguide/assets/img-icon/logo-dbr-88x88.png "dbr")
+![Dynamsoft](https://dynamsoft.github.io/styleguide/assets/images/icons/dynamsoft_logos/dynamsoft_logo_original.png "Dynamsoft")  | ![dbr](https://dynamsoft.github.io/styleguide/assets/images/icons/product-logo-SVG/dbr.svg "dbr")
 
 
 ## What You Should Know
@@ -33,7 +33,7 @@
 
 ### Version
 
-- **8.4**
+- **8.6**
 
 ### Supported Platforms
 - **Windows x64**
