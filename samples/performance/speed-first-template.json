@@ -1,0 +1,32 @@
+{
+   "ImageParameter" : {
+      "BarcodeFormatIds" : [ "BF_EAN_13" ],
+      "BarcodeFormatIds_2" : null,
+      "BinarizationModes" : [
+         {
+            "Mode" : "BM_LOCAL_BLOCK",
+            "EnableFillBinaryVacancy" : 0
+         }
+      ],
+      "DeblurModes" : [
+         {
+            "Mode" : "DM_BASED_ON_LOC_BIN"
+         },
+         {
+            "Mode" : "DM_THRESHOLD_BINARIZATION"
+         }
+      ],
+      "ExpectedBarcodesCount" : 1,
+      "LocalizationModes" : [
+         {
+            "Mode" : "LM_SCAN_DIRECTLY",
+            "ScanDirection" : 0,
+            "ScanStride" : 0
+         }
+      ],
+      "Name" : "tpl_sfs",
+      "ScaleDownThreshold" : 1200,
+      "Timeout" : 100
+   },
+   "Version" : "3.0"
+}
