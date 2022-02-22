@@ -25,7 +25,7 @@ def choose_number() -> int:
 if __name__ == "__main__":
     try:
         # 1.Initialize license.
-        # The organization id 200001 here will grant you a public trial license good for 7 days. Note that network connection is required for this license to work.
+        # The organization id 200001 here will grant you a free public trial license. Note that network connection is required for this license to work.
         # If you want to use an offline license, please contact Dynamsoft Support: https://www.dynamsoft.com/company/contact/
         # You can also request a 30-day trial license in the customer portal: https://www.dynamsoft.com/customer/license/trialLicense?product=dbr&utm_source=samples&package=python
         para = BarcodeReader.init_dls_connection_parameters()
