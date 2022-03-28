@@ -39,8 +39,8 @@ def decode_video():
     # video_file = "Put your video file path here."
     # vc = cv2.VideoCapture(video_file)
     
-    video_width  = vc.get(cv2.CAP_PROP_FRAME_WIDTH)
-    video_height = vc.get(cv2.CAP_PROP_FRAME_HEIGHT)
+    video_width  = int(vc.get(cv2.CAP_PROP_FRAME_WIDTH))
+    video_height = int(vc.get(cv2.CAP_PROP_FRAME_HEIGHT))
     vc.set(3, video_width) #set width
     vc.set(4, video_height) #set height
 
