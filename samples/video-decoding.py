@@ -39,8 +39,8 @@ def decode_video():
     # video_file = "Put your video file path here."
     # vc = cv2.VideoCapture(video_file)
     
-    video_width  = vc.get(cv2.CAP_PROP_FRAME_WIDTH)
-    video_height = vc.get(cv2.CAP_PROP_FRAME_HEIGHT)
+    video_width  = int(vc.get(cv2.CAP_PROP_FRAME_WIDTH))
+    video_height = int(vc.get(cv2.CAP_PROP_FRAME_HEIGHT))
     vc.set(3, video_width) #set width
     vc.set(4, video_height) #set height
 
@@ -104,12 +104,9 @@ if __name__ == "__main__":
 
     try:
         # Initialize license.
-        # The organization id 200001 here will grant you a free public trial license. Note that network connection is required for this license to work.
-        # If you want to use an offline license, please contact Dynamsoft Support: https://www.dynamsoft.com/company/contact/
+        # The string "DLS2eyJvcmdhbml6YXRpb25JRCI6IjIwMDAwMSJ9" here is a free public trial license. Note that network connection is required for this license to work.
         # You can also request a 30-day trial license in the customer portal: https://www.dynamsoft.com/customer/license/trialLicense?product=dbr&utm_source=samples&package=python
-        para = BarcodeReader.init_dls_connection_parameters()
-        para.organization_id = "200001"
-        error = BarcodeReader.init_license_from_dls(para)
+        error = BarcodeReader.init_license("DLS2eyJvcmdhbml6YXRpb25JRCI6IjIwMDAwMSJ9")
         if error[0] != EnumErrorCode.DBR_OK:
             print("License error: "+ error[1])
 

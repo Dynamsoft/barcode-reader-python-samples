@@ -4,12 +4,9 @@ from dbr import *
 if __name__ == "__main__":
     try:
         # 1.Initialize license.
-        # The organization id 200001 here will grant you a free public trial license. Note that network connection is required for this license to work.
-        # If you want to use an offline license, please contact Dynamsoft Support: https://www.dynamsoft.com/company/contact/
+        # The string "DLS2eyJvcmdhbml6YXRpb25JRCI6IjIwMDAwMSJ9" here is a free public trial license. Note that network connection is required for this license to work.
         # You can also request a 30-day trial license in the customer portal: https://www.dynamsoft.com/customer/license/trialLicense?product=dbr&utm_source=samples&package=python
-        para = BarcodeReader.init_dls_connection_parameters()
-        para.organization_id = "200001"
-        error = BarcodeReader.init_license_from_dls(para)
+        error = BarcodeReader.init_license("DLS2eyJvcmdhbml6YXRpb25JRCI6IjIwMDAwMSJ9")
         if error[0] != EnumErrorCode.DBR_OK:
             print("License error: "+ error[1])
 
