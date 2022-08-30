@@ -69,7 +69,7 @@ def output_results(results:TextResult):
     if results != None:
         i = 0
         for res in results:
-            barcode_format = res.barcode_format_string_2 if res.barcode_format==0 else res.barcode_format_string
+            barcode_format = res.barcode_format_string
 
             print("Barcode " + str(i) + ":" + barcode_format + "," + res.barcode_text)
             i = i+1
