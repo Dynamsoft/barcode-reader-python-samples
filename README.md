@@ -27,7 +27,15 @@ This repository contains multiple samples that demonstrates how to use the [Dyna
 
 ## Installation
 
->**pip install dbr** or **pip3 install dbr**
+```
+pip install dbr
+```
+
+or 
+
+```
+pip3 install dbr
+```
 
 ## Samples
 
@@ -50,13 +58,9 @@ https://www.dynamsoft.com/barcode-reader/programming/python/?ver=latest&utm_sour
 
 ## License
 
-The library requires a license to work, you use the API init_license to initialize license key and activate the SDK.
+The barcode reader library requires a license to work. You can use the API `init_license` to initialize license key and activate the SDK.
 
-These samples use a <a href="https://www.dynamsoft.com/license-server/docs/about/terms.html?ver=latest&product=dbr&utm_source=samples&package=python#public-trial-license" target="_blank">free public trial license</a>. Note that network connection is required for this license to work.
-
-You can also request a 30-day trial license from <a href="https://www.dynamsoft.com/customer/license/trialLicense?product=dbr&utm_source=samples&package=python" target="_blank">Customer Portal</a>
-
-For more information, please refer to https://www.dynamsoft.com/license-server/docs/about/licensefaq.html.
+These samples use a free public trial license which require network connection to function. You can request a 30-day free trial license key from <a href="https://www.dynamsoft.com/customer/license/trialLicense?product=dbr&utm_source=samples&package=python" target="_blank">Customer Portal</a> which works offline.
 
 ## Contact Us
 
