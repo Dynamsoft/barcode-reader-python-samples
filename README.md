@@ -14,16 +14,16 @@ This repository contains multiple samples that demonstrates how to use the [Dyna
 
 ### Supported Platforms
 - Windows x64
-- Linux(x64, ARM32, ARM64)
-- macOS(10.15+)
+- Linux (x64, ARM32, ARM64)
+- macOS (10.15+)
 
 ### Supported Python Versions
 
-- Python3.6
-- Python3.7
-- Python3.8
-- Python3.9
-- Python3.10
+- Python 3.6
+- Python 3.7
+- Python 3.8
+- Python 3.9
+- Python 3.10
 
 ## Installation
 
@@ -41,16 +41,16 @@ pip3 install dbr
 
 | Sample Name | Description |
 | ----------- | ----------- |
-| [`hello-world`](samples/hello-world.py) | This is a python sample that illustrates the simplest way to recognize barcodes from images with Dynamsoft Barcode Reader SDK. |
-| [`general-settings`](samples/general-settings.py) | This is a python sample that illustrates how to make general settings (including barcode format/barcode count/scan region) when using Dynamsoft Barcode Reader. | 
-| [`image-decoding`](samples/image-decoding.py) | This is a python sample that illustrates how to decode images in various format (including file bytes/opencv image/image raw buffer) when using Dynamsoft Barcode Reader. | 
-| [`video-decoding`](samples/video-decoding.py) | This is a python sample that illustrates how to decode video from a file or camera when using Dynamsoft Barcode Reader. | 
-| [`video-decoding-for-picamera`](samples/video-decoding-for-picamera.py) | This is a python sample that illustrates how to decode videos from PiCamera in the Raspberry Pi when using Dynamsoft Barcode Reader. | 
-| [`batch-decode`](samples/performance/batch-decode.py) | This is a python sample that shows how to decode image files in a specified folder. |
-| [`speed-first-settings`](samples/performance/speed-first-settings.py) | This is a python sample that shows how to configure Dynamsoft Barcode Reader to read barcodes as fast as possible. The downside is that read-rate and accuracy might be affected. |
-| [`read-rate-first-settings`](samples/performance/read-rate-first-settings.py) | This is a python sample that shows how to configure Dynamsoft Barcode Reader to read as many barcodes as possible at one time. The downside is that speed and accuracy might be affected. It is recommended to apply these configurations when decoding multiple barcodes from a single image. |
-| [`accuracy-first-settings`](samples/performance/accuracy-first-settings.py) | This is a python sample that shows how to configure Dynamsoft Barcode Reader to read barcodes as accurately as possible. The downside is that speed and read-rate might be affected. It is recommended to apply these configurations when misreading is unbearable. |
-| [`read-dpm-barcode`](samples/use-case/read-dpm-barcode.py) | This is a python sample that shows how to configure Dynamsoft Barcode Reader to read DPM barcodes. |
+| [`hello-world`](samples/hello-world.py) | Shows the simplest way to recognize barcodes from images in Python using Dynamsoft Barcode Reader SDK. |
+| [`general-settings`](samples/general-settings.py) | Shows how to adjust general scan settings, e.g., barcode format, barcode count, scan region. | 
+| [`image-decoding`](samples/image-decoding.py) | Shows how to decode images in various formats, e.g., file bytes, opencv image, raw image  buffer. | 
+| [`video-decoding`](samples/video-decoding.py) | Shows how to decode barcodes from a video from a file or camera. | 
+| [`video-decoding-for-picamera`](samples/video-decoding-for-picamera.py) | Shows how to scan barcodes from videos from a Raspberry Pi camera (PiCamera). | 
+| [`batch-decode`](samples/performance/batch-decode.py) | Shows how to batch decode image files from a specified folder. |
+| [`speed-first-settings`](samples/performance/speed-first-settings.py) | Shows how to configure the scan settings for best barcode reading speed. |
+| [`read-rate-first-settings`](samples/performance/read-rate-first-settings.py) | Shows how to configure the scan settings to read as many barcodes as possible at one time. Recommended when decoding multiple barcodes from a single image. |
+| [`accuracy-first-settings`](samples/performance/accuracy-first-settings.py) | Shows how to configure the scan settings for best barcode reading accuracy. |
+| [`read-dpm-barcode`](samples/use-case/read-dpm-barcode.py) | Shows how to read DPM (Direct Part Mark) barcodes. |
 
 ## Documentation
 
