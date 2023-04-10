@@ -50,7 +50,7 @@ if __name__ == "__main__":
         # 5.Output the barcode text.
         if results != None:
             i = 0
-            for res in results:
+            for text_result in results:
                 print("Barcode " + str(i))
                 print("Barcode Format : " + text_result.barcode_format_string)
                 print("Barcode Text : " + text_result.barcode_text)
