@@ -22,7 +22,7 @@ if __name__ == "__main__":
         # The barcode format our library will search for is composed of BarcodeFormat group 1 and BarcodeFormat group 2.
         # So you need to specify the barcode format in group 1 and group 2 individually.
         settings.barcode_format_ids = EnumBarcodeFormat.BF_ALL
-        settings.barcode_format_ids_2 = EnumBarcodeFormat.BF2_POSTALCODE | EnumBarcodeFormat_2.BF2_DOTCODE
+        settings.barcode_format_ids_2 = EnumBarcodeFormat_2.BF2_POSTALCODE | EnumBarcodeFormat_2.BF2_DOTCODE
         
         # 3.3 Set the expected barcode count you want to read. 
         settings.expected_barcodes_count = 10
