@@ -162,16 +162,17 @@ print("-------------------start------------------------")
 
 # Initialize license.
 # The string "DLS2eyJvcmdhbml6YXRpb25JRCI6IjIwMDAwMSJ9" here is a free public trial license. Note that network connection is required for this license to work.
-# You can also request a 30-day trial license in the customer portal: https://www.dynamsoft.com/customer/license/trialLicense?product=dbr&utm_source=samples&package=python
+# You can also request a 30-day trial license in the customer portal: https://www.dynamsoft.com/customer/license/trialLicense?architecture=dcv&product=dbr&utm_source=samples&package=python
 error = BarcodeReader.init_license("DLS2eyJvcmdhbml6YXRpb25JRCI6IjIwMDAwMSJ9")
 if error[0] != EnumErrorCode.DBR_OK:
     print("License error: "+ error[1])
 
-reader = BarcodeReader()
+reader = BarcodeReader.get_instance()
+if reader != None:    
+    error = reader.init_runtime_settings_with_file(json_file)
+    if error[0] != EnumErrorCode.DBR_OK:
+        print(error[1])
 
-error = reader.init_runtime_settings_with_file(json_file)
-if error[0] != EnumErrorCode.DBR_OK:
-    print(error[1])
-
-read_barcode()
+    read_barcode()
+    reader.recycle_instance()
 print("-------------------over------------------------")

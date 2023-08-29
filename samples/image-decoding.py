@@ -26,14 +26,16 @@ if __name__ == "__main__":
     try:
         # 1.Initialize license.
         # The string "DLS2eyJvcmdhbml6YXRpb25JRCI6IjIwMDAwMSJ9" here is a free public trial license. Note that network connection is required for this license to work.
-        # You can also request a 30-day trial license in the customer portal: https://www.dynamsoft.com/customer/license/trialLicense?product=dbr&utm_source=samples&package=python
+        # You can also request a 30-day trial license in the customer portal: https://www.dynamsoft.com/customer/license/trialLicense?architecture=dcv&product=dbr&utm_source=samples&package=python
         error = BarcodeReader.init_license("DLS2eyJvcmdhbml6YXRpb25JRCI6IjIwMDAwMSJ9")
         if error[0] != EnumErrorCode.DBR_OK:
             print("License error: "+ error[1])
 
         # 2.Create an instance of Barcode Reader.
-        dbr = BarcodeReader()
-
+        dbr = BarcodeReader.get_instance()
+        if dbr == None :
+            raise BarcodeReaderError("Get instance failed")
+        
         # Replace by your own image path
         image_path = os.path.dirname(os.path.abspath(__file__)) + os.path.sep + "../images/AllSupportedBarcodeTypes.png"
 
@@ -87,6 +89,6 @@ if __name__ == "__main__":
                     i = i+1
             else:
                 print("No data detected.")
-            
+        dbr.recycle_instance()    
     except BarcodeReaderError as bre:
         print(bre)

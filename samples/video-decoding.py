@@ -53,8 +53,9 @@ def decode_video():
 
     windowName = "Video Barcode Reader"
 
-    reader = BarcodeReader()
-
+    reader = BarcodeReader.get_instance()
+    if reader == None:
+        raise BarcodeReaderError("Get instance failed")
     parameters = reader.init_frame_decoding_parameters()
     parameters.max_queue_length = 30
     parameters.max_result_queue_length = 30
@@ -96,7 +97,7 @@ def decode_video():
 
     reader.stop_video_mode()
     cv2.destroyWindow(windowName)
-
+    reader.recycle_instance()
 
 if __name__ == "__main__":
 
@@ -105,7 +106,7 @@ if __name__ == "__main__":
     try:
         # Initialize license.
         # The string "DLS2eyJvcmdhbml6YXRpb25JRCI6IjIwMDAwMSJ9" here is a free public trial license. Note that network connection is required for this license to work.
-        # You can also request a 30-day trial license in the customer portal: https://www.dynamsoft.com/customer/license/trialLicense?product=dbr&utm_source=samples&package=python
+        # You can also request a 30-day trial license in the customer portal: https://www.dynamsoft.com/customer/license/trialLicense?architecture=dcv&product=dbr&utm_source=samples&package=python
         error = BarcodeReader.init_license("DLS2eyJvcmdhbml6YXRpb25JRCI6IjIwMDAwMSJ9")
         if error[0] != EnumErrorCode.DBR_OK:
             print("License error: "+ error[1])

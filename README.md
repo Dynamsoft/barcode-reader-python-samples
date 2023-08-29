@@ -60,7 +60,7 @@ https://www.dynamsoft.com/barcode-reader/programming/python/?ver=latest&utm_sour
 
 The barcode reader library requires a license to work. You can use the API `init_license` to initialize license key and activate the SDK.
 
-These samples use a free public trial license which require network connection to function. You can request a 30-day free trial license key from <a href="https://www.dynamsoft.com/customer/license/trialLicense?product=dbr&utm_source=samples&package=python" target="_blank">Customer Portal</a> which works offline.
+These samples use a free public trial license which require network connection to function. You can request a 30-day free trial license key from <a href="https://www.dynamsoft.com/customer/license/trialLicense?architecture=dcv&product=dbr&utm_source=samples&package=python" target="_blank">Customer Portal</a> which works offline.
 
 ## Contact Us
 

@@ -5,14 +5,15 @@ if __name__ == "__main__":
     try:
         # 1.Initialize license.
         # The string "DLS2eyJvcmdhbml6YXRpb25JRCI6IjIwMDAwMSJ9" here is a free public trial license. Note that network connection is required for this license to work.
-        # You can also request a 30-day trial license in the customer portal: https://www.dynamsoft.com/customer/license/trialLicense?product=dbr&utm_source=samples&package=python
+        # You can also request a 30-day trial license in the customer portal: https://www.dynamsoft.com/customer/license/trialLicense?architecture=dcv&product=dbr&utm_source=samples&package=python
         error = BarcodeReader.init_license("DLS2eyJvcmdhbml6YXRpb25JRCI6IjIwMDAwMSJ9")
         if error[0] != EnumErrorCode.DBR_OK:
             print("License error: "+ error[1])
 
         # 2.Create an instance of Barcode Reader.
-        reader = BarcodeReader()
-
+        reader = BarcodeReader.get_instance()
+        if reader == None:
+            raise BarcodeReaderError("Get instance failed")
         # There are two ways to configure runtime parameters. One is through PublicRuntimeSettings, the other is through parameters template.
         # 3. General settings (including barcode format, barcode count and scan region) through PublicRuntimeSettings
         # 3.1 Obtain current runtime settings of instance.
@@ -59,7 +60,6 @@ if __name__ == "__main__":
             print("No data detected.")
         
         # 6.Release resource
-        del reader
-        
+        reader.recycle_instance()
     except BarcodeReaderError as bre:
         print(bre)
