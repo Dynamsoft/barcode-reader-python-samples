@@ -8,7 +8,7 @@
 
 ## Overview
 
-This repository contains multiple samples that demonstrates how to use the [Dynamsoft Barcode Reader](https://www.dynamsoft.com/barcode-reader/overview/) Python Edition.
+This repository contains multiple samples that demonstrate how to use the [Dynamsoft Barcode Reader](https://www.dynamsoft.com/barcode-reader/overview/) Python Edition.
 
 ## Requirements
 
@@ -24,6 +24,7 @@ This repository contains multiple samples that demonstrates how to use the [Dyna
 - Python 3.8
 - Python 3.9
 - Python 3.10
+- Python 3.11
 
 ## Installation
 
@@ -58,9 +59,9 @@ https://www.dynamsoft.com/barcode-reader/programming/python/?ver=latest&utm_sour
 
 ## License
 
-The barcode reader library requires a license to work. You can use the API `init_license` to initialize license key and activate the SDK.
+The barcode reader library requires a license to work. You can use the API `init_license` to initialize the license key and activate the SDK.
 
-These samples use a free public trial license which require network connection to function. You can request a 30-day free trial license key from <a href="https://www.dynamsoft.com/customer/license/trialLicense?architecture=dcv&product=dbr&utm_source=samples&package=python" target="_blank">Customer Portal</a> which works offline.
+These samples use a free public trial license which requires a network connection to function. You can request a 30-day free trial license key from <a href="https://www.dynamsoft.com/customer/license/trialLicense?architecture=dcv&product=dbr&utm_source=samples&package=python" target="_blank">Customer Portal</a> which works offline.
 
 ## Contact Us
 
