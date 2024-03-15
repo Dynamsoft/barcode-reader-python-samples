@@ -27,7 +27,6 @@ This repository contains multiple samples that demonstrate how to use the [Dynam
 - Python 3.11
 - Python 3.12
 
-
 ## Installation
 
 ```
