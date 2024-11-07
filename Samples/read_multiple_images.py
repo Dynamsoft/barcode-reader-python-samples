@@ -49,5 +49,5 @@ if __name__ == '__main__':
 
         errorCode, errorMsg = cvr.start_capturing("", True)
         if errorCode != EnumErrorCode.EC_OK:
-            print("error:", errorMsg)
+            print("Error:", errorMsg)
     input("Press Enter to quit...")

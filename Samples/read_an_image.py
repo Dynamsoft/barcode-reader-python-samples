@@ -10,7 +10,7 @@ if __name__ == '__main__':
         print("License initialization failed: ErrorCode:", errorCode, ", ErrorString:", errorMsg)
     else:
         cvr = CaptureVisionRouter()
-        result = cvr.capture("../Images/GeneralBarcodes.png", EnumPresetTemplate.PT_READ_BARCODES.value)
+        result = cvr.capture("../images/GeneralBarcodes.png", EnumPresetTemplate.PT_READ_BARCODES)
         if result.get_error_code() != EnumErrorCode.EC_OK:
             print("Error:", result.get_error_code(), result.get_error_string())
         barcode_result = result.get_decoded_barcodes_result()
