@@ -1,7 +1,7 @@
 # Dynamsoft Barcode Reader Samples for Python Edition
 
 [![Current version number](https://img.shields.io/pypi/v/dynamsoft_barcode_reader_bundle?color=orange)](https://pypi.org/project/dynamsoft_barcode_reader_bundle/)
-[![Supported Python versions](https://img.shields.io/badge/python-3.8%20%7C%203.9%20%7C%203.10%20%7C%203.11%20%7C%203.12-blue)](https://www.python.org/downloads/)
+[![Supported Python versions](https://img.shields.io/badge/python-3.8%20%7C%203.9%20%7C%203.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-blue)](https://www.python.org/downloads/)
 [![PyPI downloads](https://img.shields.io/pypi/dm/dynamsoft_barcode_reader_bundle)](https://pypistats.org/packages/dynamsoft_barcode_reader_bundle)
 
 ![Dynamsoft](https://dynamsoft.github.io/styleguide/assets/images/icons/dynamsoft_logos/dynamsoft_logo_original.png "Dynamsoft")  
@@ -19,6 +19,7 @@ This repository contains multiple samples that demonstrate how to use the [Dynam
 
 ### Supported Python Versions
 
+- Python 3.13
 - Python 3.12
 - Python 3.11
 - Python 3.10
