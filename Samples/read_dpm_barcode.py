@@ -19,7 +19,7 @@ if __name__ == "__main__":
             # 2 Replace with your own dpm barcode image path
             image_path = os.path.dirname(os.path.abspath(__file__)) + os.path.sep + "../images/dpm.jpg"
 
-            # 3 Decode barcodes from an image file by current runtime settings. The second parameter value "" means to decode through the current PublicRuntimeSettings.
+            # 3 Decode barcodes from the image file.
             result = cvr_instance.capture(image_path,"")
             
             # 4 Output the barcode format and barcode text.
