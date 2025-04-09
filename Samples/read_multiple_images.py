@@ -9,15 +9,16 @@ class MyCapturedResultReceiver(CapturedResultReceiver):
         tag = result.get_original_image_tag()
         if isinstance(tag, FileImageTag):
             print("File:", tag.get_file_path())
-        if result.get_error_code() != EnumErrorCode.EC_OK:
-            print("Error:", result.get_error_string())        
-        else:
-            items = result.get_items()
-            print("Detected", len(items), "barcodes.")
-            for index, item in enumerate(items):
-                print("Result", index+1)
-                print("Barcode Format:", item.get_format_string())
-                print("Barcode Text:", item.get_text())
+        if result.get_error_code() == EnumErrorCode.EC_UNSUPPORTED_JSON_KEY_WARNING:
+            print("Warning:", result.get_error_string())
+        elif result.get_error_code() != EnumErrorCode.EC_OK:
+            print("Error:", result.get_error_string())
+        items = result.get_items()
+        print("Detected", len(items), "barcodes.")
+        for index, item in enumerate(items):
+            print("Result", index+1)
+            print("Barcode Format:", item.get_format_string())
+            print("Barcode Text:", item.get_text())
 
 class MyImageSourceStateListener(ImageSourceStateListener):
     def __init__(self, cvr:CaptureVisionRouter) -> None:
@@ -36,7 +37,7 @@ if __name__ == '__main__':
         print("License initialization failed: ErrorCode:", errorCode, ", ErrorString:", errorMsg)
     else:
         cvr = CaptureVisionRouter()
-        
+
         fetcher = DirectoryFetcher()
         fetcher.set_directory("../Images")
         cvr.set_input(fetcher)

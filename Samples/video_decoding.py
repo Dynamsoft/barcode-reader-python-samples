@@ -7,20 +7,21 @@ class MyCapturedResultReceiver(CapturedResultReceiver):
         super().__init__()
 
     def on_decoded_barcodes_received(self, result: DecodedBarcodesResult) -> None:
-        if result.get_error_code() != EnumErrorCode.EC_OK:
+        if result.get_error_code() == EnumErrorCode.EC_UNSUPPORTED_JSON_KEY_WARNING:
+            print("Warning:", result.get_error_string())
+        elif result.get_error_code() != EnumErrorCode.EC_OK:
             print("Error:", result.get_error_string())
-        else:
-            items = result.get_items()
-            if len(items) != 0:
-                tag: ImageTag = result.get_original_image_tag()
-                if tag is not None:
-                    print("ImageID:",tag.get_image_id())        
-                print("Decoded", len(items), "barcodes.")
-                for index,item in enumerate(items):
-                    print("Result", index+1)
-                    print("Barcode Format:", item.get_format_string())
-                    print("Barcode Text:", item.get_text())
-                    print()
+        items = result.get_items()
+        if len(items) != 0:
+            tag: ImageTag = result.get_original_image_tag()
+            if tag is not None:
+                print("ImageID:",tag.get_image_id())
+            print("Decoded", len(items), "barcodes.")
+            for index,item in enumerate(items):
+                print("Result", index+1)
+                print("Barcode Format:", item.get_format_string())
+                print("Barcode Text:", item.get_text())
+                print()
 class MyVideoFetcher(ImageSourceAdapter):
 
     def __init__(self):
@@ -31,13 +32,13 @@ class MyVideoFetcher(ImageSourceAdapter):
 
 def decode_video(use_video_file: bool = False, video_file_path: str = "") -> None:
     cvr_instance = CaptureVisionRouter()
-    
+
     fetcher = MyVideoFetcher()
     fetcher.set_max_image_count(100)
     fetcher.set_buffer_overflow_protection_mode(EnumBufferOverflowProtectionMode.BOPM_UPDATE)
     fetcher.set_colour_channel_usage_type(EnumColourChannelUsageType.CCUT_AUTO)
     cvr_instance.set_input(fetcher)
-    
+
     filter = MultiFrameResultCrossFilter()
     filter.enable_result_cross_verification(EnumCapturedResultItemType.CRIT_BARCODE, True)
     filter.enable_result_deduplication(EnumCapturedResultItemType.CRIT_BARCODE, True)
@@ -60,13 +61,13 @@ def decode_video(use_video_file: bool = False, video_file_path: str = "") -> Non
         else:
             # # b. Decode video file
             vc = cv2.VideoCapture(video_file_path)
-        
+
         video_width  = int(vc.get(cv2.CAP_PROP_FRAME_WIDTH))
         video_height = int(vc.get(cv2.CAP_PROP_FRAME_HEIGHT))
         vc.set(3, video_width) #set width
         vc.set(4, video_height) #set height
 
-        if not vc.isOpened():  
+        if not vc.isOpened():
             cvr_instance.stop_capturing(False, True)
             return
 

@@ -15,27 +15,35 @@ if __name__ == "__main__":
             errorCode, errorMsg = cvr_instance.init_settings_from_file(template_path)
             if errorCode != EnumErrorCode.EC_OK:
                 raise Exception("Init template failed: " + errorMsg)
-            
+
             # 2 Replace with your own dpm barcode image path
-            image_path = os.path.dirname(os.path.abspath(__file__)) + os.path.sep + "../images/dpm.jpg"
+            image_path = os.path.dirname(os.path.abspath(__file__)) + os.path.sep + "../images/DPM.png"
 
             # 3 Decode barcodes from the image file.
-            result = cvr_instance.capture(image_path,"")
-            
+            result_array = cvr_instance.capture_multi_pages(image_path,"")
+
             # 4 Output the barcode format and barcode text.
-            if result.get_error_code() != EnumErrorCode.EC_OK:
-                print("Error:", result.get_error_code(), result.get_error_string())
-            barcode_result = result.get_decoded_barcodes_result()
-            if barcode_result is None or barcode_result.get_items() == 0:
+            results = result_array.get_results()
+            if results is None or len(results) == 0:
                 print("No barcode detected.")
             else:
-                items = barcode_result.get_items()
-                print("Decoded", len(items), "barcodes.")
-                for index,item in enumerate(items):
+                for i, result in enumerate(results):
+                    if result.get_error_code() == EnumErrorCode.EC_UNSUPPORTED_JSON_KEY_WARNING:
+                        print("Warning:", result.get_error_code(), result.get_error_string())
+                    elif result.get_error_code() != EnumErrorCode.EC_OK:
+                        print("Error:", result.get_error_code(), result.get_error_string())
+
+                    barcode_result = result.get_decoded_barcodes_result()
+                    if barcode_result is None or barcode_result.get_items() == 0:
+                        print("Page-"+str(i+1), "No barcode detected.")
+                    else:
+                        items = barcode_result.get_items()
+                        print("Page-"+str(i+1), "Decoded", len(items), "barcodes.")
+                        for index,item in enumerate(items):
+                            print()
+                            print("Barcode", index)
+                            print("Barcode Format:", item.get_format_string())
+                            print("Barcode Text:", item.get_text())
                     print()
-                    print("Barcode", index)
-                    print("Barcode Format:", item.get_format_string())
-                    print("Barcode Text:", item.get_text())
-                    
     except Exception as e:
         print(e)

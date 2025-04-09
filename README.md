@@ -47,6 +47,7 @@ pip3 install dynamsoft_barcode_reader_bundle
 | [`GeneralSettings`](Samples/general_settings.py) | Shows how to adjust general scan settings, e.g., barcode format, barcode count, scan region. | 
 | [`ReadDPMBarcode`](Samples/read_dpm_barcode.py) | Shows how to read DPM (Direct Part Mark) barcodes. | 
 | [`VideoDecoding`](Samples/video_decoding.py) | Shows how to decode barcodes from live video or video file. | 
+| [`MultiFormatImageProcessing`](Samples/multi_format_image_processing.py) | Shows how to decode barcodes from various image format. | 
 
 ## Documentation
 
