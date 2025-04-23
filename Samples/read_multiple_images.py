@@ -21,13 +21,13 @@ class MyCapturedResultReceiver(CapturedResultReceiver):
             print("Barcode Text:", item.get_text())
 
 class MyImageSourceStateListener(ImageSourceStateListener):
-    def __init__(self, cvr:CaptureVisionRouter) -> None:
+    def __init__(self, cvr_instance:CaptureVisionRouter) -> None:
         super().__init__()
-        self.cvr = cvr
+        self.cvr_instance = cvr_instance
     def on_image_source_state_received(self, state: int) -> None:
         if state == EnumImageSourceState.ISS_EXHAUSTED:
-            if self.cvr != None:
-                self.cvr.stop_capturing()
+            if self.cvr_instance != None:
+                self.cvr_instance.stop_capturing()
 if __name__ == '__main__':
     # Initialize license.
     # You can request and extend a trial license from https://www.dynamsoft.com/customer/license/trialLicense?product=dbr&utm_source=samples&package=python
@@ -36,19 +36,19 @@ if __name__ == '__main__':
     if errorCode != EnumErrorCode.EC_OK and errorCode != EnumErrorCode.EC_LICENSE_CACHE_USED:
         print("License initialization failed: ErrorCode:", errorCode, ", ErrorString:", errorMsg)
     else:
-        cvr = CaptureVisionRouter()
+        cvr_instance = CaptureVisionRouter()
 
         fetcher = DirectoryFetcher()
         fetcher.set_directory("../Images")
-        cvr.set_input(fetcher)
+        cvr_instance.set_input(fetcher)
 
         receiver = MyCapturedResultReceiver()
-        cvr.add_result_receiver(receiver)
+        cvr_instance.add_result_receiver(receiver)
 
-        listener = MyImageSourceStateListener(cvr)
-        cvr.add_image_source_state_listener(listener)
+        listener = MyImageSourceStateListener(cvr_instance)
+        cvr_instance.add_image_source_state_listener(listener)
 
-        errorCode, errorMsg = cvr.start_capturing("", True)
+        errorCode, errorMsg = cvr_instance.start_capturing("", True)
         if errorCode != EnumErrorCode.EC_OK:
             print("Error:", errorMsg)
     input("Press Enter to quit...")
