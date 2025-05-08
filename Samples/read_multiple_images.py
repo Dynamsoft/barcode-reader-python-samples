@@ -48,7 +48,7 @@ if __name__ == '__main__':
         listener = MyImageSourceStateListener(cvr_instance)
         cvr_instance.add_image_source_state_listener(listener)
 
-        errorCode, errorMsg = cvr_instance.start_capturing("", True)
+        errorCode, errorMsg = cvr_instance.start_capturing(EnumPresetTemplate.PT_READ_BARCODES, True)
         if errorCode != EnumErrorCode.EC_OK:
             print("Error:", errorMsg)
     input("Press Enter to quit...")
