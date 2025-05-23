@@ -40,6 +40,8 @@ pip3 install dynamsoft_barcode_reader_bundle
 
 ## Samples
 
+### Basic Barcode Reader Samples
+
 | Sample Name | Description |
 | ----------- | ----------- |
 | [`ReadAnImage`](Samples/read_an_image.py) | Shows the simplest way to read barcodes from an image file and output barcode format and text. |
@@ -48,6 +50,18 @@ pip3 install dynamsoft_barcode_reader_bundle
 | [`ReadDPMBarcode`](Samples/read_dpm_barcode.py) | Shows how to read DPM (Direct Part Mark) barcodes. | 
 | [`VideoDecoding`](Samples/video_decoding.py) | Shows how to decode barcodes from live video or video file. | 
 | [`MultiFormatImageProcessing`](Samples/multi_format_image_processing.py) | Shows how to decode barcodes from various image format. | 
+
+### Additional Samples using Capture Vision SDK
+
+In addition to the classic barcode decoding samples listed above, the following samples go a step further by parsing the decoded results and showcasing more structured workflows.
+
+> [!IMPORTANT]
+> These samples use the `dynamsoft_capture_vision_bundle` package instead of `dynamsoft_barcode_reader_bundle`. If you're switching to these samples, make sure to install and use the correct package.
+
+| Sample Name | Description |
+| --- | --- |
+| [`DriverLicenseScanner`](https://github.com/Dynamsoft/capture-vision-python-samples/blob/main/Samples/driver_license_scanner.py) | Shows how to capture and extract user's information from driver license/ID. |
+| [`VINScanner`](https://github.com/Dynamsoft/capture-vision-python-samples/blob/main/Samples/vin_scanner.py) | Shows how to capture and extract vehicle's information from Vehicle Identification Number (VIN). |
 
 ## Documentation
 
