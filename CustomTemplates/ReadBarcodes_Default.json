@@ -1,0 +1,113 @@
+{
+    "CaptureVisionTemplates": [
+        {
+            "Name": "ReadBarcodes_Default",
+            "ImageROIProcessingNameArray": [
+                "roi-read-barcodes"
+            ]
+        }
+    ],
+    "TargetROIDefOptions": [
+        {
+            "Name": "roi-read-barcodes",
+            "TaskSettingNameArray": [
+                "task-read-barcodes"
+            ]
+        }
+    ],
+    "BarcodeReaderTaskSettingOptions": [
+        {
+            "Name": "task-read-barcodes",
+            "ExpectedBarcodesCount": 0,
+            "BarcodeFormatIds": [
+                "BF_DEFAULT"
+            ],
+            "BarcodeFormatSpecificationNameArray": [
+                "bfs1",
+                "bfs2"
+            ],
+            "SectionArray": [
+                {
+                    "Section": "ST_REGION_PREDETECTION",
+                    "ImageParameterName": "ip-read-barcodes",
+                    "StageArray": [
+                        {
+                            "Stage": "SST_PREDETECT_REGIONS"
+                        }
+                    ]
+                },
+                {
+                    "Section": "ST_BARCODE_LOCALIZATION",
+                    "ImageParameterName": "ip-read-barcodes",
+                    "StageArray": [
+                        {
+                            "Stage": "SST_LOCALIZE_CANDIDATE_BARCODES"
+                        },
+                        {
+                            "Stage": "SST_LOCALIZE_BARCODES"
+                        }
+                    ]
+                },
+                {
+                    "Section": "ST_BARCODE_DECODING",
+                    "ImageParameterName": "ip-read-barcodes",
+                    "StageArray": [
+                        {
+                            "Stage": "SST_RESIST_DEFORMATION"
+                        },
+                        {
+                            "Stage": "SST_COMPLEMENT_BARCODE"
+                        },
+                        {
+                            "Stage": "SST_SCALE_BARCODE_IMAGE"
+                        },
+                        {
+                            "Stage": "SST_DECODE_BARCODES"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "BarcodeFormatSpecificationOptions": [
+        {
+            "Name": "bfs1",
+            "BarcodeFormatIds": [
+                "BF_PDF417",
+                "BF_QR_CODE",
+                "BF_DATAMATRIX",
+                "BF_AZTEC",
+                "BF_MICRO_QR",
+                "BF_MICRO_PDF417",
+                "BF_DOTCODE"
+            ],
+            "MirrorMode": "MM_BOTH"
+        },
+        {
+            "Name": "bfs2",
+            "BarcodeFormatIds": [
+                "BF_ALL"
+            ],
+            "MirrorMode": "MM_NORMAL"
+        }
+    ],
+    "ImageParameterOptions": [
+        {
+            "Name": "ip-read-barcodes",
+            "ApplicableStages": [
+                {
+                    "Stage": "SST_DETECT_TEXT_ZONES",
+                    "TextDetectionMode": {
+                        "Mode": "TTDM_LINE",
+                        "Direction": "UNKNOWN",
+                        "Sensitivity": 3
+                    }
+                },
+                {
+                    "Stage": "SST_REMOVE_TEXT_ZONES_FROM_BINARY",
+                    "IfEraseTextZone": 1
+                }
+            ]
+        }
+    ]
+}

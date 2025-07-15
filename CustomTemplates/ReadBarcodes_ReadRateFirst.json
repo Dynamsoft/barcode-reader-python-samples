@@ -1,0 +1,144 @@
+{
+    "CaptureVisionTemplates": [
+        {
+            "Name": "ReadBarcodes_ReadRateFirst",
+            "ImageROIProcessingNameArray": [
+                "roi-read-barcodes-read-rate"
+            ],
+            "Timeout": 100000
+        }
+    ],
+    "TargetROIDefOptions": [
+        {
+            "Name": "roi-read-barcodes-read-rate",
+            "TaskSettingNameArray": [
+                "task-read-barcodes-read-rate"
+            ]
+        }
+    ],
+    "BarcodeReaderTaskSettingOptions": [
+        {
+            "Name": "task-read-barcodes-read-rate",
+            "ExpectedBarcodesCount": 999,
+            "BarcodeFormatIds": [
+                "BF_DEFAULT"
+            ],
+            "BarcodeFormatSpecificationNameArray": [
+                "bfs1-read-rate-first",
+                "bfs2-read-rate-first"
+            ],
+            "SectionArray": [
+                {
+                    "Section": "ST_REGION_PREDETECTION",
+                    "ImageParameterName": "ip-read-barcodes-read-rate",
+                    "StageArray": [
+                        {
+                            "Stage": "SST_PREDETECT_REGIONS"
+                        }
+                    ]
+                },
+                {
+                    "Section": "ST_BARCODE_LOCALIZATION",
+                    "ImageParameterName": "ip-read-barcodes-read-rate",
+                    "StageArray": [
+                        {
+                            "Stage": "SST_LOCALIZE_CANDIDATE_BARCODES",
+                            "LocalizationModes": [
+                                {
+                                    "Mode": "LM_CONNECTED_BLOCKS"
+                                },
+                                {
+                                    "Mode": "LM_LINES"
+                                },
+                                {
+                                    "Mode": "LM_STATISTICS"
+                                }
+                            ]
+                        },
+                        {
+                            "Stage": "SST_LOCALIZE_BARCODES"
+                        }
+                    ]
+                },
+                {
+                    "Section": "ST_BARCODE_DECODING",
+                    "ImageParameterName": "ip-read-barcodes-read-rate",
+                    "StageArray": [
+                        {
+                            "Stage": "SST_RESIST_DEFORMATION"
+                        },
+                        {
+                            "Stage": "SST_COMPLEMENT_BARCODE"
+                        },
+                        {
+                            "Stage": "SST_SCALE_BARCODE_IMAGE"
+                        },
+                        {
+                            "Stage": "SST_DECODE_BARCODES"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "BarcodeFormatSpecificationOptions": [
+        {
+            "Name": "bfs1-read-rate-first",
+            "BarcodeFormatIds": [
+                "BF_PDF417",
+                "BF_QR_CODE",
+                "BF_DATAMATRIX",
+                "BF_AZTEC",
+                "BF_MICRO_QR",
+                "BF_MICRO_PDF417",
+                "BF_DOTCODE"
+            ],
+            "MirrorMode": "MM_BOTH"
+        },
+        {
+            "Name": "bfs2-read-rate-first",
+            "BarcodeFormatIds": [
+                "BF_ALL"
+            ],
+            "MirrorMode": "MM_NORMAL"
+        }
+    ],
+    "ImageParameterOptions": [
+        {
+            "Name": "ip-read-barcodes-read-rate",
+            "ApplicableStages": [
+                {
+                    "Stage": "SST_DETECT_TEXT_ZONES",
+                    "TextDetectionMode": {
+                        "Mode": "TTDM_LINE",
+                        "Direction": "UNKNOWN",
+                        "Sensitivity": 3
+                    }
+                },
+                {
+                    "Stage": "SST_REMOVE_TEXT_ZONES_FROM_BINARY",
+                    "IfEraseTextZone": 1
+                },
+                {
+                    "Stage": "SST_TRANSFORM_GRAYSCALE",
+                    "GrayscaleTransformationModes": [
+                        {
+                            "Mode": "GTM_ORIGINAL"
+                        },
+                        {
+                            "Mode": "GTM_INVERTED"
+                        }
+                    ]
+                },
+                {
+                    "Stage": "SST_SCALE_IMAGE",
+                    "ImageScaleSetting": {
+                        "ScaleType": "ST_SCALE_DOWN",
+                        "ReferenceEdge": "RE_SHORTER_EDGE",
+                        "EdgeLengthThreshold": 100000
+                    }
+                }
+            ]
+        }
+    ]
+}

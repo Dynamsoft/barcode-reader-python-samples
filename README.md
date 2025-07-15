@@ -29,13 +29,13 @@ This repository contains multiple samples that demonstrate how to use the [Dynam
 ## Installation
 
 ```
-pip install dynamsoft_barcode_reader_bundle
+pip install dynamsoft-barcode-reader-bundle
 ```
 
 or 
 
 ```
-pip3 install dynamsoft_barcode_reader_bundle
+pip3 install dynamsoft-barcode-reader-bundle
 ```
 
 ## Samples
@@ -50,6 +50,9 @@ pip3 install dynamsoft_barcode_reader_bundle
 | [`ReadDPMBarcode`](Samples/read_dpm_barcode.py) | Shows how to read DPM (Direct Part Mark) barcodes. | 
 | [`VideoDecoding`](Samples/video_decoding.py) | Shows how to decode barcodes from live video or video file. | 
 | [`MultiFormatImageProcessing`](Samples/multi_format_image_processing.py) | Shows how to decode barcodes from various image format. | 
+| [`ParameterTuner`](Samples/parameter_tuner.py) | This sample demonstrates how to adjust and test different parameter settings to optimize barcode recognition performance. |
+| [`ShowLocalizedVSDecodedBarcodes`](Samples/show_localized_vs_decoded_barcodes.py) | This sample demonstrates how to highlight successfully decoded and only-localized barcodes with different styles of rectangles. |
+| [`ServerSideBarcodeDecoder`](Samples/server_side_barcode_decoder.py) | This sample demonstrates how to decode barcodes on the server side by sending images from a client application. |
 
 ### Additional Samples using Capture Vision SDK
 
@@ -62,6 +65,7 @@ In addition to the classic barcode decoding samples listed above, the following 
 | --- | --- |
 | [`DriverLicenseScanner`](https://github.com/Dynamsoft/capture-vision-python-samples/blob/main/Samples/driver_license_scanner.py) | Shows how to capture and extract user's information from driver license/ID. |
 | [`VINScanner`](https://github.com/Dynamsoft/capture-vision-python-samples/blob/main/Samples/vin_scanner.py) | Shows how to capture and extract vehicle's information from Vehicle Identification Number (VIN). |
+| [`GS1AIScanner`](https://github.com/Dynamsoft/capture-vision-python-samples/blob/main/Samples/gs1_ai_scanner.py) | Shows how to extract and interpret GS1 Application Identifiers (AIs) from GS1 barcodes. |
 
 ## Documentation
 

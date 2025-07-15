@@ -8,7 +8,7 @@ if __name__ == "__main__":
         # The string "DLS2eyJvcmdhbml6YXRpb25JRCI6IjIwMDAwMSJ9" here is a free public trial license. Note that network connection is required for this license to work.
         # You can also request a 30-day trial license in the customer portal: https://www.dynamsoft.com/customer/license/trialLicense?product=dbr&utm_source=samples&package=python
         err_code, err_str = LicenseManager.init_license("DLS2eyJvcmdhbml6YXRpb25JRCI6IjIwMDAwMSJ9")
-        if err_code != EnumErrorCode.EC_OK and err_code != EnumErrorCode.EC_LICENSE_CACHE_USED:
+        if err_code != EnumErrorCode.EC_OK and err_code != EnumErrorCode.EC_LICENSE_WARNING:
             print("License initialization failed: ErrorCode:", err_code, ", ErrorString:", err_str)
         else:
             # 2. Create an instance of CaptureVisionRouter.

@@ -1,0 +1,103 @@
+{
+    "CaptureVisionTemplates": [
+        {
+            "Name": "ReadMultipleBarcodes",
+            "ImageROIProcessingNameArray": [
+                "roi_read_multiple_barcodes"
+            ],
+            "Timeout": 650
+        }
+    ],
+    "TargetROIDefOptions": [
+        {
+            "Name": "roi_read_multiple_barcodes",
+            "TaskSettingNameArray": [
+                "task_read_multiple_barcodes"
+            ]
+        }
+    ],
+    "BarcodeReaderTaskSettingOptions": [
+        {
+            "Name": "task_read_multiple_barcodes",
+            "ExpectedBarcodesCount": 999,
+            "BarcodeFormatIds": [
+                "BF_DEFAULT"
+            ],
+            "SectionArray": [
+                {
+                    "Section": "ST_REGION_PREDETECTION",
+                    "ImageParameterName": "ip_read_multiple_barcodes",
+                    "StageArray": [
+                        {
+                            "Stage": "SST_PREDETECT_REGIONS"
+                        }
+                    ]
+                },
+                {
+                    "Section": "ST_BARCODE_LOCALIZATION",
+                    "ImageParameterName": "ip_read_multiple_barcodes",
+                    "StageArray": [
+                        {
+                            "Stage": "SST_LOCALIZE_CANDIDATE_BARCODES",
+                            "LocalizationModes": [
+                                {
+                                    "Mode": "LM_CONNECTED_BLOCKS"
+                                },
+                                {
+                                    "Mode": "LM_LINES"
+                                }
+                            ]
+                        },
+                        {
+                            "Stage": "SST_LOCALIZE_BARCODES"
+                        }
+                    ]
+                },
+                {
+                    "Section": "ST_BARCODE_DECODING",
+                    "ImageParameterName": "ip_read_multiple_barcodes",
+                    "StageArray": [
+                        {
+                            "Stage": "SST_RESIST_DEFORMATION"
+                        },
+                        {
+                            "Stage": "SST_COMPLEMENT_BARCODE"
+                        },
+                        {
+                            "Stage": "SST_SCALE_BARCODE_IMAGE"
+                        },
+                        {
+                            "Stage": "SST_DECODE_BARCODES",
+                            "DeblurModes": [
+                                {
+                                    "Mode": "DM_BASED_ON_LOC_BIN"
+                                },
+                                {
+                                    "Mode": "DM_THRESHOLD_BINARIZATION"
+                                },
+                                {
+                                    "Mode": "DM_DIRECT_BINARIZATION"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "ImageParameterOptions": [
+        {
+            "Name": "ip_read_multiple_barcodes",
+            "ApplicableStages": [
+                {
+                    "Stage": "SST_SCALE_IMAGE",
+                    "ImageScaleSetting": {
+                        "ScaleType": "ST_SCALE_DOWN",
+                        "ReferenceEdge": "RE_SHORTER_EDGE",
+                        "EdgeLengthThreshold": 100000
+                    }
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,125 @@
+{
+    "CaptureVisionTemplates": [
+        {
+            "Name": "ReadDotcode",
+            "ImageROIProcessingNameArray": [
+                "roi_read_dotcode"
+            ],
+            "Timeout": 1000
+        }
+    ],
+    "TargetROIDefOptions": [
+        {
+            "Name": "roi_read_dotcode",
+            "TaskSettingNameArray": [
+                "task_read_dotcode"
+            ]
+        }
+    ],
+    "BarcodeReaderTaskSettingOptions": [
+        {
+            "Name": "task_read_dotcode",
+            "ExpectedBarcodesCount": 1,
+            "BarcodeFormatIds": [
+                "BF_DOTCODE"
+            ],
+            "SectionArray": [
+                {
+                    "Section": "ST_REGION_PREDETECTION",
+                    "ImageParameterName": "ip_read_dotcode",
+                    "StageArray": [
+                        {
+                            "Stage": "SST_PREDETECT_REGIONS"
+                        }
+                    ]
+                },
+                {
+                    "Section": "ST_BARCODE_LOCALIZATION",
+                    "ImageParameterName": "ip_read_dotcode",
+                    "StageArray": [
+                        {
+                            "Stage": "SST_LOCALIZE_CANDIDATE_BARCODES",
+                            "LocalizationModes": [
+                                {
+                                    "Mode": "LM_STATISTICS_MARKS"
+                                }
+                            ]
+                        },
+                        {
+                            "Stage": "SST_LOCALIZE_BARCODES"
+                        }
+                    ]
+                },
+                {
+                    "Section": "ST_BARCODE_DECODING",
+                    "ImageParameterName": "ip_read_dotcode",
+                    "StageArray": [
+                        {
+                            "Stage": "SST_RESIST_DEFORMATION"
+                        },
+                        {
+                            "Stage": "SST_COMPLEMENT_BARCODE"
+                        },
+                        {
+                            "Stage": "SST_SCALE_BARCODE_IMAGE"
+                        },
+                        {
+                            "Stage": "SST_DECODE_BARCODES",
+                            "DeblurModes": [
+                                {
+                                    "Mode": "DM_BASED_ON_LOC_BIN"
+                                },
+                                {
+                                    "Mode": "DM_THRESHOLD_BINARIZATION"
+                                },
+                                {
+                                    "Mode": "DM_DEEP_ANALYSIS"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "ImageParameterOptions": [
+        {
+            "Name": "ip_read_dotcode",
+            "ApplicableStages": [
+                {
+                    "Stage": "SST_BINARIZE_IMAGE",
+                    "BinarizationModes": [
+                        {
+                            "Mode": "BM_LOCAL_BLOCK",
+                            "BlockSizeX": 39,
+                            "BlockSizeY": 39,
+                            "EnableFillBinaryVacancy": 0
+                        }
+                    ]
+                },
+                {
+                    "Stage": "SST_BINARIZE_TEXTURE_REMOVED_GRAYSCALE",
+                    "BinarizationModes": [
+                        {
+                            "Mode": "BM_LOCAL_BLOCK",
+                            "BlockSizeX": 39,
+                            "BlockSizeY": 39,
+                            "EnableFillBinaryVacancy": 0
+                        }
+                    ]
+                },
+                {
+                    "Stage": "SST_TRANSFORM_GRAYSCALE",
+                    "GrayscaleTransformationModes": [
+                        {
+                            "Mode": "GTM_ORIGINAL"
+                        },
+                        {
+                            "Mode": "GTM_INVERTED"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

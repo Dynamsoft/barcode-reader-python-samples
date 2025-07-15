@@ -1,0 +1,61 @@
+{
+
+  "CaptureVisionTemplates": [
+    {
+      "Name": "ReadBlurryBarcode",
+      "ImageROIProcessingNameArray": [
+        "TA_0"
+      ]
+    }
+  ],
+  "TargetROIDefOptions": [
+    {
+      "Name": "TA_0",
+      "TaskSettingNameArray": [
+        "BR_0"
+      ]
+    }
+  ],
+  "BarcodeReaderTaskSettingOptions": [
+    {
+      "Name": "BR_0",
+      "ExpectedBarcodesCount": 1,
+      "BarcodeFormatIds": [
+        "BF_ONED"
+      ],
+      "SectionArray": [
+        {
+          "Section": "ST_REGION_PREDETECTION"
+        },
+        {
+          "Section": "ST_BARCODE_LOCALIZATION"
+        },
+        {
+          "Section": "ST_BARCODE_DECODING",
+          "StageArray": [
+            {
+              "Stage": "SST_DECODE_BARCODES",
+              "DeblurModes": [
+                { "Mode": "DM_BASED_ON_LOC_BIN" },
+                { "Mode": "DM_THRESHOLD_BINARIZATION" },
+                { "Mode": "DM_DIRECT_BINARIZATION" },
+                { "Mode": "DM_SMOOTHING" },
+                { "Mode": "DM_GRAY_EQUALIZATION" },
+                { "Mode": "DM_DEEP_ANALYSIS" },
+                {
+                  "DeblurModelNameArray": ["OneDDeblur"],
+                  "Mode": "DM_NEURAL_NETWORK"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "CaptureVisionModelOptions": [
+    {
+      "Name": "OneDDeblur"
+    }
+  ]
+}

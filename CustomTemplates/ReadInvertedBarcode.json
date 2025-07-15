@@ -1,0 +1,57 @@
+{
+
+  "CaptureVisionTemplates": [
+    {
+      "Name": "ReadInvertedBarcode",
+      "ImageROIProcessingNameArray": [
+        "TA_0"
+      ]
+    }
+  ],
+  "TargetROIDefOptions": [
+    {
+      "Name": "TA_0",
+      "TaskSettingNameArray": [
+        "BR_0"
+      ]
+    }
+  ],
+  "BarcodeReaderTaskSettingOptions": [
+    {
+      "Name": "BR_0",
+      "ExpectedBarcodesCount": 1,
+      "BarcodeFormatIds": [
+        "BF_DEFAULT"
+      ],
+      "SectionArray": [
+        {
+          "Section": "ST_REGION_PREDETECTION",
+          "ImageParameterName": "IP_0"
+        },
+        {
+          "Section": "ST_BARCODE_LOCALIZATION",
+          "ImageParameterName": "IP_0"
+        },
+        {
+          "Section": "ST_BARCODE_DECODING",
+          "ImageParameterName": "IP_0"
+        }
+      ]
+    }
+  ],
+  "ImageParameterOptions": [
+    {
+        "Name": "IP_0",
+        "ApplicableStages": [
+        {
+            "Stage": "SST_TRANSFORM_GRAYSCALE",
+            "GrayscaleTransformationModes": [
+            {
+              "Mode": "GTM_INVERTED"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

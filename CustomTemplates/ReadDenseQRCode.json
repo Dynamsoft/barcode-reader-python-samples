@@ -1,0 +1,105 @@
+{
+    "CaptureVisionTemplates": [
+        {
+            "Name": "ReadDenseQRCode",
+            "ImageROIProcessingNameArray": [
+                "roi_read_dense_qrcode"
+            ],
+            "MaxParallelTasks": 0,
+            "Timeout": 5000
+        }
+    ],
+    "TargetROIDefOptions": [
+        {
+            "Name": "roi_read_dense_qrcode",
+            "TaskSettingNameArray": [
+                "task_read_dense_qrcode"
+            ]
+        }
+    ],
+    "BarcodeReaderTaskSettingOptions": [
+        {
+            "Name": "task_read_dense_qrcode",
+            "ExpectedBarcodesCount": 1,
+            "BarcodeFormatIds": [
+                "BF_QR_CODE"
+            ],
+            "SectionArray": [
+                {
+                    "Section": "ST_REGION_PREDETECTION",
+                    "ImageParameterName": "ip_read_dense_qrcode",
+                    "StageArray": [
+                        {
+                            "Stage": "SST_PREDETECT_REGIONS"
+                        }
+                    ]
+                },
+                {
+                    "Section": "ST_BARCODE_LOCALIZATION",
+                    "ImageParameterName": "ip_read_dense_qrcode",
+                    "StageArray": [
+                        {
+                            "Stage": "SST_LOCALIZE_CANDIDATE_BARCODES",
+                            "LocalizationModes": [
+                                {
+                                    "Mode": "LM_CONNECTED_BLOCKS"
+                                }
+                            ]
+                        },
+                        {
+                            "Stage": "SST_LOCALIZE_BARCODES"
+                        }
+                    ]
+                },
+                {
+                    "Section": "ST_BARCODE_DECODING",
+                    "ImageParameterName": "ip_read_dense_qrcode",
+                    "StageArray": [
+                        {
+                            "Stage": "SST_RESIST_DEFORMATION"
+                        },
+                        {
+                            "Stage": "SST_COMPLEMENT_BARCODE"
+                        },
+                        {
+                            "Stage": "SST_SCALE_BARCODE_IMAGE",
+                            "BarcodeScaleModes": [
+                                {
+                                    "Mode": "BSM_LINEAR_INTERPOLATION",
+                                    "ModuleSizeThreshold": 4,
+                                    "TargetModuleSize": 6
+                                }
+                            ]
+                        },
+                        {
+                            "Stage": "SST_DECODE_BARCODES",
+                            "DeblurModes": [
+                                {
+                                    "Mode": "DM_SHARPENING"
+                                },
+                                {
+                                    "Mode": "DM_GRAY_EQUALIZATION"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "ImageParameterOptions": [
+        {
+            "Name": "ip_read_dense_qrcode",
+            "ApplicableStages": [
+                {
+                    "Stage": "SST_SCALE_IMAGE",
+                    "ImageScaleSetting": {
+                        "ScaleType": "ST_SCALE_DOWN",
+                        "ReferenceEdge": "RE_SHORTER_EDGE",
+                        "EdgeLengthThreshold": 10000
+                    }
+                }
+            ]
+        }
+    ]
+}

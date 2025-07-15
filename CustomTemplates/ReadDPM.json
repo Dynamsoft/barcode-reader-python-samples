@@ -1,0 +1,83 @@
+{
+    "CaptureVisionTemplates": [
+        {
+            "Name": "ReadDPM",
+            "ImageROIProcessingNameArray": [
+                "roi_read_dpm"
+            ],
+            "MaxParallelTasks": 0,
+            "Timeout": 3000
+        }
+    ],
+    "TargetROIDefOptions": [
+        {
+            "Name": "roi_read_dpm",
+            "TaskSettingNameArray": [
+                "task_read_dpm"
+            ]
+        }
+    ],
+    "BarcodeReaderTaskSettingOptions": [
+        {
+            "Name": "task_read_dpm",
+            "ExpectedBarcodesCount": 1,
+            "BarcodeFormatIds": [
+                "BF_DATAMATRIX"
+            ],
+            "DPMCodeReadingModes": [
+                {
+                    "Mode": "DPMCRM_GENERAL"
+                }
+            ],
+            "SectionArray": [
+                {
+                    "Section": "ST_REGION_PREDETECTION",
+                    "ImageParameterName": "ip_default",
+                    "StageArray": [
+                        {
+                            "Stage": "SST_PREDETECT_REGIONS"
+                        }
+                    ]
+                },
+                {
+                    "Section": "ST_BARCODE_LOCALIZATION",
+                    "ImageParameterName": "ip_default",
+                    "StageArray": [
+                        {
+                            "Stage": "SST_LOCALIZE_CANDIDATE_BARCODES",
+                            "LocalizationModes": [
+                                {
+                                    "Mode": "LM_STATISTICS_MARKS"
+                                },
+                                {
+                                    "Mode": "LM_CONNECTED_BLOCKS"
+                                }
+                            ]
+                        },
+                        {
+                            "Stage": "SST_LOCALIZE_BARCODES"
+                        }
+                    ]
+                },
+                {
+                    "Section": "ST_BARCODE_DECODING",
+                    "ImageParameterName": "ip_default",
+                    "StageArray": [
+                        {
+                            "Stage": "SST_RESIST_DEFORMATION"
+                        },
+                        {
+                            "Stage": "SST_COMPLEMENT_BARCODE"
+                        },
+                        {
+                            "Stage": "SST_SCALE_BARCODE_IMAGE"
+                        },
+                        {
+                            "Stage": "SST_DECODE_BARCODES"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
