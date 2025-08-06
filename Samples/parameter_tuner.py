@@ -27,13 +27,13 @@ def select_image():
     print("[5] Custom Image")
 
     while True:
-        choice = input("\nEnter the number of the image to test, or provide a full path to your own image:\n> ").strip()
+        choice = input("\nEnter the number of the image to test, or provide a full path to your own image:\n> ").strip(' \'"')
         image_path, matched_template, description = None, None, None
         if choice in sample_images:
             image_path, matched_template, description = sample_images[choice]
             image_path = os.path.join("..", image_path)
         elif choice == "5":
-            image_path = input("Enter full path to your custom image:\n> ").strip()
+            image_path = input("Enter full path to your custom image:\n> ").strip(' \'"')
             if not os.path.isfile(image_path):
                 print("Invalid path input, please try again.")
                 continue
@@ -61,14 +61,14 @@ def select_template(matched_template, description):
     print("\nEnter the number of the template to test, or provide a full path to your own template:")
 
     while True:
-        choice = input("> ").strip()
+        choice = input("> ").strip(' \'"')
         selected_path = None
         if choice.isdigit():
             index = int(choice) - 1
             if 0 <= index < len(options):
                 selected_path = options[index][0]
                 if selected_path == options[-1][0]:
-                    selected_path = input("Enter full path to your custom template:\n> ")
+                    selected_path = input("Enter full path to your custom template:\n> ").strip(' \'"')
                 elif selected_path == options[-2][0]:
                     package_dir = os.path.dirname(dynamsoft_barcode_reader_bundle.__file__)
                     selected_path = os.path.join(package_dir, "Templates", "DBR-PresetTemplates.json")

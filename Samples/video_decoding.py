@@ -111,7 +111,7 @@ def get_mode_and_path():
 
                 use_video_file = True
                 while True:
-                    video_file_path = input(">> Input your video full path:\n").strip('\'"')
+                    video_file_path = input(">> Input your video full path:\n").strip(' \'"')
                     if not os.path.exists(video_file_path):
                         print("Error:File not found.\n")
                         continue
