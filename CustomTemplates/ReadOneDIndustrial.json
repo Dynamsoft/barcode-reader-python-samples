@@ -1,35 +1,31 @@
 {
     "CaptureVisionTemplates": [
         {
-            "Name": "ReadSingleBarcode",
+            "Name": "ReadOneDIndustrial",
             "ImageROIProcessingNameArray": [
-                "roi-read-single-barcode"
+                "roi-oned-industrial"
             ]
         }
     ],
     "TargetROIDefOptions": [
         {
-            "Name": "roi-read-single-barcode",
+            "Name": "roi-oned-industrial",
             "TaskSettingNameArray": [
-                "task-read-single-barcode"
+                "task-oned-industrial"
             ]
         }
     ],
     "BarcodeReaderTaskSettingOptions": [
         {
-            "Name": "task-read-single-barcode",
-            "ExpectedBarcodesCount": 1,
+            "Name": "task-oned-industrial",
+            "ExpectedBarcodesCount": 0,
             "BarcodeFormatIds": [
-                "BF_DEFAULT"
-            ],
-            "BarcodeFormatSpecificationNameArray": [
-                "bfs1-single-barcode",
-                "bfs2-single-barcode"
+                "BF_CODE_128", "BF_CODE_39", "BF_ITF", "BF_CODABAR", "BF_MSI_CODE"
             ],
             "SectionArray": [
                 {
                     "Section": "ST_REGION_PREDETECTION",
-                    "ImageParameterName": "ip-read-single-barcode",
+                    "ImageParameterName": "ip-oned-industrial",
                     "StageArray": [
                         {
                             "Stage": "SST_PREDETECT_REGIONS"
@@ -38,19 +34,17 @@
                 },
                 {
                     "Section": "ST_BARCODE_LOCALIZATION",
-                    "ImageParameterName": "ip-read-single-barcode",
+                    "ImageParameterName": "ip-oned-industrial",
                     "StageArray": [
                         {
                             "Stage": "SST_LOCALIZE_CANDIDATE_BARCODES",
                             "LocalizationModes": [
                                 {
-                                    "Mode": "LM_SCAN_DIRECTLY"
-                                },
-                                {
                                     "Mode": "LM_CONNECTED_BLOCKS"
                                 },
                                 {
-                                    "Mode": "LM_NEURAL_NETWORK"
+                                    "Mode": "LM_NEURAL_NETWORK",
+                                    "ModelNameArray": [ "OneDLocalization" ]
                                 }
                             ]
                         },
@@ -61,7 +55,7 @@
                 },
                 {
                     "Section": "ST_BARCODE_DECODING",
-                    "ImageParameterName": "ip-read-single-barcode",
+                    "ImageParameterName": "ip-oned-industrial",
                     "StageArray": [
                         {
                             "Stage": "SST_RESIST_DEFORMATION"
@@ -76,19 +70,17 @@
                             "Stage": "SST_DECODE_BARCODES",
                             "DeblurModes": [
                                 {
-                                    "Mode": "DM_BASED_ON_LOC_BIN"
-                                },
-                                {
                                     "Mode": "DM_THRESHOLD_BINARIZATION"
                                 },
                                 {
-                                "Mode": "DM_DIRECT_BINARIZATION"
+                                    "Mode": "DM_DIRECT_BINARIZATION"
                                 },
                                 {
-                                "Mode": "DM_NEURAL_NETWORK"
+                                    "Mode": "DM_NEURAL_NETWORK",
+                                    "ModelNameArray": [ "Code128Decoder", "OneDDeblur" ]
                                 },
                                 {
-                                "Mode": "DM_DEEP_ANALYSIS"
+                                    "Mode": "DM_DEEP_ANALYSIS"
                                 }
                             ]
                         }
@@ -97,31 +89,9 @@
             ]
         }
     ],
-    "BarcodeFormatSpecificationOptions": [
-        {
-            "Name": "bfs1-single-barcode",
-            "BarcodeFormatIds": [
-                "BF_PDF417",
-                "BF_QR_CODE",
-                "BF_DATAMATRIX",
-                "BF_AZTEC",
-                "BF_MICRO_QR",
-                "BF_MICRO_PDF417",
-                "BF_DOTCODE"
-            ],
-            "MirrorMode": "MM_BOTH"
-        },
-        {
-            "Name": "bfs2-single-barcode",
-            "BarcodeFormatIds": [
-                "BF_ALL"
-            ],
-            "MirrorMode": "MM_NORMAL"
-        }
-    ],
     "ImageParameterOptions": [
         {
-            "Name": "ip-read-single-barcode",
+            "Name": "ip-oned-industrial",
             "ApplicableStages": [
                 {
                     "Stage": "SST_DETECT_TEXT_ZONES",
@@ -154,17 +124,6 @@
                             "BlockSizeX": 0,
                             "BlockSizeY": 0,
                             "EnableFillBinaryVacancy": 0
-                        }
-                    ]
-                },
-                {
-                    "Stage": "SST_TRANSFORM_GRAYSCALE",
-                    "GrayscaleTransformationModes": [
-                        {
-                            "Mode": "GTM_ORIGINAL"
-                        },
-                        {
-                            "Mode": "GTM_INVERTED"
                         }
                     ]
                 }

@@ -86,30 +86,40 @@ if __name__ == '__main__':
 
         # 3. Replace by your own image path.
         image_path = os.path.dirname(os.path.abspath(__file__)) + os.path.sep + "../images/GeneralBarcodes.png"
-        io = ImageIO()
 
         # 4. Read image from file.
+        io = ImageIO()
         err, image = io.read_from_file(image_path)
         if err != EnumErrorCode.EC_OK:
             print("Failed to read image:", err)
             exit()
-        # 5. Decode barcodes from the image.
+        # 5. Update settings to get orginal image.
+        _, _, settings = cvr_instance.get_simplified_settings(EnumPresetTemplate.PT_READ_BARCODES)
+        settings.output_original_image = 1
+        cvr_instance.update_settings(EnumPresetTemplate.PT_READ_BARCODES, settings)
+
+        # 6. Decode barcodes from the image.
         result = cvr_instance.capture(image, EnumPresetTemplate.PT_READ_BARCODES)
 
-        # 6. Check error code.
+        # 7. Check error code.
         if result.get_error_code() == EnumErrorCode.EC_UNSUPPORTED_JSON_KEY_WARNING:
             print("Warning:", result.get_error_code(), result.get_error_string())
         elif result.get_error_code() != EnumErrorCode.EC_OK:
             print("Error:", result.get_error_code(), result.get_error_string())
 
-        # 7. Extract the locations of decoded barcodes from the result.
+        # 8. Get original image.
+        for item in result.get_items():
+            if isinstance(item, OriginalImageResultItem):
+                image = item.get_image_data()
+                break
+        # 9. Extract the locations of decoded barcodes from the result.
         result_locs = []
         barcode_result = result.get_decoded_barcodes_result()
         if barcode_result:
             for i,item in enumerate(barcode_result.get_items()):
                 result_locs.append(item.get_location())
 
-        # 7. Draw the outline border of the barcodes on the image.
+        # 10. Draw the outline border of the barcodes on the image.
         # The barcodes that have been decode successfully are marked as green(0xFF00FF00)
         # The barcodes that only have been localized are marked as red(0xFFFF0000)
         if irr.locations or result_locs:
@@ -118,7 +128,7 @@ if __name__ == '__main__':
             result_image_path = os.path.join(os.path.dirname(image_path),
                                         os.path.splitext(os.path.basename(image_path))[0] + "_result.png")
 
-            # 8. Save the image.
+            # 11. Save the image.
             io.save_to_file(image_complete,result_image_path)
             import platform
             system = platform.system()

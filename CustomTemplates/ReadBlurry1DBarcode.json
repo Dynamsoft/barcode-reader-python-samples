@@ -1,35 +1,31 @@
 {
     "CaptureVisionTemplates": [
         {
-            "Name": "ReadSingleBarcode",
+            "Name": "ReadBlurry1DBarcode",
             "ImageROIProcessingNameArray": [
-                "roi-read-single-barcode"
+                "roi-read-blurry-1d-barcode"
             ]
         }
     ],
     "TargetROIDefOptions": [
         {
-            "Name": "roi-read-single-barcode",
+            "Name": "roi-read-blurry-1d-barcode",
             "TaskSettingNameArray": [
-                "task-read-single-barcode"
+                "task-read-blurry-1d-barcode"
             ]
         }
     ],
     "BarcodeReaderTaskSettingOptions": [
         {
-            "Name": "task-read-single-barcode",
+            "Name": "task-read-blurry-1d-barcode",
             "ExpectedBarcodesCount": 1,
             "BarcodeFormatIds": [
-                "BF_DEFAULT"
-            ],
-            "BarcodeFormatSpecificationNameArray": [
-                "bfs1-single-barcode",
-                "bfs2-single-barcode"
+                "BF_ONED"
             ],
             "SectionArray": [
                 {
                     "Section": "ST_REGION_PREDETECTION",
-                    "ImageParameterName": "ip-read-single-barcode",
+                    "ImageParameterName": "ip-read-blurry-1d-barcode",
                     "StageArray": [
                         {
                             "Stage": "SST_PREDETECT_REGIONS"
@@ -38,7 +34,7 @@
                 },
                 {
                     "Section": "ST_BARCODE_LOCALIZATION",
-                    "ImageParameterName": "ip-read-single-barcode",
+                    "ImageParameterName": "ip-read-blurry-1d-barcode",
                     "StageArray": [
                         {
                             "Stage": "SST_LOCALIZE_CANDIDATE_BARCODES",
@@ -50,7 +46,8 @@
                                     "Mode": "LM_CONNECTED_BLOCKS"
                                 },
                                 {
-                                    "Mode": "LM_NEURAL_NETWORK"
+                                    "Mode": "LM_NEURAL_NETWORK",
+                                    "ModelNameArray": [ "OneDLocalization" ]
                                 }
                             ]
                         },
@@ -61,7 +58,7 @@
                 },
                 {
                     "Section": "ST_BARCODE_DECODING",
-                    "ImageParameterName": "ip-read-single-barcode",
+                    "ImageParameterName": "ip-read-blurry-1d-barcode",
                     "StageArray": [
                         {
                             "Stage": "SST_RESIST_DEFORMATION"
@@ -97,31 +94,9 @@
             ]
         }
     ],
-    "BarcodeFormatSpecificationOptions": [
-        {
-            "Name": "bfs1-single-barcode",
-            "BarcodeFormatIds": [
-                "BF_PDF417",
-                "BF_QR_CODE",
-                "BF_DATAMATRIX",
-                "BF_AZTEC",
-                "BF_MICRO_QR",
-                "BF_MICRO_PDF417",
-                "BF_DOTCODE"
-            ],
-            "MirrorMode": "MM_BOTH"
-        },
-        {
-            "Name": "bfs2-single-barcode",
-            "BarcodeFormatIds": [
-                "BF_ALL"
-            ],
-            "MirrorMode": "MM_NORMAL"
-        }
-    ],
     "ImageParameterOptions": [
         {
-            "Name": "ip-read-single-barcode",
+            "Name": "ip-read-blurry-1d-barcode",
             "ApplicableStages": [
                 {
                     "Stage": "SST_DETECT_TEXT_ZONES",

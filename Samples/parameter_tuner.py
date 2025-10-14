@@ -12,19 +12,23 @@ class LoopInfo():
         self.description = description
 
 sample_images = {
-    "1": ("images/blurry.png", "ReadBlurryBarcode.json", "Suitable for blurred barcode"),
+    "1": ("images/blurry.png", "ReadBlurry1DBarcode.json", "Suitable for blurred 1D barcode"),
     "2": ("images/GeneralBarcodes.png", "ReadMultipleBarcode.json", "Suitable for multiple barcodes"),
     "3": ("images/inverted-barcode.png", "ReadInvertedBarcode.json", "Suitable for colour inverted barcode"),
     "4": ("images/DPM.png", "ReadDPM.json", "Suitable for Direct Part Marking barcode"),
+    "5": ("images/EAN-13.jpg", "ReadOneDRetail.json", "Suitable for retail 1D barcode such as EAN13, UPC-A"),
+    "6": ("images/OneDIndustrial.jpg", "ReadOneDIndustrial.json", "Suitable for industrial 1D barcode such as Code128, Code39"),
 }
 
 def select_image():
     print("Available Sample Scenarios:")
-    print("[1] Blurry barcode")
+    print("[1] Blurry 1D barcode")
     print("[2] Multiple barcodes")
     print("[3] Colour Inverted Barcode")
     print("[4] Direct Part Marking (DPM)")
-    print("[5] Custom Image")
+    print("[5] Retail 1D barcode")
+    print("[6] Industrial 1D barcode")
+    print("[7] Custom Image")
 
     while True:
         choice = input("\nEnter the number of the image to test, or provide a full path to your own image:\n> ").strip(' \'"')
@@ -32,7 +36,7 @@ def select_image():
         if choice in sample_images:
             image_path, matched_template, description = sample_images[choice]
             image_path = os.path.join("..", image_path)
-        elif choice == "5":
+        elif choice == "7":
             image_path = input("Enter full path to your custom image:\n> ").strip(' \'"')
             if not os.path.isfile(image_path):
                 print("Invalid path input, please try again.")
@@ -100,7 +104,7 @@ def run(cvr_instance:CaptureVisionRouter, image_path:str, template_path:str):
         print("No results.")
     else:
         for i, result in enumerate(results):
-            print(f"\nResult{' ' + str(i+1) if i > 0 else ''}:")
+            print(f"\nResult{' Page-' + str(i+1) if i > 0 else ''}:")
             error_code = result.get_error_code()
             if error_code != EnumErrorCode.EC_OK and error_code != EnumErrorCode.EC_UNSUPPORTED_JSON_KEY_WARNING:
                 print(f"Error: {error_code}, {result.get_error_string()}")
