@@ -19,9 +19,13 @@
         {
             "Name": "task-oned-retail",
             "ExpectedBarcodesCount": 0,
-            "BarcodeFormatIds": [
-                "BF_EAN_13", "BF_EAN_8", "BF_UPC_A", "BF_UPC_E"
-            ],
+          "BarcodeFormatIds": [
+            "BF_EAN_13",
+            "BF_EAN_8",
+            "BF_UPC_A",
+            "BF_UPC_E",
+            "BF_GS1_DATABAR"
+          ],
             "SectionArray": [
                 {
                     "Section": "ST_REGION_PREDETECTION",

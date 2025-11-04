@@ -9,6 +9,7 @@ class MyCapturedResultReceiver(CapturedResultReceiver):
         tag = result.get_original_image_tag()
         if isinstance(tag, FileImageTag):
             print("File:", tag.get_file_path())
+            print("Page:", tag.get_page_number() + 1)
         if result.get_error_code() == EnumErrorCode.EC_UNSUPPORTED_JSON_KEY_WARNING:
             print("Warning:", result.get_error_string())
         elif result.get_error_code() != EnumErrorCode.EC_OK:

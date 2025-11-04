@@ -28,6 +28,10 @@ if __name__ == "__main__":
                 print("No barcode detected.")
             else:
                 for i, result in enumerate(results):
+                    page_number = i + 1
+                    tag = result.get_original_image_tag()
+                    if isinstance(tag, FileImageTag):
+                        page_number = tag.get_page_number() + 1
                     if result.get_error_code() == EnumErrorCode.EC_UNSUPPORTED_JSON_KEY_WARNING:
                         print("Warning:", result.get_error_code(), result.get_error_string())
                     elif result.get_error_code() != EnumErrorCode.EC_OK:
@@ -35,10 +39,10 @@ if __name__ == "__main__":
 
                     barcode_result = result.get_decoded_barcodes_result()
                     if barcode_result is None or barcode_result.get_items() == 0:
-                        print("Page-"+str(i+1), "No barcode detected.")
+                        print("Page-"+str(page_number), "No barcode detected.")
                     else:
                         items = barcode_result.get_items()
-                        print("Page-"+str(i+1), "Decoded", len(items), "barcodes.")
+                        print("Page-"+str(page_number), "Decoded", len(items), "barcodes.")
                         for index,item in enumerate(items):
                             print()
                             print("Barcode", index)

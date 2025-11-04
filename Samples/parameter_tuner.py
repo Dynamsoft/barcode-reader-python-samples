@@ -104,7 +104,11 @@ def run(cvr_instance:CaptureVisionRouter, image_path:str, template_path:str):
         print("No results.")
     else:
         for i, result in enumerate(results):
-            print(f"\nResult{' Page-' + str(i+1) if i > 0 else ''}:")
+            page_number = i + 1
+            tag = result.get_original_image_tag()
+            if isinstance(tag, FileImageTag):
+                page_number = tag.get_page_number() + 1
+            print(f"\nResult{' Page-' + str(page_number) if tag.get_total_pages() > 0 else ''}:")
             error_code = result.get_error_code()
             if error_code != EnumErrorCode.EC_OK and error_code != EnumErrorCode.EC_UNSUPPORTED_JSON_KEY_WARNING:
                 print(f"Error: {error_code}, {result.get_error_string()}")
