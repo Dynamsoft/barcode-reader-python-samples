@@ -1,5 +1,9 @@
 from dynamsoft_barcode_reader_bundle import *
 import os
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent
+
 if __name__ == '__main__':
     # 1. Initialize license.
     # You can request and extend a trial license from https://www.dynamsoft.com/customer/license/trialLicense?product=dbr&utm_source=samples&package=python
@@ -12,7 +16,7 @@ if __name__ == '__main__':
         cvr_instance = CaptureVisionRouter()
 
         # 3. Replace by your own image path.
-        image_path = os.path.dirname(os.path.abspath(__file__)) + os.path.sep + "../images/GeneralBarcodes.png"
+        image_path = str(BASE_DIR.parent / "Images" / "GeneralBarcodes.png")
 
         # 4. Decode barcodes from an image file.
         result_array = cvr_instance.capture_multi_pages(image_path, EnumPresetTemplate.PT_READ_BARCODES)

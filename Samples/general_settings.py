@@ -1,5 +1,7 @@
 import os
 from dynamsoft_barcode_reader_bundle import *
+from pathlib import Path
+BASE_DIR = Path(__file__).resolve().parent
 if __name__ == "__main__":
     try:
         # 1. Initialize license.
@@ -43,7 +45,7 @@ if __name__ == "__main__":
             if err_code != EnumErrorCode.EC_OK:
                 print("Update settings failed: ErrorCode:", err_code, ", ErrorString:", err_str)
             # 4.Replace by your own image path
-            image_path = os.path.dirname(os.path.abspath(__file__)) + os.path.sep + "../images/GeneralBarcodes.png"
+            image_path = str(BASE_DIR.parent / "Images" / "GeneralBarcodes.png")
 
             # 5.Decode barcodes from an image file.
             result_array = cvr_instance.capture_multi_pages(image_path, EnumPresetTemplate.PT_READ_BARCODES)

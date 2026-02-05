@@ -1,6 +1,31 @@
 from dynamsoft_barcode_reader_bundle import *
-import cv2
+try:
+    import cv2
+except ModuleNotFoundError:
+    raise SystemExit(
+        "OpenCV is required for this sample.\n"
+        "Install it with:\n"
+        "   python -m pip install opencv-python\n"
+    )
 import os
+
+def silence_opencv():
+    # OpenCV 4.5+
+    if hasattr(cv2, "setLogLevel"):
+        try:
+            cv2.setLogLevel(0)  # LOG_LEVEL_SILENT
+            return
+        except Exception:
+            pass
+
+    if hasattr(cv2, "utils") and hasattr(cv2.utils, "logging"):
+        try:
+            cv2.utils.logging.setLogLevel(
+                cv2.utils.logging.LOG_LEVEL_SILENT
+            )
+        except Exception:
+            pass
+
 class MyCapturedResultReceiver(CapturedResultReceiver):
 
     def __init__(self):
@@ -58,9 +83,13 @@ def decode_video(use_video_file: bool = False, video_file_path: str = "") -> Non
         if not use_video_file:
             # a. Decode video from camera
             vc = cv2.VideoCapture(0)
+            if not vc.isOpened():
+                raise RuntimeError("Camera not found or cannot be opened")
         else:
             # # b. Decode video file
             vc = cv2.VideoCapture(video_file_path)
+            if not vc.isOpened():
+                raise RuntimeError("File not found or cannot be opened")
 
         video_width  = int(vc.get(cv2.CAP_PROP_FRAME_WIDTH))
         video_height = int(vc.get(cv2.CAP_PROP_FRAME_HEIGHT))
@@ -126,6 +155,7 @@ def get_mode_and_path():
     return use_video_file, video_file_path
 
 if __name__ == "__main__":
+    silence_opencv()
 
     print("-------------------start------------------------")
 

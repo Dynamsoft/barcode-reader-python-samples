@@ -1,8 +1,38 @@
 from dynamsoft_barcode_reader_bundle import *
-import cv2
+try:
+    import cv2
+except ModuleNotFoundError:
+    raise SystemExit(
+        "OpenCV is required for this sample.\n"
+        "Install it with:\n"
+        "   python -m pip install opencv-python\n"
+    )
 from PIL import Image
 import numpy as np
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent
+
+def silence_opencv():
+    # OpenCV 4.5+
+    if hasattr(cv2, "setLogLevel"):
+        try:
+            cv2.setLogLevel(0)  # LOG_LEVEL_SILENT
+            return
+        except Exception:
+            pass
+
+    if hasattr(cv2, "utils") and hasattr(cv2.utils, "logging"):
+        try:
+            cv2.utils.logging.setLogLevel(
+                cv2.utils.logging.LOG_LEVEL_SILENT
+            )
+        except Exception:
+            pass
+
 if __name__ == "__main__":
+    silence_opencv()
+
     try:
         # 1.Initialize license.
         # The string "DLS2eyJvcmdhbml6YXRpb25JRCI6IjIwMDAwMSJ9" here is a free public trial license. Note that network connection is required for this license to work.
@@ -21,7 +51,7 @@ if __name__ == "__main__":
                 "decode with opencv",
                 "decode with PIL",
             ]
-            file_path = "../images/GeneralBarcodes.png"
+            file_path = str(BASE_DIR.parent / "Images" / "GeneralBarcodes.png")
             while True:
                 # 3. Choose decode mode.
                 for i, option in enumerate(options):

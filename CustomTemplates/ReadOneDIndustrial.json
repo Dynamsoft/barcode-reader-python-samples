@@ -77,7 +77,7 @@
                                 },
                                 {
                                     "Mode": "DM_NEURAL_NETWORK",
-                                    "ModelNameArray": [ "Code128Decoder", "OneDDeblur" ]
+                                    "ModelNameArray": [ "Code128Decoder", "Code39ITFDecoder", "OneDDeblur" ]
                                 },
                                 {
                                     "Mode": "DM_DEEP_ANALYSIS"

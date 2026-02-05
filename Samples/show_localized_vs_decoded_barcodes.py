@@ -1,5 +1,8 @@
 from dynamsoft_barcode_reader_bundle import *
 import os
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent
 
 class MyIntermediateResultReceiver(IntermediateResultReceiver):
     """
@@ -85,7 +88,7 @@ if __name__ == '__main__':
         im.add_result_receiver(irr)
 
         # 3. Replace by your own image path.
-        image_path = os.path.dirname(os.path.abspath(__file__)) + os.path.sep + "../images/GeneralBarcodes.png"
+        image_path = str(BASE_DIR.parent / "Images" / "GeneralBarcodes.png")
 
         # 4. Read image from file.
         io = ImageIO()

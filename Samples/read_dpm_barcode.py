@@ -1,5 +1,8 @@
-import os
 from dynamsoft_barcode_reader_bundle import *
+import os
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent
 
 if __name__ == "__main__":
     try:
@@ -11,13 +14,13 @@ if __name__ == "__main__":
             raise Exception("License initialization failed: ErrorCode: "+ str(errorCode) + ", ErrorString:" + errorMsg)
         else:
             cvr_instance = CaptureVisionRouter()
-            template_path = os.path.dirname(os.path.abspath(__file__)) + os.path.sep +"ReadDPM.json"
+            template_path = str(BASE_DIR.parent / "CustomTemplates" / "ReadDPM.json")
             errorCode, errorMsg = cvr_instance.init_settings_from_file(template_path)
             if errorCode != EnumErrorCode.EC_OK:
                 raise Exception("Init template failed: " + errorMsg)
 
             # 2 Replace with your own dpm barcode image path
-            image_path = os.path.dirname(os.path.abspath(__file__)) + os.path.sep + "../images/DPM.png"
+            image_path = str(BASE_DIR.parent / "Images" / "DPM.png")
 
             # 3 Decode barcodes from the image file.
             result_array = cvr_instance.capture_multi_pages(image_path,"")

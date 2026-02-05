@@ -1,7 +1,11 @@
 import time
 import os
 import dynamsoft_barcode_reader_bundle
+from pathlib import Path
 from dynamsoft_barcode_reader_bundle import *
+
+BASE_DIR = Path(__file__).resolve().parent
+PKG_DIR = Path(dynamsoft_barcode_reader_bundle.__file__).resolve().parent
 
 class LoopInfo():
     def __init__(self,cvr_instance : CaptureVisionRouter, image_path: str = None,matched_template: str = None, description: str = None, template_path: str = None):
@@ -12,12 +16,12 @@ class LoopInfo():
         self.description = description
 
 sample_images = {
-    "1": ("images/blurry.png", "ReadBlurry1DBarcode.json", "Suitable for blurred 1D barcode"),
-    "2": ("images/GeneralBarcodes.png", "ReadMultipleBarcode.json", "Suitable for multiple barcodes"),
-    "3": ("images/inverted-barcode.png", "ReadInvertedBarcode.json", "Suitable for colour inverted barcode"),
-    "4": ("images/DPM.png", "ReadDPM.json", "Suitable for Direct Part Marking barcode"),
-    "5": ("images/EAN-13.jpg", "ReadOneDRetail.json", "Suitable for retail 1D barcode such as EAN13, UPC-A"),
-    "6": ("images/OneDIndustrial.jpg", "ReadOneDIndustrial.json", "Suitable for industrial 1D barcode such as Code128, Code39"),
+    "1": ("Images/blurry.png", "ReadBlurry1DBarcode.json", "Suitable for blurred 1D barcode"),
+    "2": ("Images/GeneralBarcodes.png", "ReadMultipleBarcode.json", "Suitable for multiple barcodes"),
+    "3": ("Images/inverted-barcode.png", "ReadInvertedBarcode.json", "Suitable for colour inverted barcode"),
+    "4": ("Images/DPM.png", "ReadDPM.json", "Suitable for Direct Part Marking barcode"),
+    "5": ("Images/EAN-13.jpg", "ReadOneDRetail.json", "Suitable for retail 1D barcode such as EAN13, UPC-A"),
+    "6": ("Images/OneDIndustrial.jpg", "ReadOneDIndustrial.json", "Suitable for industrial 1D barcode such as Code128, Code39"),
 }
 
 def select_image():
@@ -35,7 +39,7 @@ def select_image():
         image_path, matched_template, description = None, None, None
         if choice in sample_images:
             image_path, matched_template, description = sample_images[choice]
-            image_path = os.path.join("..", image_path)
+            image_path = str(BASE_DIR.parent / image_path)
         elif choice == "7":
             image_path = input("Enter full path to your custom image:\n> ").strip(' \'"')
             if not os.path.isfile(image_path):
@@ -74,10 +78,9 @@ def select_template(matched_template, description):
                 if selected_path == options[-1][0]:
                     selected_path = input("Enter full path to your custom template:\n> ").strip(' \'"')
                 elif selected_path == options[-2][0]:
-                    package_dir = os.path.dirname(dynamsoft_barcode_reader_bundle.__file__)
-                    selected_path = os.path.join(package_dir, "Templates", "DBR-PresetTemplates.json")
+                    selected_path = str(PKG_DIR/"Templates"/"DBR-PresetTemplates.json")
                 else:
-                    selected_path = os.path.join("..", "CustomTemplates", selected_path)
+                    selected_path = str(BASE_DIR.parent/"CustomTemplates"/selected_path)
             else:
                 print("Invalid choice, please try again.")
                 continue
@@ -105,19 +108,23 @@ def run(cvr_instance:CaptureVisionRouter, image_path:str, template_path:str):
     else:
         for i, result in enumerate(results):
             page_number = i + 1
+            total_pages = 0
             tag = result.get_original_image_tag()
             if isinstance(tag, FileImageTag):
                 page_number = tag.get_page_number() + 1
-            print(f"\nResult{' Page-' + str(page_number) if tag.get_total_pages() > 0 else ''}:")
+                total_pages = tag.get_total_pages()
+            print(f"\nResult{' Page-' + str(page_number) if total_pages > 0 else ''}:")
             error_code = result.get_error_code()
             if error_code != EnumErrorCode.EC_OK and error_code != EnumErrorCode.EC_UNSUPPORTED_JSON_KEY_WARNING:
                 print(f"Error: {error_code}, {result.get_error_string()}")
             barcode_result = result.get_decoded_barcodes_result()
-            if barcode_result:
+            if barcode_result is not None:
                 items = barcode_result.get_items()
                 for j, item in enumerate(items):
                     if isinstance(item, BarcodeResultItem):
                         print(f"Barcode result [{i+1}-{j+1}]: {item.get_text()} (Format: {item.get_format_string()})")
+            else:
+                print("No barcode detected.")
     print(f"Time used: {elapsed_ms} ms...\n")
 
 def loop_inner(loop_info : LoopInfo, get_image: bool = True, get_template: bool = True):
