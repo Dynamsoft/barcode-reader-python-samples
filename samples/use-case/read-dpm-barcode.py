@@ -29,8 +29,8 @@ if __name__ == "__main__":
             raise BarcodeReaderError("Get instance failed")
         # 3.Config runtime settings for dmp
         sts = dbr.get_runtime_settings()
-        
-        # 3.1. Set expected barcode formats. 
+
+        # 3.1. Set expected barcode formats.
         # Generally, the most common dpm barcode is datamatrix or qrcode
         sts.barcode_format_ids = EnumBarcodeFormat.BF_DATAMATRIX | EnumBarcodeFormat.BF_QR_CODE
 
@@ -50,11 +50,11 @@ if __name__ == "__main__":
 
         # 3 Decode barcodes from an image file by current runtime settings. The second parameter value "" means to decode through the current PublicRuntimeSettings.
         results = dbr.decode_file(image_path,"")
-        
+
         # 4 Output the barcode format and barcode text.
         output_results(results)
-        
+
         dbr.recycle_instance()
-        
+
     except BarcodeReaderError as bre:
         print(bre)
