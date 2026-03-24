@@ -8,7 +8,7 @@
 
 ## Overview
 
-This repository contains multiple samples that demonstrate how to use the [Dynamsoft Barcode Reader](https://www.dynamsoft.com/barcode-reader/overview/) Python Edition.
+This repository contains multiple samples that demonstrate how to use the [Dynamsoft Barcode Reader](https://www.dynamsoft.com/barcode-reader/overview/) Python Edition. It also includes an [AI coding skill](#build-your-app-faster-with-ai) that helps you quickly build your own barcode app with AI agents like GitHub Copilot, Claude, and Cursor.
 
 ## Requirements
 
@@ -66,6 +66,30 @@ In addition to the classic barcode decoding samples listed above, the following 
 | [`DriverLicenseScanner`](https://github.com/Dynamsoft/capture-vision-python-samples/blob/main/Samples/driver_license_scanner.py) | Shows how to capture and extract user's information from driver license/ID. |
 | [`VINScanner`](https://github.com/Dynamsoft/capture-vision-python-samples/blob/main/Samples/vin_scanner.py) | Shows how to capture and extract vehicle's information from Vehicle Identification Number (VIN). |
 | [`GS1AIScanner`](https://github.com/Dynamsoft/capture-vision-python-samples/blob/main/Samples/gs1_ai_scanner.py) | Shows how to extract and interpret GS1 Application Identifiers (AIs) from GS1 barcodes. |
+
+## Build Your App Faster with AI
+
+> [!TIP]
+> This repository includes an **AI coding skill** that teaches your AI agent (GitHub Copilot, Claude, Cursor, Windsurf, and 40+ others) the correct DBR SDK patterns. Just describe what you need in plain English and get working code instantly - ideal for quickly building a POC.
+
+**Install the skill** after cloning this repository, run from the repo root:
+
+```bash
+npx skills add .
+```
+
+This detects your installed AI agents and sets up the skill for all of them automatically. You can also target a specific agent:
+
+```bash
+npx skills add . -a claude-code
+npx skills add . -a cursor -a windsurf
+```
+
+**Try it out** - after installation, ask your AI agent:
+
+> *"Write a Python script that reads barcodes from a single image file and prints the format and text."*
+
+For manual setup per agent, example prompts, and more details, see the [skill documentation](skills/dbr-python-sample-creator/).
 
 ## Documentation
 

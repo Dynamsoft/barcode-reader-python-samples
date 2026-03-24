@@ -1,0 +1,54 @@
+{
+  "skill_name": "dbr-python-sample-creator",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Write a Python script that reads barcodes from a single image file and prints the results. The image path should be provided as a command line argument.",
+      "expected_output": "A Python script using dynamsoft_barcode_reader_bundle that accepts a file path from sys.argv, initializes the license, creates a CaptureVisionRouter, calls capture or capture_multi_pages, and prints each barcode's format and text.",
+      "files": [],
+      "expectations": [
+        "Uses 'from dynamsoft_barcode_reader_bundle import *' as the import",
+        "Calls LicenseManager.init_license() with a license key string",
+        "Checks error_code against EnumErrorCode.EC_OK and EC_LICENSE_WARNING",
+        "Creates a CaptureVisionRouter() instance",
+        "Uses capture() or capture_multi_pages() to process the image",
+        "Extracts barcode results using get_decoded_barcodes_result()",
+        "Prints barcode format via get_format_string() and text via get_text()",
+        "Accepts the image path from command line arguments (sys.argv)",
+        "Uses if __name__ == '__main__': as entry point"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Create a Python script using dynamsoft_barcode_reader_bundle that reads barcodes from all images in a folder using DirectoryFetcher and CapturedResultReceiver, and prints the barcode format and text for each image.",
+      "expected_output": "A Python script that uses DirectoryFetcher to feed images from a folder, CapturedResultReceiver for async barcode results, and ImageSourceStateListener to stop when done.",
+      "files": [],
+      "expectations": [
+        "Uses 'from dynamsoft_barcode_reader_bundle import *' as the import",
+        "Calls LicenseManager.init_license() with a license key string",
+        "Uses DirectoryFetcher to set a directory of images",
+        "Creates a CapturedResultReceiver subclass with on_decoded_barcodes_received callback",
+        "Creates an ImageSourceStateListener subclass to stop capturing when exhausted",
+        "Calls start_capturing with a barcode template",
+        "Prints barcode format via get_format_string() and text via get_text()"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "I need a Python script that reads barcodes from a webcam feed using OpenCV and the Dynamsoft SDK. It should show the camera feed in a window and print unique barcodes as they're detected (no duplicates). Press 'q' to quit.",
+      "expected_output": "A Python script using cv2.VideoCapture for webcam, feeding frames to CaptureVisionRouter via ImageSourceAdapter or direct capture, with MultiFrameResultCrossFilter for deduplication, displaying the camera feed, and quitting on 'q'.",
+      "files": [],
+      "expectations": [
+        "Uses 'from dynamsoft_barcode_reader_bundle import *' as the import",
+        "Uses OpenCV (cv2) for camera capture and display",
+        "Calls LicenseManager.init_license() with a license key string",
+        "Creates a CaptureVisionRouter() instance",
+        "Implements deduplication logic (either MultiFrameResultCrossFilter or manual set-based tracking)",
+        "Displays camera feed using cv2.imshow()",
+        "Quits when 'q' key is pressed (cv2.waitKey check)",
+        "Feeds frames to the SDK (via ImageSourceAdapter, ImageData, or direct capture call)",
+        "Prints barcode format and text for newly detected barcodes"
+      ]
+    }
+  ]
+}
