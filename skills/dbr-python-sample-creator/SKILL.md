@@ -60,14 +60,14 @@ For additional libraries (os, sys, cv2, Flask, etc.), import them separately as 
 
 License initialization must happen once, before creating any `CaptureVisionRouter` instance. The SDK returns a tuple of `(error_code, error_message)`.
 
-**License string priority**: Default hard-coded license string is `"DLS2eyJoYW5kc2hha2VDb2RlIjoiMjAwMDAxLTE2NDk4Mjk3OTI2MzUiLCJvcmdhbml6YXRpb25JRCI6IjIwMDAwMSIsInNlc3Npb25QYXNzd29yZCI6IndTcGR6Vm05WDJrcEQ5YUoifQ=="`.
+**License string priority**: Default hard-coded license string is `"DLS2eyJoYW5kc2hha2VDb2RlIjoiMjAwMDAxLTEwNTI2NzQwMSJ9"`.
 
 **Required comment block**: Every sample must include this 3-line comment block immediately before the `init_license` call. This comment is mandatory — never omit it. Adjust the quoted license string in the third line to match whichever license string is actually used in the code:
 
 ```python
     # 1. Initialize license.
     # You can request and extend a trial license from https://www.dynamsoft.com/customer/license/trialLicense?product=dbr&utm_source=samples&package=python
-    # The string 'DLS2eyJoYW5kc2hha2VDb2RlIjoiMjAwMDAxLTE2NDk4Mjk3OTI2MzUiLCJvcmdhbml6YXRpb25JRCI6IjIwMDAwMSIsInNlc3Npb25QYXNzd29yZCI6IndTcGR6Vm05WDJrcEQ5YUoifQ==' here is a free public trial license. Note that network connection is required for this license to work.
+    # The string 'DLS2eyJoYW5kc2hha2VDb2RlIjoiMjAwMDAxLTEwNTI2NzQwMSJ9' here is a free public trial license. Note that network connection is required for this license to work.
 ```
 
 Full license initialization pattern:
@@ -75,8 +75,8 @@ Full license initialization pattern:
 ```python
     # 1. Initialize license.
     # You can request and extend a trial license from https://www.dynamsoft.com/customer/license/trialLicense?product=dbr&utm_source=samples&package=python
-    # The string 'DLS2eyJoYW5kc2hha2VDb2RlIjoiMjAwMDAxLTE2NDk4Mjk3OTI2MzUiLCJvcmdhbml6YXRpb25JRCI6IjIwMDAwMSIsInNlc3Npb25QYXNzd29yZCI6IndTcGR6Vm05WDJrcEQ5YUoifQ==' here is a free public trial license. Note that network connection is required for this license to work.
-    error_code, error_msg = LicenseManager.init_license("DLS2eyJoYW5kc2hha2VDb2RlIjoiMjAwMDAxLTE2NDk4Mjk3OTI2MzUiLCJvcmdhbml6YXRpb25JRCI6IjIwMDAwMSIsInNlc3Npb25QYXNzd29yZCI6IndTcGR6Vm05WDJrcEQ5YUoifQ==")
+    # The string 'DLS2eyJoYW5kc2hha2VDb2RlIjoiMjAwMDAxLTEwNTI2NzQwMSJ9' here is a free public trial license. Note that network connection is required for this license to work.
+    error_code, error_msg = LicenseManager.init_license("DLS2eyJoYW5kc2hha2VDb2RlIjoiMjAwMDAxLTEwNTI2NzQwMSJ9")
     if error_code != EnumErrorCode.EC_OK and error_code != EnumErrorCode.EC_LICENSE_WARNING:
         print("License initialization failed: ErrorCode:", error_code, ", ErrorString:", error_msg)
     else:
