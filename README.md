@@ -70,7 +70,7 @@ In addition to the classic barcode decoding samples listed above, the following 
 ## Build Your App Faster with AI
 
 > [!TIP]
-> This repository includes an **AI coding skill** that teaches your AI agent (GitHub Copilot, Claude, Cursor, Windsurf, and 40+ others) the correct DBR SDK patterns. Just describe what you need in plain English and get working code instantly - ideal for quickly building a POC.
+> This repository includes an **AI coding skill** that teaches your AI agent (GitHub Copilot, Claude, Cursor, Windsurf, and 40+ others) the correct DBR SDK patterns. Just describe what you need and get working code instantly - ideal for quickly building a POC.
 
 **Install the skill** after cloning this repository, run from the repo root:
 
