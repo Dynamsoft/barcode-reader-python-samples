@@ -133,16 +133,19 @@ if __name__ == '__main__':
 
             # 11. Save the image.
             io.save_to_file(image_complete,result_image_path)
-            import platform
-            system = platform.system()
-            if system == "Windows":
-                os.startfile(result_image_path)
-            elif system == "Darwin":
-                os.system(f"open '{result_image_path}'")
-            else:
-                ret = os.system(f"xdg-open '{result_image_path}'")
-                if ret != 0:
-                    print("Failed to open the result image. Please check the file manually:", result_image_path)
+            try:
+                import platform
+                system = platform.system()
+                if system == "Windows":
+                    os.startfile(result_image_path)
+                elif system == "Darwin":
+                    os.system(f"open '{result_image_path}'")
+                else:
+                    ret = os.system(f"xdg-open '{result_image_path}'")
+                    if ret != 0:
+                        print("Failed to open the result image. Please check the file manually:", result_image_path)
+            except Exception as e:
+                print("Failed to open the result image. Please check the file manually:", result_image_path, "Error:", e)
         else:
             print("No barcode detected.")
     input("Press Enter to quit...")
