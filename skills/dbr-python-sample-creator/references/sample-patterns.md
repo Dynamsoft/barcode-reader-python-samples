@@ -15,7 +15,8 @@ This document contains the FULL working code for every sample pattern in the DBR
 7. [Multi-Format Image Processing (multi_format_image_processing.py)](#7-multi-format-image-processing)
 8. [Server-Side Barcode Decoder (server_side_barcode_decoder.py)](#8-server-side-barcode-decoder)
 9. [Localized vs Decoded Barcodes Visualization (show_localized_vs_decoded_barcodes.py)](#9-localized-vs-decoded-barcodes)
-10. [Custom Template JSON Files](#10-custom-template-json-files)
+10. [Layout Analyzer (Matrix Grid Inference)](#10-layout-analyzer-matrix-grid-inference)
+11. [Custom Template JSON Files](#11-custom-template-json-files)
 
 ---
 
@@ -1121,9 +1122,118 @@ if __name__ == '__main__':
 
 ---
 
-## 10. Custom Template JSON Files
+## 10. Layout Analyzer (Matrix Grid Inference)
 
-### 10.1 ReadBlurryBarcode.json
+**File:** `Samples/layout_analyzer_matrix.py`
+
+Demonstrates how to call `LayoutAnalyzer.analyze()` on barcode quadrilaterals returned by DBR and get inferred matrix-grid structure (`row_count`, `col_count`, and inferred elements).
+
+```python
+from pathlib import Path
+import sys
+
+from dynamsoft_barcode_reader_bundle import *
+
+
+def _print_quad(quad: Quadrilateral) -> str:
+    pts = quad.points
+    return (
+        f"({pts[0].x},{pts[0].y}) -> ({pts[1].x},{pts[1].y}) -> "
+        f"({pts[2].x},{pts[2].y}) -> ({pts[3].x},{pts[3].y})"
+    )
+
+
+if __name__ == "__main__":
+    # 1. Initialize license.
+    # You can request and extend a trial license from https://www.dynamsoft.com/customer/license/trialLicense?product=dbr&utm_source=samples&package=python
+    # The string 'DLS2eyJoYW5kc2hha2VDb2RlIjoiMjAwMDAxLTEwNTI2NzQwMSJ9' here is a free public trial license. Note that network connection is required for this license to work.
+    error_code, error_msg = LicenseManager.init_license("DLS2eyJoYW5kc2hha2VDb2RlIjoiMjAwMDAxLTEwNTI2NzQwMSJ9")
+    if error_code != EnumErrorCode.EC_OK and error_code != EnumErrorCode.EC_LICENSE_WARNING:
+        print("License initialization failed: ErrorCode:", error_code, ", ErrorString:", error_msg)
+        raise SystemExit(1)
+
+    if len(sys.argv) < 2:
+        print("Usage: python layout_analyzer_matrix.py <image_path>")
+        raise SystemExit(1)
+
+    image_path = Path(sys.argv[1]).expanduser().resolve()
+    if not image_path.exists():
+        print(f"Image not found: {image_path}")
+        raise SystemExit(1)
+
+    # 2. Create an instance of CaptureVisionRouter.
+    cvr = CaptureVisionRouter()
+
+    # 3. Decode barcodes first and collect quadrilateral locations.
+    captured_result = cvr.capture(str(image_path), EnumPresetTemplate.PT_READ_BARCODES)
+    if captured_result.get_error_code() != EnumErrorCode.EC_OK:
+        print("Capture failed: ErrorCode:", captured_result.get_error_code(), ", ErrorString:", captured_result.get_error_string())
+        raise SystemExit(1)
+
+    barcode_result = captured_result.get_decoded_barcodes_result()
+    if barcode_result is None or barcode_result.get_items() == 0:
+        print("No barcodes found.")
+        raise SystemExit(0)
+
+    locations = []
+    for idx, item in enumerate(barcode_result.get_items()):
+        quad = item.get_location()
+        quad.id = idx
+        locations.append(quad)
+
+    # 4. Read image dimensions for layout analysis parameters.
+    io = ImageIO()
+    io_error, image_data = io.read_from_file(str(image_path))
+    if io_error != EnumErrorCode.EC_OK or image_data is None:
+        print(f"Failed to read image data for layout analysis: {io_error}")
+        raise SystemExit(1)
+
+    # 5. Analyze matrix layout from barcode quads.
+    param = LayoutAnalysisParameter()
+    param.pattern = EnumLayoutPattern.LP_MATRIX
+    param.input_image_width = image_data.width
+    param.input_image_height = image_data.height
+
+    layout_result = LayoutAnalyzer.analyze(locations, param)
+    if layout_result is None or layout_result.error_code != EnumErrorCode.EC_OK:
+        err = layout_result.error_code if layout_result else -1
+        print(f"Layout analysis failed: ErrorCode: {err}")
+        raise SystemExit(1)
+
+    # 6. Print layout analysis output.
+    print("LayoutAnalyzer.analyze result")
+    print(f"Grid: {layout_result.row_count} x {layout_result.col_count}")
+    print(f"Inferred regions: {len(layout_result.inferred_quads)}")
+    print("Elements:")
+
+    for row_idx, row in enumerate(layout_result.elements):
+        for col_idx, element in enumerate(row):
+            if element.source == EnumLayoutElementSource.LES_INPUT:
+                source = "input"
+            elif element.source == EnumLayoutElementSource.LES_INFERRED:
+                source = "inferred"
+            else:
+                source = "none"
+
+            print(
+                f"  row={row_idx + 1}, col={col_idx + 1}, "
+                f"source={source}, quad={_print_quad(element.quad)}"
+            )
+
+    input("Press Enter to quit...")
+```
+
+**Pattern Notes:**
+- `LayoutAnalyzer.analyze()` expects a list of `Quadrilateral` with stable IDs (`quad.id`) and a populated `LayoutAnalysisParameter`.
+- Set `param.pattern = EnumLayoutPattern.LP_MATRIX` for matrix/grid inference.
+- `param.input_image_width` and `param.input_image_height` should match the source image dimensions.
+- `layout_result.elements` contains per-cell items with `source` in `{LES_INPUT, LES_INFERRED, LES_NONE}`.
+
+---
+
+## 11. Custom Template JSON Files
+
+### 11.1 ReadBlurryBarcode.json
 
 Optimizes for blurry 1D barcode reading with multiple deblur modes including neural network.
 
@@ -1197,7 +1307,7 @@ Optimizes for blurry 1D barcode reading with multiple deblur modes including neu
 
 ---
 
-### 10.2 ReadDPM.json
+### 11.2 ReadDPM.json
 
 Configures for Direct Part Marking (DPM) DataMatrix barcode reading.
 
@@ -1294,7 +1404,7 @@ Configures for Direct Part Marking (DPM) DataMatrix barcode reading.
 
 ---
 
-### 10.3 ReadInvertedBarcode.json
+### 11.3 ReadInvertedBarcode.json
 
 Configures reading of colour-inverted barcodes by using inverted grayscale transformation.
 
@@ -1362,7 +1472,7 @@ Configures reading of colour-inverted barcodes by using inverted grayscale trans
 
 ---
 
-### 10.4 ReadMultipleBarcode.json
+### 11.4 ReadMultipleBarcode.json
 
 Optimized for reading many barcodes from a single image with a short timeout.
 

@@ -32,16 +32,11 @@
             "SectionArray": [
                 {
                     "Section": "ST_REGION_PREDETECTION",
-                    "ImageParameterName": "ip_default",
-                    "StageArray": [
-                        {
-                            "Stage": "SST_PREDETECT_REGIONS"
-                        }
-                    ]
+                    "ImageParameterName": "ip_read_dpm"
                 },
                 {
                     "Section": "ST_BARCODE_LOCALIZATION",
-                    "ImageParameterName": "ip_default",
+                    "ImageParameterName": "ip_read_dpm",
                     "StageArray": [
                         {
                             "Stage": "SST_LOCALIZE_CANDIDATE_BARCODES",
@@ -61,19 +56,23 @@
                 },
                 {
                     "Section": "ST_BARCODE_DECODING",
-                    "ImageParameterName": "ip_default",
-                    "StageArray": [
+                    "ImageParameterName": "ip_read_dpm"
+                }
+            ]
+        }
+    ],
+    "ImageParameterOptions": [
+        {
+            "Name": "ip_read_dpm",
+            "ApplicableStages": [
+                {
+                    "Stage": "SST_TRANSFORM_GRAYSCALE",
+                    "GrayscaleTransformationModes": [
                         {
-                            "Stage": "SST_RESIST_DEFORMATION"
+                          "Mode": "GTM_ORIGINAL"
                         },
                         {
-                            "Stage": "SST_COMPLEMENT_BARCODE"
-                        },
-                        {
-                            "Stage": "SST_SCALE_BARCODE_IMAGE"
-                        },
-                        {
-                            "Stage": "SST_DECODE_BARCODES"
+                          "Mode": "GTM_INVERTED"
                         }
                     ]
                 }

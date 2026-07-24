@@ -255,6 +255,7 @@ Same methods as `BarcodeResultItem` plus:
 | `set_bytes(bytes: bytes)` | — |
 | `set_confidence(confidence: int)` | `None` |
 | `set_location(location: Quadrilateral)` | `int` |
+| `get_eci_segments()` | `List[ECISegment]` |
 
 ### ExtendedBarcodeResult (DecodedBarcodeElement)
 
@@ -276,6 +277,12 @@ Same methods as `BarcodeResultItem` plus:
 | `DeformationResistedBarcodeImageUnit` | `IntermediateResultUnit` | `get_deformation_resisted_barcode()` |
 | `ComplementedBarcodeImageUnit` | `IntermediateResultUnit` | `get_image_data()`, `get_location()` |
 
+Additional mutating helpers are available in the wrapper for unit-level editing workflows:
+- `LocalizedBarcodesUnit`: `remove_all_localized_barcodes()`, `remove_localized_barcode(index)`, `add_localized_barcode(element, matrix)`, `set_localized_barcode(index, element, matrix)`
+- `DecodedBarcodesUnit`: `remove_all_decoded_barcodes()`, `set_decoded_barcode(element, matrix)`
+- `CandidateBarcodeZonesUnit`: `remove_all_candidate_barcode_zones()`, `remove_candidate_barcode_zone(index)`, `add_candidate_barcode_zone(zone, matrix)`, `set_candidate_barcode_zone(index, zone, matrix)`
+- `ComplementedBarcodeImageUnit`: `set_location(location, matrix)`
+
 ### CandidateBarcodeZone
 
 | Method | Returns |
@@ -290,10 +297,6 @@ Same methods as `BarcodeResultItem` plus:
 | `get_image_data()` / `set_image_data(img)` | `ImageData` / `None` |
 | `get_location()` / `set_location(loc)` | `Quadrilateral` / `None` |
 | `get_format()` / `set_format(format)` | `int` / `None` |
-
----
-
-## Utility
 
 ### BarcodeReaderModule
 

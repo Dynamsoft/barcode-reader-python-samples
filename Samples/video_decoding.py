@@ -84,11 +84,13 @@ def decode_video(use_video_file: bool = False, video_file_path: str = "") -> Non
             # a. Decode video from camera
             vc = cv2.VideoCapture(0)
             if not vc.isOpened():
+                cvr_instance.stop_capturing(False, True)
                 raise RuntimeError("Camera not found or cannot be opened")
         else:
             # # b. Decode video file
             vc = cv2.VideoCapture(video_file_path)
             if not vc.isOpened():
+                cvr_instance.stop_capturing(False, True)
                 raise RuntimeError("File not found or cannot be opened")
 
         video_width  = int(vc.get(cv2.CAP_PROP_FRAME_WIDTH))

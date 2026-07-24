@@ -10,12 +10,25 @@
 
 This repository contains multiple samples that demonstrate how to use the [Dynamsoft Barcode Reader](https://www.dynamsoft.com/barcode-reader/overview/) Python Edition. It also includes an [AI coding skill](#build-your-app-faster-with-ai) that helps you quickly build your own barcode app with AI agents like GitHub Copilot, Claude, and Cursor.
 
-## Requirements
+## System Requirements
 
 ### Supported Platforms
-- Windows x64
-- Linux (x64, ARM64)
-- macOS (10.15+)
+
+**Windows**
+- Supported Versions: Windows 8 and higher, or Windows Server 2012 and higher
+- Architectures: x64
+
+**Linux**
+- **x64**
+	- Supported Distributions: Ubuntu 16.04+ LTS, Debian 8+, CentOS 7+
+	- Dependencies: glibc 2.17
+- **ARM64**
+	- Supported Distributions: Ubuntu 18.04+ LTS, Debian 10+, CentOS/RHEL 8+
+	- Dependencies: glibc 2.27
+
+**macOS**
+- Supported Versions: macOS 12 (Monterey) and higher
+- Architectures: universal (x64, Apple Silicon)
 
 ### Supported Python Versions
 
@@ -24,6 +37,8 @@ This repository contains multiple samples that demonstrate how to use the [Dynam
 - Python 3.12
 - Python 3.11
 - Python 3.10
+- Python 3.9
+- Python 3.8
 
 
 ## Installation
@@ -47,12 +62,13 @@ pip3 install dynamsoft-barcode-reader-bundle
 | [`ReadAnImage`](Samples/read_an_image.py) | Shows the simplest way to read barcodes from an image file and output barcode format and text. |
 | [`ReadMultipleImages`](Samples/read_multiple_images.py) | Shows the simplest way to read barcodes from directory with image files and output barcode format and text. | 
 | [`GeneralSettings`](Samples/general_settings.py) | Shows how to adjust general scan settings, e.g., barcode format, barcode count, scan region. | 
-| [`ReadDPMBarcode`](Samples/read_dpm_barcode.py) | Shows how to read DPM (Direct Part Mark) barcodes. | 
-| [`VideoDecoding`](Samples/video_decoding.py) | Shows how to decode barcodes from live video or video file. | 
+| [`GridBarcodeScanner`](Samples/grid_barcode_scanner.py) | This sample demonstrates a multi-phase pipeline for decoding a large barcode grid from a single image, maximizing the decode rate with low latency. |
 | [`MultiFormatImageProcessing`](Samples/multi_format_image_processing.py) | Shows how to decode barcodes from various image format. | 
 | [`ParameterTuner`](Samples/parameter_tuner.py) | This sample demonstrates how to adjust and test different parameter settings to optimize barcode recognition performance. |
-| [`ShowLocalizedVSDecodedBarcodes`](Samples/show_localized_vs_decoded_barcodes.py) | This sample demonstrates how to highlight successfully decoded and only-localized barcodes with different styles of rectangles. |
+| [`ReadDPMBarcode`](Samples/read_dpm_barcode.py) | Shows how to read DPM (Direct Part Mark) barcodes. | 
 | [`ServerSideBarcodeDecoder`](Samples/server_side_barcode_decoder.py) | This sample demonstrates how to decode barcodes on the server side by sending images from a client application. |
+| [`ShowLocalizedVSDecodedBarcodes`](Samples/show_localized_vs_decoded_barcodes.py) | This sample demonstrates how to highlight successfully decoded and only-localized barcodes with different styles of rectangles. |
+| [`VideoDecoding`](Samples/video_decoding.py) | Shows how to decode barcodes from live video or video file. | 
 
 ### Additional Samples using Capture Vision SDK
 

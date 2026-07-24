@@ -1,0 +1,101 @@
+{
+    "BarcodeFormatSpecificationOptions": [
+        {
+            "BarcodeFormatIds": [
+                "BF_DATAMATRIX", "BF_QR_CODE"
+            ],
+            "MirrorMode": "MM_BOTH",
+            "Name": "bfs1"
+        }
+    ],
+    "BarcodeReaderTaskSettingOptions": [
+        {
+            "BarcodeFormatIds": [
+                "BF_DATAMATRIX", "BF_QR_CODE"
+            ],
+            "BarcodeFormatSpecificationNameArray": [
+                "bfs1"
+            ],
+            "ExpectedBarcodesCount": 0,
+            "MaxThreadsInOneTask": 0,
+            "Name": "task-read-barcodes",
+            "SectionArray": [
+                {
+                    "ImageParameterName": "ip-read-barcodes",
+                    "Section": "ST_BARCODE_LOCALIZATION",
+                    "StageArray": [
+                        {
+                            "Stage": "SST_LOCALIZE_CANDIDATE_BARCODES",
+                            "LocalizationModes": [
+                                {
+                                    "Mode": "LM_CONNECTED_BLOCKS"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "ImageParameterName": "ip-read-barcodes",
+                    "Section": "ST_BARCODE_DECODING"
+                }
+            ]
+        }
+    ],
+    "CaptureVisionTemplates": [
+        {
+            "ImageROIProcessingNameArray": [
+                "roi-read-barcodes"
+            ],
+            "Name": "GridFastScan",
+            "Timeout": 10000,
+            "MaxParallelTasks": 4
+        }
+    ],
+    "ImageParameterOptions": [
+        {
+            "ApplicableStages": [
+                {
+                    "Stage": "SST_SCALE_IMAGE",
+                    "ImageScaleSetting":{
+                        "ScaleType": "ST_SCALE_DOWN",
+                        "ReferenceEdge": "RE_SHORTER_EDGE",
+                        "EdgeLengthThreshold": 4000
+                    }
+                },
+                {
+                    "GrayscaleTransformationModes": [
+                        {
+                            "Mode": "GTM_ORIGINAL"
+                        },
+                        {
+                            "Mode": "GTM_INVERTED"
+                        }
+                    ],
+                    "Stage": "SST_TRANSFORM_GRAYSCALE"
+                },
+                {
+                    "BinarizationModes": [
+                        {
+                            "BlockSizeX": 31,
+                            "BlockSizeY": 31,
+                            "EnableFillBinaryVacancy": 0,
+                            "ThresholdCompensation": 10,
+                            "Mode": "BM_LOCAL_BLOCK"
+                        }
+                    ],
+                    "Stage": "SST_BINARIZE_IMAGE"
+                }
+            ],
+            "Name": "ip-read-barcodes"
+        }
+    ],
+    "TargetROIDefOptions": [
+        {
+            "Name": "roi-read-barcodes",
+            "TaskSettingNameArray": [
+                "task-read-barcodes"
+            ]
+        }
+    ],
+    "Version": "5.3"
+}

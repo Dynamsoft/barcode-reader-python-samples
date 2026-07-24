@@ -47,7 +47,7 @@ The main entry point for image processing. Handles single-image capture and cont
 | Method | Signature | Description |
 |--------|-----------|-------------|
 | `capture` | `(*args) -> CapturedResult` | Process a single image. Args: `(file_path, [template_name])` or `(file_bytes, [template_name])` or `(ImageData, [template_name])` or `(numpy.ndarray, [EnumImagePixelFormat], [template_name])` |
-| `capture_multi_pages` | `(file: Union[str, bytes], template_name: str = "") -> CapturedResultArray` | Process a multi-page image file (e.g. PDF/TIFF) |
+| `capture_multi_pages` | `(file: Union[str, bytes, FileFetcher], template_name: str = "") -> CapturedResultArray` | Process a multi-page image source (path/bytes/FileFetcher) |
 
 #### Settings Management
 

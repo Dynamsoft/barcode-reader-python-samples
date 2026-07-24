@@ -1,6 +1,6 @@
 # API Reference: dynamsoft_license
 
-Module: `dynamsoft_license`
+Module: `dynamsoft_barcode_reader_bundle` (license submodule)
 
 ## Classes
 
@@ -10,11 +10,11 @@ All methods are **static**.
 
 | Method | Signature | Returns |
 |--------|-----------|---------|
-| `init_license` | `(license: str) -> Tuple[int, str]` | (error_code, error_message). Must be called before using any DCV functionality |
+| `init_license` | `(license: str) -> Tuple[int, str]` | (error_code, error_message). Must be called before using SDK functionality |
 | `set_device_friendly_name` | `(name: str) -> Tuple[int, str]` | (error_code, error_message) |
-| `set_max_concurrent_instance_count` | `(count_for_this_device: int) -> Tuple[int, str]` | (error_code, error_message) |
+| `set_max_concurrent_instance_count` | `(count_for_this_device: int) -> Tuple[int, str]` | (error_code, error_message). Device/process instance cap |
 | `get_device_uuid` | `(uuid_generation_method: int) -> Tuple[int, str, str]` | (error_code, error_message, uuid). Method: 1=random, 2=hardware-based |
-| `set_license_cache_path` | `(directory_path: str) -> Tuple[int, str]` | (error_code, error_message). Call before `init_license` |
+| `set_license_cache_path` | `(directory_path: str) -> Tuple[int, str]` | (error_code, error_message). Set before `init_license` when needed |
 
 ### LicenseModule
 

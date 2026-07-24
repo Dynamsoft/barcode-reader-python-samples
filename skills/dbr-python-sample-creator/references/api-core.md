@@ -77,7 +77,7 @@ Common error codes returned by SDK operations.
 `GEM_AUTO`, `GEM_GENERAL`, `GEM_GRAY_EQUALIZE`, `GEM_GRAY_SMOOTH`, `GEM_SHARPEN_SMOOTH`, `GEM_REV`, `GEM_END`, `GEM_SKIP`
 
 ### EnumPDFReadingMode (IntEnum)
-`PDFRM_VECTOR`, `PDFRM_RASTER`, `PDFRM_REV`
+`PDFRM_VECTOR`, `PDFRM_RASTER`, `PDFRM_MULTIMODAL`, `PDFRM_REV`
 
 ### EnumRasterDataSource (IntEnum)
 `RDS_RASTERIZED_PAGES`, `RDS_EXTRACTED_IMAGES`
@@ -124,6 +124,9 @@ Common error codes returned by SDK operations.
 
 ### EnumImageFileFormat (IntEnum)
 `IFF_JPEG`, `IFF_PNG`, `IFF_BMP`, `IFF_PDF`
+
+### EnumMeasureUnit (IntEnum)
+`MU_PIXEL`, `MU_PERCENTAGE`
 
 ---
 
@@ -308,6 +311,8 @@ Parameters for PDF file reading.
 PDFReadingParameter()
 ```
 - **Attributes**: `mode: int` (EnumPDFReadingMode, default PDFRM_RASTER), `dpi: int` (default 300), `raster_data_source: int` (EnumRasterDataSource, default RDS_RASTERIZED_PAGES)
+
+Note: In current Python wrapper defaults are initialized as `PDFRM_MULTIMODAL`, `dpi=300`, `RDS_RASTERIZED_PAGES`.
 
 ---
 
