@@ -141,7 +141,7 @@ def decode_video(use_video_file: bool = False, video_file_path: str = "") -> Non
                     print("Warning: Failed to show preview window. Switch to headless mode. Details:", e)
                     show_preview = False
 
-        cvr_instance.stop_capturing(False, True)
+        cvr_instance.stop_capturing(True, True)
         vc.release()
         if show_preview:
             try:
