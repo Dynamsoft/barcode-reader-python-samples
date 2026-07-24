@@ -9,6 +9,16 @@ except ModuleNotFoundError:
     )
 import os
 
+
+def can_show_preview_window() -> bool:
+    if os.name == "nt":
+        return True
+    return bool(
+        os.environ.get("DISPLAY")
+        or os.environ.get("WAYLAND_DISPLAY")
+        or os.environ.get("MIR_SOCKET")
+    )
+
 def silence_opencv():
     # OpenCV 4.5+
     if hasattr(cv2, "setLogLevel"):
@@ -103,6 +113,9 @@ def decode_video(use_video_file: bool = False, video_file_path: str = "") -> Non
             return
 
         windowName = "Video Barcode Reader"
+        show_preview = can_show_preview_window()
+        if not show_preview:
+            print("Warning: GUI display not available, running in headless mode without preview window.")
 
         image_id = 0
         while True:
@@ -114,14 +127,27 @@ def decode_video(use_video_file: bool = False, video_file_path: str = "") -> Non
             tag.set_image_id(image_id)
             image = ImageData(frame.tobytes(), frame.shape[1], frame.shape[0], frame.strides[0], EnumImagePixelFormat.IPF_RGB_888, 0, tag)
             fetcher.add_image_to_buffer(image)
-            cv2.imshow(windowName, frame)
-            # 'ESC' for quit
-            key = cv2.waitKey(1)
-            if key == 27:
-                break
+            if show_preview:
+                try:
+                    cv2.imshow(windowName, frame)
+                    # 'ESC' for quit
+                    key = cv2.waitKey(1)
+                    if key == 27:
+                        break
+                except cv2.error as e:
+                    print("Warning: OpenCV GUI is unavailable. Switch to headless mode. Details:", e)
+                    show_preview = False
+                except Exception as e:
+                    print("Warning: Failed to show preview window. Switch to headless mode. Details:", e)
+                    show_preview = False
 
         cvr_instance.stop_capturing(False, True)
-        cv2.destroyWindow(windowName)
+        vc.release()
+        if show_preview:
+            try:
+                cv2.destroyWindow(windowName)
+            except Exception as e:
+                print("Warning: Failed to destroy preview window. Details:", e)
 
 def get_mode_and_path():
     use_video_file = False

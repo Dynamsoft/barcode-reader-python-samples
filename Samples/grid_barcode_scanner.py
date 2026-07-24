@@ -9,6 +9,7 @@ except ModuleNotFoundError:
     )
 import numpy as np
 import os
+import sys
 import threading
 import time
 from pathlib import Path
@@ -200,6 +201,17 @@ class ImageShower:
     _instance: Optional["ImageShower"] = None
     _instance_lock = threading.Lock()
 
+    @staticmethod
+    def _detect_ui_capability() -> bool:
+        if os.name == "nt":
+            return True
+        if sys.platform == "darwin":
+            return True
+
+        # Linux/Unix: require a known display server variable.
+        return any(os.environ.get(var) for var in (
+            "DISPLAY", "WAYLAND_DISPLAY", "MIR_SOCKET"))
+
     @classmethod
     def instance(cls) -> "ImageShower":
         if cls._instance is None:
@@ -216,12 +228,28 @@ class ImageShower:
         self._delay_ms: int = delay_ms
         self._img: Optional[np.ndarray] = None
         self._mutex = threading.Lock()
+        self._enabled: bool = self._detect_ui_capability()
+        self._warned_no_ui: bool = False
+
+        if not self._enabled:
+            self._running = False
+            self._thread = None
+            return
+
         self._running: bool = True
         self._thread = threading.Thread(
             target=self._loop, daemon=True, name="ImageShower")
         self._thread.start()
 
+    def is_enabled(self) -> bool:
+        return self._enabled
+
     def update(self, img: np.ndarray, title: str):
+        if not self._enabled:
+            if not self._warned_no_ui:
+                print("[Info] No GUI environment detected. Skip image preview.")
+                self._warned_no_ui = True
+            return
         with self._mutex:
             self._img = img.copy()
             self._window_title = title
@@ -229,7 +257,7 @@ class ImageShower:
     def stop(self):
         if self._running:
             self._running = False
-            if self._thread.is_alive():
+            if self._thread is not None and self._thread.is_alive():
                 self._thread.join()
 
     def set_delay(self, ms: int):
@@ -730,4 +758,5 @@ if __name__ == "__main__":
                 break
 
         ImageShower.instance().stop()
-        cv2.destroyAllWindows()
+        if ImageShower.instance().is_enabled():
+            cv2.destroyAllWindows()
