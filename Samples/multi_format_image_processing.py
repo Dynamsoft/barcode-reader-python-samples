@@ -83,7 +83,7 @@ if __name__ == "__main__":
                     raise ValueError("An unexpected value.")
 
                 # 4. Decode barcodes from the image.
-                captured_result = cvr_instance.capture(image_data,EnumPresetTemplate.PT_READ_BARCODES)
+                captured_result = cvr_instance.capture(image_data, EnumPresetTemplate.PT_READ_BARCODES, EnumImagePixelFormat.IPF_RGB_888)
 
                 # 5. Output the barcode result.
                 if captured_result.get_error_code() == EnumErrorCode.EC_UNSUPPORTED_JSON_KEY_WARNING:
